@@ -10,8 +10,6 @@ import 'package:mybindel_test/theme/theme.dart';
 
 // import 'package:test_mybindel/pageroute/customPageRouter.dart';
 
-
-
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([
@@ -69,48 +67,52 @@ class _splashState extends State<splash> {
     final size = MediaQuery.of(context).size;
     return Scaffold(
         body: Stack(
-          children: [
-            Container(
-              width: size.width,
-              height: size.height,
-              decoration: BoxDecoration(
-              color: theme == Brightness.light? orange_color : dark_Scaffold_color,
-              ),
-            ),
-            Align(
-              alignment: Alignment.center,
-              child: Container(
-                width: size.width * 0.258,
-                height: size.height * 0.149,
-                // color: Colors.amber,
-                child: theme == Brightness.light?Image.asset('asset/images/splashlogo.png') : Image.asset('asset/images/dark_splashlogo.png'),
-              ),
-            ),
-            Positioned(
-              bottom: size.height * 0.07,
-              right: size.width / 2 - size.width * 0.403 / 2,
-              child: Container(
-                alignment: Alignment.center,
-                padding: EdgeInsets.all(10),
-                width: size.width * 0.403,
-                height: size.height * 0.068,
-                //  color: Colors.amber,
-                child: Text("Mybindle",
-                    style: theme == Brightness.light?TextStyle(
-                      // fontFamily: 'Avant',
+      children: [
+        Container(
+          width: size.width,
+          height: size.height,
+          decoration: BoxDecoration(
+            color:
+                theme == Brightness.light ? orange_color : dark_Scaffold_color,
+          ),
+        ),
+        Align(
+          alignment: Alignment.center,
+          child: Container(
+            width: size.width * 0.258,
+            height: size.height * 0.149,
+            // color: Colors.amber,
+            child: theme == Brightness.light
+                ? Image.asset('asset/images/splashlogo.png')
+                : Image.asset('asset/images/dark_splashlogo.png'),
+          ),
+        ),
+        Positioned(
+          bottom: size.height * 0.07,
+          right: size.width / 2 - size.width * 0.403 / 2,
+          child: Container(
+            alignment: Alignment.center,
+            padding: EdgeInsets.all(10),
+            width: size.width * 0.403,
+            height: size.height * 0.068,
+            //  color: Colors.amber,
+            child: Text("Mybindle",
+                style: theme == Brightness.light
+                    ? TextStyle(
+                        // fontFamily: 'Avant',
                         fontWeight: FontWeight.w700,
                         letterSpacing: 1.2,
-                        fontSize: 21) : TextStyle(
-                      // fontFamily: 'Avant',
+                        fontSize: 21)
+                    : TextStyle(
+                        // fontFamily: 'Avant',
                         fontWeight: FontWeight.w700,
                         letterSpacing: 1.2,
                         fontSize: 21,
-                      color: orange_color,
-                    )
-                ),
-              ),
-            ),
-          ],
-        ));
+                        color: orange_color,
+                      )),
+          ),
+        ),
+      ],
+    ));
   }
 }

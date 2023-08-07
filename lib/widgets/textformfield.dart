@@ -30,7 +30,7 @@ class _textfieldState extends State<textfields> {
 
         controller: widget.textController,
         decoration: InputDecoration(
-          contentPadding: EdgeInsets.symmetric(vertical: 18.0, horizontal: 10.0),
+          contentPadding: EdgeInsets.symmetric(vertical: 18.0, horizontal: 15.0),
           border: InputBorder.none,
           //
           // border: OutlineInputBorder(
@@ -51,7 +51,7 @@ class _textfieldState extends State<textfields> {
           hintText: widget.hintText,
           hintStyle: TextStyle(
               fontSize: 14,
-              fontFamily: 'Avant',
+              // fontFamily: 'Avant',
               // color: Color.fromRGBO(94, 94, 94, 1),
               letterSpacing: 1,
               fontWeight: FontWeight.w500),

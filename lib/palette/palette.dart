@@ -14,14 +14,14 @@ BoxDecoration neu_Morphism = BoxDecoration(
     color: Color.fromRGBO(240, 240, 240, 1),
     boxShadow: [
       BoxShadow(
-        blurRadius: 8,
-        offset: Offset(7, 7),
+        blurRadius: 5,
+        offset: Offset(5, 3),
         color: Color.fromRGBO(164, 162, 162, 1.0),
       ),
       BoxShadow(
         blurRadius: 25,
         offset: Offset(-5, -7),
-        color: Color.fromRGBO(245, 245, 245, 1.0),
+        color: Color.fromRGBO(255, 255, 255, 1.0),
       ),
     ]);
 
@@ -31,14 +31,14 @@ BoxDecoration dark_neu_Morphism = BoxDecoration(
     color: Color.fromRGBO(25, 25, 25, 1.0),
     boxShadow: [
       BoxShadow(
-        blurRadius: 8,
+        blurRadius: 5,
         offset: Offset(5, 7),
-        color: Color.fromRGBO(0, 0, 0, 1.0),
+        color: Color.fromRGBO(18, 18, 18, 1.0),
       ),
       BoxShadow(
-        blurRadius: 12,
+        blurRadius: 3,
         offset: Offset(-3, -5),
-        color: Color.fromRGBO(39, 39, 39, 1.0),
+        color: Color.fromRGBO(33, 33, 33, 1.0),
       ),
     ]);
 
@@ -66,13 +66,13 @@ BoxDecoration textFormField_neu_morphism = BoxDecoration(
 
 BoxDecoration dark_textFormField_neu_morphism = BoxDecoration(
     borderRadius: BorderRadius.circular(10),
-    color: Color.fromRGBO(32, 32, 32, 1.0),
+    color: Color.fromRGBO(30, 30, 30, 1.0),
     boxShadow: [
       BoxShadow(
         inset: true,
         blurRadius: 5,
         offset: Offset(3,3),
-        color: Color.fromRGBO(0, 0, 0, 1.0),
+        color: Color.fromRGBO(10, 10, 10, 1.0),
       ),
       BoxShadow(
         inset: true,
