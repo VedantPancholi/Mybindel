@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:mybindel_test/screens/sendCodePage.dart';
 import 'package:mybindel_test/widgets/creatorButton_widget.dart';
 // import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../pagerouter/customPageRouter.dart';
 import '../palette/palette.dart';
 import '../widgets/fieldbutton_widget.dart';
-import '../widgets/rowbutton_widget.dart';
 import '../widgets/textformfield.dart';
+// import '../widgets/rowbutton_widget.dart';
 // import 'package:font_awesome_flutter/src/fa_icon.dart';
 
 class login_page extends StatefulWidget {
@@ -20,7 +21,9 @@ class _login_pageState extends State<login_page> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = MediaQuery.of(context).platformBrightness;
+setState(() {
+  final theme = SchedulerBinding.instance.platformDispatcher.platformBrightness;
+});
 
     final size = MediaQuery.of(context).size;
 
@@ -29,7 +32,7 @@ class _login_pageState extends State<login_page> {
       body: Column(children: [
         Container(
           alignment: Alignment.center,
-          height: size.height * 0.12,
+          height: size.height * 0.15,
           width: size.width,
           color: theme == Brightness.light
               ? light_Scaffold_color
@@ -150,88 +153,6 @@ class _login_pageState extends State<login_page> {
           ),
         ),
         creatorButton(size),
-        // Expanded(
-        //   child: Container(
-        //     width: size.width,
-        //     // color: Colors.green,
-        //     color: theme == Brightness.light
-        //         ? light_Scaffold_color
-        //         : dark_Scaffold_color,
-        //
-        //     child: Column(
-        //       mainAxisAlignment: MainAxisAlignment.start,
-        //       crossAxisAlignment: CrossAxisAlignment.start,
-        //       children: [
-        //         Padding(
-        //             padding: EdgeInsets.symmetric(
-        //                 vertical: size.height * 0.020,
-        //                 horizontal: size.width * 0.050),
-        //             child: Text(
-        //               "Don’t have one?",
-        //               style: TextStyle(
-        //                   fontFamily: 'Avant',
-        //                   fontSize: 20,
-        //                   fontWeight: FontWeight.w600,
-        //                   // color: Color.fromRGBO(51, 51, 51, 1),
-        //                   letterSpacing: 1),
-        //             )),
-        //         rowbutton(
-        //           title: 'Create using E-mail',
-        //           icon: Icons.alternate_email,
-        //           onpressed: () {
-        //             print("ok");
-        //           },
-        //           margin: EdgeInsets.symmetric(
-        //               vertical: size.height * 0.005,
-        //               horizontal: size.width * 0.087),
-        //           iconHeight: size.height * 0.07,
-        //           iconWidth: size.width * 0.14,
-        //           width: size.width * 0.60,
-        //         ),
-        //         rowbutton(
-        //           title: 'Create using Phone',
-        //           icon: Icons.phone,
-        //           onpressed: () {
-        //             print("ok");
-        //           },
-        //           margin: EdgeInsets.symmetric(
-        //               vertical: size.height * 0.005,
-        //               horizontal: size.width * 0.087),
-        //           iconHeight: size.height * 0.07,
-        //           iconWidth: size.width * 0.14,
-        //           width: size.width * 0.60,
-        //         ),
-        //         rowbutton(
-        //           title: 'Continue with Google',
-        //           icon: Icons.search_rounded,
-        //           // FaIcon(FontAwesomeIcons.google),
-        //           onpressed: () {
-        //             print("ok");
-        //           },
-        //           margin: EdgeInsets.symmetric(
-        //               vertical: size.height * 0.005,
-        //               horizontal: size.width * 0.087),
-        //           iconHeight: size.height * 0.07,
-        //           iconWidth: size.width * 0.14,
-        //           width: size.width * 0.60,
-        //         ),
-        //         rowbutton(
-        //           title: 'Continue with Apple',
-        //           icon: Icons.apple,
-        //           onpressed: () {
-        //             print("ok");
-        //           },
-        //           margin: EdgeInsets.symmetric(
-        //               vertical: size.height * 0.005,
-        //               horizontal: size.width * 0.087),
-        //           iconHeight: size.height * 0.07,
-        //           iconWidth: size.width * 0.14,
-        //           width: size.width * 0.60,
-        //         )
-        //       ],
-        //     ),
-        //   ),
-        // ),
       ]),
     );
   }

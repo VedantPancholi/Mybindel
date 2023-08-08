@@ -25,7 +25,7 @@ class _sendCodeState extends State<sendCode> {
       body: Column(children: [
         Container(
           alignment: Alignment.center,
-          height: size.height * 0.12,
+          height: size.height * 0.15,
           width: size.width,
           color: theme == Brightness.light
               ? light_Scaffold_color

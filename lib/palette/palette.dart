@@ -6,6 +6,7 @@ import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
 Color light_Scaffold_color = Color.fromRGBO(242, 242, 242, 1);
 Color dark_Scaffold_color = Color.fromRGBO(26, 26, 26, 1.0);
 Color orange_color = Color.fromRGBO(255, 83, 73, 1);
+
 final theme = SchedulerBinding.instance.platformDispatcher.platformBrightness;
 
 BoxDecoration neu_Morphism = BoxDecoration(

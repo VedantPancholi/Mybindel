@@ -62,7 +62,14 @@ class _textfieldState extends State<textfields> {
         validator: (value) {
           if (value!.isEmpty) {
             return "Enter correct Email or Password";
-          } else {
+          }
+          else {
+            // if(){
+            //
+            // }
+            // else{
+            //  return "for data not found";
+            // }
             return null;
           }
         },

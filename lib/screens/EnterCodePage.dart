@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mybindel_test/pagerouter/customPageRouter.dart';
+import 'package:mybindel_test/screens/password_reset.dart';
 
 import '../palette/palette.dart';
 import '../widgets/creatorButton_widget.dart';
@@ -25,7 +27,7 @@ class _enterCodeState extends State<enterCode> {
       body: Column(children: [
         Container(
           alignment: Alignment.center,
-          height: size.height * 0.12,
+          height: size.height * 0.15,
           width: size.width,
           color: theme == Brightness.light
               ? light_Scaffold_color
@@ -121,6 +123,7 @@ class _enterCodeState extends State<enterCode> {
                       height: size.height * 0.075,
                       width: size.width * 0.82,
                       onpressed: () {
+                        Navigator.push(context, custompageroute(child: PasswordReset()));
                         print(_emailcontroller.text);
                       })),
               SizedBox(height: size.height * 0.010),
