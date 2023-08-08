@@ -63,7 +63,7 @@ class _rowbuttonState extends State<rowbutton> {
                 widget.title,
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                    // fontFamily: 'Avant',
+                    fontFamily: 'Avant',
                     fontSize: 16,
                     // color: Color.fromRGBO(51, 51, 51, 1),
                 ),

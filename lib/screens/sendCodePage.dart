@@ -15,6 +15,7 @@ class sendCode extends StatefulWidget {
 
 class _sendCodeState extends State<sendCode> {
   TextEditingController _emailcontroller = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +50,8 @@ class _sendCodeState extends State<sendCode> {
                   //       ''),
                   // ),
                 ),
-                child: Text("Mybindle",style: TextStyle(fontWeight: FontWeight.w700,fontSize: 22,letterSpacing: 1.5),),),
+                child: Text("Mybindle",style: TextStyle(fontWeight: FontWeight.w700,fontSize: 22,letterSpacing: 1.5),),
+            ),
           ]),
         ),
         Container(
@@ -60,110 +62,136 @@ class _sendCodeState extends State<sendCode> {
           height: size.height * 0.43,
           width: size.width,
           //  color: Color(0xffff0707),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child:  Text(
-                  "Password Recovery",
-                  style: TextStyle(
-                      color: theme == Brightness.light ? const Color.fromRGBO(51, 51, 51, 1) : Colors.grey.shade100,
-                      // fontFamily: 'Avant',
-                      fontSize: 19,
-                      letterSpacing: 1,
-                      fontWeight: FontWeight.w700),
-                ),
-              ),
-              SizedBox(height: size.height * 0.018),
-              Padding(
-                  padding: EdgeInsets.symmetric(
-                      vertical: size.height * 0.010,
-                      horizontal: size.width * 0.010),
-                  child: InkWell(
-                    onTap: () {
-                      Navigator.of(context).pop();
-                    },
-                    child: Container(
-                      decoration: theme == Brightness.light?neu_Morphism : dark_neu_Morphism,
-                      // BoxDecoration(
-                      //     border: Border.all(
-                      //         width: 1, color: Color.fromRGBO(94, 94, 94, 1)),
-                      //     borderRadius: BorderRadius.circular(7)),
-                      height: size.height * 0.055,
-                      width: size.width * 0.48,
-                      child:  Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Icon(Icons.arrow_back),
-                          Text(
-                            "Back to Login",
-                            style: TextStyle(
-                                color: theme == Brightness.light ? const Color.fromRGBO(51, 51, 51, 1) : Colors.grey.shade300,
-                                // fontFamily: 'Avant',
-                                fontSize: 16,
-                                letterSpacing: 1,
-                                fontWeight: FontWeight.w600),
-                          )
-                        ],
-                      ),
-                    ),
-                  )),
-              SizedBox(height: size.height * 0.012),
-              Padding(
-                padding: EdgeInsets.symmetric(
-                    vertical: size.height * 0.010,
-                    horizontal: size.width * 0.012),
-                child: textfields(
-                  hintText: 'Email or phone',
-                  keybordType: TextInputType.emailAddress,
-                  textController: _emailcontroller,
-                  //icon: Icons.password,
-                ),
-              ),
-              SizedBox(height: size.height * 0.012),
-              Padding(
-                  padding: EdgeInsets.symmetric(
-                      vertical: size.height * 0.010,
-                      horizontal: size.width * 0.010),
-                  child: fieldbutton(
-                      title: "Send Code",
-                      height: size.height * 0.075,
-                      width: size.width * 0.82,
-                      onpressed: () {
-                        print(_emailcontroller.text);
-                        Navigator.push(
-                            context, custompageroute(child: enterCode()));
-                      })),
-              SizedBox(height: size.height*0.012,),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Text(
-                    'Remembered?',
+          child: Form(
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            key: _formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child:  Text(
+                    "Password Recovery",
                     style: TextStyle(
+                        color: theme == Brightness.light ? const Color.fromRGBO(51, 51, 51, 1) : Colors.grey.shade100,
                         // fontFamily: 'Avant',
-                        fontSize: 16,
-                        color: theme == Brightness.light ? const Color.fromRGBO(91, 91, 91, 1) : Colors.grey.shade100,
-                        fontWeight: FontWeight.w500),
+                        fontSize: 19,
+                        letterSpacing: 1,
+                        fontWeight: FontWeight.w700),
                   ),
-                  SizedBox(
-                    width: size.width * 0.01,
+                ),
+                SizedBox(height: size.height * 0.018),
+                Padding(
+                    padding: EdgeInsets.symmetric(
+                        vertical: size.height * 0.010,
+                        horizontal: size.width * 0.010),
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: Container(
+                        decoration: theme == Brightness.light?neu_Morphism : dark_neu_Morphism,
+                        // BoxDecoration(
+                        //     border: Border.all(
+                        //         width: 1, color: Color.fromRGBO(94, 94, 94, 1)),
+                        //     borderRadius: BorderRadius.circular(7)),
+                        height: size.height * 0.055,
+                        width: size.width * 0.48,
+                        child:  Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Icon(Icons.arrow_back),
+                            Text(
+                              "Back to Login",
+                              style: TextStyle(
+                                  color: theme == Brightness.light ? const Color.fromRGBO(51, 51, 51, 1) : Colors.grey.shade300,
+                                  // fontFamily: 'Avant',
+                                  fontSize: 16,
+                                  letterSpacing: 1,
+                                  fontWeight: FontWeight.w600),
+                            )
+                          ],
+                        ),
+                      ),
+                    )),
+                SizedBox(height: size.height * 0.012),
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                      vertical: size.height * 0.010,
+                      horizontal: size.width * 0.012),
+                  child: textfields(
+                    hintText: 'Email or phone',
+                    keybordType: TextInputType.emailAddress,
+                    textController: _emailcontroller,
+                    onChanged: (val) {
+                      if (_formKey.currentState!.validate()) {
+                        _formKey.currentState!.save();
+                      }
+                    },
+                    validator: (val) {
+                      if (val!.isEmpty || RegExp(r"\s").hasMatch(val)) {
+                        return "Email must not be empty";
+                      } else {
+                        if (RegExp(
+                            r"^[a-zA-Z0-9]+[^#$%&*]+[a-zA-Z0-9]+@[a-z]+\.[a-z]{2,3}")
+                            .hasMatch(val)) {
+                          return null;
+                        } else {
+                          return "Enter a valid Email";
+                        }
+                      }
+                    },
+                    //icon: Icons.password,
                   ),
-                  GestureDetector(
-                    child: Text(
-                      'Login here!',
+                ),
+                SizedBox(height: size.height * 0.012),
+                Padding(
+                    padding: EdgeInsets.symmetric(
+                        vertical: size.height * 0.010,
+                        horizontal: size.width * 0.010),
+                    child: fieldbutton(
+                        title: "Send Code",
+                        height: size.height * 0.075,
+                        width: size.width * 0.82,
+                        onpressed: () {
+                          if (_formKey.currentState!.validate()) {
+                            _formKey.currentState!.save();
+                            Navigator.push(
+                                context, custompageroute(child: enterCode()));
+                          }
+                          print(_emailcontroller.text);
+
+                        })),
+                SizedBox(height: size.height*0.012,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Text(
+                      'Remembered?',
                       style: TextStyle(
                           // fontFamily: 'Avant',
                           fontSize: 16,
-                          color: orange_color,
+                          color: theme == Brightness.light ? const Color.fromRGBO(91, 91, 91, 1) : Colors.grey.shade100,
                           fontWeight: FontWeight.w500),
                     ),
-                    onTap: () {},
-                  )
-                ],
-              )
-            ],
+                    SizedBox(
+                      width: size.width * 0.01,
+                    ),
+                    GestureDetector(
+                      child: Text(
+                        'Login here!',
+                        style: TextStyle(
+                            // fontFamily: 'Avant',
+                            fontSize: 16,
+                            color: orange_color,
+                            fontWeight: FontWeight.w500),
+                      ),
+                      onTap: () {},
+                    )
+                  ],
+                )
+              ],
+            ),
           ),
         ),
         creatorButton(size)

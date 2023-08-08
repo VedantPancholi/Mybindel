@@ -1,65 +1,71 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter/rendering.dart';
+import 'package:mybindel_test/screens/loginPage.dart';
 import '../pagerouter/customPageRouter.dart';
 import '../palette/palette.dart';
 import '../widgets/fieldbutton_widget.dart';
 import '../widgets/textformfield.dart';
 
 class PasswordReset extends StatefulWidget {
-  const PasswordReset({Key? key}) : super(key: key);
-
   @override
   State<PasswordReset> createState() => _PasswordResetState();
 }
 
 class _PasswordResetState extends State<PasswordReset> {
-  String mustFollow = "Include at least 8 character along with alphabets, numbers and symbols.";
+  TextEditingController _newpasswordcontroller = TextEditingController();
+  TextEditingController _confirmedpasswordcontroller = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    String mustfollow =
+        "Include at least 8 character along with alphabets, numbers and symbols.";
+
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: Column(
-        children: [
-          Container(
-            alignment: Alignment.center,
-            height: size.height * 0.15,
-            width: size.width,
+      body: Column(children: [
+        Container(
+          alignment: Alignment.center,
+          height: size.height * 0.12,
+          width: size.width,
+          color: theme == Brightness.light
+              ? light_Scaffold_color
+              : dark_Scaffold_color,
+          child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+            Container(
+                height: size.height * 0.04,
+                width: size.width * 0.076,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage('asset/images/logo.png')))),
+            SizedBox(width: size.width * 0.010),
+            Container(
+              height: size.height * 0.04,
+              width: size.width * 0.27,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(),
+              child: Text(
+                "Mybindle",
+                style: TextStyle(
+                    fontWeight: FontWeight.w700,
+                    fontSize: 22,
+                    letterSpacing: 1.5),
+              ),
+            ),
+          ]),
+        ),
+        Expanded(
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: size.width * 0.087),
             color: theme == Brightness.light
                 ? light_Scaffold_color
                 : dark_Scaffold_color,
-            child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-              Container(
-                  height: size.height * 0.04,
-                  width: size.width * 0.076,
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: AssetImage('asset/images/logo.png')))),
-              SizedBox(width: size.width * 0.010),
-              Container(
-                height: size.height * 0.04,
-                width: size.width * 0.27,
-                alignment: Alignment.center,
-                child: Text(
-                  "Mybindle",
-                  style: TextStyle(
-                      fontWeight: FontWeight.w700,
-                      fontSize: 22,
-                      letterSpacing: 1.5),
-                ),
-              ),
-            ]),
-          ),
-          Expanded(
-            child: Container(
-              padding: EdgeInsets.symmetric(horizontal: size.width * 0.087),
-              color: theme == Brightness.light
-                  ? light_Scaffold_color
-                  : dark_Scaffold_color,
-              height: size.height,
-              width: size.width,
-              // color: Color(0xffff0707),
+            height: size.height * 0.43,
+            width: size.width,
+            // color: Color(0xffff0707),
+            child: Form(
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              key: _formKey,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -68,52 +74,64 @@ class _PasswordResetState extends State<PasswordReset> {
                     child: Text(
                       "Password Recovery",
                       style: TextStyle(
-                          color: theme == Brightness.light ? const Color.fromRGBO(51, 51, 51, 1) : Colors.grey.shade100,
+                          color: theme == Brightness.light
+                              ? const Color.fromRGBO(51, 51, 51, 1)
+                              : Colors.grey.shade100,
                           // fontFamily: 'Avant',
                           fontSize: 19,
                           letterSpacing: 1,
                           fontWeight: FontWeight.w700),
                     ),
                   ),
-                  SizedBox(height: size.height * 0.010),
-
-
-
-
-                  // change here for confirming password
-
-
-
-                  //
-                  // Padding(
-                  //   padding: EdgeInsets.symmetric(
-                  //       vertical: size.height * 0.010,
-                  //       horizontal: size.width * 0.010),
-                  //   child: textfields(
-                  //     hintText: 'Enter new password',
-                  //     keybordType: TextInputType.emailAddress,
-                  //     textController: ,
-                  //     //icon: Icons.password,
-                  //   ),
-                  // ),
-                  // SizedBox(height: size.height * 0.010),Padding(
-                  //   padding: EdgeInsets.symmetric(
-                  //       vertical: size.height * 0.010,
-                  //       horizontal: size.width * 0.010),
-                  //   child: textfields(
-                  //     hintText: 'Confirm new password',
-                  //     keybordType: TextInputType.emailAddress,
-                  //     textController: ,
-                  //     //icon: Icons.password,
-                  //   ),
-                  // ),
-
-
-
-
-
-
-                  SizedBox(height: size.height * 0.010),
+                  SizedBox(width: size.width * 0.010),
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                        vertical: size.height * 0.010,
+                        horizontal: size.width * 0.010),
+                    child: textfields(
+                      hintText: 'Enter new password',
+                      keybordType: TextInputType.emailAddress,
+                      textController: _newpasswordcontroller,
+                      onChanged: (val) {
+                        if (_formKey.currentState!.validate()) {
+                          _formKey.currentState!.save();
+                        }
+                      },
+                      validator: (val) {
+                        if (val!.isEmpty || RegExp(r"\s").hasMatch(val)) {
+                          return "Password must not be empty";
+                        }
+                      },
+                      //icon: Icons.password,
+                    ),
+                  ),
+                  SizedBox(width: size.width * 0.010),
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                        vertical: size.height * 0.010,
+                        horizontal: size.width * 0.010),
+                    child: textfields(
+                      hintText: 'Confirm new password',
+                      keybordType: TextInputType.emailAddress,
+                      textController: _confirmedpasswordcontroller,
+                      onChanged: (val) {
+                        if (_formKey.currentState!.validate()) {
+                          _formKey.currentState!.save();
+                        }
+                      },
+                      validator: (val) {
+                        if (val!.isEmpty) {
+                          return "Password must not be empty";
+                        }
+                        if (val != _newpasswordcontroller.text) {
+                          return "Password Not match";
+                        }
+                        return null;
+                      },
+                      //icon: Icons.password,
+                    ),
+                  ),
+                  SizedBox(width: size.width * 0.010),
                   Padding(
                       padding: EdgeInsets.symmetric(
                           vertical: size.height * 0.010,
@@ -123,23 +141,45 @@ class _PasswordResetState extends State<PasswordReset> {
                           height: size.height * 0.075,
                           width: size.width * 0.82,
                           onpressed: () {
-                            print("");
+                            if (_formKey.currentState!.validate()) {
+                              _formKey.currentState!.save();
+                            }
+                            print(_newpasswordcontroller.text);
+                            print(_confirmedpasswordcontroller.text);
+                            Navigator.pushAndRemoveUntil(
+                                context,
+                                custompageroute(child: login_page()),
+                                (route) => false);
                           })),
-                  SizedBox(height: size.height * 0.010),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8.0,horizontal: 10.0),
-                    child: Text(mustFollow,style: TextStyle(
-                      // fontFamily: 'Avant',
-                        fontSize: 15,
-                        color: theme == Brightness.light ? const Color.fromRGBO(91, 91, 91, 1) : Colors.grey.shade300,
-                        fontWeight: FontWeight.w400),),
+                  SizedBox(width: size.width * 0.010),
+                  Container(
+                    height: size.height * 0.083,
+                    width: size.width * 0.83,
+                    // color: Colors.amber,
+                    child: Row(children: [
+                      Expanded(
+                        child: SingleChildScrollView(
+                          scrollDirection: Axis.vertical,
+                          child: Text(
+                            mustfollow,
+                            //  textAlign: TextAlign.justify,
+                            style: TextStyle(
+                                fontFamily: 'Avant',
+                                fontSize: 12,
+                                letterSpacing: 1,
+                                color: Color.fromRGBO(94, 94, 94, 1),
+                                fontWeight: FontWeight.w500),
+                          ),
+                        ),
+                      ),
+                    ]),
                   ),
                 ],
               ),
             ),
           ),
-        ],
-      ),
+        ),
+      ]),
     );
   }
 }

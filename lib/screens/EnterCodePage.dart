@@ -15,6 +15,7 @@ class enterCode extends StatefulWidget {
 
 class _enterCodeState extends State<enterCode> {
   TextEditingController _emailcontroller = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -62,99 +63,104 @@ class _enterCodeState extends State<enterCode> {
           height: size.height * 0.43,
           width: size.width,
           // color: Color(0xffff0707),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Text(
-                  "Password Recovery",
-                  style: TextStyle(
-                      color: theme == Brightness.light ? const Color.fromRGBO(51, 51, 51, 1) : Colors.grey.shade100,
-                      // fontFamily: 'Avant',
-                      fontSize: 19,
-                      letterSpacing: 1,
-                      fontWeight: FontWeight.w700),
+          child: Form(
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            key: _formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Text(
+                    "Password Recovery",
+                    style: TextStyle(
+                        color: theme == Brightness.light ? const Color.fromRGBO(51, 51, 51, 1) : Colors.grey.shade100,
+                        // fontFamily: 'Avant',
+                        fontSize: 19,
+                        letterSpacing: 1,
+                        fontWeight: FontWeight.w700),
+                  ),
                 ),
-              ),
-              SizedBox(height: size.height * 0.010),
-              Container(
-                height: size.height * 0.093,
-                width: size.width * 0.83,
-                // color: Colors.amber,
-                child: Row(children: [
-                  Expanded(
-                    child: SingleChildScrollView(
-                      scrollDirection: Axis.vertical,
-                      child: Text(
-                        description,
-                        //  textAlign: TextAlign.justify,
+                SizedBox(height: size.height * 0.010),
+                Container(
+                  height: size.height * 0.093,
+                  width: size.width * 0.83,
+                  // color: Colors.amber,
+                  child: Row(children: [
+                    Expanded(
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.vertical,
+                        child: Text(
+                          description,
+                          //  textAlign: TextAlign.justify,
 
-                        style: TextStyle(
-                            // fontFamily: 'Avant',
-                            fontSize: 14,
-                            letterSpacing: 1,
-                            color: theme == Brightness.light ? const Color.fromRGBO(91, 91, 91, 1) : Colors.grey.shade100,
-                            fontWeight: FontWeight.w400),
+                          style: TextStyle(
+                              // fontFamily: 'Avant',
+                              fontSize: 14,
+                              letterSpacing: 1,
+                              color: theme == Brightness.light ? const Color.fromRGBO(91, 91, 91, 1) : Colors.grey.shade100,
+                              fontWeight: FontWeight.w400),
+                        ),
                       ),
                     ),
-                  ),
-                ]),
-              ),
-              SizedBox(width: size.width * 0.018),
-              Padding(
-                padding: EdgeInsets.symmetric(
-                    vertical: size.height * 0.010,
-                    horizontal: size.width * 0.010),
-                child: textfields(
-                  hintText: 'Enter your code here',
-                  keybordType: TextInputType.emailAddress,
-                  textController: _emailcontroller,
-                  //icon: Icons.password,
+                  ]),
                 ),
-              ),
-              SizedBox(height: size.height * 0.010),
-              Padding(
+                SizedBox(width: size.width * 0.018),
+                Padding(
                   padding: EdgeInsets.symmetric(
                       vertical: size.height * 0.010,
                       horizontal: size.width * 0.010),
-                  child: fieldbutton(
-                      title: "Continue",
-                      height: size.height * 0.075,
-                      width: size.width * 0.82,
-                      onpressed: () {
-                        Navigator.push(context, custompageroute(child: PasswordReset()));
-                        print(_emailcontroller.text);
-                      })),
-              SizedBox(height: size.height * 0.010),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Text(
-                    'Didn’t get the code? ',
-                    style: TextStyle(
-                        fontFamily: 'Avant',
-                        fontSize: 16,
-                        color: theme == Brightness.light ? const Color.fromRGBO(94, 94, 94, 1) : Colors.grey.shade100,
-                        fontWeight: FontWeight.w500),
+                  child: textfields(
+                    hintText: 'Enter your code here',
+                    maxlength: 6,
+                    keybordType: TextInputType.number,
+                    textController: _emailcontroller,
+                    //icon: Icons.password,
                   ),
-                  SizedBox(
-                    width: size.width * 0.01,
-                  ),
-                  GestureDetector(
-                    child: Text(
-                      'Resend',
+                ),
+                SizedBox(height: size.height * 0.010),
+                Padding(
+                    padding: EdgeInsets.symmetric(
+                        vertical: size.height * 0.010,
+                        horizontal: size.width * 0.010),
+                    child: fieldbutton(
+                        title: "Continue",
+                        height: size.height * 0.075,
+                        width: size.width * 0.82,
+                        onpressed: () {
+                          Navigator.push(context, custompageroute(child: PasswordReset()));
+                          print(_emailcontroller.text);
+                        })),
+                SizedBox(height: size.height * 0.010),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Text(
+                      'Didn’t get the code? ',
                       style: TextStyle(
                           fontFamily: 'Avant',
                           fontSize: 16,
-                          color: Color.fromRGBO(255, 83, 73, 1),
+                          color: theme == Brightness.light ? const Color.fromRGBO(94, 94, 94, 1) : Colors.grey.shade100,
                           fontWeight: FontWeight.w500),
                     ),
-                    onTap: () {},
-                  )
-                ],
-              )
-            ],
+                    SizedBox(
+                      width: size.width * 0.01,
+                    ),
+                    GestureDetector(
+                      child: Text(
+                        'Resend',
+                        style: TextStyle(
+                            fontFamily: 'Avant',
+                            fontSize: 16,
+                            color: Color.fromRGBO(255, 83, 73, 1),
+                            fontWeight: FontWeight.w500),
+                      ),
+                      onTap: () {},
+                    )
+                  ],
+                )
+              ],
+            ),
           ),
         ),
         creatorButton(size)

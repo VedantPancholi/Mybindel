@@ -7,12 +7,18 @@ class textfields extends StatefulWidget {
   String hintText;
   TextInputType keybordType;
   TextEditingController textController;
+  final String? Function(String?)? validator;
+  final String? Function(String?)? onChanged;
+  int? maxlength;
   IconData? icon;
 
   textfields(
       {required this.hintText,
         required this.keybordType,
         required this.textController,
+        this.validator,
+        this.onChanged,
+        this.maxlength,
         this.icon});
 
   @override
@@ -20,6 +26,9 @@ class textfields extends StatefulWidget {
 }
 
 class _textfieldState extends State<textfields> {
+
+
+
   @override
   Widget build(BuildContext context) {
     final theme = SchedulerBinding.instance.platformDispatcher.platformBrightness;
@@ -27,9 +36,15 @@ class _textfieldState extends State<textfields> {
       //decoration
       decoration: theme == Brightness.light?textFormField_neu_morphism:dark_textFormField_neu_morphism,
       child: TextFormField(
-
+          maxLength: widget.maxlength,
         controller: widget.textController,
         decoration: InputDecoration(
+
+          // errorBorder: OutlineInputBorder(
+          //   borderSide: BorderSide(color: Color.fromRGBO(255, 83, 73, 0.3),width: 1),
+          //   borderRadius: BorderRadius.circular(10.0),
+          //
+          // ),
           contentPadding: EdgeInsets.symmetric(vertical: 18.0, horizontal: 15.0),
           border: InputBorder.none,
           //
@@ -49,6 +64,8 @@ class _textfieldState extends State<textfields> {
           )
               : null,
           hintText: widget.hintText,
+
+
           hintStyle: TextStyle(
               fontSize: 14,
               // fontFamily: 'Avant',
@@ -56,23 +73,13 @@ class _textfieldState extends State<textfields> {
               letterSpacing: 1,
               fontWeight: FontWeight.w500),
         ),
-        keyboardType: TextInputType.text,
+        // keyboardType: TextInputType.number,
         textInputAction: TextInputAction.next,
+        keyboardType: widget.keybordType,
+
         autovalidateMode: AutovalidateMode.onUserInteraction,
-        validator: (value) {
-          if (value!.isEmpty) {
-            return "Enter correct Email or Password";
-          }
-          else {
-            // if(){
-            //
-            // }
-            // else{
-            //  return "for data not found";
-            // }
-            return null;
-          }
-        },
+          onChanged: widget.onChanged,
+          validator: widget.validator
       ),
     );
   }

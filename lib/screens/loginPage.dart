@@ -16,6 +16,7 @@ class login_page extends StatefulWidget {
 }
 
 class _login_pageState extends State<login_page> {
+  final _formKey = GlobalKey<FormState>();
   TextEditingController _emailcontroller = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
 
@@ -68,88 +69,124 @@ setState(() {
           height: size.height * 0.43,
           width: size.width,
           // color: Color(0xffff0707),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: const Text(
-                  "Login",
-                  style: TextStyle(
-                      fontFamily: 'Avant',
-                      fontSize: 21,
-                      letterSpacing: 1,
-                      fontWeight: FontWeight.w700),
+          child: Form(
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            key: _formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: const Text(
+                    "Login",
+                    style: TextStyle(
+                        fontFamily: 'Avant',
+                        fontSize: 21,
+                        letterSpacing: 1,
+                        fontWeight: FontWeight.w700),
+                  ),
                 ),
-              ),
-              SizedBox(width: size.width * 0.010),
-              Padding(
-                padding: EdgeInsets.symmetric(
-                    vertical: size.height * 0.010,
-                    horizontal: size.width * 0.010),
-                child: textfields(
-                  hintText: '  Email or phone',
-                  keybordType: TextInputType.emailAddress,
-                  textController: _emailcontroller,
-                  //icon: Icons.password,
-                ),
-              ),
-              SizedBox(width: size.width * 0.010),
-              Padding(
-                padding: EdgeInsets.symmetric(
-                    vertical: size.height * 0.010,
-                    horizontal: size.width * 0.010),
-                child: textfields(
-                  hintText: '  Password',
-                  keybordType: TextInputType.emailAddress,
-                  textController: _passwordController,
-                  //icon: Icons.password,
-                ),
-              ),
-              SizedBox(width: size.width * 0.010),
-              Padding(
+                SizedBox(width: size.width * 0.010),
+                Padding(
                   padding: EdgeInsets.symmetric(
                       vertical: size.height * 0.010,
                       horizontal: size.width * 0.010),
-                  child: fieldbutton(
-                      title: "Continue",
-                      height: size.height * 0.075,
-                      width: size.width * 0.82,
-                      onpressed: () {
-                        print(_emailcontroller.text);
-                      })),
-              SizedBox(height: size.height * 0.010),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Text(
-                    'Forgotten?',
-                    style: TextStyle(
-                        fontFamily: 'Avant',
-                        fontSize: 16,
-                        // color: Color.fromRGBO(94, 94, 94, 1),
-                        fontWeight: FontWeight.w500),
+                  child: textfields(
+                    hintText: '  Email or phone',
+                    keybordType: TextInputType.emailAddress,
+                    textController: _emailcontroller,
+                    onChanged: (val) {
+                      if (_formKey.currentState!.validate()) {
+                        _formKey.currentState!.save();
+                      }
+                    },
+                    validator: (val) {
+                      if (val!.isEmpty || RegExp(r"\s").hasMatch(val)) {
+                        return "Email must not be empty";
+                      } else {
+                        if (RegExp(
+                            r"^[a-zA-Z0-9]+[^#$%&*]+[a-zA-Z0-9]+@[a-z]+\.[a-z]{2,3}")
+                            .hasMatch(val)) {
+                          return null;
+                        } else {
+                          return "Enter a valid Email";
+                        }
+                      }
+                    },
+                    //icon: Icons.password,
                   ),
-                  SizedBox(
-                    width: size.width * 0.01,
+                ),
+                SizedBox(width: size.width * 0.010),
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                      vertical: size.height * 0.010,
+                      horizontal: size.width * 0.010),
+                  child: textfields(
+                    hintText: '  Password',
+                    keybordType: TextInputType.emailAddress,
+                    textController: _passwordController,
+                    onChanged: (val) {
+                      if (_formKey.currentState!.validate()) {
+                        _formKey.currentState!.save();
+                      }
+                    },
+                    validator: (val) {
+                      if (val!.isEmpty || RegExp(r"\s").hasMatch(val)) {
+                        return "Password must not be empty";
+                      }
+                    },
+                    //icon: Icons.password,
                   ),
-                  GestureDetector(
-                    child: Text(
-                      'Reset here!',
+                ),
+                SizedBox(width: size.width * 0.010),
+                Padding(
+                    padding: EdgeInsets.symmetric(
+                        vertical: size.height * 0.010,
+                        horizontal: size.width * 0.010),
+                    child: fieldbutton(
+                        title: "Continue",
+                        height: size.height * 0.075,
+                        width: size.width * 0.82,
+                        onpressed: () {
+                          print(_emailcontroller.text);
+                        })),
+                SizedBox(height: size.height * 0.010),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Text(
+                      'Forgotten?',
                       style: TextStyle(
-                          fontFamily: 'Avant',
+                          fontFamily: "Avant",
                           fontSize: 16,
-                          color: orange_color,
+                          // color: Color.fromRGBO(94, 94, 94, 1),
                           fontWeight: FontWeight.w500),
                     ),
-                    onTap: () {
-                      Navigator.push(
-                          context, custompageroute(child: sendCode()));
-                    },
-                  )
-                ],
-              )
-            ],
+                    SizedBox(
+                      width: size.width * 0.01,
+                    ),
+                    GestureDetector(
+                      child: Text(
+                        'Reset here!',
+                        style: TextStyle(
+                            fontFamily: 'Avant',
+                            fontSize: 16,
+                            color: orange_color,
+                            fontWeight: FontWeight.w500),
+                      ),
+                      onTap: () {
+                        if (_formKey.currentState!.validate()) {
+                          _formKey.currentState!.save();
+                          Navigator.push(
+                              context, custompageroute(child: sendCode()));
+                        }
+
+                      },
+                    )
+                  ],
+                )
+              ],
+            ),
           ),
         ),
         creatorButton(size),
