@@ -6,6 +6,8 @@ import 'package:flutter/services.dart';
 import 'package:mybindel_test/pagerouter/customPageRouter.dart';
 import 'package:mybindel_test/palette/palette.dart';
 import 'package:mybindel_test/screens/loginPage.dart';
+import 'package:mybindel_test/screens/payement_methodsPage.dart';
+import 'package:mybindel_test/screens/welcomePage.dart';
 import 'package:mybindel_test/theme/theme.dart';
 
 // import 'package:test_mybindel/pageroute/customPageRouter.dart';
@@ -17,11 +19,12 @@ void main() {
     DeviceOrientation.portraitDown,
   ]);
   runApp(MaterialApp(
+
     debugShowCheckedModeBanner: false,
     themeMode: ThemeMode.system,
     theme: MyThemes.lightTheme,
     darkTheme: MyThemes.darkTheme,
-    home: splash(),
+    home: WelcomePage(),
   ));
 
   // WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
@@ -39,10 +42,12 @@ class splash extends StatefulWidget {
 }
 
 class _splashState extends State<splash> {
+  final theme = SchedulerBinding.instance.platformDispatcher.platformBrightness;
   void initState() {
     super.initState();
     Timer(Duration(milliseconds: 2500), () {
       openscreen();
+
     });
   }
 

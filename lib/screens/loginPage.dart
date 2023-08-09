@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:mybindel_test/screens/pricingPlans.dart';
 import 'package:mybindel_test/screens/sendCodePage.dart';
 import 'package:mybindel_test/widgets/creatorButton_widget.dart';
 // import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -19,17 +20,24 @@ class _login_pageState extends State<login_page> {
   final _formKey = GlobalKey<FormState>();
   TextEditingController _emailcontroller = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    print("Login called");
+  }
 
   @override
   Widget build(BuildContext context) {
-setState(() {
-  final theme = SchedulerBinding.instance.platformDispatcher.platformBrightness;
-});
+    final theme = SchedulerBinding.instance.platformDispatcher.platformBrightness;
 
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
+      backgroundColor: theme == Brightness.light
+          ? light_Scaffold_color
+          : dark_Scaffold_color,
       body: Column(children: [
         Container(
           alignment: Alignment.center,
@@ -68,7 +76,6 @@ setState(() {
               : dark_Scaffold_color,
           height: size.height * 0.43,
           width: size.width,
-          // color: Color(0xffff0707),
           child: Form(
             autovalidateMode: AutovalidateMode.onUserInteraction,
             key: _formKey,
@@ -148,6 +155,7 @@ setState(() {
                         height: size.height * 0.075,
                         width: size.width * 0.82,
                         onpressed: () {
+                          Navigator.pushReplacement(context, custompageroute(child: PricingPlans()));
                           print(_emailcontroller.text);
                         })),
                 SizedBox(height: size.height * 0.010),

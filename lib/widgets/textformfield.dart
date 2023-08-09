@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
 import 'package:flutter/scheduler.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
 
 import '../palette/palette.dart';
 class textfields extends StatefulWidget {
+
+  List<TextInputFormatter>? inputFormatters;
   String hintText;
   TextInputType keybordType;
   TextEditingController textController;
@@ -19,7 +22,8 @@ class textfields extends StatefulWidget {
         this.validator,
         this.onChanged,
         this.maxlength,
-        this.icon});
+        this.icon,
+        this.inputFormatters,});
 
   @override
   State<textfields> createState() => _textfieldState();
@@ -36,26 +40,12 @@ class _textfieldState extends State<textfields> {
       //decoration
       decoration: theme == Brightness.light?textFormField_neu_morphism:dark_textFormField_neu_morphism,
       child: TextFormField(
+          inputFormatters: widget.inputFormatters,
           maxLength: widget.maxlength,
         controller: widget.textController,
         decoration: InputDecoration(
-
-          // errorBorder: OutlineInputBorder(
-          //   borderSide: BorderSide(color: Color.fromRGBO(255, 83, 73, 0.3),width: 1),
-          //   borderRadius: BorderRadius.circular(10.0),
-          //
-          // ),
           contentPadding: EdgeInsets.symmetric(vertical: 18.0, horizontal: 15.0),
           border: InputBorder.none,
-          //
-          // border: OutlineInputBorder(
-          //   borderSide: BorderSide(color: Colors.black),
-          //   borderRadius: BorderRadius.circular(20.0),
-          // ),
-          // focusedBorder: OutlineInputBorder(
-          //   borderSide: BorderSide(color: Colors.black),
-          //   borderRadius: BorderRadius.circular(20.0),
-          // ),
           prefixIcon: widget.icon != null
               ? Icon(
             widget.icon,

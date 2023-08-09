@@ -1,16 +1,19 @@
 import 'dart:ui';
 import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
-import 'package:flutter/scheduler.dart';
 import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
 
-Color light_Scaffold_color = Color.fromRGBO(242, 242, 242, 1);
+Color light_Scaffold_color = Color.fromRGBO(242, 242, 242, 1.0);
 Color dark_Scaffold_color = Color.fromRGBO(26, 26, 26, 1.0);
-Color orange_color = Color.fromRGBO(255, 83, 73, 1);
 
-final theme = SchedulerBinding.instance.platformDispatcher.platformBrightness;
+Color orange_color = Color.fromRGBO(255, 83, 73, 1.0);
+
+Color dim_white = Color.fromRGBO(236, 232, 232, 0.9686274509803922);
+Color dim_black = Color.fromRGBO(51, 51, 51, 0.9686274509803922);
+
+// bool isPressed = true;
 
 BoxDecoration neu_Morphism = BoxDecoration(
-    borderRadius: BorderRadius.circular(20),
+    borderRadius: BorderRadius.circular(10),
     // theme == Brightness.light?light_Scaffold_color:dark_Scaffold_color
     color: Color.fromRGBO(240, 240, 240, 1),
     boxShadow: [
@@ -27,7 +30,7 @@ BoxDecoration neu_Morphism = BoxDecoration(
     ]);
 
 BoxDecoration dark_neu_Morphism = BoxDecoration(
-    borderRadius: BorderRadius.circular(20),
+    borderRadius: BorderRadius.circular(10),
     // theme == Brightness.light?light_Scaffold_color:dark_Scaffold_color
     color: Color.fromRGBO(25, 25, 25, 1.0),
     boxShadow: [

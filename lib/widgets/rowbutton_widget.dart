@@ -44,8 +44,6 @@ class _rowbuttonState extends State<rowbutton> {
             //     color: Color.fromRGBO(242, 242, 242, 1),
             //     borderRadius: BorderRadius.circular(7)),
             decoration: theme == Brightness.light?neu_Morphism : dark_neu_Morphism,
-
-
             width: widget.iconWidth,
             height: widget.iconHeight,
             child: Icon(widget.icon,color: orange_color,),

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import '../palette/palette.dart';
 import 'rowbutton_widget.dart';
 
 Widget creatorButton(size) {
+  final theme = SchedulerBinding.instance.platformDispatcher.platformBrightness;
   return Expanded(
     child: Container(
       width: size.width,

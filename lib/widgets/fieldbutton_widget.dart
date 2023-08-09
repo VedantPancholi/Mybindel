@@ -28,9 +28,7 @@ class _fieldbuttonState extends State<fieldbutton> {
     return Container(
       height: widget.height,
       width: widget.width,
-
       decoration: theme == Brightness.light?neu_Morphism : dark_neu_Morphism,
-
       padding: widget.padding,
       child: InkWell(
         onTap: widget.onpressed,
@@ -39,7 +37,6 @@ class _fieldbuttonState extends State<fieldbutton> {
               widget.title,
               style: TextStyle(
                   color: orange_color,
-
                   fontSize: 20,
                   // fontFamily: 'Avant',
                   fontWeight: FontWeight.w600,

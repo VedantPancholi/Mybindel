@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 
 import '../pagerouter/customPageRouter.dart';
 import '../palette/palette.dart';
@@ -19,6 +20,7 @@ class _sendCodeState extends State<sendCode> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = SchedulerBinding.instance.platformDispatcher.platformBrightness;
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
@@ -73,7 +75,7 @@ class _sendCodeState extends State<sendCode> {
                   child:  Text(
                     "Password Recovery",
                     style: TextStyle(
-                        color: theme == Brightness.light ? const Color.fromRGBO(51, 51, 51, 1) : Colors.grey.shade100,
+                        color: theme == Brightness.light ?  Color.fromRGBO(51, 51, 51, 1) : Colors.grey.shade100,
                         // fontFamily: 'Avant',
                         fontSize: 19,
                         letterSpacing: 1,
@@ -104,7 +106,7 @@ class _sendCodeState extends State<sendCode> {
                             Text(
                               "Back to Login",
                               style: TextStyle(
-                                  color: theme == Brightness.light ? const Color.fromRGBO(51, 51, 51, 1) : Colors.grey.shade300,
+                                  color: theme == Brightness.light ?  Color.fromRGBO(51, 51, 51, 1) : Colors.grey.shade300,
                                   // fontFamily: 'Avant',
                                   fontSize: 16,
                                   letterSpacing: 1,
@@ -171,7 +173,7 @@ class _sendCodeState extends State<sendCode> {
                       style: TextStyle(
                           // fontFamily: 'Avant',
                           fontSize: 16,
-                          color: theme == Brightness.light ? const Color.fromRGBO(91, 91, 91, 1) : Colors.grey.shade100,
+                          color: theme == Brightness.light ?  Color.fromRGBO(91, 91, 91, 1) : Colors.grey.shade100,
                           fontWeight: FontWeight.w500),
                     ),
                     SizedBox(

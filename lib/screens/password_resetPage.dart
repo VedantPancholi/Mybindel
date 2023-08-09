@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:mybindel_test/screens/loginPage.dart';
 import '../pagerouter/customPageRouter.dart';
 import '../palette/palette.dart';
@@ -17,12 +18,18 @@ class _PasswordResetState extends State<PasswordReset> {
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
+    final theme = SchedulerBinding.instance.platformDispatcher.platformBrightness;
     final size = MediaQuery.of(context).size;
     String mustfollow =
         "Include at least 8 character along with alphabets, numbers and symbols.";
 
     return Scaffold(
-      body: Column(children: [
+      resizeToAvoidBottomInset: false,
+      backgroundColor: theme == Brightness.light
+          ? light_Scaffold_color
+          : dark_Scaffold_color,
+      body: Column(
+          children: [
         Container(
           alignment: Alignment.center,
           height: size.height * 0.12,
@@ -75,8 +82,8 @@ class _PasswordResetState extends State<PasswordReset> {
                       "Password Recovery",
                       style: TextStyle(
                           color: theme == Brightness.light
-                              ? const Color.fromRGBO(51, 51, 51, 1)
-                              : Colors.grey.shade100,
+                              ? dim_black
+                              : dim_white,
                           // fontFamily: 'Avant',
                           fontSize: 19,
                           letterSpacing: 1,

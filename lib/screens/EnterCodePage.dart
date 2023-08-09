@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter/services.dart';
 import 'package:mybindel_test/pagerouter/customPageRouter.dart';
-import 'package:mybindel_test/screens/password_reset.dart';
+import 'package:mybindel_test/screens/password_resetPage.dart';
 
 import '../palette/palette.dart';
 import '../widgets/creatorButton_widget.dart';
@@ -14,11 +16,15 @@ class enterCode extends StatefulWidget {
 }
 
 class _enterCodeState extends State<enterCode> {
+
+
+
   TextEditingController _emailcontroller = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
+    final theme = SchedulerBinding.instance.platformDispatcher.platformBrightness;
     final size = MediaQuery.of(context).size;
     String description =
         "Check your mailbox or phone for the code. The code lasts for only 5 minutes right after it is sent to you.";
@@ -113,8 +119,10 @@ class _enterCodeState extends State<enterCode> {
                   child: textfields(
                     hintText: 'Enter your code here',
                     maxlength: 6,
+
                     keybordType: TextInputType.number,
                     textController: _emailcontroller,
+                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                     //icon: Icons.password,
                   ),
                 ),
