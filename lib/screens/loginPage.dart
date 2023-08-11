@@ -3,9 +3,11 @@ import 'package:flutter/scheduler.dart';
 import 'package:mybindel_test/screens/pricingPlans.dart';
 import 'package:mybindel_test/screens/sendCodePage.dart';
 import 'package:mybindel_test/widgets/creatorButton_widget.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 // import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../pagerouter/customPageRouter.dart';
 import '../palette/palette.dart';
+import '../theme/selectTheme.dart';
 import '../widgets/fieldbutton_widget.dart';
 import '../widgets/textformfield.dart';
 // import '../widgets/rowbutton_widget.dart';
@@ -17,25 +19,30 @@ class login_page extends StatefulWidget {
 }
 
 class _login_pageState extends State<login_page> {
+  // Future<bool?> getCurrentThemeInstance() async{
+  //   SharedPreferences pref = await SharedPreferences.getInstance();
+  //   return pref.getBool('currentTheme');
+  // }
+
   final _formKey = GlobalKey<FormState>();
   TextEditingController _emailcontroller = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    print("Login called");
-  }
+  // void initState() {
+  //   // TODO: implement initState
+  //   super.initState();
+  //   print("Login called");
+  // }
 
   @override
   Widget build(BuildContext context) {
     final theme = SchedulerBinding.instance.platformDispatcher.platformBrightness;
-
+    // final current_theme = getCurrentThemeInstance();
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: theme == Brightness.light
+      backgroundColor:  theme == Brightness.light
           ? light_Scaffold_color
           : dark_Scaffold_color,
       body: Column(children: [
@@ -43,7 +50,7 @@ class _login_pageState extends State<login_page> {
           alignment: Alignment.center,
           height: size.height * 0.15,
           width: size.width,
-          color: theme == Brightness.light
+          color:  theme == Brightness.light
               ? light_Scaffold_color
               : dark_Scaffold_color,
           child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
@@ -71,7 +78,7 @@ class _login_pageState extends State<login_page> {
         ),
         Container(
           padding: EdgeInsets.symmetric(horizontal: size.width * 0.087),
-          color: theme == Brightness.light
+          color:  theme == Brightness.light
               ? light_Scaffold_color
               : dark_Scaffold_color,
           height: size.height * 0.43,
@@ -82,9 +89,9 @@ class _login_pageState extends State<login_page> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: const Text(
+                const Padding(
+                  padding: EdgeInsets.all(10.0),
+                  child: Text(
                     "Login",
                     style: TextStyle(
                         fontFamily: 'Avant',

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../palette/palette.dart';
 
@@ -16,8 +17,13 @@ class RichTextPricingPlan extends StatefulWidget {
 }
 
 class _RichTextPricingPlanState extends State<RichTextPricingPlan> {
+  // Future<bool?> getCurrentThemeInstance() async{
+  //   SharedPreferences pref = await SharedPreferences.getInstance();
+  //   return pref.getBool('currentTheme');
+  // }
   @override
   Widget build(BuildContext context) {
+    // final current_theme = getCurrentThemeInstance();
     final theme = SchedulerBinding.instance.platformDispatcher.platformBrightness;
 
     return RichText(
@@ -28,7 +34,7 @@ class _RichTextPricingPlanState extends State<RichTextPricingPlan> {
           ),
           TextSpan(
             text: widget.text,
-            style: TextStyle(fontSize: 18,color: theme == Brightness.light
+            style: TextStyle(fontSize: 18,color:  theme == Brightness.light
               ? dark_Scaffold_color
               : light_Scaffold_color,),
           ),

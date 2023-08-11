@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
 import 'package:flutter/scheduler.dart';
+import 'package:mybindel_test/pagerouter/customPageRouter.dart';
+import 'package:mybindel_test/screens/payement_methodsPage.dart';
 import 'package:mybindel_test/widgets/richText_pricingPlan.dart';
 import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../palette/palette.dart';
 import '../widgets/fieldbutton_widget.dart';
 
@@ -13,16 +16,21 @@ class PricingPlans extends StatefulWidget {
 }
 
 class _PricingPlansState extends State<PricingPlans> {
-  bool isPressed1 = false;
+  // Future<bool?> getCurrentThemeInstance() async{
+  //   SharedPreferences pref = await SharedPreferences.getInstance();
+  //   return pref.getBool('currentTheme');
+  // }
+  bool isPressed1 = true;
   bool isPressed2 = false;
   bool isPressed3 = false;
   @override
   Widget build(BuildContext context) {
+    // final current_theme = getCurrentThemeInstance();
     final theme =
         SchedulerBinding.instance.platformDispatcher.platformBrightness;
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: theme == Brightness.light
+      backgroundColor:  theme == Brightness.light
           ? light_Scaffold_color
           : dark_Scaffold_color,
       body: Column(
@@ -31,7 +39,7 @@ class _PricingPlansState extends State<PricingPlans> {
             alignment: Alignment.center,
             height: size.height * 0.15,
             width: size.width,
-            color: theme == Brightness.light
+            color:  theme == Brightness.light
                 ? light_Scaffold_color
                 : dark_Scaffold_color,
             child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
@@ -60,7 +68,7 @@ class _PricingPlansState extends State<PricingPlans> {
             // color: Colors.green,
             width: size.width,
             height: size.height * 0.060,
-            color: theme == Brightness.light
+            color:  theme == Brightness.light
                 ? light_Scaffold_color
                 : dark_Scaffold_color,
             padding: EdgeInsets.symmetric(horizontal: size.width * 0.087),
@@ -78,7 +86,7 @@ class _PricingPlansState extends State<PricingPlans> {
           ),
           Expanded(
             child: Container(
-              color: theme == Brightness.light
+              color:  theme == Brightness.light
                   ? light_Scaffold_color
                   : dark_Scaffold_color,
               child: ListView(
@@ -88,58 +96,64 @@ class _PricingPlansState extends State<PricingPlans> {
                 children: [
                   // 1 st
                   GestureDetector(
-                    onTap: () => setState(() => isPressed1 = !isPressed1),
+                    onTap: () {
+                      setState(() {
+                        isPressed1 = true;
+                        isPressed2 = false;
+                        isPressed3 = false;
+                      });
+                    },
                     child: AnimatedContainer(
                       padding:
-                          EdgeInsets.symmetric(vertical: 5.0, horizontal: 10.0),
+                      EdgeInsets.symmetric(vertical: 5.0, horizontal: 10.0),
                       margin: EdgeInsets.symmetric(
                           horizontal: 20.0, vertical: 10.0),
                       width: size.width * 0.60,
                       height: size.height * 0.18,
-                      decoration: theme == Brightness.light
+                      decoration:  theme == Brightness.light
                           ? BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              color: Color.fromRGBO(240, 240, 240, 1),
-                              boxShadow: [
-                                BoxShadow(
-                                  inset: isPressed1,
-                                  blurRadius: isPressed1 ? 5 : 7,
-                                  offset:
-                                      isPressed1 ? Offset(3, 3) : Offset(7, 7),
-                                  color: Color.fromRGBO(184, 182, 182, 1.0),
-                                ),
-                                BoxShadow(
-                                  inset: isPressed1,
-                                  blurRadius: isPressed1 ? 2 : 7,
-                                  offset: isPressed1
-                                      ? Offset(-3, -3)
-                                      : Offset(-7, -7),
-                                  color: Color.fromRGBO(255, 255, 255, 1.0),
-                                ),
-                              ],
-                            )
+                        borderRadius: BorderRadius.circular(20),
+                        color: Color.fromRGBO(240, 240, 240, 1),
+                        boxShadow: [
+                          BoxShadow(
+                            inset: isPressed1,
+                            blurRadius: isPressed1 ? 5 : 7,
+                            offset:
+                            isPressed1 ? Offset(3, 3) : Offset(7, 7),
+                            color: Color.fromRGBO(184, 182, 182, 1.0),
+                          ),
+                          BoxShadow(
+                            inset: isPressed1,
+                            blurRadius: isPressed1 ? 2 : 7,
+                            offset: isPressed1
+                                ? Offset(-3, -3)
+                                : Offset(-7, -7),
+                            color: Color.fromRGBO(255, 255, 255, 1.0),
+                          ),
+                        ],
+                      )
                           : BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              color: Color.fromRGBO(25, 25, 25, 1.0),
-                              boxShadow: [
-                                BoxShadow(
-                                  inset: isPressed1,
-                                  blurRadius: isPressed1 ? 5 : 10,
-                                  offset: isPressed1
-                                      ? Offset(3, 3)
-                                      : Offset(10, 10),
-                                  color: Color.fromRGBO(18, 18, 18, 1.0),
-                                ),
-                                BoxShadow(
-                                  inset: isPressed1,
-                                  blurRadius: isPressed1 ? 4 : 3,
-                                  offset: isPressed1
-                                      ? Offset(-4, -4)
-                                      : Offset(-3, -3),
-                                  color: Color.fromRGBO(60, 60, 60, 1.0),
-                                ),
-                              ],
-                            ),
+                        borderRadius: BorderRadius.circular(20),
+                        color: Color.fromRGBO(25, 25, 25, 1.0),
+                        boxShadow: [
+                          BoxShadow(
+                            inset: isPressed1,
+                            blurRadius: isPressed1 ? 5 : 10,
+                            offset: isPressed1
+                                ? Offset(3, 3)
+                                : Offset(10, 10),
+                            color: Color.fromRGBO(18, 18, 18, 1.0),
+                          ),
+                          BoxShadow(
+                            inset: isPressed1,
+                            blurRadius: isPressed1 ? 4 : 3,
+                            offset: isPressed1
+                                ? Offset(-4, -4)
+                                : Offset(-3, -3),
+                            color: Color.fromRGBO(60, 60, 60, 1.0),
+                          ),
+                        ],
+                      ),
                       duration: const Duration(microseconds: 100),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -180,58 +194,65 @@ class _PricingPlansState extends State<PricingPlans> {
                   ),
                   // 2 nd
                   GestureDetector(
-                    onTap: () => setState(() => isPressed2 = !isPressed2),
+                    onTap: () {
+                      setState(() {
+                        isPressed1 = false;
+                        isPressed2 = true;
+                        isPressed3 = false;
+                      });
+
+                    },
                     child: AnimatedContainer(
                       padding:
-                          EdgeInsets.symmetric(vertical: 5.0, horizontal: 10.0),
+                      EdgeInsets.symmetric(vertical: 5.0, horizontal: 10.0),
                       margin: EdgeInsets.symmetric(
                           horizontal: 20.0, vertical: 10.0),
                       width: size.width * 0.60,
                       height: size.height * 0.18,
-                      decoration: theme == Brightness.light
+                      decoration:  theme == Brightness.light
                           ? BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              color: Color.fromRGBO(240, 240, 240, 1),
-                              boxShadow: [
-                                BoxShadow(
-                                  inset: isPressed2,
-                                  blurRadius: isPressed2 ? 5 : 7,
-                                  offset:
-                                      isPressed2 ? Offset(3, 3) : Offset(7, 7),
-                                  color: Color.fromRGBO(184, 182, 182, 1.0),
-                                ),
-                                BoxShadow(
-                                  inset: isPressed2,
-                                  blurRadius: isPressed2 ? 2 : 7,
-                                  offset: isPressed2
-                                      ? Offset(-3, -3)
-                                      : Offset(-7, -7),
-                                  color: Color.fromRGBO(255, 255, 255, 1.0),
-                                ),
-                              ],
-                            )
+                        borderRadius: BorderRadius.circular(20),
+                        color: Color.fromRGBO(240, 240, 240, 1),
+                        boxShadow: [
+                          BoxShadow(
+                            inset: isPressed2,
+                            blurRadius: isPressed2 ? 5 : 7,
+                            offset:
+                            isPressed2 ? Offset(3, 3) : Offset(7, 7),
+                            color: Color.fromRGBO(184, 182, 182, 1.0),
+                          ),
+                          BoxShadow(
+                            inset: isPressed2,
+                            blurRadius: isPressed2 ? 2 : 7,
+                            offset: isPressed2
+                                ? Offset(-3, -3)
+                                : Offset(-7, -7),
+                            color: Color.fromRGBO(255, 255, 255, 1.0),
+                          ),
+                        ],
+                      )
                           : BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              color: Color.fromRGBO(25, 25, 25, 1.0),
-                              boxShadow: [
-                                BoxShadow(
-                                  inset: isPressed2,
-                                  blurRadius: isPressed2 ? 10 : 5,
-                                  offset: isPressed2
-                                      ? Offset(10, 10)
-                                      : Offset(3, 3),
-                                  color: Color.fromRGBO(18, 18, 18, 1.0),
-                                ),
-                                BoxShadow(
-                                  inset: isPressed2,
-                                  blurRadius: isPressed2 ? 4 : 3,
-                                  offset: isPressed2
-                                      ? Offset(-4, -4)
-                                      : Offset(-3, -3),
-                                  color: Color.fromRGBO(60, 60, 60, 1.0),
-                                ),
-                              ],
-                            ),
+                        borderRadius: BorderRadius.circular(20),
+                        color: Color.fromRGBO(25, 25, 25, 1.0),
+                        boxShadow: [
+                          BoxShadow(
+                            inset: isPressed2,
+                            blurRadius: isPressed2 ? 10 : 5,
+                            offset: isPressed2
+                                ? Offset(10, 10)
+                                : Offset(3, 3),
+                            color: Color.fromRGBO(18, 18, 18, 1.0),
+                          ),
+                          BoxShadow(
+                            inset: isPressed2,
+                            blurRadius: isPressed2 ? 4 : 3,
+                            offset: isPressed2
+                                ? Offset(-4, -4)
+                                : Offset(-3, -3),
+                            color: Color.fromRGBO(60, 60, 60, 1.0),
+                          ),
+                        ],
+                      ),
                       duration: const Duration(microseconds: 100),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -273,58 +294,64 @@ class _PricingPlansState extends State<PricingPlans> {
                   ),
                   // 3 rd
                   GestureDetector(
-                    onTap: () => setState(() => isPressed3 = !isPressed3),
+                    onTap: () {
+                      setState(() {
+                        isPressed1 = false;
+                        isPressed2 = false;
+                        isPressed3 = true;
+                      });
+                    },
                     child: AnimatedContainer(
                       padding:
-                          EdgeInsets.symmetric(vertical: 5.0, horizontal: 10.0),
+                      EdgeInsets.symmetric(vertical: 5.0, horizontal: 10.0),
                       margin: EdgeInsets.symmetric(
                           horizontal: 20.0, vertical: 10.0),
                       width: size.width * 0.60,
                       height: size.height * 0.20,
-                      decoration: theme == Brightness.light
+                      decoration:  theme == Brightness.light
                           ? BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              color: Color.fromRGBO(240, 240, 240, 1),
-                              boxShadow: [
-                                BoxShadow(
-                                  inset: isPressed3,
-                                  blurRadius: isPressed3 ? 5 : 7,
-                                  offset:
-                                      isPressed3 ? Offset(3, 3) : Offset(7, 7),
-                                  color: Color.fromRGBO(184, 182, 182, 1.0),
-                                ),
-                                BoxShadow(
-                                  inset: isPressed3,
-                                  blurRadius: isPressed3 ? 2 : 7,
-                                  offset: isPressed3
-                                      ? Offset(-3, -3)
-                                      : Offset(-7, -7),
-                                  color: Color.fromRGBO(255, 255, 255, 1.0),
-                                ),
-                              ],
-                            )
+                        borderRadius: BorderRadius.circular(20),
+                        color: Color.fromRGBO(240, 240, 240, 1),
+                        boxShadow: [
+                          BoxShadow(
+                            inset: isPressed3,
+                            blurRadius: isPressed3 ? 5 : 7,
+                            offset:
+                            isPressed3 ? Offset(3, 3) : Offset(7, 7),
+                            color: Color.fromRGBO(184, 182, 182, 1.0),
+                          ),
+                          BoxShadow(
+                            inset: isPressed3,
+                            blurRadius: isPressed3 ? 2 : 7,
+                            offset: isPressed3
+                                ? Offset(-3, -3)
+                                : Offset(-7, -7),
+                            color: Color.fromRGBO(255, 255, 255, 1.0),
+                          ),
+                        ],
+                      )
                           : BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              color: Color.fromRGBO(25, 25, 25, 1.0),
-                              boxShadow: [
-                                BoxShadow(
-                                  inset: isPressed3,
-                                  blurRadius: isPressed3 ? 10 : 5,
-                                  offset: isPressed3
-                                      ? Offset(10, 10)
-                                      : Offset(3, 3),
-                                  color: Color.fromRGBO(18, 18, 18, 1.0),
-                                ),
-                                BoxShadow(
-                                  inset: isPressed3,
-                                  blurRadius: isPressed3 ? 4 : 3,
-                                  offset: isPressed3
-                                      ? Offset(-4, -4)
-                                      : Offset(-3, -3),
-                                  color: Color.fromRGBO(60, 60, 60, 1.0),
-                                ),
-                              ],
-                            ),
+                        borderRadius: BorderRadius.circular(20),
+                        color: Color.fromRGBO(25, 25, 25, 1.0),
+                        boxShadow: [
+                          BoxShadow(
+                            inset: isPressed3,
+                            blurRadius: isPressed3 ? 10 : 5,
+                            offset: isPressed3
+                                ? Offset(10, 10)
+                                : Offset(3, 3),
+                            color: Color.fromRGBO(18, 18, 18, 1.0),
+                          ),
+                          BoxShadow(
+                            inset: isPressed3,
+                            blurRadius: isPressed3 ? 4 : 3,
+                            offset: isPressed3
+                                ? Offset(-4, -4)
+                                : Offset(-3, -3),
+                            color: Color.fromRGBO(60, 60, 60, 1.0),
+                          ),
+                        ],
+                      ),
                       duration: const Duration(microseconds: 100),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -377,6 +404,7 @@ class _PricingPlansState extends State<PricingPlans> {
                             height: size.height * 0.075,
                             width: size.width * 0.82,
                             onpressed: () {
+                              Navigator.push(context, custompageroute(child: PaymentMethods()));
                               print("Continue tapped");
                               print(isPressed1);
                               print(isPressed2);

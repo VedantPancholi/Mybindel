@@ -2,6 +2,7 @@ import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../palette/palette.dart';
 class textfields extends StatefulWidget {
@@ -31,14 +32,18 @@ class textfields extends StatefulWidget {
 
 class _textfieldState extends State<textfields> {
 
-
+  // Future<bool?> getCurrentThemeInstance() async{
+  //   SharedPreferences pref = await SharedPreferences.getInstance();
+  //   return pref.getBool('currentTheme');
+  // }
 
   @override
   Widget build(BuildContext context) {
+    // final current_theme = getCurrentThemeInstance();
     final theme = SchedulerBinding.instance.platformDispatcher.platformBrightness;
     return Container(
       //decoration
-      decoration: theme == Brightness.light?textFormField_neu_morphism:dark_textFormField_neu_morphism,
+      decoration:  theme == Brightness.light?textFormField_neu_morphism:dark_textFormField_neu_morphism,
       child: TextFormField(
           inputFormatters: widget.inputFormatters,
           maxLength: widget.maxlength,

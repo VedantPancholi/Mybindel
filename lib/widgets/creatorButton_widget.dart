@@ -1,16 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../palette/palette.dart';
 import 'rowbutton_widget.dart';
 
 Widget creatorButton(size) {
+  // Future<bool?> getCurrentThemeInstance() async{
+  //   SharedPreferences pref = await SharedPreferences.getInstance();
+  //   return pref.getBool('currentTheme');
+  // }
+  // final current_theme = getCurrentThemeInstance();
   final theme = SchedulerBinding.instance.platformDispatcher.platformBrightness;
   return Expanded(
     child: Container(
       width: size.width,
       // color: Colors.green,
       decoration: BoxDecoration(
-      color: theme == Brightness.light
+      color:  theme == Brightness.light
       ? light_Scaffold_color
       : dark_Scaffold_color,
       ),

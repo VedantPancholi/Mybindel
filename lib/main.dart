@@ -5,9 +5,12 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:mybindel_test/pagerouter/customPageRouter.dart';
 import 'package:mybindel_test/palette/palette.dart';
+import 'package:mybindel_test/screens/create_userPage.dart';
 import 'package:mybindel_test/screens/loginPage.dart';
+// import 'package:mybindel_test/screens/loginPage.dart';
 import 'package:mybindel_test/screens/payement_methodsPage.dart';
 import 'package:mybindel_test/screens/welcomePage.dart';
+// import 'package:mybindel_test/screens/welcomePage.dart';
 import 'package:mybindel_test/theme/theme.dart';
 
 // import 'package:test_mybindel/pageroute/customPageRouter.dart';
@@ -24,7 +27,7 @@ void main() {
     themeMode: ThemeMode.system,
     theme: MyThemes.lightTheme,
     darkTheme: MyThemes.darkTheme,
-    home: WelcomePage(),
+    home: CreateUser(),
   ));
 
   // WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 import '../palette/palette.dart';
+import '../theme/selectTheme.dart';
 import '../widgets/fieldbutton_widget.dart';
 
 class WelcomePage extends StatefulWidget {
@@ -12,10 +14,17 @@ class WelcomePage extends StatefulWidget {
 }
 
 class _WelcomePageState extends State<WelcomePage> {
+
+//   Future<bool?> getCurrentThemeInstance() async{
+//   SharedPreferences pref = await SharedPreferences.getInstance();
+//   return pref.getBool('currentTheme');
+// }
+
   @override
   Widget build(BuildContext context) {
     final theme =
         SchedulerBinding.instance.platformDispatcher.platformBrightness;
+    // final current_theme = getCurrentThemeInstance();
     final size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: theme == Brightness.light
@@ -27,7 +36,7 @@ class _WelcomePageState extends State<WelcomePage> {
             alignment: Alignment.center,
             height: size.height * 0.15,
             width: size.width,
-            color: theme == Brightness.light
+            color:  theme == Brightness.light
                 ? light_Scaffold_color
                 : dark_Scaffold_color,
             child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
@@ -57,7 +66,7 @@ class _WelcomePageState extends State<WelcomePage> {
           Container(
             height: size.height * 0.50,
             width: size.width,
-            color: theme == Brightness.light
+            color:  theme == Brightness.light
                 ? light_Scaffold_color
                 : dark_Scaffold_color,
             child: Column(
@@ -67,7 +76,7 @@ class _WelcomePageState extends State<WelcomePage> {
                 Container(
                   width: size.width * 0.380,
                   height: size.height * 0.200,
-                  decoration: theme == Brightness.light
+                  decoration:  theme == Brightness.light
                       ? BoxDecoration(
                           image: DecorationImage(
                             image: AssetImage("asset/images/Large_Check.png"),
@@ -89,7 +98,7 @@ class _WelcomePageState extends State<WelcomePage> {
                         text: "Hi ",
                         style: TextStyle(
                           fontSize: 18,
-                          color: theme == Brightness.light
+                          color:  theme == Brightness.light
                               ? dark_Scaffold_color
                               : light_Scaffold_color,
                         ),
@@ -102,7 +111,7 @@ class _WelcomePageState extends State<WelcomePage> {
                         text: "Your Bindle Is Ready!",
                         style: TextStyle(
                           fontSize: 18,
-                          color: theme == Brightness.light
+                          color:  theme == Brightness.light
                               ? dark_Scaffold_color
                               : light_Scaffold_color,
                         ),
@@ -122,7 +131,7 @@ class _WelcomePageState extends State<WelcomePage> {
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
-                    color: theme == Brightness.light
+                    color:  theme == Brightness.light
                         ? dark_Scaffold_color
                         : light_Scaffold_color,
                   ),
@@ -137,15 +146,15 @@ class _WelcomePageState extends State<WelcomePage> {
                   animationDuration: 800,
                   minWidth: size.width * 0.140,
                   minHeight: size.height * 0.040,
-                  initialLabelIndex: 0,
+                  // initialLabelIndex: 0,
                   cornerRadius: 10.0,
-                  activeFgColor: theme == Brightness.light
+                  activeFgColor:  theme == Brightness.light
                       ? light_Scaffold_color
                       : dark_Scaffold_color,
-                  inactiveBgColor: theme == Brightness.light
+                  inactiveBgColor:  theme == Brightness.light
                       ? dim_white
                       : dim_black,
-                  inactiveFgColor: theme == Brightness.light
+                  inactiveFgColor:  theme == Brightness.light
                       ? dim_black
                       : dim_white,
                   totalSwitches: 2,
@@ -154,6 +163,11 @@ class _WelcomePageState extends State<WelcomePage> {
                   // icons: [FontAwesomeIcons.mars, FontAwesomeIcons.venus],
                   // activeBgColors: [[orange_color],[Colors.pink]],
                   onToggle: (index) {
+                    // setState(() {
+                    //
+                    // SelectTheme.toggleTheme(index!);
+                    // SelectTheme.selectTheme(theme);
+                    // });
                     print('switched to: $index');
                   },
                 ),
@@ -168,7 +182,7 @@ class _WelcomePageState extends State<WelcomePage> {
                   text: "Well, you can change later in the settings too.",
                   style: TextStyle(
                     fontSize: 16,
-                    color: theme == Brightness.light
+                    color:  theme == Brightness.light
                         ? dark_Scaffold_color
                         : light_Scaffold_color,
                   ),
@@ -183,6 +197,7 @@ class _WelcomePageState extends State<WelcomePage> {
                   height: size.height * 0.075,
                   width: size.width * 0.82,
                   onpressed: () {
+
                     // Navigator.pushReplacement(context, custompageroute(child: PricingPlans()));
                     print("Continue from Welcome Page");
                   })),

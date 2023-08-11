@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:mybindel_test/screens/loginPage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../pagerouter/customPageRouter.dart';
 import '../palette/palette.dart';
 import '../widgets/fieldbutton_widget.dart';
@@ -13,11 +14,16 @@ class PasswordReset extends StatefulWidget {
 }
 
 class _PasswordResetState extends State<PasswordReset> {
+  // Future<bool?> getCurrentThemeInstance() async{
+  //   SharedPreferences pref = await SharedPreferences.getInstance();
+  //   return pref.getBool('currentTheme');
+  // }
   TextEditingController _newpasswordcontroller = TextEditingController();
   TextEditingController _confirmedpasswordcontroller = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
+    // final current_theme = getCurrentThemeInstance();
     final theme = SchedulerBinding.instance.platformDispatcher.platformBrightness;
     final size = MediaQuery.of(context).size;
     String mustfollow =
@@ -25,7 +31,7 @@ class _PasswordResetState extends State<PasswordReset> {
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: theme == Brightness.light
+      backgroundColor:  theme == Brightness.light
           ? light_Scaffold_color
           : dark_Scaffold_color,
       body: Column(
@@ -34,7 +40,7 @@ class _PasswordResetState extends State<PasswordReset> {
           alignment: Alignment.center,
           height: size.height * 0.12,
           width: size.width,
-          color: theme == Brightness.light
+          color:  theme == Brightness.light
               ? light_Scaffold_color
               : dark_Scaffold_color,
           child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
@@ -64,7 +70,7 @@ class _PasswordResetState extends State<PasswordReset> {
         Expanded(
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: size.width * 0.087),
-            color: theme == Brightness.light
+            color:  theme == Brightness.light
                 ? light_Scaffold_color
                 : dark_Scaffold_color,
             height: size.height * 0.43,
@@ -81,7 +87,7 @@ class _PasswordResetState extends State<PasswordReset> {
                     child: Text(
                       "Password Recovery",
                       style: TextStyle(
-                          color: theme == Brightness.light
+                          color:  theme == Brightness.light
                               ? dim_black
                               : dim_white,
                           // fontFamily: 'Avant',
@@ -97,7 +103,7 @@ class _PasswordResetState extends State<PasswordReset> {
                         horizontal: size.width * 0.010),
                     child: textfields(
                       hintText: 'Enter new password',
-                      keybordType: TextInputType.emailAddress,
+                      keybordType: TextInputType.text,
                       textController: _newpasswordcontroller,
                       onChanged: (val) {
                         if (_formKey.currentState!.validate()) {
@@ -119,7 +125,7 @@ class _PasswordResetState extends State<PasswordReset> {
                         horizontal: size.width * 0.010),
                     child: textfields(
                       hintText: 'Confirm new password',
-                      keybordType: TextInputType.emailAddress,
+                      keybordType: TextInputType.text,
                       textController: _confirmedpasswordcontroller,
                       onChanged: (val) {
                         if (_formKey.currentState!.validate()) {
