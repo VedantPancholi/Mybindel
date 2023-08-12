@@ -4,6 +4,7 @@ import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:mybindel_test/screens/pricingPlans.dart';
+import 'package:mybindel_test/screens/second_create_userPage.dart';
 import 'package:mybindel_test/screens/welcomePage.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -100,8 +101,8 @@ class _CreateUserState extends State<CreateUser> {
                             right: size.width * 0.005,
                             bottom: size.height * 0.015,
                         ),
-                        child: Text(
-                          "Create User",
+                        child: const Text(
+                          "Create New",
                           style: TextStyle(
                               fontFamily: 'Avant',
                               fontSize: 21,
@@ -170,7 +171,32 @@ class _CreateUserState extends State<CreateUser> {
                         decoration: provider.currentTheme
                             ? textFormField_neu_morphism
                             : dark_textFormField_neu_morphism,
-                        child: websiteTextfield(_website, size),
+                        child:  TextFormField(
+                          controller: _website,
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            suffix: TextButton(
+                              onPressed: () {},
+                              child: Text(
+                                "Add more",
+                                textAlign: TextAlign.center,
+                                softWrap: true,
+                                style: TextStyle(color: theme == Brightness.light ? dim_white : dim_black, fontSize: 15, letterSpacing: 1, fontWeight: FontWeight.w500),
+                              ),
+                            ),
+                            contentPadding: EdgeInsets.symmetric(
+                              // vertical: size.height * 0.010,
+                                horizontal: size.width * 0.030),
+                            hintStyle: const TextStyle(
+                                fontSize: 14,
+                                // fontFamily: 'Avant',
+                                // color: Color.fromRGBO(94, 94, 94, 1),
+                                letterSpacing: 1,
+                                fontWeight: FontWeight.w500),
+                            hintText: "Website",
+                          ),
+                          textInputAction: TextInputAction.next,
+                        ),
                       ),
                       SizedBox(
                         height: size.height * 0.020,
@@ -403,7 +429,7 @@ class _CreateUserState extends State<CreateUser> {
                         isPressed1 = false;
                       });
                       Navigator.pushReplacement(
-                          context, custompageroute(child: PricingPlans()));
+                          context, custompageroute(child: SecondCreateUserPage(_email.text)));
                       // print(_emailcontroller.text);
                     }),
               )),
@@ -513,7 +539,7 @@ Widget websiteTextfield(TextEditingController _website, Size size ) =>
         suffix: TextButton(
           onPressed: () {},
           child: Text(
-            "website",
+            "Add more",
             textAlign: TextAlign.center,
             softWrap: true,
             style: TextStyle(color: dim_black, fontSize: 15, letterSpacing: 1, fontWeight: FontWeight.w500),

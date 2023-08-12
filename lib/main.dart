@@ -9,6 +9,7 @@ import 'package:mybindel_test/screens/create_userPage.dart';
 import 'package:mybindel_test/screens/loginPage.dart';
 // import 'package:mybindel_test/screens/loginPage.dart';
 import 'package:mybindel_test/screens/payement_methodsPage.dart';
+import 'package:mybindel_test/screens/second_create_userPage.dart';
 import 'package:mybindel_test/screens/welcomePage.dart';
 import 'package:mybindel_test/theme/selectTheme.dart';
 // import 'package:mybindel_test/screens/welcomePage.dart';
@@ -35,7 +36,7 @@ void main() {
             themeMode: provider.currentTheme ? ThemeMode.light: ThemeMode.dark, //ThemeMode.system, //
             theme: MyThemes.lightTheme,
             darkTheme: MyThemes.darkTheme,
-            home: splash(),
+            home: CreateUser(),
           );
         },
       ));
