@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:mybindel_test/screens/loginPage.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../pagerouter/customPageRouter.dart';
 import '../palette/palette.dart';
+import '../theme/selectTheme.dart';
 import '../widgets/fieldbutton_widget.dart';
 import '../widgets/textformfield.dart';
 
@@ -25,13 +27,14 @@ class _PasswordResetState extends State<PasswordReset> {
   Widget build(BuildContext context) {
     // final current_theme = getCurrentThemeInstance();
     final theme = SchedulerBinding.instance.platformDispatcher.platformBrightness;
+    final provider = Provider.of<Themeprovider>(context);
     final size = MediaQuery.of(context).size;
     String mustfollow =
         "Include at least 8 character along with alphabets, numbers and symbols.";
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor:  theme == Brightness.light
+      backgroundColor:  provider.currentTheme
           ? light_Scaffold_color
           : dark_Scaffold_color,
       body: Column(
@@ -40,7 +43,7 @@ class _PasswordResetState extends State<PasswordReset> {
           alignment: Alignment.center,
           height: size.height * 0.12,
           width: size.width,
-          color:  theme == Brightness.light
+          color:  provider.currentTheme
               ? light_Scaffold_color
               : dark_Scaffold_color,
           child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
@@ -70,7 +73,7 @@ class _PasswordResetState extends State<PasswordReset> {
         Expanded(
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: size.width * 0.087),
-            color:  theme == Brightness.light
+            color:  provider.currentTheme
                 ? light_Scaffold_color
                 : dark_Scaffold_color,
             height: size.height * 0.43,
@@ -87,7 +90,7 @@ class _PasswordResetState extends State<PasswordReset> {
                     child: Text(
                       "Password Recovery",
                       style: TextStyle(
-                          color:  theme == Brightness.light
+                          color:  provider.currentTheme
                               ? dim_black
                               : dim_white,
                           // fontFamily: 'Avant',

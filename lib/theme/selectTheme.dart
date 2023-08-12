@@ -1,45 +1,93 @@
-import 'dart:ui';
-
-import 'package:mybindel_test/palette/palette.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class SelectTheme {
-  static bool userSelected = false;
+class Themeprovider extends ChangeNotifier {
+  late bool lastpref  = true; // Default true
+  late bool userpref  = false; // Default false
+  late ThemePreferences _preferences;
+  late Brightness theme;
 
- static void selectTheme(Brightness theme) async {
-    if((theme == Brightness.light && userSelected == true) || (theme == Brightness.dark && userSelected == false)){
-      // dark theme
-    SharedPreferences pref = await SharedPreferences.getInstance();
-    pref.remove('currentTheme');
-      pref.setBool('currentTheme',false);
-      // return false;
-
-    }
-    if((theme == Brightness.light && userSelected == false) || theme == Brightness.dark && userSelected == true){
-      //light theme
-      SharedPreferences pref = await SharedPreferences.getInstance();
-      pref.remove('currentTheme');
-      pref.setBool('currentTheme',true);
-      // return true;
-    }
-
-
-    // else if(theme == Brightness.dark && userSelected == true){
-    //   //light theme
-    //
-    // }
-    // else if(theme == Brightness.dark && userSelected == false){
-    //   //dark theme
-    //
-    // }
+  Themeprovider()  {
+    print("Intial : ${lastpref}");
+    print("Intial : ${userpref}");
+    _preferences = ThemePreferences();
+    getTheme();
+    theme = SchedulerBinding.instance.platformDispatcher.platformBrightness;
+    print("After Constructor : ${lastpref}");
+    print("After Constructor : ${userpref}");
   }
 
-  static void toggleTheme(int i){
-    if(i == 0){
-      userSelected = false;
+  bool get currentTheme => lastpref;
+
+  getTheme() async {
+    userpref = await _preferences.getUserPreference();
+    lastpref = await _preferences.getFinalPreference();
+    notifyListeners();
+  }
+
+  changeuserpref(int index) {
+    if (index == 0) {
+      userpref = false;
+      setUserPreference(false);
+    } else {
+      userpref = true;
+      setUserPreference(true);
     }
-    if(i == 1){
-      userSelected = true;
+    changefinalpref();
+    getFinalPreference();
+    print("Change userpref: ${userpref}");
+    print("final instance: ${lastpref}");
+  }
+
+  changefinalpref() {
+    if ((theme == Brightness.light && userpref == false) ||
+        (theme == Brightness.dark && userpref == true)) {
+      // light  true
+      setFinalPreference(true);
     }
+    if ((theme == Brightness.dark && userpref == false) ||
+        (theme == Brightness.light && userpref == true)) {
+      // dark  false
+      setFinalPreference(false);
+    }
+  }
+
+  setUserPreference(bool value) {
+    _preferences.setUserPreference(value);
+  }
+
+  setFinalPreference(bool value) {
+    _preferences.setFinalPreference(value);
+  }
+
+  getFinalPreference() async {
+    lastpref = await _preferences.getFinalPreference();
+    notifyListeners();
+  }
+}
+
+class ThemePreferences {
+  setUserPreference(bool value) async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+
+    sharedPreferences.setBool('user_pref', value);
+  }
+
+  Future<bool> getUserPreference() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    return sharedPreferences.getBool('user_pref') ?? false;
+  }
+
+  setFinalPreference(bool value) async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+
+    sharedPreferences.setBool('final_pref', value);
+  }
+
+  Future<bool> getFinalPreference() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    return sharedPreferences.getBool('final_pref') ?? true;
   }
 }

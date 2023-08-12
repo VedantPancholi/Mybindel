@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../palette/palette.dart';
+import '../theme/selectTheme.dart';
 
 class RichTextPricingPlan extends StatefulWidget {
    String text;
@@ -25,6 +27,7 @@ class _RichTextPricingPlanState extends State<RichTextPricingPlan> {
   Widget build(BuildContext context) {
     // final current_theme = getCurrentThemeInstance();
     final theme = SchedulerBinding.instance.platformDispatcher.platformBrightness;
+    final provider = Provider.of<Themeprovider>(context);
 
     return RichText(
       text: TextSpan(
@@ -34,7 +37,7 @@ class _RichTextPricingPlanState extends State<RichTextPricingPlan> {
           ),
           TextSpan(
             text: widget.text,
-            style: TextStyle(fontSize: 18,color:  theme == Brightness.light
+            style: TextStyle(fontSize: 18,color:  provider.currentTheme
               ? dark_Scaffold_color
               : light_Scaffold_color,),
           ),

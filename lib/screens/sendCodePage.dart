@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../pagerouter/customPageRouter.dart';
 import '../palette/palette.dart';
+import '../theme/selectTheme.dart';
 import '../widgets/creatorButton_widget.dart';
 import '../widgets/fieldbutton_widget.dart';
 import '../widgets/textformfield.dart';
@@ -27,6 +29,7 @@ class _sendCodeState extends State<sendCode> {
   Widget build(BuildContext context) {
     // final current_theme = getCurrentThemeInstance();
     final theme = SchedulerBinding.instance.platformDispatcher.platformBrightness;
+    final provider = Provider.of<Themeprovider>(context);
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
@@ -36,7 +39,7 @@ class _sendCodeState extends State<sendCode> {
           alignment: Alignment.center,
           height: size.height * 0.15,
           width: size.width,
-          color:  theme == Brightness.light
+          color:  provider.currentTheme
               ? light_Scaffold_color
               : dark_Scaffold_color,
           child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
@@ -64,7 +67,7 @@ class _sendCodeState extends State<sendCode> {
         ),
         Container(
           padding: EdgeInsets.symmetric(horizontal: size.width * 0.087),
-          color:  theme == Brightness.light
+          color:  provider.currentTheme
               ? light_Scaffold_color
               : dark_Scaffold_color,
           height: size.height * 0.43,
@@ -81,7 +84,7 @@ class _sendCodeState extends State<sendCode> {
                   child:  Text(
                     "Password Recovery",
                     style: TextStyle(
-                        color:  theme == Brightness.light ?  Color.fromRGBO(51, 51, 51, 1) : Colors.grey.shade100,
+                        color:  provider.currentTheme ?  Color.fromRGBO(51, 51, 51, 1) : Colors.grey.shade100,
                         // fontFamily: 'Avant',
                         fontSize: 19,
                         letterSpacing: 1,
@@ -98,7 +101,7 @@ class _sendCodeState extends State<sendCode> {
                         Navigator.of(context).pop();
                       },
                       child: Container(
-                        decoration:  theme == Brightness.light?neu_Morphism : dark_neu_Morphism,
+                        decoration:  provider.currentTheme?neu_Morphism : dark_neu_Morphism,
                         // BoxDecoration(
                         //     border: Border.all(
                         //         width: 1, color: Color.fromRGBO(94, 94, 94, 1)),
@@ -112,7 +115,7 @@ class _sendCodeState extends State<sendCode> {
                             Text(
                               "Back to Login",
                               style: TextStyle(
-                                  color:  theme == Brightness.light ?  Color.fromRGBO(51, 51, 51, 1) : Colors.grey.shade300,
+                                  color:  provider.currentTheme ?  Color.fromRGBO(51, 51, 51, 1) : Colors.grey.shade300,
                                   // fontFamily: 'Avant',
                                   fontSize: 16,
                                   letterSpacing: 1,
@@ -179,7 +182,7 @@ class _sendCodeState extends State<sendCode> {
                       style: TextStyle(
                           // fontFamily: 'Avant',
                           fontSize: 16,
-                          color:  theme == Brightness.light ?  Color.fromRGBO(91, 91, 91, 1) : Colors.grey.shade100,
+                          color:  provider.currentTheme ?  Color.fromRGBO(91, 91, 91, 1) : Colors.grey.shade100,
                           fontWeight: FontWeight.w500),
                     ),
                     SizedBox(

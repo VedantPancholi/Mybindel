@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:mybindel_test/screens/loginPage.dart';
 import 'package:mybindel_test/screens/pricingPlans.dart';
 import 'package:mybindel_test/screens/welcomePage.dart';
 import 'package:mybindel_test/widgets/payment_option_widget.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../pagerouter/customPageRouter.dart';
 import '../palette/palette.dart';
+import '../theme/selectTheme.dart';
 import '../widgets/fieldbutton_widget.dart';
 
 
@@ -31,15 +34,16 @@ class _PaymentMethodsState extends State<PaymentMethods> {
     // final current_theme = getCurrentThemeInstance();
 
     final theme = SchedulerBinding.instance.platformDispatcher.platformBrightness;
+    final provider = Provider.of<Themeprovider>(context);
     final size = MediaQuery.of(context).size;
     final List<Map<String ,dynamic>> item = [
       {'image': 'asset/images/PayPal.png','title':'PayPal',},
       {'image': 'asset/images/bankTransfer.png','title':'Bank Transfer'},
       {'image': 'asset/images/masterCard.png','title':'Mastercard',},
       {'image': 'asset/images/americanExpress.png','title':'American Express',},
-       theme == Brightness.light?{'image': 'asset/images/applePay.png','title':'Apple Pay',}:{'image': 'asset/images/dark_applepay_theme.png','title':'Apple Pay',},
+       provider.currentTheme?{'image': 'asset/images/applePay.png','title':'Apple Pay',}:{'image': 'asset/images/dark_applepay_theme.png','title':'Apple Pay',},
       {'image': 'asset/images/googlepay.png','title':'Google Pay',},
-       theme == Brightness.light?{'image': 'asset/images/amazonpay.png','title':'Amazon Pay',}:{'image': 'asset/images/dark_amazonpay_theme_according.png','title':'Amazon Pay',},
+       provider.currentTheme?{'image': 'asset/images/amazonpay.png','title':'Amazon Pay',}:{'image': 'asset/images/dark_amazonpay_theme_according.png','title':'Amazon Pay',},
     ];
 
     return Scaffold(
@@ -49,7 +53,7 @@ class _PaymentMethodsState extends State<PaymentMethods> {
             alignment: Alignment.center,
             height: size.height * 0.15,
             width: size.width,
-            color:  theme == Brightness.light
+            color:  provider.currentTheme
                 ? light_Scaffold_color
                 : dark_Scaffold_color,
             child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
@@ -79,7 +83,7 @@ class _PaymentMethodsState extends State<PaymentMethods> {
           Container(
             height: size.height * 0.85,
             width: size.width,
-            color:  theme == Brightness.light? light_Scaffold_color:dark_Scaffold_color,
+            color:  provider.currentTheme? light_Scaffold_color:dark_Scaffold_color,
             child: Column(
               children: [
                 Container(
@@ -140,7 +144,7 @@ class _PaymentMethodsState extends State<PaymentMethods> {
                           height: size.height * 0.075,
                           width: size.width * 0.82,
                           onpressed: () {
-                            Navigator.pushReplacement(context, custompageroute(child: WelcomePage()));
+                            Navigator.pushReplacement(context, custompageroute(child: login_page()));
                             print("Continue tapped");
                           }),
                     )

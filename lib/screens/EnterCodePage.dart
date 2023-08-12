@@ -3,9 +3,11 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:mybindel_test/pagerouter/customPageRouter.dart';
 import 'package:mybindel_test/screens/password_resetPage.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../palette/palette.dart';
+import '../theme/selectTheme.dart';
 import '../widgets/creatorButton_widget.dart';
 import '../widgets/fieldbutton_widget.dart';
 import '../widgets/textformfield.dart';
@@ -30,6 +32,7 @@ class _enterCodeState extends State<enterCode> {
   Widget build(BuildContext context) {
     // final current_theme = getCurrentThemeInstance();
     final theme = SchedulerBinding.instance.platformDispatcher.platformBrightness;
+    final provider = Provider.of<Themeprovider>(context);
     final size = MediaQuery.of(context).size;
     String description =
         "Check your mailbox or phone for the code. The code lasts for only 5 minutes right after it is sent to you.";
@@ -41,7 +44,7 @@ class _enterCodeState extends State<enterCode> {
           alignment: Alignment.center,
           height: size.height * 0.15,
           width: size.width,
-          color:  theme == Brightness.light
+          color:  provider.currentTheme
               ? light_Scaffold_color
               : dark_Scaffold_color,
           child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
@@ -68,7 +71,7 @@ class _enterCodeState extends State<enterCode> {
         ),
         Container(
           padding: EdgeInsets.symmetric(horizontal: size.width * 0.087),
-          color:  theme == Brightness.light
+          color:  provider.currentTheme
               ? light_Scaffold_color
               : dark_Scaffold_color,
           height: size.height * 0.43,
@@ -85,7 +88,7 @@ class _enterCodeState extends State<enterCode> {
                   child: Text(
                     "Password Recovery",
                     style: TextStyle(
-                        color:  theme == Brightness.light ? const Color.fromRGBO(51, 51, 51, 1) : Colors.grey.shade100,
+                        color:  provider.currentTheme ? const Color.fromRGBO(51, 51, 51, 1) : Colors.grey.shade100,
                         // fontFamily: 'Avant',
                         fontSize: 19,
                         letterSpacing: 1,
@@ -109,7 +112,7 @@ class _enterCodeState extends State<enterCode> {
                               // fontFamily: 'Avant',
                               fontSize: 14,
                               letterSpacing: 1,
-                              color:  theme == Brightness.light ? const Color.fromRGBO(91, 91, 91, 1) : Colors.grey.shade100,
+                              color:  provider.currentTheme ? const Color.fromRGBO(91, 91, 91, 1) : Colors.grey.shade100,
                               fontWeight: FontWeight.w400),
                         ),
                       ),
@@ -153,7 +156,7 @@ class _enterCodeState extends State<enterCode> {
                       style: TextStyle(
                           fontFamily: 'Avant',
                           fontSize: 16,
-                          color:  theme == Brightness.light ? const Color.fromRGBO(94, 94, 94, 1) : Colors.grey.shade100,
+                          color:  provider.currentTheme ? const Color.fromRGBO(94, 94, 94, 1) : Colors.grey.shade100,
                           fontWeight: FontWeight.w500),
                     ),
                     SizedBox(

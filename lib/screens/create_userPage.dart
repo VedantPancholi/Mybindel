@@ -3,11 +3,14 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
+import 'package:mybindel_test/screens/pricingPlans.dart';
 import 'package:mybindel_test/screens/welcomePage.dart';
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
 import '../pagerouter/customPageRouter.dart';
 import '../palette/palette.dart';
+import '../theme/selectTheme.dart';
 import '../widgets/fieldbutton_widget.dart';
 
 class CreateUser extends StatefulWidget {
@@ -23,53 +26,47 @@ class _CreateUserState extends State<CreateUser> {
   TextEditingController _lname = TextEditingController();
   TextEditingController _email = TextEditingController();
   TextEditingController _contact = TextEditingController();
-  TextEditingController _address = TextEditingController();
+  TextEditingController _website = TextEditingController();
+  TextEditingController _userName = TextEditingController();
   TextEditingController _pass = TextEditingController();
   TextEditingController _confirmPass = TextEditingController();
-  TextEditingController _purpose = TextEditingController();
+  TextEditingController _multipleLine = TextEditingController();
 
   final Uri _url = Uri.parse('https://www.google.com/');
   bool isPressed1 = false;
-
 
   @override
   Widget build(BuildContext context) {
     final theme =
         SchedulerBinding.instance.platformDispatcher.platformBrightness;
+    final provider = Provider.of<Themeprovider>(context);
     final size = MediaQuery.of(context).size;
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: theme == Brightness.light
-          ? light_Scaffold_color
-          : dark_Scaffold_color,
+      backgroundColor:
+          provider.currentTheme ? light_Scaffold_color : dark_Scaffold_color,
       body: Column(
         children: [
           Container(
-            alignment: Alignment.bottomCenter,
-            height: size.height * 0.12,
+            alignment: Alignment.center,
+            height: size.height * 0.15,
             width: size.width,
-            color: theme == Brightness.light
+            // color: Colors.amber,
+            color: provider.currentTheme
                 ? light_Scaffold_color
                 : dark_Scaffold_color,
             child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
               Container(
-                  height: size.height * 0.04,
-                  width: size.width * 0.076,
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: AssetImage('asset/images/logo.png')))),
+                height: size.height * 0.04,
+                width: size.width * 0.076,
+                alignment: Alignment.center,
+                child: Image.asset("asset/images/logo.png"),
+              ),
               SizedBox(width: size.width * 0.010),
               Container(
                 height: size.height * 0.04,
                 width: size.width * 0.27,
                 alignment: Alignment.center,
-                decoration: BoxDecoration(
-                    // image: DecorationImage(
-                    //   image: AssetImage('asset/images/mainTitle.png'
-                    //       ''),
-                    // ),
-                    ),
                 child: Text(
                   "Mybindle",
                   style: TextStyle(
@@ -80,25 +77,29 @@ class _CreateUserState extends State<CreateUser> {
               ),
             ]),
           ),
-          ListView(
-            shrinkWrap: true,
-            children: [
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: size.width * 0.087),
-                color: theme == Brightness.light
-                    ? light_Scaffold_color
-                    : dark_Scaffold_color,
-                // color: Colors.amber,
-                height: size.height*0.79,
-                width: size.width,
-                child: Form(
-                  autovalidateMode: AutovalidateMode.onUserInteraction,
-                  key: _formKey,
+          Expanded(
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: size.width * 0.087),
+              color: provider.currentTheme
+                  ? light_Scaffold_color
+                  : dark_Scaffold_color,
+              // color: Colors.orange,
+              height: size.height * 0.80,
+              width: size.width,
+              child: Form(
+                autovalidateMode: AutovalidateMode.onUserInteraction,
+                key: _formKey,
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.vertical,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Padding(
-                        padding: EdgeInsets.all(10.0),
+                      Padding(
+                        padding: EdgeInsets.only(
+                            left: size.width * 0.004,
+                            right: size.width * 0.005,
+                            bottom: size.height * 0.015,
+                        ),
                         child: Text(
                           "Create User",
                           style: TextStyle(
@@ -108,17 +109,19 @@ class _CreateUserState extends State<CreateUser> {
                               fontWeight: FontWeight.w700),
                         ),
                       ),
+
                       SizedBox(width: size.width * 0.010),
+                      //f_name and l_name
                       Row(
                         children: [
                           Expanded(
                               child: Container(
                                   height: size.height * 0.060,
                                   width: size.width * 0.402,
-                                  decoration: theme == Brightness.light
+                                  decoration: provider.currentTheme
                                       ? textFormField_neu_morphism
                                       : dark_textFormField_neu_morphism,
-                                  child: f_nameTextfields(_fname, size))),
+                                  child: f_nameTextfield(_fname, size))),
                           SizedBox(
                             width: size.width * 0.050,
                           ),
@@ -126,52 +129,69 @@ class _CreateUserState extends State<CreateUser> {
                               child: Container(
                                   height: size.height * 0.060,
                                   width: size.width * 0.402,
-                                  decoration: theme == Brightness.light
+                                  decoration: provider.currentTheme
                                       ? textFormField_neu_morphism
                                       : dark_textFormField_neu_morphism,
-                                  child: l_nameTextfields(_lname, size))),
+                                  child: l_nameTextfield(_lname, size))),
                         ],
                       ),
                       SizedBox(
                         height: size.height * 0.020,
                       ),
+                      //Email address
                       Container(
                         height: size.height * 0.055,
                         width: size.width * 0.852,
-                        decoration: theme == Brightness.light
+                        decoration: provider.currentTheme
                             ? textFormField_neu_morphism
                             : dark_textFormField_neu_morphism,
-                        child: e_mailTextfields3(_email, size),
+                        child: e_mailTextfield(_email, size),
                       ),
                       SizedBox(
                         height: size.height * 0.020,
                       ),
+                      //Phone number
                       Container(
                         height: size.height * 0.055,
                         width: size.width * 0.852,
-                        decoration: theme == Brightness.light
+                        decoration: provider.currentTheme
                             ? textFormField_neu_morphism
                             : dark_textFormField_neu_morphism,
-                        child: c_noTextfields4(_contact, size),
+                        child: c_noTextfield(_contact, size),
                       ),
                       SizedBox(
                         height: size.height * 0.020,
                       ),
+
+                      //website
                       Container(
                         height: size.height * 0.055,
                         width: size.width * 0.852,
-                        decoration: theme == Brightness.light
+                        decoration: provider.currentTheme
                             ? textFormField_neu_morphism
                             : dark_textFormField_neu_morphism,
-                        child: addressTextfields(_address, size),
+                        child: websiteTextfield(_website, size),
                       ),
                       SizedBox(
                         height: size.height * 0.020,
                       ),
+                      //add user name
                       Container(
                         height: size.height * 0.055,
                         width: size.width * 0.852,
-                        decoration: theme == Brightness.light
+                        decoration: provider.currentTheme
+                            ? textFormField_neu_morphism
+                            : dark_textFormField_neu_morphism,
+                        child: userNameTextfield(_userName, size),
+                      ),
+                      SizedBox(
+                        height: size.height * 0.020,
+                      ),
+                      //password
+                      Container(
+                        height: size.height * 0.055,
+                        width: size.width * 0.852,
+                        decoration: provider.currentTheme
                             ? textFormField_neu_morphism
                             : dark_textFormField_neu_morphism,
                         child: TextFormField(
@@ -180,7 +200,7 @@ class _CreateUserState extends State<CreateUser> {
                             border: InputBorder.none,
                             contentPadding: EdgeInsets.symmetric(
                                 vertical: size.height * 0.010,
-                                horizontal: size.width * 0.020),
+                                horizontal: size.width * 0.030),
                             hintStyle: const TextStyle(
                                 fontSize: 14,
                                 letterSpacing: 1,
@@ -208,10 +228,12 @@ class _CreateUserState extends State<CreateUser> {
                       SizedBox(
                         height: size.height * 0.020,
                       ),
+
+                      //confirm password
                       Container(
                         height: size.height * 0.055,
                         width: size.width * 0.852,
-                        decoration: theme == Brightness.light
+                        decoration: provider.currentTheme
                             ? textFormField_neu_morphism
                             : dark_textFormField_neu_morphism,
                         child: TextFormField(
@@ -219,8 +241,9 @@ class _CreateUserState extends State<CreateUser> {
                           decoration: InputDecoration(
                             border: InputBorder.none,
                             contentPadding: EdgeInsets.symmetric(
-                                vertical: size.height * 0.010,
-                                horizontal: size.width * 0.020),
+                              vertical: size.height * 0.010,
+                              horizontal: size.width * 0.030,
+                            ),
                             hintStyle: const TextStyle(
                                 fontSize: 14,
                                 letterSpacing: 1,
@@ -248,128 +271,155 @@ class _CreateUserState extends State<CreateUser> {
                       SizedBox(
                         height: size.height * 0.020,
                       ),
-                      //dropdown search
+
+                      //about Yourself
                       Container(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: size.width * 0.020),
-                        decoration: theme == Brightness.light
+                        decoration: provider.currentTheme
                             ? textFormField_neu_morphism
                             : dark_textFormField_neu_morphism,
-                        child: DropdownSearch<String>(
-                          popupProps: PopupProps.menu(
-                            showSearchBox: true,
-                            showSelectedItems: true,
-                            disabledItemFn: (String s) => s.startsWith('I'),
-                          ),
-                          items: [
-                            "Purpose 1",
-                            "Purpose 2",
-                            "Purpose 3",
-                            "Purpose 4"
-                          ],
-                          dropdownDecoratorProps: DropDownDecoratorProps(
-                            dropdownSearchDecoration: InputDecoration(
-                              border: InputBorder.none,
-                              // labelText: "Purpose",
-                              hintText: "Purpose",
+                        child: TextFormField(
+                          controller: _multipleLine,
+                          keyboardType: TextInputType.multiline,
+                          minLines: 5,
+                          maxLines: 7,
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText: "About yourself",
+                            hintStyle: const TextStyle(
+                                fontSize: 14,
+                                letterSpacing: 1,
+                                fontWeight: FontWeight.w500),
+                            contentPadding: EdgeInsets.symmetric(
+                              vertical: size.height * 0.010,
+                              horizontal: size.width * 0.030,
                             ),
                           ),
-                          onChanged: print,
-                          // selectedItem: "Brazil",
                         ),
                       ),
+                      // //dropdown search
+                      // Container(
+                      //   padding: EdgeInsets.symmetric(
+                      //       horizontal: size.width * 0.020),
+                      //   decoration: provider.currentTheme
+                      //       ? textFormField_neu_morphism
+                      //       : dark_textFormField_neu_morphism,
+                      //   child: DropdownSearch<String>(
+                      //     popupProps: PopupProps.menu(
+                      //       showSearchBox: true,
+                      //       showSelectedItems: true,
+                      //       disabledItemFn: (String s) => s.startsWith('I'),
+                      //     ),
+                      //     items: [
+                      //       "Purpose 1",
+                      //       "Purpose 2",
+                      //       "Purpose 3",
+                      //       "Purpose 4"
+                      //     ],
+                      //     dropdownDecoratorProps: DropDownDecoratorProps(
+                      //       dropdownSearchDecoration: InputDecoration(
+                      //         border: InputBorder.none,
+                      //         // labelText: "Purpose",
+                      //         hintText: "Purpose",
+                      //       ),
+                      //     ),
+                      //     onChanged: print,
+                      //     // selectedItem: "Brazil",
+                      //   ),
+                      // ),
                       SizedBox(
-                        height: size.height * 0.020,
+                        height: size.height * 0.010,
                       ),
-                      Row(
-                        children: [
-                          Container(
-                            width: size.width * 0.095,
-                            height: size.height * 0.040,
-                            decoration: theme == Brightness.light
-                                ? textFormField_neu_morphism
-                                : dark_textFormField_neu_morphism,
-                            child: IconButton(
-                              color: theme == Brightness.light
-                                  ? light_Scaffold_color
-                                  : dark_Scaffold_color,
-                              onPressed: () {
-                                setState(() {
-                                  isPressed1 = true;
-                                });
-                              },
-                              icon: Icon(
-                                Icons.check,
-                                color: isPressed1 == true
-                                    ? orange_color
-                                    : dim_white,
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            width: size.width * 0.030,
-                          ),
-                          RichText(
-                            textAlign: TextAlign.center,
-                              text: TextSpan(children: [
-                            TextSpan(
-                              text: "I agreed to the ",
-                              style: TextStyle(
-                                  color: theme == Brightness.light
-                                      ? dim_black
-                                      : dim_white),
-                            ),
-                            TextSpan(
-                              text: "Terms and Conditions",
-                              style: TextStyle(color: orange_color),
-                              recognizer: TapGestureRecognizer()
-                                ..onTap = () {
-                                  launchUrl(_url);
-                                },
-                            )
-                          ]))
-                        ],
-                      ),
-                      Container(
-                          height: size.height*0.15,
-                          // color: Colors.blue,//margin: EdgeInsets.fromLTRB(0,0,0,size.height*0.050),
-                          child: Center(
-                            child: fieldbutton(
-                                title: "Continue",
-                                padding:EdgeInsets.symmetric(
-                                    vertical: size.height * 0.010,
-                                    horizontal: size.width * 0.010),
-                                height: size.height * 0.075,
-                                width: size.width * 0.82,
-                                onpressed: () {
-                                  setState(() {
-                                    isPressed1 = false;
-                                  });
-                                  // Navigator.pushReplacement(context, custompageroute(child: WelcomePage()));
-                                  // print(_emailcontroller.text);
-                                }),
-                          )
-
-                      ),
+                      // Row(
+                      //   children: [
+                      //     Container(
+                      //       width: size.width * 0.095,
+                      //       height: size.height * 0.040,
+                      //       decoration: provider.currentTheme
+                      //           ? textFormField_neu_morphism
+                      //           : dark_textFormField_neu_morphism,
+                      //       child: IconButton(
+                      //         color: provider.currentTheme
+                      //             ? light_Scaffold_color
+                      //             : dark_Scaffold_color,
+                      //         onPressed: () {
+                      //           setState(() {
+                      //             isPressed1 = true;
+                      //           });
+                      //         },
+                      //         icon: Icon(
+                      //           Icons.check,
+                      //           color: isPressed1 == true
+                      //               ? orange_color
+                      //               : dim_white,
+                      //         ),
+                      //       ),
+                      //     ),
+                      //     SizedBox(
+                      //       width: size.width * 0.030,
+                      //     ),
+                      //     RichText(
+                      //       textAlign: TextAlign.center,
+                      //         text: TextSpan(children: [
+                      //       TextSpan(
+                      //         text: "I agreed to the ",
+                      //         style: TextStyle(
+                      //           fontSize: 15.0,
+                      //             color: provider.currentTheme
+                      //                 ? dim_black
+                      //                 : dim_white),
+                      //       ),
+                      //       TextSpan(
+                      //         text: "Terms and Conditions",
+                      //         style: TextStyle(
+                      //             fontSize: 15.0,
+                      //             color: orange_color),
+                      //         recognizer: TapGestureRecognizer()
+                      //           ..onTap = () {
+                      //             launchUrl(_url);
+                      //           },
+                      //       )
+                      //     ]))
+                      //   ],
+                      // ),
                     ],
                   ),
                 ),
               ),
-            ],
-          )
+            ),
+          ),
+          Container(
+              height: size.height * 0.12,
+              // color: Colors.blue,//margin: EdgeInsets.fromLTRB(0,0,0,size.height*0.050),
+              child: Center(
+                child: fieldbutton(
+                    title: "Continue",
+                    padding: EdgeInsets.symmetric(
+                        vertical: size.height * 0.010,
+                        horizontal: size.width * 0.010),
+                    height: size.height * 0.075,
+                    width: size.width * 0.82,
+                    onpressed: () {
+                      setState(() {
+                        isPressed1 = false;
+                      });
+                      Navigator.pushReplacement(
+                          context, custompageroute(child: PricingPlans()));
+                      // print(_emailcontroller.text);
+                    }),
+              )),
         ],
       ),
     );
   }
 }
 
-Widget f_nameTextfields(TextEditingController _fname, Size size) =>
+Widget f_nameTextfield(TextEditingController _fname, Size size) =>
     TextFormField(
       controller: _fname,
       decoration: InputDecoration(
         border: InputBorder.none,
         contentPadding: EdgeInsets.symmetric(
-            vertical: size.height * 0.010, horizontal: size.width * 0.020),
+            vertical: size.height * 0.010, horizontal: size.width * 0.030),
         hintStyle: const TextStyle(
             fontSize: 14,
             // fontFamily: 'Avant',
@@ -387,13 +437,13 @@ Widget f_nameTextfields(TextEditingController _fname, Size size) =>
         }
       },
     );
-Widget l_nameTextfields(TextEditingController _lname, Size size) =>
+Widget l_nameTextfield(TextEditingController _lname, Size size) =>
     TextFormField(
         controller: _lname,
         decoration: InputDecoration(
           border: InputBorder.none,
           contentPadding: EdgeInsets.symmetric(
-              vertical: size.height * 0.010, horizontal: size.width * 0.020),
+              vertical: size.height * 0.010, horizontal: size.width * 0.030),
           hintStyle: const TextStyle(
               fontSize: 14, letterSpacing: 1, fontWeight: FontWeight.w500),
           hintText: "Last Name",
@@ -407,13 +457,13 @@ Widget l_nameTextfields(TextEditingController _lname, Size size) =>
           }
         });
 
-Widget e_mailTextfields3(TextEditingController _email, Size size) =>
+Widget e_mailTextfield(TextEditingController _email, Size size) =>
     TextFormField(
       controller: _email,
       decoration: InputDecoration(
         border: InputBorder.none,
         contentPadding: EdgeInsets.symmetric(
-            vertical: size.height * 0.010, horizontal: size.width * 0.020),
+            vertical: size.height * 0.010, horizontal: size.width * 0.030),
         hintStyle: const TextStyle(
             fontSize: 14, letterSpacing: 1, fontWeight: FontWeight.w500),
         hintText: "Email address",
@@ -429,12 +479,13 @@ Widget e_mailTextfields3(TextEditingController _email, Size size) =>
         }
       },
     );
-Widget c_noTextfields4(TextEditingController _contact, Size size) => TextFormField(
+Widget c_noTextfield(TextEditingController _contact, Size size) =>
+    TextFormField(
       controller: _contact,
       decoration: InputDecoration(
         border: InputBorder.none,
         contentPadding: EdgeInsets.symmetric(
-            vertical: size.height * 0.010, horizontal: size.width * 0.020),
+            vertical: size.height * 0.010, horizontal: size.width * 0.030),
         hintStyle: const TextStyle(
             fontSize: 14, letterSpacing: 1, fontWeight: FontWeight.w500),
         hintText: "Phone Number",
@@ -444,61 +495,75 @@ Widget c_noTextfields4(TextEditingController _contact, Size size) => TextFormFie
         FilteringTextInputFormatter.digitsOnly,
       ],
       textInputAction: TextInputAction.next,
-      validator: (value) {
-        if (value!.isEmpty || !RegExp(r'^[0-9]+$').hasMatch(value)) {
-          RegExp(
-              r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\><*~]).{8,}/pre>');
-          return "Enter correct number";
-        } else {
-          return null;
-        }
-      },
+      // validator: (value) {
+      //   if (value!.isEmpty || !RegExp(r'^[0-9]+$').hasMatch(value)) {
+      //     RegExp(
+      //         r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[!@#\><*~]).{8,}/pre>');
+      //     return "Enter correct number";
+      //   } else {
+      //     return null;
+      //   }
+      // },
     );
-Widget addressTextfields(TextEditingController _address, Size size) => TextFormField(
-      controller: _address,
-      maxLines: 2,
+Widget websiteTextfield(TextEditingController _website, Size size ) =>
+    TextFormField(
+      controller: _website,
       decoration: InputDecoration(
         border: InputBorder.none,
+        suffix: TextButton(
+          onPressed: () {},
+          child: Text(
+            "website",
+            textAlign: TextAlign.center,
+            softWrap: true,
+            style: TextStyle(color: dim_black, fontSize: 15, letterSpacing: 1, fontWeight: FontWeight.w500),
+          ),
+        ),
         contentPadding: EdgeInsets.symmetric(
-            vertical: size.height * 0.010, horizontal: size.width * 0.020),
+            // vertical: size.height * 0.010,
+            horizontal: size.width * 0.030),
         hintStyle: const TextStyle(
             fontSize: 14,
             // fontFamily: 'Avant',
             // color: Color.fromRGBO(94, 94, 94, 1),
             letterSpacing: 1,
             fontWeight: FontWeight.w500),
-        hintText: "Address",
+        hintText: "Website",
       ),
       textInputAction: TextInputAction.next,
+    );
+Widget userNameTextfield(TextEditingController _userName, Size size) =>
+    TextFormField(
+      controller: _userName,
+      decoration: InputDecoration(
+        suffix: TextButton(
+          onPressed: () {},
+          child: Text(
+            "Username",
+            textAlign: TextAlign.center,
+            softWrap: true,
+            style: TextStyle(color: orange_color, fontSize: 15, letterSpacing: 1, fontWeight: FontWeight.w500),
+          ),
+        ),
+        border: InputBorder.none,
+        contentPadding: EdgeInsets.symmetric(
+            // vertical: size.height * 0.000,
+            horizontal: size.width * 0.030),
+        hintStyle: const TextStyle(
+            fontSize: 14, letterSpacing: 1, fontWeight: FontWeight.w500),
+        hintText: "User name",
+      ),
+      keyboardType: TextInputType.text,
+      textInputAction: TextInputAction.next,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       validator: (value) {
         if (value!.isEmpty) {
-          return "Address must not be Empty";
+          return "Username must not be empty";
         } else {
           return null;
         }
       },
     );
-// Widget passwordTextfields5( TextEditingController _pass, Size size, _formkey) => TextFormField(
-//   controller: _pass,
-//   decoration: InputDecoration(
-//     contentPadding: EdgeInsets.symmetric(vertical: size.height*0.010, horizontal: size.width*0.020),
-//     hintStyle: const TextStyle(
-//         fontSize: 14,
-//         letterSpacing: 1,
-//         fontWeight: FontWeight.w500),
-//     hintText: "Password",
-//   ),
-//   keyboardType: TextInputType.text,
-//   textInputAction: TextInputAction.next,
-//   autovalidateMode: AutovalidateMode.onUserInteraction,
-//   validator: (value) {
-//     if (value!.isEmpty || RegExp(r"\s").hasMatch(value)) {
-//       return "Enter correct Password";
-//     } else {
-//       return null;
-//     }
-//   },
-// );
 // Widget confirmPasswordTextfields( TextEditingController _confirmPass, Size size) => TextFormField(
 //   controller: _confirmPass,
 //   decoration: InputDecoration(

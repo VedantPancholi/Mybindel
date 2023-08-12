@@ -13,7 +13,7 @@ Color dim_black = Color.fromRGBO(51, 51, 51, 0.9686274509803922);
 // bool isPressed = true;
 
 BoxDecoration neu_Morphism = BoxDecoration(
-    borderRadius: BorderRadius.circular(10),
+    borderRadius: BorderRadius.circular(15),
     // theme == Brightness.light?light_Scaffold_color:dark_Scaffold_color
     color: Color.fromRGBO(240, 240, 240, 1),
     boxShadow: [

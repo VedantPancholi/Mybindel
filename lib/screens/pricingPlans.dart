@@ -4,8 +4,10 @@ import 'package:mybindel_test/pagerouter/customPageRouter.dart';
 import 'package:mybindel_test/screens/payement_methodsPage.dart';
 import 'package:mybindel_test/widgets/richText_pricingPlan.dart';
 import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../palette/palette.dart';
+import '../theme/selectTheme.dart';
 import '../widgets/fieldbutton_widget.dart';
 
 class PricingPlans extends StatefulWidget {
@@ -28,9 +30,10 @@ class _PricingPlansState extends State<PricingPlans> {
     // final current_theme = getCurrentThemeInstance();
     final theme =
         SchedulerBinding.instance.platformDispatcher.platformBrightness;
+    final provider = Provider.of<Themeprovider>(context);
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor:  theme == Brightness.light
+      backgroundColor:  provider.currentTheme
           ? light_Scaffold_color
           : dark_Scaffold_color,
       body: Column(
@@ -39,7 +42,7 @@ class _PricingPlansState extends State<PricingPlans> {
             alignment: Alignment.center,
             height: size.height * 0.15,
             width: size.width,
-            color:  theme == Brightness.light
+            color:  provider.currentTheme
                 ? light_Scaffold_color
                 : dark_Scaffold_color,
             child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
@@ -68,7 +71,7 @@ class _PricingPlansState extends State<PricingPlans> {
             // color: Colors.green,
             width: size.width,
             height: size.height * 0.060,
-            color:  theme == Brightness.light
+            color:  provider.currentTheme
                 ? light_Scaffold_color
                 : dark_Scaffold_color,
             padding: EdgeInsets.symmetric(horizontal: size.width * 0.087),
@@ -86,7 +89,7 @@ class _PricingPlansState extends State<PricingPlans> {
           ),
           Expanded(
             child: Container(
-              color:  theme == Brightness.light
+              color:  provider.currentTheme
                   ? light_Scaffold_color
                   : dark_Scaffold_color,
               child: ListView(
@@ -110,7 +113,7 @@ class _PricingPlansState extends State<PricingPlans> {
                           horizontal: 20.0, vertical: 10.0),
                       width: size.width * 0.60,
                       height: size.height * 0.18,
-                      decoration:  theme == Brightness.light
+                      decoration:  provider.currentTheme
                           ? BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
                         color: Color.fromRGBO(240, 240, 240, 1),
@@ -209,7 +212,7 @@ class _PricingPlansState extends State<PricingPlans> {
                           horizontal: 20.0, vertical: 10.0),
                       width: size.width * 0.60,
                       height: size.height * 0.18,
-                      decoration:  theme == Brightness.light
+                      decoration:  provider.currentTheme
                           ? BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
                         color: Color.fromRGBO(240, 240, 240, 1),
@@ -308,7 +311,7 @@ class _PricingPlansState extends State<PricingPlans> {
                           horizontal: 20.0, vertical: 10.0),
                       width: size.width * 0.60,
                       height: size.height * 0.20,
-                      decoration:  theme == Brightness.light
+                      decoration:  provider.currentTheme
                           ? BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
                         color: Color.fromRGBO(240, 240, 240, 1),

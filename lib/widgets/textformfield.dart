@@ -2,9 +2,11 @@ import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../palette/palette.dart';
+import '../theme/selectTheme.dart';
 class textfields extends StatefulWidget {
 
   List<TextInputFormatter>? inputFormatters;
@@ -41,9 +43,11 @@ class _textfieldState extends State<textfields> {
   Widget build(BuildContext context) {
     // final current_theme = getCurrentThemeInstance();
     final theme = SchedulerBinding.instance.platformDispatcher.platformBrightness;
+    final provider = Provider.of<Themeprovider>(context);
+
     return Container(
       //decoration
-      decoration:  theme == Brightness.light?textFormField_neu_morphism:dark_textFormField_neu_morphism,
+      decoration:  provider.currentTheme?textFormField_neu_morphism:dark_textFormField_neu_morphism,
       child: TextFormField(
           inputFormatters: widget.inputFormatters,
           maxLength: widget.maxlength,

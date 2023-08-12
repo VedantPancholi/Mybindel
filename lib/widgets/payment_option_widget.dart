@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
+import 'package:provider/provider.dart';
+
+import '../theme/selectTheme.dart';
 
 class paymentoption extends StatefulWidget {
   final String title;
@@ -33,6 +36,7 @@ class _paymentoptionState extends State<paymentoption> {
   Widget build(BuildContext context) {
     final theme =
         SchedulerBinding.instance.platformDispatcher.platformBrightness;
+    final provider = Provider.of<Themeprovider>(context);
 
     return GestureDetector(
       onTap: widget.onpressed,
@@ -42,7 +46,7 @@ class _paymentoptionState extends State<paymentoption> {
         children: [
           AnimatedContainer(
               margin: widget.margin,
-              decoration: theme == Brightness.light
+              decoration: provider.currentTheme
                   ? BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
                 color: Color.fromRGBO(240, 240, 240, 1),

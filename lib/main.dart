@@ -10,8 +10,10 @@ import 'package:mybindel_test/screens/loginPage.dart';
 // import 'package:mybindel_test/screens/loginPage.dart';
 import 'package:mybindel_test/screens/payement_methodsPage.dart';
 import 'package:mybindel_test/screens/welcomePage.dart';
+import 'package:mybindel_test/theme/selectTheme.dart';
 // import 'package:mybindel_test/screens/welcomePage.dart';
 import 'package:mybindel_test/theme/theme.dart';
+import 'package:provider/provider.dart';
 
 // import 'package:test_mybindel/pageroute/customPageRouter.dart';
 
@@ -21,14 +23,22 @@ void main() {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
-  runApp(MaterialApp(
+  runApp(
+      ChangeNotifierProvider(
+        create: (context) => Themeprovider(),
+        builder: (context , child){
 
-    debugShowCheckedModeBanner: false,
-    themeMode: ThemeMode.system,
-    theme: MyThemes.lightTheme,
-    darkTheme: MyThemes.darkTheme,
-    home: CreateUser(),
-  ));
+          final provider = Provider.of<Themeprovider>(context);
+          print("Materialapp : ${provider.currentTheme}");
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            themeMode: provider.currentTheme ? ThemeMode.light: ThemeMode.dark, //ThemeMode.system, //
+            theme: MyThemes.lightTheme,
+            darkTheme: MyThemes.darkTheme,
+            home: splash(),
+          );
+        },
+      ));
 
   // WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
   //   try {
@@ -56,7 +66,7 @@ class _splashState extends State<splash> {
 
   openscreen() {
     Navigator.pushReplacement(
-        this.context, custompageroute(child: login_page()));
+        this.context, custompageroute(child: CreateUser()));
   }
 
   // @override
@@ -71,6 +81,7 @@ class _splashState extends State<splash> {
   // }
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<Themeprovider>(context);
     // final theme = SchedulerBinding.instance.platformDispatcher.platformBrightness;
     final size = MediaQuery.of(context).size;
     return Scaffold(
@@ -81,7 +92,7 @@ class _splashState extends State<splash> {
           height: size.height,
           decoration: BoxDecoration(
             color:
-                theme == Brightness.light ? orange_color : dark_Scaffold_color,
+                provider.currentTheme ? orange_color : dark_Scaffold_color,
           ),
         ),
         Align(
@@ -90,7 +101,7 @@ class _splashState extends State<splash> {
             width: size.width * 0.258,
             height: size.height * 0.149,
             // color: Colors.amber,
-            child: theme == Brightness.light
+            child: provider.currentTheme
                 ? Image.asset('asset/images/splashlogo.png')
                 : Image.asset('asset/images/dark_splashlogo.png'),
           ),
@@ -105,7 +116,7 @@ class _splashState extends State<splash> {
             height: size.height * 0.068,
             //  color: Colors.amber,
             child: Text("Mybindle",
-                style: theme == Brightness.light
+                style: provider.currentTheme
                     ? TextStyle(
                         // fontFamily: 'Avant',
                         fontWeight: FontWeight.w700,

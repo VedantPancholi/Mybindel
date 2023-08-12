@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:mybindel_test/screens/DonationPage.dart';
+import 'package:mybindel_test/screens/pricingPlans.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toggle_switch/toggle_switch.dart';
+import '../pagerouter/customPageRouter.dart';
 import '../palette/palette.dart';
 import '../theme/selectTheme.dart';
 import '../widgets/fieldbutton_widget.dart';
@@ -19,15 +23,17 @@ class _WelcomePageState extends State<WelcomePage> {
 //   SharedPreferences pref = await SharedPreferences.getInstance();
 //   return pref.getBool('currentTheme');
 // }
+  int selected = 0;
 
   @override
   Widget build(BuildContext context) {
     final theme =
         SchedulerBinding.instance.platformDispatcher.platformBrightness;
+    final provider = Provider.of<Themeprovider>(context);
     // final current_theme = getCurrentThemeInstance();
     final size = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: theme == Brightness.light
+      backgroundColor: provider.currentTheme
           ? light_Scaffold_color
           : dark_Scaffold_color,
       body: Column(
@@ -36,7 +42,7 @@ class _WelcomePageState extends State<WelcomePage> {
             alignment: Alignment.center,
             height: size.height * 0.15,
             width: size.width,
-            color:  theme == Brightness.light
+            color:  provider.currentTheme
                 ? light_Scaffold_color
                 : dark_Scaffold_color,
             child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
@@ -66,7 +72,7 @@ class _WelcomePageState extends State<WelcomePage> {
           Container(
             height: size.height * 0.50,
             width: size.width,
-            color:  theme == Brightness.light
+            color:  provider.currentTheme
                 ? light_Scaffold_color
                 : dark_Scaffold_color,
             child: Column(
@@ -76,7 +82,7 @@ class _WelcomePageState extends State<WelcomePage> {
                 Container(
                   width: size.width * 0.380,
                   height: size.height * 0.200,
-                  decoration:  theme == Brightness.light
+                  decoration:  provider.currentTheme
                       ? BoxDecoration(
                           image: DecorationImage(
                             image: AssetImage("asset/images/Large_Check.png"),
@@ -98,7 +104,7 @@ class _WelcomePageState extends State<WelcomePage> {
                         text: "Hi ",
                         style: TextStyle(
                           fontSize: 18,
-                          color:  theme == Brightness.light
+                          color:  provider.currentTheme
                               ? dark_Scaffold_color
                               : light_Scaffold_color,
                         ),
@@ -111,7 +117,7 @@ class _WelcomePageState extends State<WelcomePage> {
                         text: "Your Bindle Is Ready!",
                         style: TextStyle(
                           fontSize: 18,
-                          color:  theme == Brightness.light
+                          color:  provider.currentTheme
                               ? dark_Scaffold_color
                               : light_Scaffold_color,
                         ),
@@ -127,11 +133,11 @@ class _WelcomePageState extends State<WelcomePage> {
             child: RichText(
                 textAlign: TextAlign.center,
                 text: TextSpan(
-                  text: "But, Would Like to Switch To Dark Mode?",
+                  text:  provider.currentTheme ?"Would Like to Switch To Dark Mode?" : "Would Like to Switch To Light Mode?",
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
-                    color:  theme == Brightness.light
+                    color:  provider.currentTheme
                         ? dark_Scaffold_color
                         : light_Scaffold_color,
                   ),
@@ -146,15 +152,15 @@ class _WelcomePageState extends State<WelcomePage> {
                   animationDuration: 800,
                   minWidth: size.width * 0.140,
                   minHeight: size.height * 0.040,
-                  // initialLabelIndex: 0,
+                  initialLabelIndex: selected,
                   cornerRadius: 10.0,
-                  activeFgColor:  theme == Brightness.light
+                  activeFgColor:  provider.currentTheme
                       ? light_Scaffold_color
                       : dark_Scaffold_color,
-                  inactiveBgColor:  theme == Brightness.light
+                  inactiveBgColor:  provider.currentTheme
                       ? dim_white
                       : dim_black,
-                  inactiveFgColor:  theme == Brightness.light
+                  inactiveFgColor:  provider.currentTheme
                       ? dim_black
                       : dim_white,
                   totalSwitches: 2,
@@ -163,12 +169,8 @@ class _WelcomePageState extends State<WelcomePage> {
                   // icons: [FontAwesomeIcons.mars, FontAwesomeIcons.venus],
                   // activeBgColors: [[orange_color],[Colors.pink]],
                   onToggle: (index) {
-                    // setState(() {
-                    //
-                    // SelectTheme.toggleTheme(index!);
-                    // SelectTheme.selectTheme(theme);
-                    // });
-                    print('switched to: $index');
+                    selected = index!;
+                    provider.changeuserpref(index);
                   },
                 ),
               ],
@@ -182,7 +184,7 @@ class _WelcomePageState extends State<WelcomePage> {
                   text: "Well, you can change later in the settings too.",
                   style: TextStyle(
                     fontSize: 16,
-                    color:  theme == Brightness.light
+                    color:  provider.currentTheme
                         ? dark_Scaffold_color
                         : light_Scaffold_color,
                   ),
@@ -198,7 +200,7 @@ class _WelcomePageState extends State<WelcomePage> {
                   width: size.width * 0.82,
                   onpressed: () {
 
-                    // Navigator.pushReplacement(context, custompageroute(child: PricingPlans()));
+                    Navigator.pushReplacement(context, custompageroute(child: DonationPage()));
                     print("Continue from Welcome Page");
                   })),
         ],

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../palette/palette.dart';
+import '../theme/selectTheme.dart';
 
 
 class rowbutton extends StatefulWidget {
@@ -37,6 +39,7 @@ class _rowbuttonState extends State<rowbutton> {
   Widget build(BuildContext context) {
     // final current_theme = getCurrentThemeInstance();
     final theme = SchedulerBinding.instance.platformDispatcher.platformBrightness;
+    final provider = Provider.of<Themeprovider>(context);
 
     return GestureDetector(
       onTap: widget.onpressed,
@@ -49,7 +52,7 @@ class _rowbuttonState extends State<rowbutton> {
             // decoration: BoxDecoration(
             //     color: Color.fromRGBO(242, 242, 242, 1),
             //     borderRadius: BorderRadius.circular(7)),
-            decoration:  theme == Brightness.light?neu_Morphism : dark_neu_Morphism,
+            decoration:  provider.currentTheme?neu_Morphism : dark_neu_Morphism,
             width: widget.iconWidth,
             height: widget.iconHeight,
             child: Icon(widget.icon,color: orange_color,),

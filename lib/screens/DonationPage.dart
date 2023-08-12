@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:mybindel_test/pagerouter/customPageRouter.dart';
+import 'package:mybindel_test/screens/Home/HomePage.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../palette/palette.dart';
+import '../theme/selectTheme.dart';
 
 
 class DonationPage extends StatefulWidget {
@@ -22,10 +26,12 @@ class _DonationPageState extends State<DonationPage> {
     // final current_theme = getCurrentThemeInstance();
     final theme =
         SchedulerBinding.instance.platformDispatcher.platformBrightness;
+    final provider = Provider.of<Themeprovider>(context);
+
     final size = MediaQuery.of(context).size;
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor:  theme == Brightness.light
+      backgroundColor:  provider.currentTheme
           ? light_Scaffold_color
           : dark_Scaffold_color,
       body: Column(
@@ -34,7 +40,7 @@ class _DonationPageState extends State<DonationPage> {
             alignment: Alignment.center,
             height: size.height * 0.15,
             width: size.width,
-            color:  theme == Brightness.light
+            color:  provider.currentTheme
                 ? light_Scaffold_color
                 : dark_Scaffold_color,
             child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
@@ -64,7 +70,7 @@ class _DonationPageState extends State<DonationPage> {
           Container(
             height: size.height * 0.60,
             width: size.width,
-            color:  theme == Brightness.light
+            color:  provider.currentTheme
                 ? light_Scaffold_color
                 : dark_Scaffold_color,
             child: Column(
@@ -74,7 +80,7 @@ class _DonationPageState extends State<DonationPage> {
                 Container(
                   width: size.width * 0.380,
                   height: size.height * 0.200,
-                  decoration:  theme == Brightness.light
+                  decoration:  provider.currentTheme
                       ? BoxDecoration(
                     image: DecorationImage(
                       image: AssetImage("asset/images/Large_Heart.png"),
@@ -95,7 +101,7 @@ class _DonationPageState extends State<DonationPage> {
                         text: "Ah ",
                         style: TextStyle(
                           fontSize: 18,
-                          color:  theme == Brightness.light
+                          color:  provider.currentTheme
                               ? dark_Scaffold_color
                               : light_Scaffold_color,
                         ),
@@ -108,7 +114,7 @@ class _DonationPageState extends State<DonationPage> {
                         text: ",\nA homeless person is \n",
                         style: TextStyle(
                           fontSize: 18,
-                          color:  theme == Brightness.light
+                          color:  provider.currentTheme
                               ? dark_Scaffold_color
                               : light_Scaffold_color,
                         ),
@@ -117,7 +123,7 @@ class _DonationPageState extends State<DonationPage> {
                         text: "awaiting your ",
                         style: TextStyle(
                           fontSize: 18,
-                          color:  theme == Brightness.light
+                          color:  provider.currentTheme
                               ? dark_Scaffold_color
                               : light_Scaffold_color,
                         ),),
@@ -138,7 +144,7 @@ class _DonationPageState extends State<DonationPage> {
              // color: Colors.amber,
              height: size.height * 0.055,
              width: size.width * 0.302,
-             decoration:  theme == Brightness.light?textFormField_neu_morphism:dark_textFormField_neu_morphism,
+             decoration:  provider.currentTheme?textFormField_neu_morphism:dark_textFormField_neu_morphism,
              child: TextFormField(
                keyboardType: TextInputType.numberWithOptions(decimal: true),
                decoration: InputDecoration(
@@ -163,9 +169,10 @@ class _DonationPageState extends State<DonationPage> {
              // color: Colors.green,
              height: size.height * 0.055,
              width: size.width * 0.502,
-             decoration:  theme == Brightness.light?neu_Morphism : dark_neu_Morphism,
+             decoration:  provider.currentTheme?neu_Morphism : dark_neu_Morphism,
              child: InkWell(
                onTap: (){
+                 //payment gateway
                  print("Donate Now");
                },
                child: Center(
@@ -188,23 +195,25 @@ class _DonationPageState extends State<DonationPage> {
             // color: Colors.green,
             height: size.height * 0.060,
             width: size.width * 0.802,
-            decoration:  theme == Brightness.light?neu_Morphism : dark_neu_Morphism,
+            decoration:  provider.currentTheme?neu_Morphism : dark_neu_Morphism,
             child: InkWell(
               onTap: (){
+                Navigator.push(context, custompageroute(child: HomePage()));
                 print("Maybe Later... pressed");
               },
               child: Center(
                   child: Text(
                     "Maybe Later...",
                     style: TextStyle(
-                        color:  theme == Brightness.light
+                        color:  provider.currentTheme
                             ? dim_black
                             : dim_white,
                         fontSize: 18,
                         // fontFamily: 'Avant',
                         fontWeight: FontWeight.w600,
                         letterSpacing: 1,
-                        height: 0.7),
+                        height: 0.7,
+                    ),
                   )),
             ),
           ),

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../palette/palette.dart';
+import '../theme/selectTheme.dart';
 
 class fieldbutton extends StatefulWidget {
 
@@ -34,10 +36,11 @@ class _fieldbuttonState extends State<fieldbutton> {
   Widget build(BuildContext context) {
   // final current_theme = getCurrentThemeInstance();
     final theme = SchedulerBinding.instance.platformDispatcher.platformBrightness;
+    final provider = Provider.of<Themeprovider>(context);
     return Container(
       height: widget.height,
       width: widget.width,
-      decoration:  theme == Brightness.light?neu_Morphism : dark_neu_Morphism,
+      decoration:  provider.currentTheme?neu_Morphism : dark_neu_Morphism,
       padding: widget.padding,
       child: InkWell(
         onTap: widget.onpressed,
