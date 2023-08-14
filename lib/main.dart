@@ -18,12 +18,18 @@ import 'package:provider/provider.dart';
 
 // import 'package:test_mybindel/pageroute/customPageRouter.dart';
 
-void main() {
+void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
+
+  final theme = Themeprovider();
+  await theme.getTheme();
+  print("called already");
+
+
   runApp(
       ChangeNotifierProvider(
         create: (context) => Themeprovider(),

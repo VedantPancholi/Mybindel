@@ -31,6 +31,8 @@ class _SecondCreateUserPageState extends State<SecondCreateUserPage> {
 
   final Uri _url = Uri.parse('https://www.google.com/');
   bool isPressed1 = false;
+  bool isPressed2 = false;
+  bool isPressed3 = false;
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<Themeprovider>(context);
@@ -578,13 +580,13 @@ class _SecondCreateUserPageState extends State<SecondCreateUserPage> {
                       ),
                       child: InkWell(
                         onTap: () => setState(() {
-                          isPressed1 = true;
+                          isPressed2 = true;
                         }),
                         child: Center(
                           child: Icon(
                             Icons.check,
                             size: 15,
-                            color: isPressed1 == true
+                            color: isPressed2 == true
                                 ? orange_color
                                 : dim_white,
                           ),
@@ -668,13 +670,13 @@ class _SecondCreateUserPageState extends State<SecondCreateUserPage> {
                       ),
                       child: InkWell(
                         onTap: () => setState(() {
-                          isPressed1 = true;
+                          isPressed3 = true;
                         }),
                         child: Center(
                           child: Icon(
                             Icons.check,
                             size: 15,
-                            color: isPressed1 == true
+                            color: isPressed3 == true
                                 ? orange_color
                                 : dim_white,
                           ),
@@ -723,6 +725,8 @@ class _SecondCreateUserPageState extends State<SecondCreateUserPage> {
                         onpressed: () {
                           setState(() {
                             isPressed1 = false;
+                            isPressed2 = false;
+                            isPressed3 = false;
                           });
                           Navigator.pushReplacement(
                               context, custompageroute(child: PricingPlans()));

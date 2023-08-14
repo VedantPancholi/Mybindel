@@ -181,7 +181,7 @@ class _CreateUserState extends State<CreateUser> {
                                 "Add more",
                                 textAlign: TextAlign.center,
                                 softWrap: true,
-                                style: TextStyle(color: theme == Brightness.light ? dim_white : dim_black, fontSize: 15, letterSpacing: 1, fontWeight: FontWeight.w500),
+                                style: TextStyle(color: theme == Brightness.light ? dim_black : dim_white, fontSize: 15, letterSpacing: 1, fontWeight: FontWeight.w500),
                               ),
                             ),
                             contentPadding: EdgeInsets.symmetric(
@@ -203,7 +203,7 @@ class _CreateUserState extends State<CreateUser> {
                       ),
                       //add user name
                       Container(
-                        height: size.height * 0.055,
+                        height: size.height * 0.068,
                         width: size.width * 0.852,
                         decoration: provider.currentTheme
                             ? textFormField_neu_morphism
@@ -573,7 +573,7 @@ Widget userNameTextfield(TextEditingController _userName, Size size) =>
         ),
         border: InputBorder.none,
         contentPadding: EdgeInsets.symmetric(
-            // vertical: size.height * 0.000,
+            vertical: size.height * 0.00,
             horizontal: size.width * 0.030),
         hintStyle: const TextStyle(
             fontSize: 14, letterSpacing: 1, fontWeight: FontWeight.w500),

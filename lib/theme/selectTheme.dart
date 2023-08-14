@@ -4,59 +4,49 @@ import 'package:flutter/scheduler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Themeprovider extends ChangeNotifier {
-  late bool lastpref  = true; // Default true
-  late bool userpref  = false; // Default false
+  static bool lastpref  = true; // Default true
+  static bool userpref  = false; // Default false
+
   late ThemePreferences _preferences;
   late Brightness theme;
 
-  Themeprovider()  {
-    print("Intial : ${lastpref}");
-    print("Intial : ${userpref}");
+  Themeprovider() {
     _preferences = ThemePreferences();
     getTheme();
-    theme = SchedulerBinding.instance.platformDispatcher.platformBrightness;
-    print("After Constructor : ${lastpref}");
-    print("After Constructor : ${userpref}");
+
   }
 
   bool get currentTheme => lastpref;
 
   getTheme() async {
-    userpref = await _preferences.getUserPreference();
     lastpref = await _preferences.getFinalPreference();
-    notifyListeners();
+    print("After Constructor lastpref : ${lastpref}");
+    print("After Constructor userpref : ${userpref}");
   }
 
-  changeuserpref(int index) {
+  changeuserpref(int index) async {
     if (index == 0) {
       userpref = false;
-      setUserPreference(false);
     } else {
       userpref = true;
-      setUserPreference(true);
+      await changefinalpref();
+      await getFinalPreference();
     }
-    changefinalpref();
-    getFinalPreference();
-    print("Change userpref: ${userpref}");
-    print("final instance: ${lastpref}");
+
+
   }
 
   changefinalpref() {
-    if ((theme == Brightness.light && userpref == false) ||
-        (theme == Brightness.dark && userpref == true)) {
+    if (lastpref == false && userpref == true) {
       // light  true
       setFinalPreference(true);
     }
-    if ((theme == Brightness.dark && userpref == false) ||
-        (theme == Brightness.light && userpref == true)) {
+    if (lastpref == true && userpref == true) {
       // dark  false
       setFinalPreference(false);
     }
   }
 
-  setUserPreference(bool value) {
-    _preferences.setUserPreference(value);
-  }
 
   setFinalPreference(bool value) {
     _preferences.setFinalPreference(value);
@@ -65,29 +55,20 @@ class Themeprovider extends ChangeNotifier {
   getFinalPreference() async {
     lastpref = await _preferences.getFinalPreference();
     notifyListeners();
+    print("Change userpref: ${userpref}");
+    print("final instance: ${lastpref}");
   }
 }
 
 class ThemePreferences {
-  setUserPreference(bool value) async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-
-    sharedPreferences.setBool('user_pref', value);
-  }
-
-  Future<bool> getUserPreference() async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    return sharedPreferences.getBool('user_pref') ?? false;
-  }
 
   setFinalPreference(bool value) async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-
     sharedPreferences.setBool('final_pref', value);
   }
 
   Future<bool> getFinalPreference() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    return sharedPreferences.getBool('final_pref') ?? true;
-  }
+    return sharedPreferences.getBool('final_pref')??true;
+    }
 }
