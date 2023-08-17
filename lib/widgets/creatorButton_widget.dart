@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 import '../palette/palette.dart';
-import '../theme/selectTheme.dart';
+import '../providers/selectTheme.dart';
 import 'rowbutton_widget.dart';
 
 class creatorButton extends StatelessWidget {

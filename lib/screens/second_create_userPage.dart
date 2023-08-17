@@ -10,7 +10,7 @@ import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../pagerouter/customPageRouter.dart';
 import '../palette/palette.dart';
-import '../theme/selectTheme.dart';
+import '../providers/selectTheme.dart';
 import 'package:intl/intl.dart';
 
 import '../widgets/fieldbutton_widget.dart';
@@ -75,7 +75,8 @@ class _SecondCreateUserPageState extends State<SecondCreateUserPage> {
                       style: TextStyle(
                           fontWeight: FontWeight.w700,
                           fontSize: 22,
-                          letterSpacing: 1.5),
+                          letterSpacing: 1.5,
+                      ),
                     ),
                   ),
                 ]),
@@ -91,7 +92,6 @@ class _SecondCreateUserPageState extends State<SecondCreateUserPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                 InkWell(
-
                   onTap: (){
                     Navigator.pushAndRemoveUntil(context, custompageroute(child: CreateUser()), (route) => false);
                   },
@@ -173,9 +173,15 @@ class _SecondCreateUserPageState extends State<SecondCreateUserPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      "The code was sent to ${widget.sendToEmail}",
-                      style: TextStyle(color: provider.currentTheme ? dim_black : dim_white),
+                    Container(
+                      width: size.width*0.60,
+                      child: AutoSizeText(
+                        
+                        "The code was sent to ${widget.sendToEmail}",
+                        softWrap: true,
+                        wrapWords: true,
+                        style: TextStyle(color: provider.currentTheme ? dim_black : dim_white),
+                      ),
                     ),
                     TextButton(onPressed: (){}, child: Text("Resend",style: TextStyle(color: orange_color),))
                   ],
@@ -467,19 +473,19 @@ class _SecondCreateUserPageState extends State<SecondCreateUserPage> {
                       height: size.height * 0.025,
                       decoration: provider.currentTheme
                           ? BoxDecoration(
-                        // borderRadius: BorderRadius.circular(15),
+                        borderRadius: BorderRadius.circular(5),
                         // theme == Brightness.light?light_Scaffold_color:dark_Scaffold_color
-                        color: Color.fromRGBO(240, 240, 240, 1),
+                        color: Color.fromRGBO(238, 238, 238, 1),
                         boxShadow: [
                           BoxShadow(
-                            blurRadius: 3,
-                            offset: Offset(3, 3),
+                            blurRadius: 2,
+                            offset: Offset(2, 2),
                             color: Color.fromRGBO(174, 172, 172, 1.0),
                           ),
                           BoxShadow(
                             blurRadius: 25,
                             offset: Offset(-5, -7),
-                            color: Color.fromRGBO(255, 255, 255, 1.0),
+                            color: Color.fromRGBO(255, 255, 255, 1),
                           ),
                         ],
                       )
@@ -545,19 +551,19 @@ class _SecondCreateUserPageState extends State<SecondCreateUserPage> {
                       height: size.height * 0.025,
                       decoration: provider.currentTheme
                           ? BoxDecoration(
-                        // borderRadius: BorderRadius.circular(15),
+                        borderRadius: BorderRadius.circular(5),
                         // theme == Brightness.light?light_Scaffold_color:dark_Scaffold_color
-                        color: Color.fromRGBO(240, 240, 240, 1),
+                        color: Color.fromRGBO(238, 238, 238, 1),
                         boxShadow: [
                           BoxShadow(
-                            blurRadius: 3,
-                            offset: Offset(3, 3),
+                            blurRadius: 2,
+                            offset: Offset(2, 2),
                             color: Color.fromRGBO(174, 172, 172, 1.0),
                           ),
                           BoxShadow(
                             blurRadius: 25,
                             offset: Offset(-5, -7),
-                            color: Color.fromRGBO(255, 255, 255, 1.0),
+                            color: Color.fromRGBO(255, 255, 255, 1),
                           ),
                         ],
                       )
@@ -635,19 +641,19 @@ class _SecondCreateUserPageState extends State<SecondCreateUserPage> {
                       height: size.height * 0.025,
                       decoration: provider.currentTheme
                           ? BoxDecoration(
-                        // borderRadius: BorderRadius.circular(15),
+                        borderRadius: BorderRadius.circular(5),
                         // theme == Brightness.light?light_Scaffold_color:dark_Scaffold_color
-                        color: Color.fromRGBO(240, 240, 240, 1),
+                        color: Color.fromRGBO(238, 238, 238, 1),
                         boxShadow: [
                           BoxShadow(
-                            blurRadius: 3,
-                            offset: Offset(3, 3),
+                            blurRadius: 2,
+                            offset: Offset(2, 2),
                             color: Color.fromRGBO(174, 172, 172, 1.0),
                           ),
                           BoxShadow(
                             blurRadius: 25,
                             offset: Offset(-5, -7),
-                            color: Color.fromRGBO(255, 255, 255, 1.0),
+                            color: Color.fromRGBO(255, 255, 255, 1),
                           ),
                         ],
                       )
@@ -692,7 +698,7 @@ class _SecondCreateUserPageState extends State<SecondCreateUserPage> {
                           TextSpan(
                             text: "I agreed to the ",
                             style: TextStyle(
-                                fontSize: 15.0,
+                                fontSize: 13.0,
                                 color: provider.currentTheme
                                     ? dim_black
                                     : dim_white),
@@ -700,8 +706,9 @@ class _SecondCreateUserPageState extends State<SecondCreateUserPage> {
                           TextSpan(
                             text: "Terms and Conditions",
                             style: TextStyle(
-                                fontSize: 15.0,
-                                color: orange_color),
+                                fontSize: 13.0,
+                                color: orange_color,
+                            ),
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
                                 launchUrl(_url);

@@ -5,7 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../pagerouter/customPageRouter.dart';
 import '../palette/palette.dart';
-import '../theme/selectTheme.dart';
+import '../providers/selectTheme.dart';
 import '../widgets/creatorButton_widget.dart';
 import '../widgets/fieldbutton_widget.dart';
 import '../widgets/textformfield.dart';

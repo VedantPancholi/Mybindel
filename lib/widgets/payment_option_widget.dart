@@ -3,7 +3,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
 import 'package:provider/provider.dart';
 
-import '../theme/selectTheme.dart';
+import '../providers/selectTheme.dart';
 
 class paymentoption extends StatefulWidget {
   final String title;

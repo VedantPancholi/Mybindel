@@ -11,7 +11,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_inset_box_shadow/flutter_inset_box_shadow.dart';
 import '../pagerouter/customPageRouter.dart';
 import '../palette/palette.dart';
-import '../theme/selectTheme.dart';
+import '../providers/selectTheme.dart';
 import '../widgets/fieldbutton_widget.dart';
 
 class CreateUser extends StatefulWidget {
@@ -43,7 +43,7 @@ class _CreateUserState extends State<CreateUser> {
     final provider = Provider.of<Themeprovider>(context);
     final size = MediaQuery.of(context).size;
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: true,
       backgroundColor:
           provider.currentTheme ? light_Scaffold_color : dark_Scaffold_color,
       body: Column(

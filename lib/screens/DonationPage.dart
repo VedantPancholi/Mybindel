@@ -5,7 +5,8 @@ import 'package:mybindel_test/screens/Home/HomePage.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../palette/palette.dart';
-import '../theme/selectTheme.dart';
+import '../providers/selectTheme.dart';
+import 'BasePage.dart';
 
 
 class DonationPage extends StatefulWidget {
@@ -198,7 +199,7 @@ class _DonationPageState extends State<DonationPage> {
             decoration:  provider.currentTheme?neu_Morphism : dark_neu_Morphism,
             child: InkWell(
               onTap: (){
-                Navigator.push(context, custompageroute(child: HomePage()));
+                Navigator.push(context, custompageroute(child: BasePage()));
                 print("Maybe Later... pressed");
               },
               child: Center(

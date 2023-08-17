@@ -5,13 +5,17 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:mybindel_test/pagerouter/customPageRouter.dart';
 import 'package:mybindel_test/palette/palette.dart';
+import 'package:mybindel_test/providers/bottomNavigationProvider.dart';
+import 'package:mybindel_test/screens/BasePage.dart';
+
+import 'package:mybindel_test/screens/Home/HomePage.dart';
 import 'package:mybindel_test/screens/create_userPage.dart';
 import 'package:mybindel_test/screens/loginPage.dart';
 // import 'package:mybindel_test/screens/loginPage.dart';
 import 'package:mybindel_test/screens/payement_methodsPage.dart';
 import 'package:mybindel_test/screens/second_create_userPage.dart';
 import 'package:mybindel_test/screens/welcomePage.dart';
-import 'package:mybindel_test/theme/selectTheme.dart';
+import 'package:mybindel_test/providers/selectTheme.dart';
 // import 'package:mybindel_test/screens/welcomePage.dart';
 import 'package:mybindel_test/theme/theme.dart';
 import 'package:provider/provider.dart';
@@ -42,7 +46,8 @@ void main() async{
             themeMode: provider.currentTheme ? ThemeMode.light: ThemeMode.dark, //ThemeMode.system, //
             theme: MyThemes.lightTheme,
             darkTheme: MyThemes.darkTheme,
-            home: CreateUser(),
+            home: ChangeNotifierProvider(
+                create: (_) => Navigationprovider(), child:BasePage()),
           );
         },
       ));
