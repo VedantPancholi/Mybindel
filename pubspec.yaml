@@ -50,6 +50,7 @@ dependencies:
   comment_tree: ^0.3.0
   comment_box: ^0.0.18
   flutter_svg: ^2.0.7
+  flutter_blurhash: ^0.7.0
 
 dev_dependencies:
   flutter_test:
@@ -78,6 +79,7 @@ flutter:
     - asset/images/
     - asset/icons/
     - asset/icons2/
+    - asset/share_icons/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
