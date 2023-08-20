@@ -418,7 +418,7 @@ class _CreateUserState extends State<CreateUser> {
               // color: Colors.blue,//margin: EdgeInsets.fromLTRB(0,0,0,size.height*0.050),
               child: Center(
                 child: fieldbutton(
-                    title: "Continue",
+                    title: "Next",
                     padding: EdgeInsets.symmetric(
                         vertical: size.height * 0.010,
                         horizontal: size.width * 0.010),

@@ -1,20 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:mybindel_test/Dummy_Data/dummy_feed.dart';
 import 'package:mybindel_test/palette/palette.dart';
 import 'package:provider/provider.dart';
 import '../../providers/selectTheme.dart';
 import '../Home/single_item.dart';
-
-// ListView.builder(
-// scrollDirection: Axis.horizontal,
-// shrinkWrap: true,
-// itemCount: 11,
-// itemBuilder: (ctx, index) {
-// return Center(
-// child: Container(
-// margin: EdgeInsets.all(size.width*0.035),
-// width: size.width*0.076, height: size.height*0.036, color: Colors.black),
-// );
-// }),
 
 class HomePage extends StatelessWidget {
   @override
@@ -144,9 +133,9 @@ class HomePage extends StatelessWidget {
               ListView.builder(
                   shrinkWrap: true,
                   physics: BouncingScrollPhysics(),
-                  itemCount: 2,
+                  itemCount: Feeds().getfeeds.length,
                   itemBuilder: (ctx, index) {
-                    return single_item();
+                    return single_item(index);
                   })
             ],
           ),

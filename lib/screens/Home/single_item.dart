@@ -6,19 +6,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_blurhash/flutter_blurhash.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
+import 'package:mybindel_test/Dummy_Data/dummy_feed.dart';
+import 'package:mybindel_test/models/Comment.dart';
+import 'package:mybindel_test/widgets/CommnetChild_widget.dart';
 import 'package:provider/provider.dart';
-
 import '../../palette/palette.dart';
 import '../../providers/selectTheme.dart';
 
 class single_item extends StatefulWidget {
+  int index;
+
+  single_item(this.index);
   @override
   State<single_item> createState() => _single_itemState();
 }
 
 class _single_itemState extends State<single_item> {
   final formKey = GlobalKey<FormState>();
-  final TextEditingController commentController = TextEditingController();
+  late final TextEditingController commentController;
 
   static String currentDate = DateFormat('yyyy-MM-dd').format(DateTime.now());
   // print(dateStr);
@@ -26,67 +31,46 @@ class _single_itemState extends State<single_item> {
 
   bool isVisible = false;
 
-  List filedata = [
-    {
-      'name': 'Chuks Okwuenu',
-      'pic': 'asset/images/emily.png',
-      'message': 'I love to code',
-      'date': '2021-01-01 11:00 AM'
-    },
-    {
-      'name': 'Biggi Man',
-      'pic': 'asset/images/franklin.png',
-      'message': 'Very cool',
-      'date': '2021-01-01 08:00 PM'
-    },
-    {
-      'name': 'Tunde Martins',
-      'pic': 'asset/images/marshall.png',
-      'message': 'Very cool',
-      'date': '2021-01-01 01:00 AM'
-    },
-    {
-      'name': 'Biggi Man',
-      'pic': 'asset/images/user_post.png',
-      'message': 'Very cool',
-      'date': '2021-01-01 10:00 PM'
-    },
-  ];
+  // List filedata = [
+  //   {
+  //     'name': 'Chuks Okwuenu',
+  //     'pic': 'asset/images/emily.png',
+  //     'message': 'I love to code',
+  //     'date': '2021-01-01 11:00 AM'
+  //   },
+  //   {
+  //     'name': 'Biggi Man',
+  //     'pic': 'asset/images/franklin.png',
+  //     'message': 'Very cool',
+  //     'date': '2021-01-01 08:00 PM'
+  //   },
+  //   {
+  //     'name': 'Tunde Martins',
+  //     'pic': 'asset/images/marshall.png',
+  //     'message': 'Very cool',
+  //     'date': '2021-01-01 01:00 AM'
+  //   },
+  //   {
+  //     'name': 'Biggi Man',
+  //     'pic': 'asset/images/user_post.png',
+  //     'message': 'Very cool',
+  //     'date': '2021-01-01 10:00 PM'
+  //   },
+  // ];
 
-  Widget commentChild(data) {
-    return ListView.builder(
-        itemCount: filedata.length,
-        itemBuilder: (ctx, index) {
-          return Padding(
-            padding: const EdgeInsets.fromLTRB(12.0, 8.0, 2.0, 0.0),
-            child: ListTile(
-              leading: GestureDetector(
-                onTap: () async {
-                  // Display the image in large form.
-                  print("Comment Clicked ${index}");
-                },
-                child: Container(
-                  height: 50.0,
-                  width: 50.0,
-                  decoration: const BoxDecoration(
-                      color: Colors.blue,
-                      borderRadius: BorderRadius.all(Radius.circular(50))),
-                  child: CircleAvatar(
-                      radius: 50,
-                      backgroundImage: CommentBox.commentImageParser(
-                          imageURLorPath: data[index]['pic'])),
-                ),
-              ),
-              title: Text(
-                data[index]['name'],
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              subtitle: Text(data[index]['message']),
-              trailing:
-                  Text(data[index]['date'], style: TextStyle(fontSize: 10)),
-            ),
-          );
-        });
+  late final object;
+
+  @override
+  void initState() {
+    object = Feeds();
+    commentController = TextEditingController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    commentController.dispose();
+    super.dispose();
   }
 
   // Widget commentChild(data) {
@@ -130,6 +114,7 @@ class _single_itemState extends State<single_item> {
 
   @override
   Widget build(BuildContext context) {
+    List feeds = object.getfeeds;
     final size = MediaQuery.of(context).size;
     final provider = Provider.of<Themeprovider>(context);
 
@@ -169,7 +154,7 @@ class _single_itemState extends State<single_item> {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(5),
                       child: Image.asset(
-                        "asset/images/user_logo.png",
+                        feeds[widget.index].picture,
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -218,7 +203,7 @@ class _single_itemState extends State<single_item> {
                                       text: TextSpan(
                                         children: [
                                           TextSpan(
-                                            text: "John David",
+                                            text: feeds[widget.index].name,
                                             style: TextStyle(
                                                 fontSize: 18,
                                                 color: provider.currentTheme
@@ -237,7 +222,9 @@ class _single_itemState extends State<single_item> {
                                       ),
                                     ),
                                     AutoSizeText(
-                                      "Artist".toUpperCase(),
+                                      feeds[widget.index]
+                                          .occupation
+                                          .toUpperCase(),
                                       style: TextStyle(
                                           fontSize: 15, color: orange_color),
                                     ),
@@ -296,8 +283,7 @@ class _single_itemState extends State<single_item> {
               margin: EdgeInsets.symmetric(
                   horizontal: size.width * 0.035,
                   vertical: size.height * 0.005),
-              child:
-                  AutoSizeText("Created with love, crafted with intelligence."),
+              child: AutoSizeText(feeds[widget.index].caption),
             ),
             Container(
               // color: Colors.amber,
@@ -320,7 +306,7 @@ class _single_itemState extends State<single_item> {
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(10),
                             child: Image.asset(
-                              "asset/images/user_post.png",
+                              feeds[widget.index].image,
                               fit: BoxFit.cover,
                             ),
                           ))
@@ -345,8 +331,7 @@ class _single_itemState extends State<single_item> {
                                 margin: EdgeInsets.symmetric(
                                     horizontal: size.width * 0.010),
                                 decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10)
-                                ),
+                                    borderRadius: BorderRadius.circular(10)),
                                 child: SingleChildScrollView(
                                   scrollDirection: Axis.vertical,
                                   child: Column(children: [
@@ -384,40 +369,42 @@ class _single_itemState extends State<single_item> {
                                           child: InkWell(
                                             onTap: () {},
                                             child: Column(
-                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
                                                 children: [
-                                              SvgPicture.asset(
-                                              'asset/share_icons/Everyone.svg',
-                                              fit: BoxFit.cover,
-                                               width: size.width * 0.120,
-                                              height: size.height * 0.050,
-                                            ),
-                                              // Image.asset(
-                                              //   "asset/share_icons/everyone.png",
-                                              //   fit: BoxFit.cover,
-                                              //   width: 20,
-                                              //   height: 20,
-                                              // ),
-                                              Container(
-                                                alignment: Alignment.center,
-                                                child: AutoSizeText(
-                                                  "Everyone",
-                                                  softWrap: true,
-                                                  wrapWords: true,
-                                                  style: TextStyle(
-                                                      fontSize: 12,
-                                                      color: Colors.white,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                ),
-                                              ),
-                                            ]),
+                                                  SvgPicture.asset(
+                                                    'asset/share_icons/Everyone.svg',
+                                                    fit: BoxFit.cover,
+                                                    width: size.width * 0.120,
+                                                    height: size.height * 0.050,
+                                                  ),
+                                                  // Image.asset(
+                                                  //   "asset/share_icons/everyone.png",
+                                                  //   fit: BoxFit.cover,
+                                                  //   width: 20,
+                                                  //   height: 20,
+                                                  // ),
+                                                  Container(
+                                                    alignment: Alignment.center,
+                                                    child: const AutoSizeText(
+                                                      "Everyone",
+                                                      softWrap: true,
+                                                      wrapWords: true,
+                                                      style: TextStyle(
+                                                        fontSize: 12,
+                                                        color: Colors.white,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ]),
                                           ),
                                         ),
                                         //2
                                         Container(
                                           alignment: Alignment.center,
-                                           width: size.width * 0.140,
+                                          width: size.width * 0.140,
                                           height: size.height * 0.090,
                                           decoration: BoxDecoration(
                                             color:
@@ -426,37 +413,38 @@ class _single_itemState extends State<single_item> {
                                           child: InkWell(
                                             onTap: () {},
                                             child: Column(
-                                              mainAxisAlignment: MainAxisAlignment.center,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
                                                 children: [
-                                              SvgPicture.asset(
-                                                'asset/share_icons/only_with.svg',
-                                                fit: BoxFit.cover,
-                                                 width: size.width * 0.140,
-                                          height: size.height * 0.050,
-                                              ),
-                                              // Image.asset(
-                                              //   "asset/share_icons/onlyWith.png",
-                                              //   fit: BoxFit.cover,
-                                              // ),
-                                              Container(
-                                                alignment: Alignment.center,
-                                                child: AutoSizeText(
-                                                  "Only with",
-                                                  softWrap: true,
-                                                  wrapWords: true,
-                                                  style: TextStyle(
-                                                      fontSize: 12,
-                                                      color: Colors.white,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                ),
-                                              ),
-                                            ]),
+                                                  SvgPicture.asset(
+                                                    'asset/share_icons/only_with.svg',
+                                                    fit: BoxFit.cover,
+                                                    width: size.width * 0.140,
+                                                    height: size.height * 0.050,
+                                                  ),
+                                                  // Image.asset(
+                                                  //   "asset/share_icons/onlyWith.png",
+                                                  //   fit: BoxFit.cover,
+                                                  // ),
+                                                  Container(
+                                                    alignment: Alignment.center,
+                                                    child: AutoSizeText(
+                                                      "Only with",
+                                                      softWrap: true,
+                                                      wrapWords: true,
+                                                      style: TextStyle(
+                                                          fontSize: 12,
+                                                          color: Colors.white,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ),
+                                                  ),
+                                                ]),
                                           ),
                                         ),
                                         //3
                                         Container(
-                                           width: size.width * 0.140,
+                                          width: size.width * 0.140,
                                           height: size.height * 0.090,
                                           decoration: BoxDecoration(
                                             color:
@@ -465,32 +453,33 @@ class _single_itemState extends State<single_item> {
                                           child: InkWell(
                                             onTap: () {},
                                             child: Column(
-                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
                                                 children: [
-                                              SvgPicture.asset(
-                                                "asset/share_icons/hide.svg",
-                                                fit: BoxFit.cover,
-                                                 width: size.width * 0.140,
-                                          height: size.height * 0.050,
-                                              ),
-                                              // Image.asset(
-                                              //   "asset/share_icons/hideFrom.png",
-                                              //   fit: BoxFit.cover,
-                                              // ),
-                                              Container(
-                                                alignment: Alignment.center,
-                                                child: AutoSizeText(
-                                                  "Hide from",
-                                                  softWrap: true,
-                                                  wrapWords: true,
-                                                  style: TextStyle(
-                                                      fontSize: 12,
-                                                      color: Colors.white,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                ),
-                                              ),
-                                            ]),
+                                                  SvgPicture.asset(
+                                                    "asset/share_icons/hide.svg",
+                                                    fit: BoxFit.cover,
+                                                    width: size.width * 0.140,
+                                                    height: size.height * 0.050,
+                                                  ),
+                                                  // Image.asset(
+                                                  //   "asset/share_icons/hideFrom.png",
+                                                  //   fit: BoxFit.cover,
+                                                  // ),
+                                                  Container(
+                                                    alignment: Alignment.center,
+                                                    child: AutoSizeText(
+                                                      "Hide from",
+                                                      softWrap: true,
+                                                      wrapWords: true,
+                                                      style: TextStyle(
+                                                          fontSize: 12,
+                                                          color: Colors.white,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ),
+                                                  ),
+                                                ]),
                                           ),
                                         ),
                                       ],
@@ -508,7 +497,7 @@ class _single_itemState extends State<single_item> {
                                       children: [
                                         //4
                                         Container(
-                                           width: size.width * 0.140,
+                                          width: size.width * 0.140,
                                           height: size.height * 0.090,
                                           decoration: BoxDecoration(
                                             color:
@@ -517,39 +506,40 @@ class _single_itemState extends State<single_item> {
                                           child: InkWell(
                                             onTap: () {},
                                             child: Column(
-                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
                                                 children: [
-                                             SvgPicture.asset(
-                                                  "asset/share_icons/private.svg",
-                                                  fit: BoxFit.cover,
-                                                   width: size.width * 0.140,
-                                          height: size.height * 0.050,
-                                                ),
-                                              // Image.asset(
-                                              //   "asset/share_icons/private.png",
-                                              //   fit: BoxFit.cover,
-                                              // ),
-                                              Container(
-                                                alignment: Alignment.center,
-                                               width: size.width * 0.140,
-                                              height: size.height * 0.020,
-                                                child: AutoSizeText(
-                                                  "Private",
-                                                  softWrap: true,
-                                                  wrapWords: true,
-                                                  style: TextStyle(
-                                                      fontSize: 12,
-                                                      color: Colors.white,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                ),
-                                              ),
-                                            ]),
+                                                  SvgPicture.asset(
+                                                    "asset/share_icons/private.svg",
+                                                    fit: BoxFit.cover,
+                                                    width: size.width * 0.140,
+                                                    height: size.height * 0.050,
+                                                  ),
+                                                  // Image.asset(
+                                                  //   "asset/share_icons/private.png",
+                                                  //   fit: BoxFit.cover,
+                                                  // ),
+                                                  Container(
+                                                    alignment: Alignment.center,
+                                                    width: size.width * 0.140,
+                                                    height: size.height * 0.020,
+                                                    child: AutoSizeText(
+                                                      "Private",
+                                                      softWrap: true,
+                                                      wrapWords: true,
+                                                      style: TextStyle(
+                                                          fontSize: 12,
+                                                          color: Colors.white,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ),
+                                                  ),
+                                                ]),
                                           ),
                                         ),
                                         //5
                                         Container(
-                                           width: size.width * 0.140,
+                                          width: size.width * 0.140,
                                           height: size.height * 0.090,
                                           decoration: BoxDecoration(
                                             color:
@@ -558,39 +548,40 @@ class _single_itemState extends State<single_item> {
                                           child: InkWell(
                                             onTap: () {},
                                             child: Column(
-                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
                                                 children: [
-                                              SvgPicture.asset(
-                                                "asset/share_icons/Inbox.svg",
-                                                fit: BoxFit.cover,
-                                                 width: size.width * 0.140,
-                                          height: size.height * 0.050,
-                                              ),
-                                              // Image.asset(
-                                              //   "asset/share_icons/inbox.png",
-                                              //   fit: BoxFit.cover,
-                                              // ),
-                                              Container(
-                                                alignment: Alignment.center,
-                                                width: size.width * 0.140,
-                                              height: size.height * 0.020,
-                                                child: AutoSizeText(
-                                                  "Inbox",
-                                                  softWrap: true,
-                                                  wrapWords: true,
-                                                  style: TextStyle(
-                                                      fontSize: 12,
-                                                      color: Colors.white,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                ),
-                                              ),
-                                            ]),
+                                                  SvgPicture.asset(
+                                                    "asset/share_icons/Inbox.svg",
+                                                    fit: BoxFit.cover,
+                                                    width: size.width * 0.140,
+                                                    height: size.height * 0.050,
+                                                  ),
+                                                  // Image.asset(
+                                                  //   "asset/share_icons/inbox.png",
+                                                  //   fit: BoxFit.cover,
+                                                  // ),
+                                                  Container(
+                                                    alignment: Alignment.center,
+                                                    width: size.width * 0.140,
+                                                    height: size.height * 0.020,
+                                                    child: AutoSizeText(
+                                                      "Inbox",
+                                                      softWrap: true,
+                                                      wrapWords: true,
+                                                      style: TextStyle(
+                                                          fontSize: 12,
+                                                          color: Colors.white,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ),
+                                                  ),
+                                                ]),
                                           ),
                                         ),
                                         //6
                                         Container(
-                                           width: size.width * 0.140,
+                                          width: size.width * 0.140,
                                           height: size.height * 0.090,
                                           decoration: BoxDecoration(
                                             color:
@@ -599,34 +590,35 @@ class _single_itemState extends State<single_item> {
                                           child: InkWell(
                                             onTap: () {},
                                             child: Column(
-                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
                                                 children: [
-                                              SvgPicture.asset(
-                                                "asset/share_icons/copy_link.svg",
-                                                fit: BoxFit.cover,
-                                                 width: size.width * 0.140,
-                                          height: size.height * 0.050,
-                                              ),
-                                              // Image.asset(
-                                              //   "asset/share_icons/copyLink.png",
-                                              //   fit: BoxFit.cover,
-                                              // ),
-                                              Container(
-                                                alignment: Alignment.center,
-                                                width: size.width * 0.140,
-                                              height: size.height * 0.020,
-                                                child: AutoSizeText(
-                                                  "Copy with",
-                                                  softWrap: true,
-                                                  wrapWords: true,
-                                                  style: TextStyle(
-                                                      fontSize: 12,
-                                                      color: Colors.white,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                ),
-                                              ),
-                                            ]),
+                                                  SvgPicture.asset(
+                                                    "asset/share_icons/copy_link.svg",
+                                                    fit: BoxFit.cover,
+                                                    width: size.width * 0.140,
+                                                    height: size.height * 0.050,
+                                                  ),
+                                                  // Image.asset(
+                                                  //   "asset/share_icons/copyLink.png",
+                                                  //   fit: BoxFit.cover,
+                                                  // ),
+                                                  Container(
+                                                    alignment: Alignment.center,
+                                                    width: size.width * 0.140,
+                                                    height: size.height * 0.020,
+                                                    child: AutoSizeText(
+                                                      "Copy with",
+                                                      softWrap: true,
+                                                      wrapWords: true,
+                                                      style: TextStyle(
+                                                          fontSize: 12,
+                                                          color: Colors.white,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ),
+                                                  ),
+                                                ]),
                                           ),
                                         ),
                                       ],
@@ -644,7 +636,7 @@ class _single_itemState extends State<single_item> {
                                       children: [
                                         //7
                                         Container(
-                                           width: size.width * 0.140,
+                                          width: size.width * 0.140,
                                           height: size.height * 0.090,
                                           decoration: BoxDecoration(
                                             color:
@@ -653,34 +645,35 @@ class _single_itemState extends State<single_item> {
                                           child: InkWell(
                                             onTap: () {},
                                             child: Column(
-                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
                                                 children: [
-                                              SvgPicture.asset(
-                                                "asset/share_icons/outside.svg",
-                                                fit: BoxFit.cover,
-                                                 width: size.width * 0.140,
-                                          height: size.height * 0.050,
-                                              ),
-                                              // Image.asset(
-                                              //   "asset/share_icons/outside.png",
-                                              //   fit: BoxFit.cover,
-                                              // ),
-                                              Container(
-                                                alignment: Alignment.center,
-                                               width: size.width * 0.140,
-                                              height: size.height * 0.020,
-                                                child: AutoSizeText(
-                                                  "Outside",
-                                                  softWrap: true,
-                                                  wrapWords: true,
-                                                  style: TextStyle(
-                                                      fontSize: 12,
-                                                      color: Colors.white,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                ),
-                                              ),
-                                            ]),
+                                                  SvgPicture.asset(
+                                                    "asset/share_icons/outside.svg",
+                                                    fit: BoxFit.cover,
+                                                    width: size.width * 0.140,
+                                                    height: size.height * 0.050,
+                                                  ),
+                                                  // Image.asset(
+                                                  //   "asset/share_icons/outside.png",
+                                                  //   fit: BoxFit.cover,
+                                                  // ),
+                                                  Container(
+                                                    alignment: Alignment.center,
+                                                    width: size.width * 0.140,
+                                                    height: size.height * 0.020,
+                                                    child: AutoSizeText(
+                                                      "Outside",
+                                                      softWrap: true,
+                                                      wrapWords: true,
+                                                      style: TextStyle(
+                                                          fontSize: 12,
+                                                          color: Colors.white,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ),
+                                                  ),
+                                                ]),
                                           ),
                                         ),
                                       ],
@@ -716,7 +709,7 @@ class _single_itemState extends State<single_item> {
                                 "asset/images/highlighted_star_in_post.png",
                                 width: size.width * 0.060,
                               ),
-                              AutoSizeText("1k"),
+                              AutoSizeText(feeds[widget.index].likesCount),
                             ]),
                           ),
                         ),
@@ -761,17 +754,18 @@ class _single_itemState extends State<single_item> {
                                               .validate()) {
                                             print(commentController.text);
                                             setState(() {
-                                              var value = {
-                                                'name': 'Vedant',
-                                                'pic':
-                                                    'asset/images/user_logo.png',
-                                                'message':
-                                                    commentController.text,
-                                                'date':
-                                                    '${currentDate}  /  ${currentTime}',
-                                              };
-                                              filedata.insert(0, value);
+                                              
+                                              feeds[widget.index]
+                                                  .comments
+                                                  .add(Singlecomment(
+                                                  picture:
+                                                      'asset/images/user_logo.png',
+                                                  name: "vedant",
+                                                  text: commentController.text,
+                                                  datetime: currentDate,
+                                                  reaction: 1));
                                             });
+
                                             commentController.clear();
                                             FocusScope.of(context).unfocus();
                                           } else {
@@ -795,7 +789,8 @@ class _single_itemState extends State<single_item> {
                                           width:
                                               MediaQuery.of(context).size.width,
                                           //color: Colors.red,
-                                          child: commentChild(filedata),
+                                          child: commentChild(
+                                              feeds[widget.index].comments),
                                         ),
                                       ),
                                     );
@@ -806,7 +801,10 @@ class _single_itemState extends State<single_item> {
                                 "asset/images/comment_in_post.png",
                                 width: size.width * 0.060,
                               ),
-                              AutoSizeText("47"),
+                              AutoSizeText(feeds[widget.index]
+                                  .comments
+                                  .length
+                                  .toString()),
                             ]),
                           ),
                         ),
@@ -827,7 +825,8 @@ class _single_itemState extends State<single_item> {
                                 "asset/images/share_in_post.png",
                                 width: size.width * 0.060,
                               ),
-                              AutoSizeText("12"),
+                              AutoSizeText(
+                                  feeds[widget.index].sharesCount.toString()),
                             ]),
                           ),
                         ),
@@ -863,7 +862,7 @@ class _single_itemState extends State<single_item> {
                 text: TextSpan(
                   children: [
                     TextSpan(
-                      text: "2,300",
+                      text: feeds[widget.index].views,
                       style: TextStyle(
                         fontSize: 10,
                         color: provider.currentTheme

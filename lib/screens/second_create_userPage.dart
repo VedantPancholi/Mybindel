@@ -134,9 +134,10 @@ class _SecondCreateUserPageState extends State<SecondCreateUserPage> {
                               ]),
                           child: Center(child: Icon(Icons.arrow_back_ios_rounded,color: orange_color,size: 17,))),
                       SizedBox(width: size.width*0.020,),
-                      const Text(
+                       Text(
                         "Create New",
                         style: TextStyle(
+                          color: provider.currentTheme ? dim_black : dim_white,
                             fontFamily: 'Avant',
                             fontSize: 21,
                             letterSpacing: 1,

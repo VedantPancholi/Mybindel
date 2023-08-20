@@ -2,6 +2,8 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:mybindel_test/screens/Home/HomePage.dart';
+import 'package:mybindel_test/screens/postCreationPage.dart';
+import 'package:mybindel_test/screens/storyCreationPage.dart';
 import 'package:provider/provider.dart';
 import '../../palette/palette.dart';
 import '../providers/bottomNavigationProvider.dart';
@@ -117,7 +119,7 @@ class _BasePageState extends State<BasePage> {
                 child: PageView(
                   physics: NeverScrollableScrollPhysics(),
                   controller: _pageController,
-                  children: [HomePage(), VideoScreenPage()],
+                  children: [HomePage(), VideoScreenPage(), PostCreationPage(),StoryCreationPage()],
                   onPageChanged: (index) {
                     //print("page: ${index}");
                   },
