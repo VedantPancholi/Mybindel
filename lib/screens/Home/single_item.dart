@@ -30,34 +30,6 @@ class _single_itemState extends State<single_item> {
   static String currentTime = DateFormat('hh:mm a').format(DateTime.now());
 
   bool isVisible = false;
-
-  // List filedata = [
-  //   {
-  //     'name': 'Chuks Okwuenu',
-  //     'pic': 'asset/images/emily.png',
-  //     'message': 'I love to code',
-  //     'date': '2021-01-01 11:00 AM'
-  //   },
-  //   {
-  //     'name': 'Biggi Man',
-  //     'pic': 'asset/images/franklin.png',
-  //     'message': 'Very cool',
-  //     'date': '2021-01-01 08:00 PM'
-  //   },
-  //   {
-  //     'name': 'Tunde Martins',
-  //     'pic': 'asset/images/marshall.png',
-  //     'message': 'Very cool',
-  //     'date': '2021-01-01 01:00 AM'
-  //   },
-  //   {
-  //     'name': 'Biggi Man',
-  //     'pic': 'asset/images/user_post.png',
-  //     'message': 'Very cool',
-  //     'date': '2021-01-01 10:00 PM'
-  //   },
-  // ];
-
   late final object;
 
   @override
@@ -72,45 +44,6 @@ class _single_itemState extends State<single_item> {
     commentController.dispose();
     super.dispose();
   }
-
-  // Widget commentChild(data) {
-  //   return Expanded(
-  //     child: ListView(
-  //       shrinkWrap: true,
-  //       children: [
-  //         for (var i = 0; i < data.length; i++)
-  //           Padding(
-  //             padding: const EdgeInsets.fromLTRB(12.0, 8.0, 2.0, 0.0),
-  //             child: ListTile(
-  //               leading: GestureDetector(
-  //                 onTap: () async {
-  //                   // Display the image in large form.
-  //                   print("Comment Clicked ${i}");
-  //                 },
-  //                 child: Container(
-  //                   height: 50.0,
-  //                   width: 50.0,
-  //                   decoration: const BoxDecoration(
-  //                       color: Colors.blue,
-  //                       borderRadius: BorderRadius.all(Radius.circular(50))),
-  //                   child: CircleAvatar(
-  //                       radius: 50,
-  //                       backgroundImage: CommentBox.commentImageParser(
-  //                           imageURLorPath: data[i]['pic'])),
-  //                 ),
-  //               ),
-  //               title: Text(
-  //                 data[i]['name'],
-  //                 style: TextStyle(fontWeight: FontWeight.bold),
-  //               ),
-  //               subtitle: Text(data[i]['message']),
-  //               trailing: Text(data[i]['date'], style: TextStyle(fontSize: 10)),
-  //             ),
-  //           )
-  //       ],
-  //     ),
-  //   );
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -790,7 +723,7 @@ class _single_itemState extends State<single_item> {
                                               MediaQuery.of(context).size.width,
                                           //color: Colors.red,
                                           child: commentChild(
-                                              feeds[widget.index].comments),
+                                              feeds[widget.index].comments,context),
                                         ),
                                       ),
                                     );

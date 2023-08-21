@@ -183,7 +183,7 @@ class _BasePageState extends State<BasePage> {
                         bottom_Icon(
                           index: 10,
                           icon: 'asset/icons/Plus.svg',
-                          iconsize: 40,
+                          iconsize: 80,
                           showNotification: false,
                           ontap: ontapped,
                           notification_number: 0,

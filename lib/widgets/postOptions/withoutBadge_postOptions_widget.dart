@@ -40,7 +40,6 @@ class postOptionsWithoutBadge extends StatelessWidget {
                               : square_dark_neu_Morphism,
                           child: Row(children: [
                             SvgPicture.asset(svg),
-                            SizedBox(width: size.width*0.020,),
                             AutoSizeText(
                               text,
                               style: TextStyle(

@@ -7,11 +7,13 @@ import 'package:mybindel_test/palette/palette.dart';
 import 'package:mybindel_test/providers/selectTheme.dart';
 import 'package:mybindel_test/screens/create_userPage.dart';
 import 'package:mybindel_test/widgets/fieldbutton_widget.dart';
-import 'package:mybindel_test/widgets/postOptions/withoutBadge_postOptions_widget.dart';
 import 'package:provider/provider.dart';
 
 
-import '../widgets/postOptions/postOptions_widget.dart';class PostCreationPage extends StatefulWidget {
+import '../widgets/postOptions/postOptions_widget.dart';
+import '../widgets/postOptions/withoutBadge_postOptions_widget.dart';
+
+class PostCreationPage extends StatefulWidget {
   const PostCreationPage({super.key});
 
   @override
