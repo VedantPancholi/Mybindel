@@ -1,25 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:mybindel_test/Dummy_Data/dummy_feed.dart';
 import 'package:mybindel_test/palette/palette.dart';
+import 'package:mybindel_test/screens/Home/storyCreationPage.dart';
 import 'package:provider/provider.dart';
+import '../../pagerouter/customPageRouter.dart';
 import '../../providers/selectTheme.dart';
 import '../Home/single_item.dart';
+import 'package:sizer/sizer.dart';
+
 
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<Themeprovider>(context);
-    final size = MediaQuery.of(context).size;
     return Scaffold(
         resizeToAvoidBottomInset: true,
         backgroundColor:
-            provider.currentTheme ? light_Scaffold_color : dark_Scaffold_color,
+        provider.currentTheme ? light_Scaffold_color : dark_Scaffold_color,
         body: SingleChildScrollView(
           child: Column(
             children: [
               Container(
-                width: size.width,
-                height: size.height * 0.080,
+                width: (100).w,
+                height: (8.00).h,
                 //color: Colors.amber,
                 color: provider.currentTheme
                     ? light_Scaffold_color
@@ -28,10 +31,10 @@ class HomePage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
-                      width: size.width * 0.75,
+                      width: (75.0).w,
                       margin: EdgeInsets.symmetric(
-                          // vertical: size.height * 0.010,
-                          horizontal: size.width * 0.030),
+                        // vertical: ().h * 0.010,
+                          horizontal: (3.00).w),
                       decoration: provider.currentTheme
                           ? textFormField_neu_morphism
                           : dark_textFormField_neu_morphism,
@@ -43,26 +46,28 @@ class HomePage extends StatelessWidget {
                             hintStyle: TextStyle(
                               fontSize: 15,
                               color:
-                                  provider.currentTheme ? dim_black : dim_white,
+                              provider.currentTheme ? dim_black : dim_white,
                             ),
                             contentPadding: EdgeInsets.symmetric(
-                                horizontal: size.width * 0.040)),
+                                horizontal: (4.00).w )),
                         keyboardType: TextInputType.text,
                         textInputAction: TextInputAction.done,
                       ),
                     ),
                     Container(
-                      width: size.width * 0.12,
+                      width: (12.00).w,
                       margin: EdgeInsets.only(
-                        // vertical: size.height * 0.010,
-                        right: size.width * 0.040,
-                        left: size.width * 0.015,
+                        // vertical: ().h * 0.010,
+                        right: (4.00).w,
+                        left: (1.50).w,
                       ),
                       decoration: provider.currentTheme
                           ? square_neu_Morphism
                           : square_dark_neu_Morphism,
                       child: IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(context, custompageroute(child: StoryCreationPage()));
+                          },
                           icon: Icon(
                             Icons.add,
                             color: orange_color,
@@ -73,8 +78,9 @@ class HomePage extends StatelessWidget {
                 ),
               ),
               Container(
-                width: size.width,
-                height: size.height * 0.100,
+                width: (100).w,
+                height: (12.50).h,
+                padding: EdgeInsets.only(left: (1).w),
                 // color: Colors.amber,
                 // color: provider.currentTheme
                 //     ? light_Scaffold_color
@@ -84,49 +90,24 @@ class HomePage extends StatelessWidget {
                     itemCount: 5,
                     itemBuilder: (context, index) {
                       return Container(
-                        width: size.width * 0.175,
-                        height: size.height * 0.065,
+                        width: (19.0).w,
+                        height: (11.0).h,
                         margin: EdgeInsets.symmetric(
-                            vertical: size.height * 0.010,
-                            horizontal: size.width * 0.020),
-                        //  color: Colors.red,
-                        child: Stack(fit: StackFit.expand, children: [
-                          Container(
-                            // color: Colors.blue,
-                            margin: EdgeInsets.symmetric(
-                                vertical: size.height * 0.005,
-                                horizontal: size.width * 0.015),
-                            padding: EdgeInsets.symmetric(
-                                vertical: size.height * 0.012,
-                                horizontal: size.width * 0.015),
-                            width: size.width * 0.170,
-                            height: size.height * 0.060,
-                            decoration: provider.currentTheme
-                                ? story_square_neu_Morphism
-                                : story_square_dark_neu_Morphism,
-                            child: ClipRRect(
-                                borderRadius: BorderRadius.circular(6),
-                                child: Image.asset(
-                                  "asset/images/user_logo.png",
-                                  fit: BoxFit.cover,
-                                )),
-                          ),
-                          Positioned(
-                            bottom: 1,
-                            right: 3,
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(40),
-                              child: Container(
-                                width: size.width * 0.025,
-                                height: size.height * 0.012,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Colors.red,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ]),
+                            vertical: (0.5).h ,
+                            horizontal: (2.00).w),
+                        // color: Colors.red,
+                        padding: EdgeInsets.symmetric(
+                            vertical: (1.200).h,
+                            horizontal: (1.500).w),
+                        decoration: provider.currentTheme
+                            ? story_square_neu_Morphism
+                            : story_square_dark_neu_Morphism,
+                        child: ClipRRect(
+                            borderRadius: BorderRadius.circular(6),
+                            child: Image.asset(
+                              "asset/images/user_logo.png",
+                              fit: BoxFit.cover,
+                            )),
                       );
                     }),
               ),
@@ -135,6 +116,7 @@ class HomePage extends StatelessWidget {
                   physics: BouncingScrollPhysics(),
                   itemCount: Feeds().getfeeds.length,
                   itemBuilder: (ctx, index) {
+                    print("LISTVIEW...................");
                     return single_item(index);
                   })
             ],
@@ -145,7 +127,6 @@ class HomePage extends StatelessWidget {
 
 BoxDecoration story_square_neu_Morphism = BoxDecoration(
     borderRadius: BorderRadius.circular(5),
-    border: Border.all(color: orange_color),
     color: Color.fromRGBO(240, 240, 240, 1),
     boxShadow: [
       BoxShadow(
@@ -162,7 +143,6 @@ BoxDecoration story_square_neu_Morphism = BoxDecoration(
 
 BoxDecoration story_square_dark_neu_Morphism = BoxDecoration(
     borderRadius: BorderRadius.circular(5),
-    border: Border.all(color: orange_color),
     color: Color.fromRGBO(25, 25, 25, 1.0),
     boxShadow: [
       BoxShadow(

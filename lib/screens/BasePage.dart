@@ -1,15 +1,17 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:badges/badges.dart' as badges;
+import 'package:mybindel_test/pagerouter/customPageRouter.dart';
 import 'package:mybindel_test/screens/Home/HomePage.dart';
-import 'package:mybindel_test/screens/postCreationPage.dart';
-import 'package:mybindel_test/screens/storyCreationPage.dart';
 import 'package:provider/provider.dart';
 import '../../palette/palette.dart';
 import '../providers/bottomNavigationProvider.dart';
 import '../providers/selectTheme.dart';
+import 'Home/postCreationPage.dart';
 import 'Home/videoScreenPage.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:sizer/sizer.dart';
+
 
 class BasePage extends StatefulWidget {
   const BasePage({Key? key}) : super(key: key);
@@ -42,7 +44,6 @@ class _BasePageState extends State<BasePage> {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<Themeprovider>(context);
-    final size = MediaQuery.of(context).size;
 
     return Scaffold(
         backgroundColor:
@@ -51,12 +52,12 @@ class _BasePageState extends State<BasePage> {
           children: [
             Container(
               margin: EdgeInsets.only(
-                  top: size.height * 0.043,
-                  left: size.width * 0.038,
-                  right: size.width * 0.038,
-                  bottom: size.height * 0.018),
-              width: size.width,
-              height: size.height * 0.069,
+                  top: (4.300).h,
+                  left: (3.800).w,
+                  right: (3.800).w,
+                  bottom: (1.800).h),
+              width: (100).w,
+              height: (6.900).h,
               // color: Colors.red,
               color: provider.currentTheme
                   ? light_Scaffold_color
@@ -65,14 +66,14 @@ class _BasePageState extends State<BasePage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
-                    width: size.width * 0.10,
-                    height: size.height * 0.045,
+                    width: (10.00).w,
+                    height: (4.500).h,
                     decoration: provider.currentTheme
                         ? square_neu_Morphism
                         : square_dark_neu_Morphism,
                     margin: EdgeInsets.symmetric(
-                      vertical: size.height * 0.010,
-                      // horizontal: size.width * 0.040
+                      vertical: (1.00).h ,
+                      // horizontal: ().w * 0.040
                     ),
                     child: InkWell(
                       onTap: () {
@@ -85,20 +86,20 @@ class _BasePageState extends State<BasePage> {
                     ),
                   ),
                   Container(
-                    width: size.width * 0.10,
-                    height: size.height * 0.050,
+                    width: (10.00).w,
+                    height: (5.00).h,
                     // color: Colors.black,
                     margin: EdgeInsets.symmetric(
-                        vertical: size.height * 0.010,
-                        horizontal: size.width * 0.030),
+                        vertical: (1.00).h,
+                        horizontal: (3.00).w),
                     child: Image.asset("asset/images/logo.png"),
                   ),
                   Container(
-                    width: size.width * 0.148,
-                    height: size.height * 0.064,
+                    width: (14.800).w,
+                    height: (6.400).h ,
                     padding: EdgeInsets.symmetric(
-                        vertical: size.height * 0.006,
-                        horizontal: size.width * 0.014),
+                        vertical: (0.6).h ,
+                        horizontal: (1.400).w),
                     // color: Colors.black,
                     decoration: provider.currentTheme
                         ? square_neu_Morphism
@@ -119,128 +120,132 @@ class _BasePageState extends State<BasePage> {
                 child: PageView(
                   physics: NeverScrollableScrollPhysics(),
                   controller: _pageController,
-                  children: [HomePage(), VideoScreenPage(), PostCreationPage(),StoryCreationPage()],
+                  children: [HomePage(), VideoScreenPage(),],
                   onPageChanged: (index) {
                     //print("page: ${index}");
                   },
                 )),
             Consumer<Navigationprovider>(
-                builder: (ctx , navigationprovider , child) => Container(
-                    width: size.width,
-                    height: size.height * 0.1,
-                    color: light_Scaffold_color,
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: SingleChildScrollView(
-                            physics: BouncingScrollPhysics(),
-                            reverse: true,
-                            scrollDirection: Axis.horizontal,
-                            child: Row(children: [
-                              bottom_Icon(
-                                index: 0,
-                                icon: navigationprovider.current_index != 0
-                                    ? 'asset/icons/Home.svg'
-                                    : 'asset/icons2/Home.svg',
-                                ontap: ontapped,
-                                notification_number: 2,
-                              ),
-                              bottom_Icon(
-                                index: 1,
-                                icon: navigationprovider.current_index != 1
-                                    ? 'asset/icons/Video.svg'
-                                    : 'asset/icons2/Video.svg',
-                                ontap: ontapped,
-                                notification_number: 2,
-                              ),
-                              bottom_Icon(
-                                index: 2,
-                                icon: navigationprovider.current_index != 2
-                                    ? 'asset/icons/Friends.svg'
-                                    : 'asset/icons2/Friends.svg',
-                                ontap: ontapped,
-                                notification_number: 2,
-                              ),
-                              bottom_Icon(
-                                index: 3,
-                                icon: navigationprovider.current_index != 3
-                                    ? 'asset/icons/Messages.svg'
-                                    : 'asset/icons2/Messages.svg',
-                                ontap: ontapped,
-                                notification_number: 42,
-                              ),
-                              bottom_Icon(
-                                index: 4,
-                                icon: navigationprovider.current_index != 4
-                                    ? 'asset/icons/Calls.svg'
-                                    : 'asset/icons2/Calls.svg',
-                                ontap: ontapped,
-                                notification_number: 0,
-                              )
-                            ]),
-                          ),
-                        ),
-                        bottom_Icon(
-                          index: 10,
-                          icon: 'asset/icons/Plus.svg',
-                          iconsize: 80,
-                          showNotification: false,
-                          ontap: ontapped,
-                          notification_number: 0,
-                        ),
-                        Expanded(
-                          child: SingleChildScrollView(
-                            physics: BouncingScrollPhysics(),
-                            scrollDirection: Axis.horizontal,
-                            child: Row(
-                              children: [
-                                bottom_Icon(
-                                  index: 5,
-                                  icon: navigationprovider.current_index != 5
-                                      ? 'asset/icons/Pages.svg'
-                                      : 'asset/icons2/Pages.svg',
-                                  ontap: ontapped,
-                                  notification_number: 12,
-                                ),
-                                bottom_Icon(
-                                  index: 6,
-                                  icon: navigationprovider.current_index != 6
-                                      ? 'asset/icons/Groups.svg'
-                                      : 'asset/icons2/Groups.svg',
-                                  ontap: ontapped,
-                                  notification_number: 2,
-                                ),
-                                bottom_Icon(
-                                  index: 7,
-                                  icon: navigationprovider.current_index != 7
-                                      ? 'asset/icons/Notifications.svg'
-                                      : 'asset/icons2/Notifications.svg',
-                                  ontap: ontapped,
-                                  notification_number: 2,
-                                ),
-                                bottom_Icon(
-                                  index: 8,
-                                  icon: navigationprovider.current_index != 8
-                                      ? 'asset/icons/Drive.svg'
-                                      : 'asset/icons2/Drive.svg',
-                                  ontap: ontapped,
-                                  notification_number: 2,
-                                ),
-                                bottom_Icon(
-                                  index: 9,
-                                  icon: navigationprovider.current_index != 9
-                                      ? 'asset/icons/Settings.svg'
-                                      : 'asset/icons2/Settings.svg',
-                                  ontap: ontapped,
-                                  notification_number: 2,
-                                )
-                              ],
+              builder: (ctx , navigationprovider , child) => Container(
+                  width: (100).w,
+                  height: (10.00).h,
+                  color: light_Scaffold_color,
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: SingleChildScrollView(
+                          physics: BouncingScrollPhysics(),
+                          reverse: true,
+                          scrollDirection: Axis.horizontal,
+                          child: Row(children: [
+                            bottom_Icon(
+                              index: 0,
+                              icon: navigationprovider.current_index != 0
+                                  ? 'asset/icons/Home.svg'
+                                  : 'asset/icons2/Home.svg',
+                              ontap: ontapped,
+                              notification_number: 2,
                             ),
+                            bottom_Icon(
+                              index: 1,
+                              icon: navigationprovider.current_index != 1
+                                  ? 'asset/icons/Video.svg'
+                                  : 'asset/icons2/Video.svg',
+                              ontap: ontapped,
+                              notification_number: 2,
+                            ),
+                            bottom_Icon(
+                              index: 2,
+                              icon: navigationprovider.current_index != 2
+                                  ? 'asset/icons/Friends.svg'
+                                  : 'asset/icons2/Friends.svg',
+                              ontap: ontapped,
+                              notification_number: 2,
+                            ),
+                            bottom_Icon(
+                              index: 3,
+                              icon: navigationprovider.current_index != 3
+                                  ? 'asset/icons/Messages.svg'
+                                  : 'asset/icons2/Messages.svg',
+                              ontap: ontapped,
+                              notification_number: 42,
+                            ),
+                            bottom_Icon(
+                              index: 4,
+                              icon: navigationprovider.current_index != 4
+                                  ? 'asset/icons/Calls.svg'
+                                  : 'asset/icons2/Calls.svg',
+                              ontap: ontapped,
+                              notification_number: 0,
+                            )
+                          ]),
+                        ),
+                      ),
+                      bottom_Icon(
+                        index: 10,
+                        icon: 'asset/icons/Plus.svg',
+                        iconsize: 40,
+                        showNotification: false,
+                        ontap: (index){
+                          Navigator.push(context,custompageroute(child: PostCreationPage()));
+                        },
+                        notification_number: 0,
+                        width_ratio: 10.00,
+                        height_ratio: 5.00,
+                      ),
+                      Expanded(
+                        child: SingleChildScrollView(
+                          physics: BouncingScrollPhysics(),
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            children: [
+                              bottom_Icon(
+                                index: 5,
+                                icon: navigationprovider.current_index != 5
+                                    ? 'asset/icons/Pages.svg'
+                                    : 'asset/icons2/Pages.svg',
+                                ontap: ontapped,
+                                notification_number: 12,
+                              ),
+                              bottom_Icon(
+                                index: 6,
+                                icon: navigationprovider.current_index != 6
+                                    ? 'asset/icons/Groups.svg'
+                                    : 'asset/icons2/Groups.svg',
+                                ontap: ontapped,
+                                notification_number: 2,
+                              ),
+                              bottom_Icon(
+                                index: 7,
+                                icon: navigationprovider.current_index != 7
+                                    ? 'asset/icons/Notifications.svg'
+                                    : 'asset/icons2/Notifications.svg',
+                                ontap: ontapped,
+                                notification_number: 2,
+                              ),
+                              bottom_Icon(
+                                index: 8,
+                                icon: navigationprovider.current_index != 8
+                                    ? 'asset/icons/Drive.svg'
+                                    : 'asset/icons2/Drive.svg',
+                                ontap: ontapped,
+                                notification_number: 2,
+                              ),
+                              bottom_Icon(
+                                index: 9,
+                                icon: navigationprovider.current_index != 9
+                                    ? 'asset/icons/Settings.svg'
+                                    : 'asset/icons2/Settings.svg',
+                                ontap: ontapped,
+                                notification_number: 2,
+                              )
+                            ],
                           ),
-                        )
-                      ],
-                    )),
-                ),
+                        ),
+                      )
+                    ],
+                  )),
+            ),
           ],
         ));
   }
@@ -253,6 +258,9 @@ class bottom_Icon extends StatelessWidget {
   double iconsize;
   bool showNotification;
   int notification_number;
+  double height_ratio;
+  double width_ratio;
+
 
   bottom_Icon(
       {required this.index,
@@ -260,48 +268,54 @@ class bottom_Icon extends StatelessWidget {
         this.ontap,
         this.iconsize = 35.0,
         this.showNotification = true,
+        this.height_ratio = 2.9,
+        this.width_ratio = 7.0,
         required this.notification_number});
 
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<Themeprovider>(context);
-    final size = MediaQuery.of(context).size;
     final navigationprovider = Provider.of<Navigationprovider>(context);
 
     return Center(
-        child: GestureDetector(
-            onTap: () {
-              ontap!(index);
-              navigationprovider.changeIndex(index);
-              // print(index);
-            },
-            child: Container(
-                margin: EdgeInsets.all(size.width * 0.035),
-                width: size.width * 0.076,
-                height: size.height * 0.036,
-                //color: Colors.blue,
-                color: light_Scaffold_color,
-                child: badges.Badge(
-                  badgeAnimation: badges.BadgeAnimation.slide(),
-                  badgeContent: AutoSizeText(notification_number.toString()),
-                  badgeStyle: badges.BadgeStyle(
-                    badgeColor: orange_color,
-                    padding: EdgeInsets.all(5),
-                  ),
-                  position: badges.BadgePosition.custom(
-                    top: -10,
-                    end: -2,
-                  ),
-                  showBadge: showNotification,
-                  // child: Icon(icon, size: iconsize),
-                  child: SvgPicture.asset(
-                    icon,
-                    fit: BoxFit.cover,
-                  ),
-                )),
-            ),
-        );
-    }
+      child: GestureDetector(
+        onTap: () {
+          ontap!(index);
+          navigationprovider.changeIndex(index);
+          // print(index);
+        },
+        child: Container(
+            margin: EdgeInsets.all((1.500).w ),
+            width: (11.600).w,
+            height: (5.900).h,
+            //color: Colors.blue,
+            color: light_Scaffold_color,
+            child: Center(
+              child: badges.Badge(
+                badgeAnimation: badges.BadgeAnimation.slide(),
+                badgeContent: AutoSizeText(notification_number.toString() , style: TextStyle(color: Color.fromRGBO(242,242,242,1.0),fontSize: 10,fontWeight: FontWeight.bold),),
+                badgeStyle: badges.BadgeStyle(
+                  badgeColor: orange_color,
+                  padding: EdgeInsets.all((1).w),
+                ),
+                position: badges.BadgePosition.custom(
+                  top: -11,
+                  end: -7,
+                ),
+                showBadge: showNotification,
+                // child: Icon(icon, size: iconsize),
+                child: SvgPicture.asset(
+                  icon,
+                  width: (width_ratio).w,
+                  height: (height_ratio).h,
+                  fit: BoxFit.cover,
+
+                ),
+              ),
+            )),
+      ),
+    );
+  }
 }
 
 
@@ -325,7 +339,6 @@ class bottom_Icon extends StatelessWidget {
 //   @override
 //   Widget build(BuildContext context) {
 //     final provider = Provider.of<Themeprovider>(context);
-//     final size = MediaQuery.of(context).size;
 //
 //     return Center(
 //       child: GestureDetector(
@@ -334,9 +347,9 @@ class bottom_Icon extends StatelessWidget {
 //           print(index);
 //         },
 //         child: Container(
-//             margin: EdgeInsets.all(size.width * 0.035),
-//             width: size.width * 0.076,
-//             height: size.height * 0.036,
+//             margin: EdgeInsets.all(().w * 0.035),
+//             width: ().w * 0.076,
+//             height: ().h * 0.036,
 //             color: light_Scaffold_color,
 //             child: badges.Badge(
 //               badgeAnimation: badges.BadgeAnimation.slide(),

@@ -52,6 +52,7 @@ dependencies:
   flutter_svg: ^2.0.7
   flutter_blurhash: ^0.7.0
   sizer: ^2.0.15
+  flutter_staggered_animations: ^1.1.1
 
 dev_dependencies:
   flutter_test:
@@ -82,6 +83,8 @@ flutter:
     - asset/icons2/
     - asset/share_icons/
     - asset/post_icons/
+    - asset/effect_icon/
+    - asset/music_icons/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

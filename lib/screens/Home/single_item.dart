@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:comment_box/comment/comment.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_blurhash/flutter_blurhash.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
@@ -12,6 +13,7 @@ import 'package:mybindel_test/widgets/CommnetChild_widget.dart';
 import 'package:provider/provider.dart';
 import '../../palette/palette.dart';
 import '../../providers/selectTheme.dart';
+import 'package:sizer/sizer.dart';
 
 class single_item extends StatefulWidget {
   int index;
@@ -24,17 +26,15 @@ class single_item extends StatefulWidget {
 class _single_itemState extends State<single_item> {
   final formKey = GlobalKey<FormState>();
   late final TextEditingController commentController;
-
-  static String currentDate = DateFormat('yyyy-MM-dd').format(DateTime.now());
+  FocusNode inputNode = FocusNode();
   // print(dateStr);
-  static String currentTime = DateFormat('hh:mm a').format(DateTime.now());
-
-  bool isVisible = false;
+  bool liked = false;
+  bool share_clicked = false;
   late final object;
 
   @override
   void initState() {
-    object = Feeds();
+    object = getobj();
     commentController = TextEditingController();
     super.initState();
   }
@@ -42,43 +42,43 @@ class _single_itemState extends State<single_item> {
   @override
   void dispose() {
     commentController.dispose();
+    object = null;
     super.dispose();
   }
+
 
   @override
   Widget build(BuildContext context) {
     List feeds = object.getfeeds;
-    final size = MediaQuery.of(context).size;
     final provider = Provider.of<Themeprovider>(context);
+    print("build again ");
 
     return Container(
-      margin: EdgeInsets.all(size.width * 0.010),
+      margin: EdgeInsets.all((1.00).w),
       // color: Colors.green,
       color: provider.currentTheme ? light_Scaffold_color : dark_Scaffold_color,
-      height: size.height * 0.49,
-      width: size.width * 0.98,
+      height: (49.00).h,
+      width: (98.00).w,
       child: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              // width: size.width*0.90,
-              height: size.height * 0.080,
+              // width: ().w*0.90,
+              height: (8.00).h,
               // color: Colors.green,
               color: provider.currentTheme
                   ? light_Scaffold_color
                   : dark_Scaffold_color,
-              margin: EdgeInsets.only(
-                  left: size.width * 0.030, right: size.width * 0.010),
+              margin: EdgeInsets.only(left: (3.00).w, right: (1.00).w),
               child: Row(children: [
                 Stack(children: [
                   Container(
-                    width: size.width * 0.140,
-                    height: size.height * 0.060,
+                    width: (14.00).w,
+                    height: (6.00).h,
                     padding: EdgeInsets.symmetric(
-                        vertical: size.height * 0.0080,
-                        horizontal: size.width * 0.015),
+                        vertical: (0.8).h, horizontal: (1.500).w),
                     // color: Colors.black,
                     decoration: provider.currentTheme
                         ? square_neu_Morphism
@@ -99,20 +99,20 @@ class _single_itemState extends State<single_item> {
                       borderRadius: BorderRadius.circular(40),
                       child: Container(
                         color: Colors.red,
-                        width: size.width * 0.025,
-                        height: size.height * 0.012,
+                        width: (2.500).w,
+                        height: (1.200).h,
                       ),
                     ),
                   ),
                 ]),
                 SizedBox(
-                  width: size.width * 0.020,
+                  width: (2.00).w,
                 ),
                 Stack(
                   children: [
                     Container(
-                      width: size.width * 0.77,
-                      height: size.height * 0.070,
+                      width: (77.00).w,
+                      height: (7.00).h,
                       // color: Colors.amber,
                       color: provider.currentTheme
                           ? light_Scaffold_color
@@ -122,15 +122,15 @@ class _single_itemState extends State<single_item> {
                           children: [
                             Container(
                               alignment: Alignment.topLeft,
-                              height: size.height * 0.070,
-                              width: size.width * 0.35,
+                              height: (7.00).h,
+                              width: (35.00).w,
                               child: Padding(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: size.width * 0.020),
+                                padding:
+                                EdgeInsets.symmetric(horizontal: (2.00).w),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
+                                  MainAxisAlignment.spaceEvenly,
                                   children: [
                                     RichText(
                                       text: TextSpan(
@@ -167,28 +167,28 @@ class _single_itemState extends State<single_item> {
                             ),
                             Container(
                               alignment: Alignment.topRight,
-                              height: size.height * 0.070,
-                              width: size.width * 0.4,
+                              height: (7.00).h,
+                              width: (40.00).w,
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
+                                MainAxisAlignment.spaceAround,
                                 children: [
                                   Container(
-                                    width: size.width * 0.100,
-                                    height: size.height * 0.018,
+                                    width: (10.00).w,
+                                    height: (1.800).h,
                                     // decoration: provider.currentTheme ? square_neu_Morphism : square_dark_neu_Morphism,
                                     // ignore: prefer_const_constructors
                                     child: InkWell(
                                       onTap: () {},
                                       child:
-                                          Center(child: Icon(Icons.more_horiz)),
+                                      Center(child: Icon(Icons.more_horiz)),
                                     ),
                                   ),
                                   // IconButton(onPressed: (){}, icon: Icon(Icons.more_horiz_outlined)),
                                   Container(
-                                    width: size.width * 0.190,
-                                    height: size.height * 0.030,
+                                    width: (19.00).w,
+                                    height: (3.00).h,
                                     decoration: provider.currentTheme
                                         ? square_neu_Morphism
                                         : square_dark_neu_Morphism,
@@ -214,441 +214,422 @@ class _single_itemState extends State<single_item> {
             ),
             Container(
               margin: EdgeInsets.symmetric(
-                  horizontal: size.width * 0.035,
-                  vertical: size.height * 0.005),
+                  horizontal: (3.500).w, vertical: (0.5).h),
               child: AutoSizeText(feeds[widget.index].caption),
             ),
             Container(
               // color: Colors.amber,
-              margin: EdgeInsets.all(size.width * 0.020),
+              margin: EdgeInsets.all((2.00).w),
               decoration: provider.currentTheme
                   ? square_neu_Morphism
                   : square_dark_neu_Morphism,
               child: Row(
                 children: [
-                  isVisible == false
+                  share_clicked == false
                       ? Container(
-                          height: size.height * 0.33,
-                          width: size.width * 0.76,
-                          // color: Colors.amber,
-                          margin: EdgeInsets.symmetric(
-                              horizontal: size.width * 0.010),
-                          color: provider.currentTheme
-                              ? light_Scaffold_color
-                              : dark_Scaffold_color,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(10),
-                            child: Image.asset(
-                              feeds[widget.index].image,
-                              fit: BoxFit.cover,
-                            ),
-                          ))
-                      : Container(
-                          height: size.height * 0.33,
-                          width: size.width * 0.76,
-                          margin: EdgeInsets.symmetric(
-                              horizontal: size.width * 0.010),
-                          // decoration: BoxDecoration(
-                          //   image: DecorationImage(
-                          //       image: AssetImage(
-                          //         "asset/images/user_post.png",
-                          //       ),
-                          //       fit: BoxFit.cover),
-                          // ),
-                          child: Stack(
-                            children: [
-                              BlurHash(hash: "LXE]Hd|I\$f]C=dxISkr;67KRNsAV"),
-                              Container(
-                                height: size.height * 0.30,
-                                width: size.width * 0.70,
-                                margin: EdgeInsets.symmetric(
-                                    horizontal: size.width * 0.010),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10)),
-                                child: SingleChildScrollView(
-                                  scrollDirection: Axis.vertical,
-                                  child: Column(children: [
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: [
-                                        AutoSizeText(
-                                          "Share",
-                                          softWrap: true,
-                                          style: TextStyle(
-                                              fontSize: 17,
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.bold),
-                                        )
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: size.height * 0.020,
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        //1
-                                        Container(
-                                          width: size.width * 0.140,
-                                          height: size.height * 0.090,
-                                          decoration: BoxDecoration(
-                                            color:
-                                                Colors.white.withOpacity(0.2),
-                                          ),
-                                          child: InkWell(
-                                            onTap: () {},
-                                            child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  SvgPicture.asset(
-                                                    'asset/share_icons/Everyone.svg',
-                                                    fit: BoxFit.cover,
-                                                    width: size.width * 0.120,
-                                                    height: size.height * 0.050,
-                                                  ),
-                                                  // Image.asset(
-                                                  //   "asset/share_icons/everyone.png",
-                                                  //   fit: BoxFit.cover,
-                                                  //   width: 20,
-                                                  //   height: 20,
-                                                  // ),
-                                                  Container(
-                                                    alignment: Alignment.center,
-                                                    child: const AutoSizeText(
-                                                      "Everyone",
-                                                      softWrap: true,
-                                                      wrapWords: true,
-                                                      style: TextStyle(
-                                                        fontSize: 12,
-                                                        color: Colors.white,
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ]),
-                                          ),
-                                        ),
-                                        //2
-                                        Container(
-                                          alignment: Alignment.center,
-                                          width: size.width * 0.140,
-                                          height: size.height * 0.090,
-                                          decoration: BoxDecoration(
-                                            color:
-                                                Colors.white.withOpacity(0.2),
-                                          ),
-                                          child: InkWell(
-                                            onTap: () {},
-                                            child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  SvgPicture.asset(
-                                                    'asset/share_icons/only_with.svg',
-                                                    fit: BoxFit.cover,
-                                                    width: size.width * 0.140,
-                                                    height: size.height * 0.050,
-                                                  ),
-                                                  // Image.asset(
-                                                  //   "asset/share_icons/onlyWith.png",
-                                                  //   fit: BoxFit.cover,
-                                                  // ),
-                                                  Container(
-                                                    alignment: Alignment.center,
-                                                    child: AutoSizeText(
-                                                      "Only with",
-                                                      softWrap: true,
-                                                      wrapWords: true,
-                                                      style: TextStyle(
-                                                          fontSize: 12,
-                                                          color: Colors.white,
-                                                          fontWeight:
-                                                              FontWeight.bold),
-                                                    ),
-                                                  ),
-                                                ]),
-                                          ),
-                                        ),
-                                        //3
-                                        Container(
-                                          width: size.width * 0.140,
-                                          height: size.height * 0.090,
-                                          decoration: BoxDecoration(
-                                            color:
-                                                Colors.white.withOpacity(0.2),
-                                          ),
-                                          child: InkWell(
-                                            onTap: () {},
-                                            child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  SvgPicture.asset(
-                                                    "asset/share_icons/hide.svg",
-                                                    fit: BoxFit.cover,
-                                                    width: size.width * 0.140,
-                                                    height: size.height * 0.050,
-                                                  ),
-                                                  // Image.asset(
-                                                  //   "asset/share_icons/hideFrom.png",
-                                                  //   fit: BoxFit.cover,
-                                                  // ),
-                                                  Container(
-                                                    alignment: Alignment.center,
-                                                    child: AutoSizeText(
-                                                      "Hide from",
-                                                      softWrap: true,
-                                                      wrapWords: true,
-                                                      style: TextStyle(
-                                                          fontSize: 12,
-                                                          color: Colors.white,
-                                                          fontWeight:
-                                                              FontWeight.bold),
-                                                    ),
-                                                  ),
-                                                ]),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: size.height * 0.010,
-                                    ),
-
-                                    // 2nd Row
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        //4
-                                        Container(
-                                          width: size.width * 0.140,
-                                          height: size.height * 0.090,
-                                          decoration: BoxDecoration(
-                                            color:
-                                                Colors.white.withOpacity(0.2),
-                                          ),
-                                          child: InkWell(
-                                            onTap: () {},
-                                            child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  SvgPicture.asset(
-                                                    "asset/share_icons/private.svg",
-                                                    fit: BoxFit.cover,
-                                                    width: size.width * 0.140,
-                                                    height: size.height * 0.050,
-                                                  ),
-                                                  // Image.asset(
-                                                  //   "asset/share_icons/private.png",
-                                                  //   fit: BoxFit.cover,
-                                                  // ),
-                                                  Container(
-                                                    alignment: Alignment.center,
-                                                    width: size.width * 0.140,
-                                                    height: size.height * 0.020,
-                                                    child: AutoSizeText(
-                                                      "Private",
-                                                      softWrap: true,
-                                                      wrapWords: true,
-                                                      style: TextStyle(
-                                                          fontSize: 12,
-                                                          color: Colors.white,
-                                                          fontWeight:
-                                                              FontWeight.bold),
-                                                    ),
-                                                  ),
-                                                ]),
-                                          ),
-                                        ),
-                                        //5
-                                        Container(
-                                          width: size.width * 0.140,
-                                          height: size.height * 0.090,
-                                          decoration: BoxDecoration(
-                                            color:
-                                                Colors.white.withOpacity(0.2),
-                                          ),
-                                          child: InkWell(
-                                            onTap: () {},
-                                            child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  SvgPicture.asset(
-                                                    "asset/share_icons/Inbox.svg",
-                                                    fit: BoxFit.cover,
-                                                    width: size.width * 0.140,
-                                                    height: size.height * 0.050,
-                                                  ),
-                                                  // Image.asset(
-                                                  //   "asset/share_icons/inbox.png",
-                                                  //   fit: BoxFit.cover,
-                                                  // ),
-                                                  Container(
-                                                    alignment: Alignment.center,
-                                                    width: size.width * 0.140,
-                                                    height: size.height * 0.020,
-                                                    child: AutoSizeText(
-                                                      "Inbox",
-                                                      softWrap: true,
-                                                      wrapWords: true,
-                                                      style: TextStyle(
-                                                          fontSize: 12,
-                                                          color: Colors.white,
-                                                          fontWeight:
-                                                              FontWeight.bold),
-                                                    ),
-                                                  ),
-                                                ]),
-                                          ),
-                                        ),
-                                        //6
-                                        Container(
-                                          width: size.width * 0.140,
-                                          height: size.height * 0.090,
-                                          decoration: BoxDecoration(
-                                            color:
-                                                Colors.white.withOpacity(0.2),
-                                          ),
-                                          child: InkWell(
-                                            onTap: () {},
-                                            child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  SvgPicture.asset(
-                                                    "asset/share_icons/copy_link.svg",
-                                                    fit: BoxFit.cover,
-                                                    width: size.width * 0.140,
-                                                    height: size.height * 0.050,
-                                                  ),
-                                                  // Image.asset(
-                                                  //   "asset/share_icons/copyLink.png",
-                                                  //   fit: BoxFit.cover,
-                                                  // ),
-                                                  Container(
-                                                    alignment: Alignment.center,
-                                                    width: size.width * 0.140,
-                                                    height: size.height * 0.020,
-                                                    child: AutoSizeText(
-                                                      "Copy with",
-                                                      softWrap: true,
-                                                      wrapWords: true,
-                                                      style: TextStyle(
-                                                          fontSize: 12,
-                                                          color: Colors.white,
-                                                          fontWeight:
-                                                              FontWeight.bold),
-                                                    ),
-                                                  ),
-                                                ]),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: size.height * 0.010,
-                                    ),
-
-                                    // 3rd Row
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        //7
-                                        Container(
-                                          width: size.width * 0.140,
-                                          height: size.height * 0.090,
-                                          decoration: BoxDecoration(
-                                            color:
-                                                Colors.white.withOpacity(0.2),
-                                          ),
-                                          child: InkWell(
-                                            onTap: () {},
-                                            child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  SvgPicture.asset(
-                                                    "asset/share_icons/outside.svg",
-                                                    fit: BoxFit.cover,
-                                                    width: size.width * 0.140,
-                                                    height: size.height * 0.050,
-                                                  ),
-                                                  // Image.asset(
-                                                  //   "asset/share_icons/outside.png",
-                                                  //   fit: BoxFit.cover,
-                                                  // ),
-                                                  Container(
-                                                    alignment: Alignment.center,
-                                                    width: size.width * 0.140,
-                                                    height: size.height * 0.020,
-                                                    child: AutoSizeText(
-                                                      "Outside",
-                                                      softWrap: true,
-                                                      wrapWords: true,
-                                                      style: TextStyle(
-                                                          fontSize: 12,
-                                                          color: Colors.white,
-                                                          fontWeight:
-                                                              FontWeight.bold),
-                                                    ),
-                                                  ),
-                                                ]),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ]),
-                                ),
-                              )
-                            ],
-                          ),
+                      height: (33.00).h,
+                      width: (76.00).w,
+                      // color: Colors.amber,
+                      margin: EdgeInsets.symmetric(horizontal: (1.00).w),
+                      color: provider.currentTheme
+                          ? light_Scaffold_color
+                          : dark_Scaffold_color,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Image.asset(
+                          feeds[widget.index].image,
+                          fit: BoxFit.cover,
                         ),
+                      ))
+                      : Container(
+                    height: (33.00).h,
+                    width: (76.00).w,
+                    margin: EdgeInsets.symmetric(horizontal: (1.00).w),
+                    // decoration: BoxDecoration(
+                    //   image: DecorationImage(
+                    //       image: AssetImage(
+                    //         "asset/images/user_post.png",
+                    //       ),
+                    //       fit: BoxFit.cover),
+                    // ),
+                    child: Stack(
+                      children: [
+                        BlurHash(hash: "LXE]Hd|I\$f]C=dxISkr;67KRNsAV"),
+                        Container(
+                          height: (30.00).h,
+                          width: (70.00).w,
+                          margin:
+                          EdgeInsets.symmetric(horizontal: (1.00).w),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10)),
+                          child: SingleChildScrollView(
+                            scrollDirection: Axis.vertical,
+                            child: Column(children: [
+                              Row(
+                                mainAxisAlignment:
+                                MainAxisAlignment.start,
+                                crossAxisAlignment:
+                                CrossAxisAlignment.center,
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsets.all((1.50).h),
+                                    child: AutoSizeText(
+                                      "Share",
+                                      softWrap: true,
+                                      style: TextStyle(
+                                          fontSize: 17,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                ],
+                              ),
+
+                              // 1st Row
+                              SizedBox(
+                                height: (0.50).h,
+                              ),
+
+                              Padding(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: (3).w),
+                                child: Row(
+                                  mainAxisAlignment:
+                                  MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment:
+                                  CrossAxisAlignment.center,
+                                  children: [
+
+                                    Column(
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        Container(
+                                          width: (14.00).w,
+                                          height: (6.60).h,
+                                          decoration: BoxDecoration(
+                                              color:
+                                              Colors.white.withOpacity(0.2),
+                                              borderRadius: BorderRadius.circular(6)
+                                          ),
+                                          child:  Center(
+                                            child: SvgPicture.asset(
+                                              'asset/share_icons/Everyone.svg',
+                                              width: (6.40).w,
+                                              height: (3.30).h,
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: (0.25).h,
+                                        ),
+                                        const AutoSizeText(
+                                          "Everyone",
+                                          softWrap: true,
+                                          wrapWords: true,
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            color: Colors.white,
+                                            fontWeight:
+                                            FontWeight.bold,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    Column(
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        Container(
+                                          width: (14.00).w,
+                                          height: (6.60).h,
+                                          decoration: BoxDecoration(
+                                              color:
+                                              Colors.white.withOpacity(0.2),
+                                              borderRadius: BorderRadius.circular(6)
+                                          ),
+                                          child:  Center(
+                                            child: SvgPicture.asset(
+                                              'asset/share_icons/only_with.svg',
+                                              width: (6.40).w,
+                                              height: (3.40).h,
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: (0.25).h,
+                                        ),
+                                        const AutoSizeText(
+                                          "Only With",
+                                          softWrap: true,
+                                          wrapWords: true,
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            color: Colors.white,
+                                            fontWeight:
+                                            FontWeight.bold,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    Column(
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        Container(
+                                          width: (14.00).w,
+                                          height: (6.60).h,
+                                          decoration: BoxDecoration(
+                                              color:
+                                              Colors.white.withOpacity(0.2),
+                                              borderRadius: BorderRadius.circular(6)
+                                          ),
+                                          child:  Center(
+                                            child: SvgPicture.asset(
+                                              "asset/share_icons/hide.svg",
+                                              width: (6.40).w,
+                                              height: (3.30).h,
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: (0.25).h,
+                                        ),
+                                        const AutoSizeText(
+                                          "Hide From",
+                                          softWrap: true,
+                                          wrapWords: true,
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            color: Colors.white,
+                                            fontWeight:
+                                            FontWeight.bold,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+
+                              SizedBox(
+                                height: (1.00).h,
+                              ),
+                              // 2nd Row
+                              Padding(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: (3).w),
+                                child: Row(
+                                  mainAxisAlignment:
+                                  MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment:
+                                  CrossAxisAlignment.center,
+                                  children: [
+
+                                    Column(
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        Container(
+                                          width: (14.00).w,
+                                          height: (6.60).h,
+                                          decoration: BoxDecoration(
+                                              color:
+                                              Colors.white.withOpacity(0.2),
+                                              borderRadius: BorderRadius.circular(6)
+                                          ),
+                                          child:  Center(
+                                            child: SvgPicture.asset(
+                                              "asset/share_icons/private.svg",
+                                              width: (6.40).w,
+                                              height: (3.30).h,
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: (0.25).h,
+                                        ),
+                                        const AutoSizeText(
+                                          "Private",
+                                          softWrap: true,
+                                          wrapWords: true,
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            color: Colors.white,
+                                            fontWeight:
+                                            FontWeight.bold,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    Column(
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        Container(
+                                          width: (14.00).w,
+                                          height: (6.60).h,
+                                          decoration: BoxDecoration(
+                                              color:
+                                              Colors.white.withOpacity(0.2),
+                                              borderRadius: BorderRadius.circular(6)
+                                          ),
+                                          child:  Center(
+                                            child: SvgPicture.asset(
+                                              "asset/share_icons/Inbox.svg",
+                                              width: (6.40).w,
+                                              height: (3.30).h,
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: (0.25).h,
+                                        ),
+                                        const AutoSizeText(
+                                          "Inbox",
+                                          softWrap: true,
+                                          wrapWords: true,
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            color: Colors.white,
+                                            fontWeight:
+                                            FontWeight.bold,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    Column(
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        Container(
+                                          width: (14.00).w,
+                                          height: (6.60).h,
+                                          decoration: BoxDecoration(
+                                              color:
+                                              Colors.white.withOpacity(0.2),
+                                              borderRadius: BorderRadius.circular(6)
+                                          ),
+                                          child:  Center(
+                                            child: SvgPicture.asset(
+                                              "asset/share_icons/copy_link.svg",
+                                              width: (6.40).w,
+                                              height: (3.30).h,
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: (0.25).h,
+                                        ),
+                                        const AutoSizeText(
+                                          "Copy With",
+                                          softWrap: true,
+                                          wrapWords: true,
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            color: Colors.white,
+                                            fontWeight:
+                                            FontWeight.bold,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+
+                              SizedBox(
+                                height: (1.00).h,
+                              ),
+                              // 3rd Row
+                              Padding(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: (3).w),
+                                child: Row(
+                                  mainAxisAlignment:
+                                  MainAxisAlignment.center,
+                                  crossAxisAlignment:
+                                  CrossAxisAlignment.center,
+                                  children: [
+                                    Column(
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        Container(
+                                          width: (14.00).w,
+                                          height: (6.60).h,
+                                          decoration: BoxDecoration(
+                                              color:
+                                              Colors.white.withOpacity(0.2),
+                                              borderRadius: BorderRadius.circular(6)
+                                          ),
+                                          child:  Center(
+                                            child: SvgPicture.asset(
+                                              "asset/share_icons/outside.svg",
+                                              width: (6.40).w,
+                                              height: (3.0).h,
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: (0.25).h,
+                                        ),
+                                        const AutoSizeText(
+                                          "Outside",
+                                          softWrap: true,
+                                          wrapWords: true,
+                                          style: TextStyle(
+                                            fontSize: 12,
+                                            color: Colors.white,
+                                            fontWeight:
+                                            FontWeight.bold,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ]),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
                   SizedBox(
-                    width: size.width * 0.010,
+                    width: (1.00).w,
                   ),
                   Container(
-                    height: size.height * 0.33,
-                    width: size.width * 0.13,
+                    height: (33.00).h,
+                    width: (13.00).w,
                     // color: Colors.amber,
-                    padding: EdgeInsets.only(top: size.height * 0.015),
+                    padding: EdgeInsets.only(top: (1.500).h),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       // mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Container(
-                          width: size.width * 0.080,
-                          height: size.height * 0.080,
+                          width: (8.00).w,
+                          height: (8.00).h,
                           // color: Colors.deepOrange,
                           child: GestureDetector(
                             onTap: () {
+                              liked = !liked ;
+                              setState(() {});
                               print("Star clicked");
                             },
                             child: Column(children: [
                               Image.asset(
-                                "asset/images/highlighted_star_in_post.png",
-                                width: size.width * 0.060,
+                                liked? "asset/images/highlighted_star_in_post.png":"asset/images/un_highlighted_star_in_post.png",
+                                width: (6.00).w,
                               ),
                               AutoSizeText(feeds[widget.index].likesCount),
                             ]),
                           ),
                         ),
                         Container(
-                          width: size.width * 0.080,
-                          height: size.height * 0.080,
+                          width: (8.00).w,
+                          height: (8.00).h,
                           // color: Colors.deepPurple,
                           child: GestureDetector(
                             onTap: () {
@@ -658,72 +639,82 @@ class _single_itemState extends State<single_item> {
                                       : dark_Scaffold_color,
                                   shape: const RoundedRectangleBorder(
                                       borderRadius: BorderRadius.vertical(
-                                    top: Radius.circular(30.0),
-                                  )),
+                                        top: Radius.circular(30.0),
+                                      )),
                                   elevation: 15,
                                   constraints: BoxConstraints.loose(
-                                      Size(size.width, size.height * 0.75)),
+                                      Size((100).w, (75.00).h)),
                                   isScrollControlled: true,
                                   context: context,
                                   // backgroundColor: Colors.transparent,
                                   builder: (BuildContext context) {
-                                    return Container(
-                                      padding: EdgeInsets.only(
-                                        bottom: MediaQuery.of(context)
-                                            .viewInsets
-                                            .bottom,
-                                      ),
-                                      height: size.height * 0.70,
-                                      child: CommentBox(
-                                        // focusNode: myFocusNode,
-                                        userImage: CommentBox.commentImageParser(
-                                            imageURLorPath:
-                                                "asset/images/user_logo.png"),
-                                        labelText: 'Write a comment...',
-                                        errorText: 'Comment cannot be blank',
-                                        withBorder: false,
-                                        sendButtonMethod: () {
-                                          if (formKey.currentState!
-                                              .validate()) {
-                                            print(commentController.text);
-                                            setState(() {
-                                              
-                                              feeds[widget.index]
-                                                  .comments
-                                                  .add(Singlecomment(
-                                                  picture:
-                                                      'asset/images/user_logo.png',
-                                                  name: "vedant",
-                                                  text: commentController.text,
-                                                  datetime: currentDate,
-                                                  reaction: 1));
-                                            });
+                                    return GestureDetector(
+                                      onTap: () {
+                                        FocusScope.of(context).unfocus();
+                                      },
+                                      child: Container(
+                                        padding: EdgeInsets.only(
+                                          bottom: MediaQuery.of(context)
+                                              .viewInsets
+                                              .bottom,
+                                        ),
+                                        height: (70.00).h,
+                                        child: CommentBox(
+                                          focusNode: inputNode,
+                                          userImage: CommentBox.commentImageParser(
+                                              imageURLorPath:
+                                              "asset/images/user_logo.png"),
+                                          labelText: 'Write a comment...',
+                                          errorText: 'Comment cannot be blank',
+                                          withBorder: false,
+                                          sendButtonMethod: () {
+                                            if (formKey.currentState!
+                                                .validate()) {
+                                              print(commentController.text);
+                                              setState(() {
+                                                var value = Singelcomment(
+                                                    picture:
+                                                    'asset/images/user_logo.png',
+                                                    name: 'maharshi',
+                                                    text:
+                                                    commentController.text,
+                                                    datetime: DateTime.now()
+                                                        .toString(),
+                                                    reaction: Reaction.none);
 
-                                            commentController.clear();
-                                            FocusScope.of(context).unfocus();
-                                          } else {
-                                            print("Not validated");
-                                          }
-                                        },
-                                        formKey: formKey,
-                                        commentController: commentController,
-                                        backgroundColor: provider.currentTheme
-                                            ? light_Scaffold_color
-                                            : dark_Scaffold_color,
-                                        textColor: provider.currentTheme
-                                            ? dim_black
-                                            : dim_white,
-                                        sendWidget: Icon(Icons.send_sharp,
-                                            size: 30, color: orange_color),
-                                        child: Container(
-                                          height: MediaQuery.of(context)
-                                              .size
-                                              .height,
-                                          width:
-                                              MediaQuery.of(context).size.width,
-                                          //color: Colors.red,
-                                          child: commentChild(
-                                              feeds[widget.index].comments,context),
+                                                feeds[widget.index]
+                                                    .comments
+                                                    .add(value);
+                                              });
+
+                                              commentController.clear();
+                                              FocusScope.of(context).unfocus();
+                                            } else {
+                                              print("Not validated");
+                                            }
+                                          },
+                                          formKey: formKey,
+                                          commentController: commentController,
+                                          backgroundColor: provider.currentTheme
+                                              ? light_Scaffold_color
+                                              : dark_Scaffold_color,
+                                          textColor: provider.currentTheme
+                                              ? dim_black
+                                              : dim_white,
+                                          sendWidget: Icon(Icons.send_sharp,
+                                              size: 30, color: orange_color),
+                                          child: Container(
+                                            height: (100.00).h,
+                                            width: (100).w,
+                                            //color: Colors.red,
+                                            child: Padding(
+                                              padding: EdgeInsets.only(top: 20),
+                                              child: commentChild(
+                                                  feeds[widget.index].comments,
+                                                  context,
+                                                  inputNode , widget.index),
+                                            ),
+                                          ),
                                         ),
                                       ),
                                     );
@@ -732,7 +723,7 @@ class _single_itemState extends State<single_item> {
                             child: Column(children: [
                               Image.asset(
                                 "asset/images/comment_in_post.png",
-                                width: size.width * 0.060,
+                                width: (6.00).w,
                               ),
                               AutoSizeText(feeds[widget.index]
                                   .comments
@@ -742,21 +733,21 @@ class _single_itemState extends State<single_item> {
                           ),
                         ),
                         Container(
-                          width: size.width * 0.080,
-                          height: size.height * 0.080,
+                          width: (8.00).w,
+                          height: (8.00).h,
                           // color: Colors.deepOrange,
                           child: GestureDetector(
                             onTap: () {
                               setState(() {
-                                isVisible = !isVisible;
+                                share_clicked = !share_clicked;
                               });
 
                               print("Share clicked");
                             },
                             child: Column(children: [
                               Image.asset(
-                                "asset/images/share_in_post.png",
-                                width: size.width * 0.060,
+                                share_clicked ? "asset/images/highlighted_share_in_post.png" : "asset/images/share_in_post.png",
+                                width: (6.00).w,
                               ),
                               AutoSizeText(
                                   feeds[widget.index].sharesCount.toString()),
@@ -764,8 +755,8 @@ class _single_itemState extends State<single_item> {
                           ),
                         ),
                         Container(
-                          width: size.width * 0.060,
-                          height: size.height * 0.040,
+                          width: (6.00).w,
+                          height: (4.00).h,
                           // color: Colors.deepPurple,
                           child: GestureDetector(
                             onTap: () {
@@ -773,7 +764,7 @@ class _single_itemState extends State<single_item> {
                             },
                             child: Image.asset(
                               "asset/images/download_in_post.png",
-                              width: size.width * 0.060,
+                              width: (6.00).w,
                             ),
                           ),
                         ),
@@ -784,8 +775,8 @@ class _single_itemState extends State<single_item> {
               ),
             ),
             Container(
-              width: size.width * 0.935,
-              height: size.height * 0.025,
+              width: (93.5).w,
+              height: (2.500).h,
               // color: Colors.red,
               color: provider.currentTheme
                   ? light_Scaffold_color

@@ -1,16 +1,16 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:badges/badges.dart' as badges;
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:mybindel_test/pagerouter/customPageRouter.dart';
 import 'package:mybindel_test/palette/palette.dart';
 import 'package:mybindel_test/providers/selectTheme.dart';
-import 'package:mybindel_test/screens/create_userPage.dart';
+import 'package:mybindel_test/screens/Home/Music/AddMusicPage_main.dart';
+import 'package:mybindel_test/screens/Home/Post_Enhances/AddEffectPage_main.dart';
 import 'package:mybindel_test/widgets/fieldbutton_widget.dart';
 import 'package:mybindel_test/widgets/postOptions/withoutBadge_postOptions_widget.dart';
 import 'package:provider/provider.dart';
-
-import '../widgets/postOptions/postOptions_widget.dart';
+import 'package:sizer/sizer.dart';
+import '../../widgets/postOptions/postOptions_widget.dart';
 class StoryCreationPage extends StatefulWidget {
   const StoryCreationPage({Key? key}) : super(key: key);
 
@@ -19,7 +19,7 @@ class StoryCreationPage extends StatefulWidget {
 }
 
 class _StoryCreationPageState extends State<StoryCreationPage> {
-  TextEditingController _multipleLine = TextEditingController();
+  final TextEditingController _multipleLine = TextEditingController();
   bool showNotification = false;
   int notification_number = 3;
 
@@ -35,6 +35,71 @@ class _StoryCreationPageState extends State<StoryCreationPage> {
         scrollDirection: Axis.vertical,
         child: Column(children: [
           Container(
+            margin: EdgeInsets.only(
+                top: (4.300).h,
+                left: (3.800).w,
+                right: (3.800).w,
+                bottom: (1.800).h),
+            width: (100).w,
+            height: (6.900).h,
+            // color: Colors.red,
+            color: provider.currentTheme
+                ? light_Scaffold_color
+                : dark_Scaffold_color,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  width: (10.00).w,
+                  height: (4.500).h,
+                  decoration: provider.currentTheme
+                      ? square_neu_Morphism
+                      : square_dark_neu_Morphism,
+                  margin: EdgeInsets.symmetric(
+                    vertical: (1.00).h ,
+                    // horizontal: ().w * 0.040
+                  ),
+                  child: InkWell(
+                    onTap: () {
+                    },
+                    child: Icon(
+                      Icons.menu,
+                      color: provider.currentTheme ? dim_black : dim_white,
+                    ),
+                  ),
+                ),
+                Container(
+                  width: (10.00).w,
+                  height: (5.00).h,
+                  // color: Colors.black,
+                  margin: EdgeInsets.symmetric(
+                      vertical: (1.00).h,
+                      horizontal: (3.00).w),
+                  child: Image.asset("asset/images/logo.png"),
+                ),
+                Container(
+                  width: (14.800).w,
+                  height: (6.400).h ,
+                  padding: EdgeInsets.symmetric(
+                      vertical: (0.6).h ,
+                      horizontal: (1.400).w),
+                  // color: Colors.black,
+                  decoration: provider.currentTheme
+                      ? square_neu_Morphism
+                      : square_dark_neu_Morphism,
+
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(5),
+                    child: Image.asset(
+                      "asset/images/user_logo.png",
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Container(
             padding: EdgeInsets.symmetric(horizontal: size.width * 0.047),
             color: provider.currentTheme
                 ? light_Scaffold_color
@@ -44,7 +109,7 @@ class _StoryCreationPageState extends State<StoryCreationPage> {
             // color: Colors.red,
             child: InkWell(
               onTap: () {
-                print("Back button clicked");
+                Navigator.pop(context);
                 // Navigator.pushAndRemoveUntil(context, custompageroute(child: CreateUser()), (route) => false);
               },
               child: Row(
@@ -54,23 +119,25 @@ class _StoryCreationPageState extends State<StoryCreationPage> {
                       width: size.width * 0.060,
                       height: size.height * 0.030,
                       decoration: provider.currentTheme
-                          ? const BoxDecoration(
-                          color: Color.fromRGBO(240, 240, 240, 1),
-                          boxShadow: [
+                          ?  BoxDecoration(
+                          color: const Color.fromRGBO(240, 240, 240, 1),
+                          borderRadius: BorderRadius.circular(3),
+                          boxShadow: const [
                             BoxShadow(
-                              blurRadius: 2,
-                              offset: Offset(1, 1),
-                              color: Color.fromRGBO(174, 172, 172, 1.0),
+                              blurRadius: 3,
+                              offset: Offset(3, 3),
+                              color: Color.fromRGBO(0, 0, 0, 0.2),
                             ),
                             BoxShadow(
                               blurRadius: 3,
-                              offset: Offset(-3, -4),
+                              offset: Offset(-3, -3),
                               color: Color.fromRGBO(255, 255, 255, 1.0),
                             ),
                           ])
-                          : const BoxDecoration(
-                          color: Color.fromRGBO(25, 25, 25, 1.0),
-                          boxShadow: [
+                          :  BoxDecoration(
+                          color: const Color.fromRGBO(25, 25, 25, 1.0),
+                          borderRadius: BorderRadius.circular(3),
+                          boxShadow: const [
                             BoxShadow(
                               blurRadius: 5,
                               offset: Offset(5, 5),
@@ -89,10 +156,11 @@ class _StoryCreationPageState extends State<StoryCreationPage> {
                             size: 17,
                           ))),
                   SizedBox(
-                    width: size.width * 0.020,
+                    width: size.width * 0.030,
                   ),
                   AutoSizeText(
                     "Back",
+                    textAlign: TextAlign.center,
                     style: TextStyle(
                         color: provider.currentTheme ? dim_black : dim_white,
                         fontFamily: 'Avant',
@@ -163,7 +231,6 @@ class _StoryCreationPageState extends State<StoryCreationPage> {
                     splashColor: orange_color,
                     // highlightColor: Colors.black,
                     onTap: () {
-                      print("cover photo");
                     },
                     child: Container(
                       margin: EdgeInsets.symmetric(
@@ -220,7 +287,9 @@ class _StoryCreationPageState extends State<StoryCreationPage> {
                     child: postOptions(size: size,showNotification: true,notification_number: 3,text: "Tag friends",svg: "asset/post_icons/tag.svg",),
                   ),
                   InkWell(
-                    onTap: (){},
+                    onTap: (){
+                      Navigator.push(context, custompageroute(child: AddMusicPage()));
+                    },
                     child: postOptions(size: size,showNotification: true,notification_number: 3,text: "Add music",svg: "asset/post_icons/add_music.svg",),
                   ),
                   InkWell(
@@ -249,7 +318,7 @@ class _StoryCreationPageState extends State<StoryCreationPage> {
                         showSelectedItems: true,
                         disabledItemFn: (String s) => s.startsWith('I'),
                       ),
-                      items: ["Person 1", "Person 2", "Person 3", "Person 4"],
+                      items: const ["Person 1", "Person 2", "Person 3", "Person 4"],
                       // dropdownButtonProps: DropdownButtonProps(
                       //   style: ButtonStyle()
                       // ),
@@ -278,8 +347,10 @@ class _StoryCreationPageState extends State<StoryCreationPage> {
                     child: postOptionsWithoutBadge(size: size,text: "Add Location", svg: 'asset/post_icons/add_location.svg',),
                   ),
                   InkWell(
-                    onTap: (){},
-                    child: postOptionsWithoutBadge(size: size,text: "Share in Groups", svg: 'asset/post_icons/share_groups.svg',),
+                    onTap: (){
+                      Navigator.push(context, custompageroute(child: AddEffectPage()));
+                    },
+                    child: postOptionsWithoutBadge(size: size,text: "Enhancements", svg: 'asset/post_icons/share_groups.svg',),
                   ),
                   InkWell(
                     onTap: (){},
@@ -294,8 +365,8 @@ class _StoryCreationPageState extends State<StoryCreationPage> {
               ),
             ],
           ),
-          Container(
-              height: size.height * 0.12,
+          SizedBox(
+              height: size.height * 0.10,
               width: size.width,
               // color: Colors.blue,
               ////margin: EdgeInsets.fromLTRB(0,0,0,size.height*0.050),
@@ -308,7 +379,6 @@ class _StoryCreationPageState extends State<StoryCreationPage> {
                     height: size.height * 0.065,
                     width: size.width * 0.90,
                     onpressed: () {
-                      print("Create tapped");
                     }),
               )),
         ]),

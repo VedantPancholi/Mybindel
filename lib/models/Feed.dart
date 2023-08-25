@@ -1,4 +1,4 @@
-import 'package:mybindel_test/models/comment.dart';
+import 'package:mybindel_test/models/Comment.dart';
 
 class Reel {
   String picture;
@@ -10,7 +10,7 @@ class Reel {
   String commentsCount;
   int sharesCount;
   String views;
-  List<Singlecomment> comments;
+  List<Singelcomment> comments;
 
   Reel(
       {

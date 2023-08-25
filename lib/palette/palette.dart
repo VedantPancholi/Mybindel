@@ -125,5 +125,39 @@ BoxDecoration square_dark_neu_Morphism = BoxDecoration(
 
 
 
+BoxDecoration music_listTile_neu_Morphism = BoxDecoration(
+    borderRadius: BorderRadius.circular(5),
+    // theme == Brightness.light?light_Scaffold_color:dark_Scaffold_color
+    color: Color.fromRGBO(240, 240, 240, 1),
+    boxShadow: const [
+      BoxShadow(
+        blurRadius: 1,
+        offset: Offset(1, 1),
+        color: Color.fromRGBO(184, 182, 182, 1.0),
+      ),
+      BoxShadow(
+        blurRadius: 2,
+        offset: Offset(-2, -2),
+        color: Color.fromRGBO(255, 255, 255, 1.0),
+      ),
+    ]);
+
+BoxDecoration music_listTile_dark_neu_Morphism = BoxDecoration(
+    borderRadius: BorderRadius.circular(5),
+    // theme == Brightness.light?light_Scaffold_color:dark_Scaffold_color
+    color: Color.fromRGBO(25, 25, 25, 1.0),
+    boxShadow: const [
+      BoxShadow(
+        blurRadius: 1,
+        offset: Offset(1, 1),
+        color: Color.fromRGBO(18, 18, 18, 1.0),
+      ),
+      BoxShadow(
+        blurRadius: 2,
+        offset: Offset(-2, -2),
+        color: Color.fromRGBO(33, 33, 33, 1.0),
+      ),
+    ]);
+
 
 

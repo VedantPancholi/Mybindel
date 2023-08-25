@@ -19,10 +19,11 @@ import 'package:mybindel_test/providers/selectTheme.dart';
 // import 'package:mybindel_test/screens/welcomePage.dart';
 import 'package:mybindel_test/theme/theme.dart';
 import 'package:provider/provider.dart';
+import 'package:sizer/sizer.dart';
 
 // import 'package:test_mybindel/pageroute/customPageRouter.dart';
 
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
@@ -33,33 +34,47 @@ void main() async{
   await theme.getTheme();
   print("called already");
 
-
   runApp(
-      ChangeNotifierProvider(
-        create: (context) => Themeprovider(),
-        builder: (context , child){
-
-          final provider = Provider.of<Themeprovider>(context);
-          print("Materialapp : ${provider.currentTheme}");
-          return MaterialApp(
-            debugShowCheckedModeBanner: false,
-            themeMode: provider.currentTheme ? ThemeMode.light: ThemeMode.dark, //ThemeMode.system, //
-            theme: MyThemes.lightTheme,
-            darkTheme: MyThemes.darkTheme,
-            home: ChangeNotifierProvider(
-                create: (_) => Navigationprovider(), child:BasePage()),
-          );
-        },
-      ));
-
-  // WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
-  //   try {
-  //     if (Platform.isAndroid) {
-  //       await FlutterWindowManager.addFlags(FlutterWindowManager.FLAG_SECURE);
-  //     }
-  //   } catch (e) {}
-  // });
+      Sizer(builder: (context, orientation, deviceType) {
+        return ChangeNotifierProvider(
+          create: (context) => Themeprovider(),
+          child: MyApp(),
+        );
+      })
+  );
 }
+
+
+class MyApp extends StatefulWidget {
+  const MyApp({super.key});
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+
+  @override
+  Widget build(BuildContext context) {
+    final provider = Provider.of<Themeprovider>(context);
+    print("Materialapp : ${provider.currentTheme}");
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      themeMode: provider.currentTheme
+          ? ThemeMode.light
+          : ThemeMode.dark, //ThemeMode.system, //
+      theme: MyThemes.lightTheme,
+      darkTheme: MyThemes.darkTheme,
+      //home: splash(),
+      home: ChangeNotifierProvider(
+          create: (_) => Navigationprovider(), child: BasePage()),
+    );
+  }
+}
+
+
+
+
 
 class splash extends StatefulWidget {
   @override
@@ -72,7 +87,6 @@ class _splashState extends State<splash> {
     super.initState();
     Timer(Duration(milliseconds: 2500), () {
       openscreen();
-
     });
   }
 
@@ -95,55 +109,53 @@ class _splashState extends State<splash> {
   Widget build(BuildContext context) {
     final provider = Provider.of<Themeprovider>(context);
     // final theme = SchedulerBinding.instance.platformDispatcher.platformBrightness;
-    final size = MediaQuery.of(context).size;
     return Scaffold(
         body: Stack(
-      children: [
-        Container(
-          width: size.width,
-          height: size.height,
-          decoration: BoxDecoration(
-            color:
-                provider.currentTheme ? orange_color : dark_Scaffold_color,
-          ),
-        ),
-        Align(
-          alignment: Alignment.center,
-          child: Container(
-            width: size.width * 0.258,
-            height: size.height * 0.149,
-            // color: Colors.amber,
-            child: provider.currentTheme
-                ? Image.asset('asset/images/splashlogo.png')
-                : Image.asset('asset/images/dark_splashlogo.png'),
-          ),
-        ),
-        Positioned(
-          bottom: size.height * 0.07,
-          right: size.width / 2 - size.width * 0.403 / 2,
-          child: Container(
-            alignment: Alignment.center,
-            padding: EdgeInsets.all(10),
-            width: size.width * 0.403,
-            height: size.height * 0.068,
-            //  color: Colors.amber,
-            child: Text("Mybindle",
-                style: provider.currentTheme
-                    ? TextStyle(
-                        // fontFamily: 'Avant',
+          children: [
+            Container(
+              width: (100).w,
+              height: (100).h,
+              decoration: BoxDecoration(
+                color: provider.currentTheme ? orange_color : dark_Scaffold_color,
+              ),
+            ),
+            Align(
+              alignment: Alignment.center,
+              child: Container(
+                width: (25.8).w,
+                height: (14.9).h,
+                // color: Colors.amber,
+                child: provider.currentTheme
+                    ? Image.asset('asset/images/splashlogo.png')
+                    : Image.asset('asset/images/dark_splashlogo.png'),
+              ),
+            ),
+            Positioned(
+              bottom: (7.00).h,
+              right: (100).w / 2 - (40.3).w / 2,
+              child: Container(
+                alignment: Alignment.center,
+                padding: EdgeInsets.all(10),
+                width: (40.3).w,
+                height: (6.80).h,
+                //  color: Colors.amber,
+                child: Text("Mybindle",
+                    style: provider.currentTheme
+                        ? TextStyle(
+                      // fontFamily: 'Avant',
                         fontWeight: FontWeight.w700,
                         letterSpacing: 1.2,
                         fontSize: 21)
-                    : TextStyle(
-                        // fontFamily: 'Avant',
-                        fontWeight: FontWeight.w700,
-                        letterSpacing: 1.2,
-                        fontSize: 21,
-                        color: orange_color,
-                      )),
-          ),
-        ),
-      ],
-    ));
+                        : TextStyle(
+                      // fontFamily: 'Avant',
+                      fontWeight: FontWeight.w700,
+                      letterSpacing: 1.2,
+                      fontSize: 21,
+                      color: orange_color,
+                    )),
+              ),
+            ),
+          ],
+        ));
   }
 }
