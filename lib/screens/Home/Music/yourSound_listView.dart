@@ -84,7 +84,7 @@ class _YourSoundListViewState extends State<YourSoundListView> {
                             : music_listTile_dark_neu_Morphism,
                         width: 7.w,
                         height: 3.2.h,
-                        child: SvgPicture.asset("asset/music_icons/like_svg.svg",width: 6.w, height: 3.h,),
+                        child: Center(child: SvgPicture.asset("asset/music_icons/like_svg.svg",)),
                       ),
                       Container(
                         margin: EdgeInsets.only(right: 1.w),

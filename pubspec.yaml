@@ -53,6 +53,8 @@ dependencies:
   flutter_blurhash: ^0.7.0
   sizer: ^2.0.15
   flutter_staggered_animations: ^1.1.1
+  azlistview: ^2.0.0
+  readmore: ^2.2.0
 
 dev_dependencies:
   flutter_test:

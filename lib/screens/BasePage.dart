@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:badges/badges.dart' as badges;
 import 'package:mybindel_test/pagerouter/customPageRouter.dart';
+import 'package:mybindel_test/screens/Home/Friends/FriendScreenPage.dart';
 import 'package:mybindel_test/screens/Home/HomePage.dart';
 import 'package:provider/provider.dart';
 import '../../palette/palette.dart';

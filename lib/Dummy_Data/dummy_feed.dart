@@ -1,6 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:mybindel_test/models/feed.dart';
 import '../models/Comment.dart';
-
+import '../models/Location.dart';
 
 class Feeds {
   List<Reel> feeds = [
@@ -17,52 +18,60 @@ class Feeds {
         comments: [
           Singelcomment(
               picture: 'asset/images/user_logo.png',
-              name: 'naresh',
-              text: 'ohh cool!',
+              name: 'chacha_Choudhary',
+              text: 'look amazing',
               datetime: DateTime.now().toString(),
-              reaction: Reaction.none),
+              reaction: Reaction.none,
+              replies: []),
           Singelcomment(
               picture: 'asset/images/user_logo.png',
               name: 'cool_dude69',
               text: 'ohh!',
               datetime: DateTime.now().toString(),
-              reaction: Reaction.none),
+              reaction: Reaction.none,
+              replies: []),
+          Singelcomment(
+              picture: 'asset/images/user_logo.png',
+              name: 'nariyo doffo',
+              text: 'ohh cool!',
+              datetime: DateTime.now().toString(),
+              reaction: Reaction.none,
+              replies: []),
           Singelcomment(
               picture: 'asset/images/user_logo.png',
               name: 'angel_priya',
               text: 'yehh!',
               datetime: DateTime.now().toString(),
-              reaction: Reaction.none),
-          Singelcomment(
-              picture: 'asset/images/user_logo.png',
-              name: 'chacha_Choudhary',
-              text: 'look amazing',
-              datetime: DateTime.now().toString(),
-              reaction: Reaction.none),
+              reaction: Reaction.none,
+              replies: []),
           Singelcomment(
               picture: 'asset/images/user_logo.png',
               name: 'vedant',
               text: 'ohh cool!',
               datetime: DateTime.now().toString(),
-              reaction: Reaction.none),
+              reaction: Reaction.none,
+              replies: []),
           Singelcomment(
               picture: 'asset/images/user_logo.png',
               name: 'raj',
               text: 'ohh!',
               datetime: DateTime.now().toString(),
-              reaction: Reaction.none),
+              reaction: Reaction.none,
+              replies: []),
           Singelcomment(
               picture: 'asset/images/user_logo.png',
               name: 'het',
               text: 'yehh!',
               datetime: DateTime.now().toString(),
-              reaction: Reaction.none),
+              reaction: Reaction.none,
+              replies: []),
           Singelcomment(
               picture: 'asset/images/user_logo.png',
               name: 'parth',
               text: 'look amazing',
               datetime: DateTime.now().toString(),
-              reaction: Reaction.none),
+              reaction: Reaction.none,
+              replies: []),
         ]),
     Reel(
         picture: 'asset/images/user_logo.png',
@@ -80,51 +89,50 @@ class Feeds {
               name: 'naresh',
               text: 'ohh cool!',
               datetime: DateTime.now().toString(),
-              reaction: Reaction.none),
+              reaction: Reaction.none,
+              replies: []),
           Singelcomment(
               picture: 'asset/images/user_logo.png',
               name: 'cool_dude69',
               text: 'ohh!',
               datetime: DateTime.now().toString(),
-              reaction: Reaction.none),
+              reaction: Reaction.none,
+              replies: []),
           Singelcomment(
               picture: 'asset/images/user_logo.png',
               name: 'angel_priya',
               text: 'yehh!',
               datetime: DateTime.now().toString(),
-              reaction: Reaction.none),
+              reaction: Reaction.none,
+              replies: []),
           Singelcomment(
               picture: 'asset/images/user_logo.png',
               name: 'chacha_Choudhary',
               text: 'look amazing',
               datetime: DateTime.now().toString(),
-              reaction: Reaction.none),
+              reaction: Reaction.none,
+              replies: []),
         ]),
   ];
 
   int i = 0;
 
-
   List<Reel> get getfeeds {
     return feeds;
   }
 
-  void changeReaction(reaction , reelIndex , commentIndex){
+  void changeReaction(reaction, reelIndex, commentIndex) {
     feeds[reelIndex].comments[commentIndex].reaction = reaction;
-    print("set called");
-    print(  feeds[reelIndex].comments[commentIndex].reaction);
+    print(feeds[reelIndex].comments[commentIndex].reaction);
   }
 
-  Reaction getReaction(reelIndex , commentIndex){
-    print("get called");
+  Reaction getReaction(reelIndex, commentIndex) {
     //print(  feeds[reelIndex].comments[commentIndex].reaction);
     return feeds[reelIndex].comments[commentIndex].reaction;
   }
-
 }
 
-
 Feeds obj = Feeds();
-Feeds getobj(){
+Feeds getobj() {
   return obj;
 }

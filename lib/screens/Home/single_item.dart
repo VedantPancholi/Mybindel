@@ -12,13 +12,14 @@ import 'package:mybindel_test/models/Comment.dart';
 import 'package:mybindel_test/widgets/CommnetChild_widget.dart';
 import 'package:provider/provider.dart';
 import '../../palette/palette.dart';
+import '../../providers/selectCommentType.dart';
 import '../../providers/selectTheme.dart';
 import 'package:sizer/sizer.dart';
 
 class single_item extends StatefulWidget {
-  int index;
+  int postIndex;
 
-  single_item(this.index);
+  single_item(this.postIndex);
   @override
   State<single_item> createState() => _single_itemState();
 }
@@ -42,7 +43,7 @@ class _single_itemState extends State<single_item> {
   @override
   void dispose() {
     commentController.dispose();
-    object = null;
+    // object = null;
     super.dispose();
   }
 
@@ -87,7 +88,7 @@ class _single_itemState extends State<single_item> {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(5),
                       child: Image.asset(
-                        feeds[widget.index].picture,
+                        feeds[widget.postIndex].picture,
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -136,7 +137,7 @@ class _single_itemState extends State<single_item> {
                                       text: TextSpan(
                                         children: [
                                           TextSpan(
-                                            text: feeds[widget.index].name,
+                                            text: feeds[widget.postIndex].name,
                                             style: TextStyle(
                                                 fontSize: 18,
                                                 color: provider.currentTheme
@@ -155,7 +156,7 @@ class _single_itemState extends State<single_item> {
                                       ),
                                     ),
                                     AutoSizeText(
-                                      feeds[widget.index]
+                                      feeds[widget.postIndex]
                                           .occupation
                                           .toUpperCase(),
                                       style: TextStyle(
@@ -215,7 +216,7 @@ class _single_itemState extends State<single_item> {
             Container(
               margin: EdgeInsets.symmetric(
                   horizontal: (3.500).w, vertical: (0.5).h),
-              child: AutoSizeText(feeds[widget.index].caption),
+              child: AutoSizeText(feeds[widget.postIndex].caption),
             ),
             Container(
               // color: Colors.amber,
@@ -237,7 +238,7 @@ class _single_itemState extends State<single_item> {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(10),
                         child: Image.asset(
-                          feeds[widget.index].image,
+                          feeds[widget.postIndex].image,
                           fit: BoxFit.cover,
                         ),
                       ))
@@ -623,7 +624,7 @@ class _single_itemState extends State<single_item> {
                                 liked? "asset/images/highlighted_star_in_post.png":"asset/images/un_highlighted_star_in_post.png",
                                 width: (6.00).w,
                               ),
-                              AutoSizeText(feeds[widget.index].likesCount),
+                              AutoSizeText(feeds[widget.postIndex].likesCount),
                             ]),
                           ),
                         ),
@@ -648,75 +649,112 @@ class _single_itemState extends State<single_item> {
                                   context: context,
                                   // backgroundColor: Colors.transparent,
                                   builder: (BuildContext context) {
-                                    return GestureDetector(
-                                      onTap: () {
-                                        FocusScope.of(context).unfocus();
-                                      },
-                                      child: Container(
-                                        padding: EdgeInsets.only(
-                                          bottom: MediaQuery.of(context)
-                                              .viewInsets
-                                              .bottom,
-                                        ),
-                                        height: (70.00).h,
-                                        child: CommentBox(
-                                          focusNode: inputNode,
-                                          userImage: CommentBox.commentImageParser(
-                                              imageURLorPath:
-                                              "asset/images/user_logo.png"),
-                                          labelText: 'Write a comment...',
-                                          errorText: 'Comment cannot be blank',
-                                          withBorder: false,
-                                          sendButtonMethod: () {
-                                            if (formKey.currentState!
-                                                .validate()) {
-                                              print(commentController.text);
-                                              setState(() {
-                                                var value = Singelcomment(
-                                                    picture:
-                                                    'asset/images/user_logo.png',
-                                                    name: 'maharshi',
-                                                    text:
-                                                    commentController.text,
-                                                    datetime: DateTime.now()
-                                                        .toString(),
-                                                    reaction: Reaction.none);
-
-                                                feeds[widget.index]
-                                                    .comments
-                                                    .add(value);
-                                              });
-
-                                              commentController.clear();
-                                              FocusScope.of(context).unfocus();
-                                            } else {
-                                              print("Not validated");
-                                            }
+                                    return ChangeNotifierProvider(
+                                      create: (context) =>
+                                          Commenttypeprovider(),
+                                      builder: (context, child) {
+                                        return GestureDetector(
+                                          onTap: () {
+                                            FocusScope.of(context).unfocus();
                                           },
-                                          formKey: formKey,
-                                          commentController: commentController,
-                                          backgroundColor: provider.currentTheme
-                                              ? light_Scaffold_color
-                                              : dark_Scaffold_color,
-                                          textColor: provider.currentTheme
-                                              ? dim_black
-                                              : dim_white,
-                                          sendWidget: Icon(Icons.send_sharp,
-                                              size: 30, color: orange_color),
                                           child: Container(
-                                            height: (100.00).h,
-                                            width: (100).w,
-                                            //color: Colors.red,
-                                            child: Padding(
-                                              padding: EdgeInsets.only(top: 20),
-                                              child: commentChild(
-                                                  feeds[widget.index].comments,
-                                                  context,
-                                                  inputNode , widget.index),
+                                            padding: EdgeInsets.only(
+                                              bottom: MediaQuery.of(context)
+                                                  .viewInsets
+                                                  .bottom,
+                                            ),
+                                            height: (70.00).h,
+                                            child: Consumer(
+                                              builder: (context,
+                                                  Commenttypeprovider
+                                                  commenttypeprovider,
+                                                  child) {
+                                                return CommentBox(
+                                                  focusNode: inputNode,
+                                                  userImage: CommentBox
+                                                      .commentImageParser(
+                                                      imageURLorPath:
+                                                      "asset/images/user_logo.png"),
+                                                  labelText:
+                                                  'Write a comment...',
+                                                  errorText:
+                                                  'Comment cannot be blank',
+                                                  withBorder: false,
+                                                  sendButtonMethod: () {
+                                                    if (formKey.currentState!
+                                                        .validate()) {
+                                                      print(commentController
+                                                          .text);
+                                                      setState(() {
+                                                        var value = Singelcomment(
+                                                            picture:
+                                                            'asset/images/user_logo.png',
+                                                            name: 'Vedant',
+                                                            text:
+                                                            commentController
+                                                                .text,
+                                                            datetime:
+                                                            DateTime.now()
+                                                                .toString(),
+                                                            reaction:
+                                                            Reaction.none,
+                                                            replies: []);
+
+                                                        if (commenttypeprovider.isreply) {
+                                                          String name = "@" + feeds[widget.postIndex].comments[commenttypeprovider.pushIndex].name;
+                                                          value.text = "" + name + " ${value.text}";
+                                                          feeds[widget.postIndex].comments[commenttypeprovider.getPushIndex].replies.add(value);
+                                                          print(  feeds[widget.postIndex].comments[commenttypeprovider.getPushIndex].replies[0]);
+                                                          commenttypeprovider.changecommentType = false;
+                                                        } else {
+                                                          feeds[widget.postIndex].comments.add(value);
+                                                        }
+                                                      });
+
+                                                      commentController.clear();
+                                                      FocusScope.of(context)
+                                                          .unfocus();
+                                                    } else {
+                                                      print("Not validated");
+                                                    }
+                                                  },
+                                                  formKey: formKey,
+                                                  commentController:
+                                                  commentController,
+                                                  backgroundColor:
+                                                  provider.currentTheme
+                                                      ? light_Scaffold_color
+                                                      : dark_Scaffold_color,
+                                                  textColor:
+                                                  provider.currentTheme
+                                                      ? dim_black
+                                                      : dim_white,
+                                                  sendWidget: Icon(
+                                                      Icons.send_sharp,
+                                                      size: 30,
+                                                      color: orange_color),
+                                                  child: Container(
+                                                    height: (100.00).h,
+                                                    width: (100).w,
+                                                    //color: Colors.red,
+                                                    child: Padding(
+                                                        padding:
+                                                        const EdgeInsets.only(
+                                                            top: 20),
+                                                        child: commentChild(
+                                                            feeds[widget
+                                                                .postIndex]
+                                                                .comments,
+                                                            context,
+                                                            inputNode,
+                                                            widget.postIndex)),
+                                                  ),
+                                                );
+                                              },
                                             ),
                                           ),
-                                        ),
-                                      ),
+                                        );
+                                      },
                                     );
                                   });
                             },
@@ -725,7 +763,7 @@ class _single_itemState extends State<single_item> {
                                 "asset/images/comment_in_post.png",
                                 width: (6.00).w,
                               ),
-                              AutoSizeText(feeds[widget.index]
+                              AutoSizeText(feeds[widget.postIndex]
                                   .comments
                                   .length
                                   .toString()),
@@ -750,7 +788,7 @@ class _single_itemState extends State<single_item> {
                                 width: (6.00).w,
                               ),
                               AutoSizeText(
-                                  feeds[widget.index].sharesCount.toString()),
+                                  feeds[widget.postIndex].sharesCount.toString()),
                             ]),
                           ),
                         ),
@@ -786,7 +824,7 @@ class _single_itemState extends State<single_item> {
                 text: TextSpan(
                   children: [
                     TextSpan(
-                      text: feeds[widget.index].views,
+                      text: feeds[widget.postIndex].views,
                       style: TextStyle(
                         fontSize: 10,
                         color: provider.currentTheme

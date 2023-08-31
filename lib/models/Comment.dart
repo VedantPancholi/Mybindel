@@ -7,12 +7,15 @@ class Singelcomment {
   String text;
   String datetime;
   Reaction reaction;
+  List<Singelcomment> replies;
 
   Singelcomment(
       {required this.picture,
-        required this.name,
-        required this.text,
-        required this.datetime,
-        required this.reaction});
+      required this.name,
+      required this.text,
+      required this.datetime,
+      required this.reaction,
+      required this.replies
+      });
 }
 
