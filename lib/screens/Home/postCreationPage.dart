@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:mybindel_test/pagerouter/customPageRouter.dart';
 import 'package:mybindel_test/palette/palette.dart';
 import 'package:mybindel_test/providers/selectTheme.dart';
+import 'package:mybindel_test/screens/Home/Friends/FriendScreenPage.dart';
+import 'package:mybindel_test/screens/Home/Location/AddLocation_main.dart';
 import 'package:mybindel_test/screens/Home/Post_Enhances/AddEffectPage_main.dart';
 import 'package:mybindel_test/widgets/fieldbutton_widget.dart';
 import 'package:mybindel_test/widgets/postOptions/withoutBadge_postOptions_widget.dart';
@@ -282,7 +284,9 @@ class _postCreationPageState extends State<PostCreationPage> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   InkWell(
-                    onTap: (){},
+                    onTap: (){
+                      Navigator.push(context, custompageroute(child: FriendScreenPage()));
+                    },
                     child: postOptions(size: size,showNotification: true,notification_number: 3,text: "Tag friends",svg: "asset/post_icons/tag.svg",),
                   ),
                   InkWell(
@@ -340,7 +344,9 @@ class _postCreationPageState extends State<PostCreationPage> {
               Column(
                 children: [
                   InkWell(
-                    onTap: (){},
+                    onTap: (){
+                      Navigator.push(context, custompageroute(child: AddLocationPage()));
+                    },
                     child: postOptionsWithoutBadge(size: size,text: "Add Location", svg: 'asset/post_icons/add_location.svg',),
                   ),
                   InkWell(

@@ -31,6 +31,7 @@ class _single_itemState extends State<single_item> {
   // print(dateStr);
   bool liked = false;
   bool share_clicked = false;
+  bool isFollow = false;
   late final object;
 
   @override
@@ -195,12 +196,16 @@ class _single_itemState extends State<single_item> {
                                         : square_dark_neu_Morphism,
                                     // ignore: prefer_const_constructors
                                     child: InkWell(
-                                      onTap: () {},
+                                      onTap: () {
+                                        setState(() {
+                                          isFollow = !isFollow;
+                                        });
+                                      },
                                       child: Center(
-                                        child: AutoSizeText("Following",
+                                        child: AutoSizeText(isFollow == true ? "Following" : "Follow",
                                             style: TextStyle(
                                                 fontSize: 15,
-                                                color: orange_color)),
+                                                color: isFollow == true ?  Colors.deepOrange.shade600 : provider.currentTheme ? dim_black : dim_white, fontWeight: FontWeight.w500)),
                                       ),
                                     ),
                                   )

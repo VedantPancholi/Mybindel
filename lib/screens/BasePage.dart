@@ -9,7 +9,7 @@ import '../../palette/palette.dart';
 import '../providers/bottomNavigationProvider.dart';
 import '../providers/selectTheme.dart';
 import 'Home/postCreationPage.dart';
-import 'Home/videoScreenPage.dart';
+import 'Video/videoScreenPage.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:sizer/sizer.dart';
 
