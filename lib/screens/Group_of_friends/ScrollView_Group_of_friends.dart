@@ -3,19 +3,18 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:azlistview/azlistview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:mybindel_test/Dummy_Data/dummy_group_of_friends.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
-
-import 'package:mybindel_test/models/Location.dart';
 import 'package:mybindel_test/palette/palette.dart';
 import 'package:mybindel_test/providers/selectTheme.dart';
 
-import '../../../Dummy_Data/dummy_location.dart';
+import '../../../models/Group_of_friends.dart';
 
-class LocationList extends ISuspensionBean{
+class Group_of_friendsList extends ISuspensionBean{
   final String title;
   final String tag;
-  LocationList({
+  Group_of_friendsList({
     required this.title,
     required this.tag,
   });
@@ -24,22 +23,22 @@ class LocationList extends ISuspensionBean{
   String getSuspensionTag() => tag;
 }
 
-class LocationScrollView extends StatefulWidget {
+class Group_of_friends_Scroll_View extends StatefulWidget {
 
-  final List<Location> items;
+  final List<Group_Of_Friends> items;
 
-  LocationScrollView({
+  Group_of_friends_Scroll_View({
     Key? key,
     required this.items,
   }) : super(key: key);
 
   @override
-  State<LocationScrollView> createState() => _LocationScrollViewState();
+  State<Group_of_friends_Scroll_View> createState() => _Group_of_friends_Scroll_ViewState();
 }
 
-class _LocationScrollViewState extends State<LocationScrollView> {
+class _Group_of_friends_Scroll_ViewState extends State<Group_of_friends_Scroll_View> {
 
-List<LocationList> items_list = [];
+List<Group_of_friendsList> items_list = [];
 bool isSelect = false;
 
 //  late final list; 
@@ -47,8 +46,8 @@ bool isSelect = false;
   void initState() {
     
     
-    // final list = locationsprovider.getItem;
-    this.items_list = widget.items.map((item) => LocationList(title: item.name, tag: item.name[0].toUpperCase())).toList();
+    // final list = Group_of_friendsProvider.getItem;
+    this.items_list = widget.items.map((item) => Group_of_friendsList(title: item.name, tag: item.name[0].toUpperCase())).toList();
     super.initState();
   }
  int currentIndex = 0;
@@ -56,14 +55,15 @@ bool isSelect = false;
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<Themeprovider>(context);
-        final locationprovider = Provider.of<LocationsProvider>(context);
+        final group_of_friendsProvider = Provider.of<Group_of_friendsProvider>(context);
     // final tag = item.getSuspensionTag();
     // final title = item.title;
 print(currentIndex);
 
     return AzListView(
-      // susItemHeight: 20,
+      // susItemHeight: 30,
       data: items_list, 
+      // indexBarHeight: 100.h,
       indexBarItemHeight: 2.h,
       physics: const BouncingScrollPhysics(),
       indexBarMargin: EdgeInsets.symmetric(horizontal: 2.w,vertical: 0),
@@ -128,23 +128,18 @@ print(currentIndex);
                               vertical: (0.8).h, horizontal: (2.2).w),
                           child: _buildHeader(items_list[index].getSuspensionTag()),
                         ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children:  [
-                             AutoSizeText(
-                                items_list[index].title,
-                                style: TextStyle(
-                                    fontSize: 20,
-                                    letterSpacing: 1,
-                                    fontWeight: FontWeight.w500,
-                                    color: provider.currentTheme
-                                        ? dim_black
-                                        : dim_white),
-                              ),
-                              SizedBox(height: 0.5.h,),
-                            AutoSizeText("Usa".toUpperCase(), style: TextStyle(color: orange_color, fontWeight: FontWeight.w500, fontSize: 13),),
-                          ],
+                        Container(
+                          margin: EdgeInsets.only(left: (1.2).w),
+                          child: AutoSizeText(
+                             items_list[index].title,
+                             style: TextStyle(
+                                 fontSize: 19,
+                                 letterSpacing: 1,
+                                 fontWeight: FontWeight.w400,
+                                 color: provider.currentTheme
+                                     ? dim_black
+                                     : dim_white),
+                           ),
                         ),
                       ],
                     ),

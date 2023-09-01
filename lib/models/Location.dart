@@ -1,5 +1,3 @@
-
-
 class Location{
   String name;
   String picture;

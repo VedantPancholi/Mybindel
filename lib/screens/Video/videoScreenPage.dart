@@ -51,7 +51,7 @@ class _VideoScreenPageState extends State<VideoScreenPage> {
                         // controller: _find,
                         decoration: InputDecoration(
                             border: InputBorder.none,
-                            hintText: "Hey John,Whats's Shakin?",
+                            hintText: "Search Videos",
                             hintStyle: TextStyle(
                               fontSize: 15,
                               color:
@@ -78,7 +78,7 @@ class _VideoScreenPageState extends State<VideoScreenPage> {
                             // Navigator.push(context, custompageroute(child: StoryCreationPage()));
                           },
                           icon: Icon(
-                            Icons.timelapse,
+                            Icons.access_time_sharp,
                             color: orange_color,
                             size: 25,
                           )),

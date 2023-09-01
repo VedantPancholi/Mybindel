@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:mybindel_test/pagerouter/customPageRouter.dart';
 import 'package:mybindel_test/palette/palette.dart';
 import 'package:mybindel_test/providers/selectTheme.dart';
+import 'package:mybindel_test/screens/Group_of_friends/Group_of_Friends_main.dart';
 import 'package:mybindel_test/screens/Home/Friends/FriendScreenPage.dart';
 import 'package:mybindel_test/screens/Home/Location/AddLocation_main.dart';
 import 'package:mybindel_test/screens/Home/Post_Enhances/AddEffectPage_main.dart';
@@ -291,7 +292,7 @@ class _postCreationPageState extends State<PostCreationPage> {
                   ),
                   InkWell(
                     onTap: (){},
-                    child: postOptions(size: size,showNotification: true,notification_number: 3,text: "Share in  Pages",svg: "asset/post_icons/share_page.svg",),
+                    child: postOptions(size: size,showNotification: true,notification_number: 3,text: "Share in Pages",svg: "asset/post_icons/share_page.svg",),
                   ),
                   InkWell(
                     onTap: (){},
@@ -350,7 +351,9 @@ class _postCreationPageState extends State<PostCreationPage> {
                     child: postOptionsWithoutBadge(size: size,text: "Add Location", svg: 'asset/post_icons/add_location.svg',),
                   ),
                   InkWell(
-                    onTap: (){},
+                    onTap: (){
+                      // Navigator.push(context, custompageroute(child: const Group_Of_FriendsPage()));
+                    },
                     child: postOptionsWithoutBadge(size: size,text: "Share in Groups", svg: 'asset/post_icons/share_groups.svg',),
                   ),
                   InkWell(
