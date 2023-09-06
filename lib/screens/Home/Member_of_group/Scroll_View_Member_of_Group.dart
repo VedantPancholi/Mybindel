@@ -2,19 +2,18 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:azlistview/azlistview.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:mybindel_test/Dummy_Data/dummy_group_of_friends.dart';
+import 'package:mybindel_test/Dummy_Data/dummy_Member_of_Group.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
+
+import 'package:mybindel_test/models/Member_of_Group.dart';
 import 'package:mybindel_test/palette/palette.dart';
 import 'package:mybindel_test/providers/selectTheme.dart';
 
-import '../../../models/Group_of_friends.dart';
-
-class Group_of_friendsList extends ISuspensionBean{
+class Member_of_GroupsList extends ISuspensionBean{
   final String title;
   final String tag;
-  Group_of_friendsList({
+  Member_of_GroupsList({
     required this.title,
     required this.tag,
   });
@@ -23,31 +22,30 @@ class Group_of_friendsList extends ISuspensionBean{
   String getSuspensionTag() => tag;
 }
 
-class Group_of_friends_Scroll_View extends StatefulWidget {
+class Member_of_Groups_ScrollView extends StatefulWidget {
 
-  final List<Group_Of_Friends> items;
+  final List<String> items;
 
-  Group_of_friends_Scroll_View({
+  Member_of_Groups_ScrollView({
     Key? key,
     required this.items,
   }) : super(key: key);
 
   @override
-  State<Group_of_friends_Scroll_View> createState() => _Group_of_friends_Scroll_ViewState();
+  State<Member_of_Groups_ScrollView> createState() => _Member_of_Groups_ScrollViewState();
 }
 
-class _Group_of_friends_Scroll_ViewState extends State<Group_of_friends_Scroll_View> {
+class _Member_of_Groups_ScrollViewState extends State<Member_of_Groups_ScrollView> {
 
-List<Group_of_friendsList> items_list = [];
+List<Member_of_GroupsList> items_list = [];
 bool isSelect = false;
 
 //  late final list; 
   @override
   void initState() {
     
-    
-    // final list = Group_of_friendsProvider.getItem;
-    this.items_list = widget.items.map((item) => Group_of_friendsList(title: item.name, tag: item.name[0].toUpperCase())).toList();
+    // final list = Member_of_GroupsProvider.getItem;
+    this.items_list = widget.items.map((item) => Member_of_GroupsList(title: item, tag: item[0].toUpperCase())).toList();
     super.initState();
   }
  int currentIndex = 0;
@@ -55,15 +53,14 @@ bool isSelect = false;
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<Themeprovider>(context);
-        final group_of_friendsProvider = Provider.of<Group_of_friendsProvider>(context);
+        final member_of_GroupsProvider = Provider.of<Member_of_GroupsProvider>(context);
     // final tag = item.getSuspensionTag();
     // final title = item.title;
 print(currentIndex);
 
     return AzListView(
-      // susItemHeight: 30,
+      // susItemHeight: 20,
       data: items_list, 
-      // indexBarHeight: 100.h,
       indexBarItemHeight: 2.h,
       physics: const BouncingScrollPhysics(),
       indexBarMargin: EdgeInsets.symmetric(horizontal: 2.w,vertical: 0),
@@ -109,14 +106,19 @@ print(currentIndex);
       width: (80).w,
       margin: EdgeInsets.only(right: 12.w, bottom: 1.2.h, top: 0.5.h, left: 1.4.w),
       alignment: Alignment.centerLeft,
-      decoration: provider.currentTheme ? currentIndex == index ? selected_square_neu_Morphism : square_neu_Morphism : square_dark_neu_Morphism,
+      decoration: provider.currentTheme ? square_neu_Morphism : square_dark_neu_Morphism,
       child: InkWell(
         onTap: (){
-          print("onTap");
-          currentIndex = index;
-          setState(() {
+           if(!member_of_GroupsProvider.getItem.any((element) => element.name == items_list[index].title))
+            {
+              var value = Member_of_Group(name: items_list[index].title, picture: 'asset/music_icons/music_bg.png');
+              member_of_GroupsProvider.addItem(value);
+            }
+          // print("onTap");
+          // currentIndex = index;
+          // setState(() {
             
-          });
+          // });
         },
         child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -128,18 +130,37 @@ print(currentIndex);
                               vertical: (0.8).h, horizontal: (2.2).w),
                           child: _buildHeader(items_list[index].getSuspensionTag()),
                         ),
-                        Container(
-                          margin: EdgeInsets.only(left: (1.2).w),
-                          child: AutoSizeText(
-                             items_list[index].title,
-                             style: TextStyle(
-                                 fontSize: 19,
-                                 letterSpacing: 1,
-                                 fontWeight: FontWeight.w400,
-                                 color: provider.currentTheme
-                                     ? dim_black
-                                     : dim_white),
-                           ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children:  [
+                              RichText(
+                              text: TextSpan(
+                                children: [
+                                  TextSpan(
+                                    text: items_list[index].title,
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        letterSpacing: 1.2,
+                                        fontWeight: FontWeight.w500,
+                                        color: provider.currentTheme
+                                            ? dim_black
+                                            : dim_white),
+                                  ),
+                                  WidgetSpan(
+                                    alignment: PlaceholderAlignment.top,
+                                    child: Container(
+                                      width: 4.2.w,
+                                      height: 2.0.h,
+                                      alignment: Alignment.topCenter,
+                                      margin: EdgeInsets.only(bottom: 0.5.h, left: 1.2.w),
+                                      child: Image.asset("asset/images/check.png")),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            AutoSizeText("Artist".toUpperCase(), style: TextStyle(color: orange_color, fontWeight: FontWeight.w500, fontSize: 13),),
+                          ],
                         ),
                       ],
                     ),

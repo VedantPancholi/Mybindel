@@ -203,17 +203,16 @@ class _FriendScreenPageState extends State<FriendScreenPage> {
               // onClickedIem : (item){},
               items: const [
                 'Aiden', 'Alice', 'Alex', 'Amelia', 'Andrew', 'Anna',
-            'Benjamin', 'Brooke', 'Brandon', 'Bella', 'Caleb', 'Chloe', 'Christopher', 'Charlotte',
-            'Daniel', 'David', 'Diana', 'Dylan', 'Emily', 'Ethan', 'Elizabeth', 'Ella',
-            'Finn', 'Fiona', 'Faith', 'Gabriel', 'Grace', 'Gavin', 'Hannah', 'Henry', 'Haley',
-            'Isaac', 'Isabella', 'Ivy', 'Ian', 'Jackson', 'Julia', 'Jacob', 'James',
-            'Kevin', 'Kayla', 'Kyle', 'Katherine', 'Liam', 'Lily', 'Lucas', 'Leah',
-            'Mason', 'Mia', 'Michael', 'Madison', 'Noah', 'Natalie', 'Nathan', 'Olivia',
-            'Owen', 'Sophia', 'Samuel', 'Samantha', 'Thomas', 'Taylor', 'Tyler',
-            'Victoria', 'Violet', 'Vincent', 'Valerie', 'William', 'Willow', 'Wyatt',
-            'Xavier', 'Ximena', 'Xander',
-            'Yasmine', 'Yvonne', 'Yara',
-            'Zachary', 'Zoe', 'Zane', 'Zara'
+                'Benjamin', 'Brooke', 'Brandon', 'Bella', 'Caleb', 'Chloe', 'Christopher', 'Charlotte','Daniel', 'David', 'Diana', 'Dylan', 'Emily', 'Ethan', 'Elizabeth', 'Ella',
+                'Finn', 'Fiona', 'Faith', 'Gabriel', 'Grace', 'Gavin', 'Hannah', 'Henry', 'Haley',
+                'Isaac', 'Isabella', 'Ivy', 'Ian', 'Jackson', 'Julia', 'Jacob', 'James',
+                'Kevin', 'Kayla', 'Kyle', 'Katherine', 'Liam', 'Lily', 'Lucas', 'Leah',
+                'Mason', 'Mia', 'Michael', 'Madison', 'Noah', 'Natalie', 'Nathan', 'Olivia',
+                'Owen', 'Sophia', 'Samuel', 'Samantha', 'Thomas', 'Taylor', 'Tyler',
+                'Victoria', 'Violet', 'Vincent', 'Valerie', 'William', 'Willow', 'Wyatt',
+                'Xavier', 'Ximena', 'Xander',
+                'Yasmine', 'Yvonne', 'Yara',
+                'Zachary', 'Zoe', 'Zane', 'Zara'
               ],
             ),
           )

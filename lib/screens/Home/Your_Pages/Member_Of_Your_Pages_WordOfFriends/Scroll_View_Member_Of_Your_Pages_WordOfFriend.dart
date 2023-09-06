@@ -2,20 +2,17 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:azlistview/azlistview.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:mybindel_test/Dummy_Data/dummy_member_of_your_pages_wordoffriends.dart';
+import 'package:mybindel_test/models/Member_Of_Your_Pages_WordOfFriends.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
-
-import 'package:mybindel_test/models/Location.dart';
 import 'package:mybindel_test/palette/palette.dart';
 import 'package:mybindel_test/providers/selectTheme.dart';
 
-import '../../../Dummy_Data/dummy_location.dart';
-
-class LocationList extends ISuspensionBean{
+class Member_Of_Your_Pages_WordOfFriendList extends ISuspensionBean{
   final String title;
   final String tag;
-  LocationList({
+  Member_Of_Your_Pages_WordOfFriendList({
     required this.title,
     required this.tag,
   });
@@ -24,30 +21,30 @@ class LocationList extends ISuspensionBean{
   String getSuspensionTag() => tag;
 }
 
-class LocationScrollView extends StatefulWidget {
+class Member_Of_Your_Pages_WordOfFriend_Scoll_View extends StatefulWidget {
 
-  final List<Location> items;
+  final List<String> items;
 
-  LocationScrollView({
+  Member_Of_Your_Pages_WordOfFriend_Scoll_View({
     Key? key,
     required this.items,
   }) : super(key: key);
 
   @override
-  State<LocationScrollView> createState() => _LocationScrollViewState();
+  State<Member_Of_Your_Pages_WordOfFriend_Scoll_View> createState() => _Member_Of_Your_Pages_WordOfFriend_Scoll_ViewState();
 }
 
-class _LocationScrollViewState extends State<LocationScrollView> {
+class _Member_Of_Your_Pages_WordOfFriend_Scoll_ViewState extends State<Member_Of_Your_Pages_WordOfFriend_Scoll_View> {
 
-List<LocationList> items_list = [];
+List<Member_Of_Your_Pages_WordOfFriendList> items_list = [];
 bool isSelect = false;
 
 //  late final list; 
   @override
   void initState() {
     
-    // final list = locationsprovider.getItem;
-    this.items_list = widget.items.map((item) => LocationList(title: item.name, tag: item.name[0].toUpperCase())).toList();
+    // final list = Member_Of_Your_Pages_WordOfFriendsProvider.getItem;
+    this.items_list = widget.items.map((item) => Member_Of_Your_Pages_WordOfFriendList(title: item, tag: item[0].toUpperCase())).toList();
     super.initState();
   }
  int currentIndex = 0;
@@ -55,7 +52,7 @@ bool isSelect = false;
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<Themeprovider>(context);
-        final locationprovider = Provider.of<LocationsProvider>(context);
+        final member_Of_Your_Pages_WordOfFriendsProvider = Provider.of<Member_Of_Your_Pages_WordOfFriendsProvider>(context);
     // final tag = item.getSuspensionTag();
     // final title = item.title;
 print(currentIndex);
@@ -108,14 +105,19 @@ print(currentIndex);
       width: (80).w,
       margin: EdgeInsets.only(right: 12.w, bottom: 1.2.h, top: 0.5.h, left: 1.4.w),
       alignment: Alignment.centerLeft,
-      decoration: provider.currentTheme ? currentIndex == index ? selected_square_neu_Morphism : square_neu_Morphism : square_dark_neu_Morphism,
+      decoration: provider.currentTheme ? square_neu_Morphism : square_dark_neu_Morphism,
       child: InkWell(
         onTap: (){
-          print("onTap");
-          currentIndex = index;
-          setState(() {
+           if(!member_Of_Your_Pages_WordOfFriendsProvider.getItem.any((element) => element.name == items_list[index].title))
+            {
+              var value = Member_Of_Your_Pages_WordOfFriend(name: items_list[index].title, picture: 'asset/music_icons/music_bg.png');
+              member_Of_Your_Pages_WordOfFriendsProvider.addItem(value);
+            }
+          // print("onTap");
+          // currentIndex = index;
+          // setState(() {
             
-          });
+          // });
         },
         child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -131,18 +133,32 @@ print(currentIndex);
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children:  [
-                             AutoSizeText(
-                                items_list[index].title,
-                                style: TextStyle(
-                                    fontSize: 20,
-                                    letterSpacing: 1,
-                                    fontWeight: FontWeight.w500,
-                                    color: provider.currentTheme
-                                        ? dim_black
-                                        : dim_white),
+                              RichText(
+                              text: TextSpan(
+                                children: [
+                                  TextSpan(
+                                    text: items_list[index].title,
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        letterSpacing: 1.2,
+                                        fontWeight: FontWeight.w500,
+                                        color: provider.currentTheme
+                                            ? dim_black
+                                            : dim_white),
+                                  ),
+                                  WidgetSpan(
+                                    alignment: PlaceholderAlignment.top,
+                                    child: Container(
+                                      width: 4.2.w,
+                                      height: 2.0.h,
+                                      alignment: Alignment.topCenter,
+                                      margin: EdgeInsets.only(bottom: 0.5.h, left: 1.2.w),
+                                      child: Image.asset("asset/images/check.png")),
+                                  ),
+                                ],
                               ),
-                              SizedBox(height: 0.5.h,),
-                            AutoSizeText("Usa".toUpperCase(), style: TextStyle(color: orange_color, fontWeight: FontWeight.w500, fontSize: 13),),
+                            ),
+                            AutoSizeText("Artist".toUpperCase(), style: TextStyle(color: orange_color, fontWeight: FontWeight.w500, fontSize: 13),),
                           ],
                         ),
                       ],

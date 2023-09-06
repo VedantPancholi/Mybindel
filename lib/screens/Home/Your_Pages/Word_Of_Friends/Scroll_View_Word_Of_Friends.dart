@@ -2,20 +2,18 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:azlistview/azlistview.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:mybindel_test/Dummy_Data/dummy_word_of_friends.dart';
+import 'package:mybindel_test/models/Word_Of_Friends.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
-
-import 'package:mybindel_test/models/Location.dart';
 import 'package:mybindel_test/palette/palette.dart';
 import 'package:mybindel_test/providers/selectTheme.dart';
 
-import '../../../Dummy_Data/dummy_location.dart';
 
-class LocationList extends ISuspensionBean{
+class Word_Of_FriendsList extends ISuspensionBean{
   final String title;
   final String tag;
-  LocationList({
+  Word_Of_FriendsList({
     required this.title,
     required this.tag,
   });
@@ -24,30 +22,30 @@ class LocationList extends ISuspensionBean{
   String getSuspensionTag() => tag;
 }
 
-class LocationScrollView extends StatefulWidget {
+class Word_Of_Friends_ScrollView extends StatefulWidget {
 
-  final List<Location> items;
+  final List<Word_Of_Friends> items;
 
-  LocationScrollView({
+  Word_Of_Friends_ScrollView({
     Key? key,
     required this.items,
   }) : super(key: key);
 
   @override
-  State<LocationScrollView> createState() => _LocationScrollViewState();
+  State<Word_Of_Friends_ScrollView> createState() => _Word_Of_Friends_ScrollViewState();
 }
 
-class _LocationScrollViewState extends State<LocationScrollView> {
+class _Word_Of_Friends_ScrollViewState extends State<Word_Of_Friends_ScrollView> {
 
-List<LocationList> items_list = [];
+List<Word_Of_FriendsList> items_list = [];
 bool isSelect = false;
 
 //  late final list; 
   @override
   void initState() {
     
-    // final list = locationsprovider.getItem;
-    this.items_list = widget.items.map((item) => LocationList(title: item.name, tag: item.name[0].toUpperCase())).toList();
+    // final list = Word_Of_Friendssprovider.getItem;
+    this.items_list = widget.items.map((item) => Word_Of_FriendsList(title: item.name, tag: item.name[0].toUpperCase())).toList();
     super.initState();
   }
  int currentIndex = 0;
@@ -55,7 +53,7 @@ bool isSelect = false;
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<Themeprovider>(context);
-        final locationprovider = Provider.of<LocationsProvider>(context);
+        final word_Of_FriendsProvider = Provider.of<Word_Of_FriendsProvider>(context);
     // final tag = item.getSuspensionTag();
     // final title = item.title;
 print(currentIndex);
@@ -104,17 +102,16 @@ print(currentIndex);
       itemBuilder: (BuildContext context, int index) {
         // return _buildListItem(items_list[index], index, currentIndex);
         return Container(
-      height: (8).h,
+      height: (7.5).h,
       width: (80).w,
-      margin: EdgeInsets.only(right: 12.w, bottom: 1.2.h, top: 0.5.h, left: 1.4.w),
+      margin: EdgeInsets.only(right: 12.w, bottom: 1.2.h, top: 0.5.h, left: 2.4.w),
       alignment: Alignment.centerLeft,
       decoration: provider.currentTheme ? currentIndex == index ? selected_square_neu_Morphism : square_neu_Morphism : square_dark_neu_Morphism,
       child: InkWell(
         onTap: (){
-          print("onTap");
+          print("Tapped : ${index} ");
           currentIndex = index;
           setState(() {
-            
           });
         },
         child: Row(
@@ -127,24 +124,16 @@ print(currentIndex);
                               vertical: (0.8).h, horizontal: (2.2).w),
                           child: _buildHeader(items_list[index].getSuspensionTag()),
                         ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children:  [
-                             AutoSizeText(
-                                items_list[index].title,
-                                style: TextStyle(
-                                    fontSize: 20,
-                                    letterSpacing: 1,
-                                    fontWeight: FontWeight.w500,
-                                    color: provider.currentTheme
-                                        ? dim_black
-                                        : dim_white),
-                              ),
-                              SizedBox(height: 0.5.h,),
-                            AutoSizeText("Usa".toUpperCase(), style: TextStyle(color: orange_color, fontWeight: FontWeight.w500, fontSize: 13),),
-                          ],
-                        ),
+                        AutoSizeText(
+                           items_list[index].title,
+                           style: TextStyle(
+                               fontSize: 20,
+                               letterSpacing: 1,
+                               fontWeight: FontWeight.w500,
+                               color: provider.currentTheme
+                                   ? dim_black
+                                   : dim_white),
+                         ),
                       ],
                     ),
                   ],

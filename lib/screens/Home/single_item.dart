@@ -1,11 +1,13 @@
 import 'dart:ui';
 
+import 'package:focused_menu_custom/focused_menu.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:comment_box/comment/comment.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_blurhash/flutter_blurhash.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:focused_menu_custom/modals.dart';
 import 'package:intl/intl.dart';
 import 'package:mybindel_test/Dummy_Data/dummy_feed.dart';
 import 'package:mybindel_test/models/Comment.dart';
@@ -181,8 +183,59 @@ class _single_itemState extends State<single_item> {
                                     height: (1.800).h,
                                     // decoration: provider.currentTheme ? square_neu_Morphism : square_dark_neu_Morphism,
                                     // ignore: prefer_const_constructors
-                                    child: InkWell(
-                                      onTap: () {},
+                                    child: FocusedMenuHolder(
+                                      onPressed : (){},
+                                      blurSize: 2.0,
+                                      menuItemExtent: 45,
+                                      menuWidth: 50.w,
+                                      menuBoxDecoration: provider.currentTheme ? textFormField_neu_morphism : dark_textFormField_neu_morphism,
+                                      duration: Duration(milliseconds: 100),
+                                      animateMenuItems: true,
+                                      blurBackgroundColor: Colors.black54.withOpacity(0.2),
+                                      bottomOffsetHeight: 100,
+                                      openWithTap: true,
+                                      menuItems: [
+                                        FocusedMenuItem(
+                                          onPressed: (){},
+                                          title: Text("Hide"),
+                                          leadingIcon: Icon(Icons.hide_source_sharp),
+                                        ),
+                                        FocusedMenuItem(
+                                          onPressed: (){},
+                                          title: Text("View Profile"),
+                                          leadingIcon: Icon(Icons.person_outline_rounded),
+                                        ),
+                                        FocusedMenuItem(
+                                          onPressed: (){},
+                                          title: Text("Mute"),
+                                          leadingIcon: Icon(Icons.volume_mute_rounded),
+                                        ),
+                                        FocusedMenuItem(
+                                          onPressed: (){},
+                                          title: Text("Message"),
+                                          leadingIcon: Icon(Icons.message_outlined),
+                                        ),
+                                        FocusedMenuItem(
+                                          onPressed: (){},
+                                          title: Text("UnFriend"),
+                                          leadingIcon: Icon(Icons.cancel_outlined),
+                                        ),
+                                        FocusedMenuItem(
+                                          onPressed: (){},
+                                          title: Text("Block Person"),
+                                          leadingIcon: Icon(Icons.block_sharp),
+                                        ),
+                                        FocusedMenuItem(
+                                          onPressed: (){},
+                                          title: Text("Call"),
+                                          leadingIcon: Icon(Icons.call_outlined),
+                                        ),
+                                        FocusedMenuItem(
+                                          onPressed: (){},
+                                          title: Text("Report"),
+                                          leadingIcon: Icon(Icons.report_problem_outlined),
+                                        ),
+                                      ],
                                       child:
                                       Center(child: Icon(Icons.more_horiz)),
                                     ),
