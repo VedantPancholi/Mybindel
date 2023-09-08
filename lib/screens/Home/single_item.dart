@@ -208,7 +208,7 @@ class _single_itemState extends State<single_item> {
                                         FocusedMenuItem(
                                           onPressed: (){},
                                           title: Text("Mute"),
-                                          leadingIcon: Icon(Icons.volume_mute_rounded),
+                                          leadingIcon: Icon(Icons.volume_mute_outlined),
                                         ),
                                         FocusedMenuItem(
                                           onPressed: (){},

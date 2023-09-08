@@ -18,6 +18,7 @@ class HomePage extends StatelessWidget {
         backgroundColor:
         provider.currentTheme ? light_Scaffold_color : dark_Scaffold_color,
         body: SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
           child: Column(
             children: [
               Container(

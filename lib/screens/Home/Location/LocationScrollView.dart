@@ -55,7 +55,7 @@ bool isSelect = false;
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<Themeprovider>(context);
-        final locationprovider = Provider.of<LocationsProvider>(context);
+    final locationprovider = Provider.of<LocationsProvider>(context);
     // final tag = item.getSuspensionTag();
     // final title = item.title;
 print(currentIndex);

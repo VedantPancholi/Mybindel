@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:mybindel_test/screens/Video/WatchHistory.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
@@ -17,6 +18,9 @@ class VideoScreenPage extends StatefulWidget {
 }
 
 class _VideoScreenPageState extends State<VideoScreenPage> {
+
+  bool onWatchHistory = false;
+
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<Themeprovider>(context);
@@ -25,6 +29,7 @@ class _VideoScreenPageState extends State<VideoScreenPage> {
         backgroundColor:
             provider.currentTheme ? light_Scaffold_color : dark_Scaffold_color,
         body: SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
           child: Column(
             children: [
               Container(
@@ -74,20 +79,25 @@ class _VideoScreenPageState extends State<VideoScreenPage> {
                           : square_dark_neu_Morphism,
                       child: IconButton(
                           onPressed: () {
+                            setState(() {
+                              onWatchHistory = !onWatchHistory;
+                            });
                             // Navigator.push(context, custompageroute(child: StoryCreationPage()));
                           },
                           icon: Icon(
                             Icons.access_time_sharp,
-                            color: orange_color,
+                            color: onWatchHistory == true ? orange_color : Colors.grey.shade800,
                             size: 25,
                           )),
                     )
                   ],
                 ),
               ),
-              ListView.builder(
+              onWatchHistory == true 
+              ? WatchHistory()
+              : ListView.builder(
                   shrinkWrap: true,
-                  physics: BouncingScrollPhysics(),
+                  physics: const BouncingScrollPhysics(),
                   itemCount: 2,
                   itemBuilder: (ctx, index) {
                     print("LISTVIEW...................");
@@ -387,6 +397,7 @@ class Search {
     required this.name,
   });
 }
+
 //  List<String> data = ["Eminem", "Marshall", "Not affraid", "Lose Yourself", "Evil", "Vedant"];
 // List<String> recentSearch = ["Eminem", "Marshall", "Not affraid", "Lose Yourself"];
 
