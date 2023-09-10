@@ -10,7 +10,7 @@ import 'package:mybindel_test/models/Location.dart';
 import 'package:mybindel_test/palette/palette.dart';
 import 'package:mybindel_test/providers/selectTheme.dart';
 
-import '../../../Dummy_Data/dummy_location.dart';
+import '../../../../Dummy_Data/dummy_location.dart';
 
 class LocationList extends ISuspensionBean{
   final String title;

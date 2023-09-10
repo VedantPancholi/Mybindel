@@ -1,26 +1,26 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:mybindel_test/Dummy_Data/dummy_Member_of_Group.dart';
+import 'package:mybindel_test/Dummy_Data/dummy_word_of_friends.dart';
 import 'package:mybindel_test/palette/palette.dart';
 import 'package:mybindel_test/providers/selectTheme.dart';
-import 'package:mybindel_test/screens/Home/Member_of_group/Scroll_View_Member_of_Group.dart';
+import 'package:mybindel_test/screens/Home/Post_Enhances/Your_Pages/Word_Of_Friends/Scroll_View_Word_Of_Friends.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
-class Member_Of_GroupPage extends StatefulWidget {
-  const Member_Of_GroupPage({super.key});
+class Word_Of_friendsPage extends StatefulWidget {
+  const Word_Of_friendsPage({super.key});
 
   @override
-  State<Member_Of_GroupPage> createState() => _Member_Of_GroupPageState();
+  State<Word_Of_friendsPage> createState() => _Word_Of_friendsPageState();
 }
 
-class _Member_Of_GroupPageState extends State<Member_Of_GroupPage> {
+class _Word_Of_friendsPageState extends State<Word_Of_friendsPage> {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<Themeprovider>(context);
     final size = MediaQuery.of(context).size;
     return ChangeNotifierProvider(
-      create: (context) => Member_of_GroupsProvider(),
+      create: (context) => Word_Of_FriendsProvider(),
       child: Scaffold(
           resizeToAvoidBottomInset: false,
           // backgroundColor: provider.currentTheme ? light_Scaffold_color : dark_Scaffold_color,
@@ -102,7 +102,7 @@ class _Member_Of_GroupPageState extends State<Member_Of_GroupPage> {
                   // controller: _find,
                   decoration: InputDecoration(
                       border: InputBorder.none,
-                      hintText: "Search In Groups",
+                      hintText: "Search In Pages",
                       hintStyle: TextStyle(
                         fontSize: 15,
                         color: provider.currentTheme ? dim_black : dim_white,
@@ -113,57 +113,6 @@ class _Member_Of_GroupPageState extends State<Member_Of_GroupPage> {
                   textInputAction: TextInputAction.done,
                 ),
               ),
-
-              Consumer(
-            builder: (context, Member_of_GroupsProvider member_of_GroupsProvider, child) {
-              return Visibility(
-                visible: member_of_GroupsProvider.getItem.length > 0 ? true:false,
-                child: Container(
-                  height: (15).h,
-                  width: (100).w,
-                  child: ListView.builder(
-                    // reverse: true,
-                      scrollDirection: Axis.horizontal,
-                      itemCount: member_of_GroupsProvider.getItem.length,
-                      itemBuilder: (context, index) {
-                        return Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                              margin: EdgeInsets.all((2).w),
-                              height: (8).h,
-                              width: (20).w,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(7),
-                                image: DecorationImage(
-                                    fit: BoxFit.cover,
-                                    image: AssetImage(
-                                      member_of_GroupsProvider.getItem[index].picture,
-                                    )),
-                              ),
-                              child: Center(
-                                child: IconButton(
-                                  onPressed: () {
-                                    member_of_GroupsProvider.removeItem(index);
-                                    print("removed");
-                                  },
-                                  icon: Icon(
-                                    Icons.cancel_outlined,
-                                    color: dim_white ,
-                                    size: 35,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Text( member_of_GroupsProvider.getItem[index].name)
-                          ],
-                        );
-                      }),
-                ),
-              );
-            },
-          ),
-
               Container(
                 padding: EdgeInsets.symmetric(
                     horizontal: size.width * 0.047,
@@ -178,7 +127,7 @@ class _Member_Of_GroupPageState extends State<Member_Of_GroupPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     AutoSizeText(
-                      "Groups",
+                      "Your Pages",
                       style: TextStyle(
                           color: provider.currentTheme ? dim_black : dim_white,
                           fontFamily: 'Avant',
@@ -191,7 +140,7 @@ class _Member_Of_GroupPageState extends State<Member_Of_GroupPage> {
                         Navigator.pop(context);
                       },
                       child: Container(
-                        margin: EdgeInsets.only(right: 2.w),
+                        margin: EdgeInsets.only(right: 3.w),
                         padding: EdgeInsets.symmetric(
                             horizontal: 4.w, vertical: (0.5).h),
                         decoration: provider.currentTheme
@@ -208,21 +157,9 @@ class _Member_Of_GroupPageState extends State<Member_Of_GroupPage> {
               ),
               Expanded(
                 child: Consumer(builder:
-                    (context, Member_of_GroupsProvider member_of_GroupsProvider, child) {
-                  return Member_of_Groups_ScrollView(
-                   items: const [
-                'Aiden', 'Alice', 'Alex', 'Amelia', 'Andrew', 'Anna',
-                'Benjamin', 'Brooke', 'Brandon', 'Bella', 'Caleb', 'Chloe', 'Christopher', 'Charlotte','Daniel', 'David', 'Diana', 'Dylan', 'Emily', 'Ethan', 'Elizabeth', 'Ella',
-                'Finn', 'Fiona', 'Faith', 'Gabriel', 'Grace', 'Gavin', 'Hannah', 'Henry', 'Haley',
-                'Isaac', 'Isabella', 'Ivy', 'Ian', 'Jackson', 'Julia', 'Jacob', 'James',
-                'Kevin', 'Kayla', 'Kyle', 'Katherine', 'Liam', 'Lily', 'Lucas', 'Leah',
-                'Mason', 'Mia', 'Michael', 'Madison', 'Noah', 'Natalie', 'Nathan', 'Olivia',
-                'Owen', 'Sophia', 'Samuel', 'Samantha', 'Thomas', 'Taylor', 'Tyler',
-                'Victoria', 'Violet', 'Vincent', 'Valerie', 'William', 'Willow', 'Wyatt',
-                'Xavier', 'Ximena', 'Xander',
-                'Yasmine', 'Yvonne', 'Yara',
-                'Zachary', 'Zoe', 'Zane', 'Zara'
-              ],
+                    (context, Word_Of_FriendsProvider word_Of_FriendsProvider, child) {
+                  return Word_Of_Friends_ScrollView(
+                    items: word_Of_FriendsProvider.getItem,
                     // onClickedIem : (item){},
                   );
                 }),

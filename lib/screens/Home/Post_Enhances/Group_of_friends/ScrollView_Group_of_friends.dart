@@ -9,7 +9,7 @@ import 'package:sizer/sizer.dart';
 import 'package:mybindel_test/palette/palette.dart';
 import 'package:mybindel_test/providers/selectTheme.dart';
 
-import '../../../../models/Group_of_friends.dart';
+import '../../../../../models/Group_of_friends.dart';
 
 class Group_of_friendsList extends ISuspensionBean{
   final String title;

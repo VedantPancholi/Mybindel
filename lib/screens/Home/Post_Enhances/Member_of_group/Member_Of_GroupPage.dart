@@ -1,27 +1,28 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:mybindel_test/Dummy_Data/dummy_group_of_friends.dart';
+import 'package:mybindel_test/Dummy_Data/dummy_Member_of_Group.dart';
 import 'package:mybindel_test/palette/palette.dart';
 import 'package:mybindel_test/providers/selectTheme.dart';
-import 'package:mybindel_test/screens/Home/Group_of_friends/ScrollView_Group_of_friends.dart';
+import 'package:mybindel_test/screens/Home/Post_Enhances/Member_of_group/Scroll_View_Member_of_Group.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
-class Group_Of_FriendsPage extends StatefulWidget {
-  const Group_Of_FriendsPage({super.key});
+class Member_Of_GroupPage extends StatefulWidget {
+  const Member_Of_GroupPage({super.key});
 
   @override
-  State<Group_Of_FriendsPage> createState() => _Group_Of_FriendsPageState();
+  State<Member_Of_GroupPage> createState() => _Member_Of_GroupPageState();
 }
 
-class _Group_Of_FriendsPageState extends State<Group_Of_FriendsPage> {
+class _Member_Of_GroupPageState extends State<Member_Of_GroupPage> {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<Themeprovider>(context);
     final size = MediaQuery.of(context).size;
     return ChangeNotifierProvider(
-      create: (context) => Group_of_friendsProvider(),
+      create: (context) => Member_of_GroupsProvider(),
       child: Scaffold(
+          resizeToAvoidBottomInset: false,
           // backgroundColor: provider.currentTheme ? light_Scaffold_color : dark_Scaffold_color,
           body: Column(
             children: [
@@ -112,32 +113,80 @@ class _Group_Of_FriendsPageState extends State<Group_Of_FriendsPage> {
                   textInputAction: TextInputAction.done,
                 ),
               ),
-              Row(
-                children: [
-                  Container(
-                    margin: EdgeInsets.only(top: (1.2).h),
-                    padding: EdgeInsets.symmetric(
-                        horizontal: size.width * 0.047,
-                        vertical: size.height * 0.010),
-                    color: provider.currentTheme
-                        ? light_Scaffold_color
-                        : dark_Scaffold_color,
-                    height: size.height * 0.055,
-                    width: size.width,
-                    // color: Colors.amber,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        AutoSizeText(
-                          "Group Of Friends",
-                          style: TextStyle(
-                              color: provider.currentTheme ? dim_black : dim_white,
-                              fontFamily: 'Avant',
-                              fontSize: 20,
-                              letterSpacing: 1,
-                              fontWeight: FontWeight.w700),
-                        ),
-                        InkWell(
+
+              Consumer(
+            builder: (context, Member_of_GroupsProvider member_of_GroupsProvider, child) {
+              return Visibility(
+                visible: member_of_GroupsProvider.getItem.length > 0 ? true:false,
+                child: Container(
+                  height: (15).h,
+                  width: (100).w,
+                  child: ListView.builder(
+                    // reverse: true,
+                      scrollDirection: Axis.horizontal,
+                      itemCount: member_of_GroupsProvider.getItem.length,
+                      itemBuilder: (context, index) {
+                        return Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              margin: EdgeInsets.all((2).w),
+                              height: (8).h,
+                              width: (20).w,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(7),
+                                image: DecorationImage(
+                                    fit: BoxFit.cover,
+                                    image: AssetImage(
+                                      member_of_GroupsProvider.getItem[index].picture,
+                                    )),
+                              ),
+                              child: Center(
+                                child: IconButton(
+                                  onPressed: () {
+                                    member_of_GroupsProvider.removeItem(index);
+                                    print("removed");
+                                  },
+                                  icon: Icon(
+                                    Icons.cancel_outlined,
+                                    color: dim_white ,
+                                    size: 35,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Text( member_of_GroupsProvider.getItem[index].name)
+                          ],
+                        );
+                      }),
+                ),
+              );
+            },
+          ),
+
+              Container(
+                padding: EdgeInsets.symmetric(
+                    horizontal: size.width * 0.047,
+                    vertical: size.height * 0.010),
+                color: provider.currentTheme
+                    ? light_Scaffold_color
+                    : dark_Scaffold_color,
+                height: size.height * 0.050,
+                width: size.width,
+                // color: Colors.amber,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    AutoSizeText(
+                      "Groups",
+                      style: TextStyle(
+                          color: provider.currentTheme ? dim_black : dim_white,
+                          fontFamily: 'Avant',
+                          fontSize: 20,
+                          letterSpacing: 1,
+                          fontWeight: FontWeight.w700),
+                    ),
+                    InkWell(
                       onTap: () {
                         Navigator.pop(context);
                       },
@@ -154,17 +203,26 @@ class _Group_Of_FriendsPageState extends State<Group_Of_FriendsPage> {
                         ),
                       ),
                     ),
-                      ],
-                    ),
-                  ),
-                  
-                ],
+                  ],
+                ),
               ),
               Expanded(
-                child: Consumer(builder: (context,
-                    Group_of_friendsProvider group_of_friendsProvider, child) {
-                  return Group_of_friends_Scroll_View(
-                    items: group_of_friendsProvider.getItem,
+                child: Consumer(builder:
+                    (context, Member_of_GroupsProvider member_of_GroupsProvider, child) {
+                  return Member_of_Groups_ScrollView(
+                   items: const [
+                'Aiden', 'Alice', 'Alex', 'Amelia', 'Andrew', 'Anna',
+                'Benjamin', 'Brooke', 'Brandon', 'Bella', 'Caleb', 'Chloe', 'Christopher', 'Charlotte','Daniel', 'David', 'Diana', 'Dylan', 'Emily', 'Ethan', 'Elizabeth', 'Ella',
+                'Finn', 'Fiona', 'Faith', 'Gabriel', 'Grace', 'Gavin', 'Hannah', 'Henry', 'Haley',
+                'Isaac', 'Isabella', 'Ivy', 'Ian', 'Jackson', 'Julia', 'Jacob', 'James',
+                'Kevin', 'Kayla', 'Kyle', 'Katherine', 'Liam', 'Lily', 'Lucas', 'Leah',
+                'Mason', 'Mia', 'Michael', 'Madison', 'Noah', 'Natalie', 'Nathan', 'Olivia',
+                'Owen', 'Sophia', 'Samuel', 'Samantha', 'Thomas', 'Taylor', 'Tyler',
+                'Victoria', 'Violet', 'Vincent', 'Valerie', 'William', 'Willow', 'Wyatt',
+                'Xavier', 'Ximena', 'Xander',
+                'Yasmine', 'Yvonne', 'Yara',
+                'Zachary', 'Zoe', 'Zane', 'Zara'
+              ],
                     // onClickedIem : (item){},
                   );
                 }),

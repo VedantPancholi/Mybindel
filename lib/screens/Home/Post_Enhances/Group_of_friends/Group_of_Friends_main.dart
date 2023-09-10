@@ -1,31 +1,27 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:mybindel_test/Dummy_Data/dummy_group_of_friends.dart';
 import 'package:mybindel_test/palette/palette.dart';
 import 'package:mybindel_test/providers/selectTheme.dart';
-import 'package:mybindel_test/screens/Home/Friends/AlphabeticScrollView.dart';
-import 'package:mybindel_test/screens/Home/Location/LocationScrollView.dart';
+import 'package:mybindel_test/screens/Home/Post_Enhances/Group_of_friends/ScrollView_Group_of_friends.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../../Dummy_Data/dummy_location.dart';
-
-class AddLocationPage extends StatefulWidget {
-  const AddLocationPage({super.key});
+class Group_Of_FriendsPage extends StatefulWidget {
+  const Group_Of_FriendsPage({super.key});
 
   @override
-  State<AddLocationPage> createState() => _AddLocationPageState();
+  State<Group_Of_FriendsPage> createState() => _Group_Of_FriendsPageState();
 }
 
-class _AddLocationPageState extends State<AddLocationPage> {
+class _Group_Of_FriendsPageState extends State<Group_Of_FriendsPage> {
   @override
   Widget build(BuildContext context) {
-    // final locationsprovider = Provider.of<LocationsProvider>(context);
     final provider = Provider.of<Themeprovider>(context);
     final size = MediaQuery.of(context).size;
     return ChangeNotifierProvider(
-      create: (context) => LocationsProvider(),
+      create: (context) => Group_of_friendsProvider(),
       child: Scaffold(
-          resizeToAvoidBottomInset: false,
           // backgroundColor: provider.currentTheme ? light_Scaffold_color : dark_Scaffold_color,
           body: Column(
             children: [
@@ -105,7 +101,7 @@ class _AddLocationPageState extends State<AddLocationPage> {
                   // controller: _find,
                   decoration: InputDecoration(
                       border: InputBorder.none,
-                      hintText: "Search In Locations",
+                      hintText: "Search In Groups",
                       hintStyle: TextStyle(
                         fontSize: 15,
                         color: provider.currentTheme ? dim_black : dim_white,
@@ -116,83 +112,37 @@ class _AddLocationPageState extends State<AddLocationPage> {
                   textInputAction: TextInputAction.done,
                 ),
               ),
-
-              // Consumer(
-              //   builder: (context, LocationsProvider LocationProvider, child) {
-              //     return Visibility(
-              //       visible: LocationProvider.getItem.length > 0 ? true:false,
-              //       child: Container(
-              //         height: (15).h,
-              //         width: (100).w,
-              //         child: ListView.builder(
-              //             scrollDirection: Axis.horizontal,
-              //             itemCount: LocationProvider.getItem.length,
-              //             itemBuilder: (context, index) {
-              //               return Column(
-              //                 mainAxisAlignment: MainAxisAlignment.center,
-              //                 children: [
-              //                   Container(
-              //                     margin: EdgeInsets.all((2).w),
-              //                     height: (8).h,
-              //                     width: (20).w,
-              //                     decoration: BoxDecoration(
-              //                       borderRadius: BorderRadius.circular(7),
-              //                       image: DecorationImage(
-              //                           fit: BoxFit.cover,
-              //                           image: AssetImage(
-              //                             LocationProvider.getItem[index].picture,
-              //                           )),
-              //                     ),
-              //                     child: Center(
-              //                       child: IconButton(
-              //                         onPressed: () {
-              //                           LocationProvider.removeItem(index);
-              //                           print("removed");
-              //                         },
-              //                         icon: Icon(
-              //                           Icons.cancel_outlined,
-              //                           color: dim_white ,
-              //                           size: 35,
-              //                         ),
-              //                       ),
-              //                     ),
-              //                   ),
-              //                   Text( LocationProvider.getItem[index].name)
-              //                 ],
-              //               );
-              //             }),
-              //       ),
-              //     );
-              //   },
-              // ),
-              Container(
-                padding: EdgeInsets.symmetric(
-                    horizontal: size.width * 0.047,
-                    vertical: size.height * 0.010),
-                color: provider.currentTheme
-                    ? light_Scaffold_color
-                    : dark_Scaffold_color,
-                height: size.height * 0.050,
-                width: size.width,
-                // color: Colors.amber,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    AutoSizeText(
-                      "Locations",
-                      style: TextStyle(
-                          color: provider.currentTheme ? dim_black : dim_white,
-                          fontFamily: 'Avant',
-                          fontSize: 20,
-                          letterSpacing: 1,
-                          fontWeight: FontWeight.w700),
-                    ),
-                    InkWell(
+              Row(
+                children: [
+                  Container(
+                    margin: EdgeInsets.only(top: (1.2).h),
+                    padding: EdgeInsets.symmetric(
+                        horizontal: size.width * 0.047,
+                        vertical: size.height * 0.010),
+                    color: provider.currentTheme
+                        ? light_Scaffold_color
+                        : dark_Scaffold_color,
+                    height: size.height * 0.055,
+                    width: size.width,
+                    // color: Colors.amber,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        AutoSizeText(
+                          "Group Of Friends",
+                          style: TextStyle(
+                              color: provider.currentTheme ? dim_black : dim_white,
+                              fontFamily: 'Avant',
+                              fontSize: 20,
+                              letterSpacing: 1,
+                              fontWeight: FontWeight.w700),
+                        ),
+                        InkWell(
                       onTap: () {
                         Navigator.pop(context);
                       },
                       child: Container(
-                        margin: EdgeInsets.only(right: 3.w),
+                        margin: EdgeInsets.only(right: 2.w),
                         padding: EdgeInsets.symmetric(
                             horizontal: 4.w, vertical: (0.5).h),
                         decoration: provider.currentTheme
@@ -204,14 +154,17 @@ class _AddLocationPageState extends State<AddLocationPage> {
                         ),
                       ),
                     ),
-                  ],
-                ),
+                      ],
+                    ),
+                  ),
+                  
+                ],
               ),
               Expanded(
-                child: Consumer(builder:
-                    (context, LocationsProvider locationsProvider, child) {
-                  return LocationScrollView(
-                    items: locationsProvider.getItem,
+                child: Consumer(builder: (context,
+                    Group_of_friendsProvider group_of_friendsProvider, child) {
+                  return Group_of_friends_Scroll_View(
+                    items: group_of_friendsProvider.getItem,
                     // onClickedIem : (item){},
                   );
                 }),

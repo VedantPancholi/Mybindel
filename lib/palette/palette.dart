@@ -16,7 +16,7 @@ BoxDecoration neu_Morphism = BoxDecoration(
     borderRadius: BorderRadius.circular(15),
     // theme == Brightness.light?light_Scaffold_color:dark_Scaffold_color
     color: Color.fromRGBO(240, 240, 240, 1),
-    boxShadow: [
+    boxShadow: const [
       BoxShadow(
         blurRadius: 5,
         offset: Offset(5, 3),
@@ -33,7 +33,7 @@ BoxDecoration dark_neu_Morphism = BoxDecoration(
     borderRadius: BorderRadius.circular(10),
     // theme == Brightness.light?light_Scaffold_color:dark_Scaffold_color
     color: Color.fromRGBO(25, 25, 25, 1.0),
-    boxShadow: [
+    boxShadow: const [
       BoxShadow(
         blurRadius: 5,
         offset: Offset(5, 7),
@@ -52,7 +52,7 @@ BoxDecoration textFormField_neu_morphism = BoxDecoration(
 
     borderRadius: BorderRadius.circular(10),
     color: Color.fromRGBO(240, 240, 240, 1),
-    boxShadow: [
+    boxShadow: const [
       BoxShadow(
         inset: true,
         blurRadius: 5,
@@ -72,7 +72,7 @@ BoxDecoration textFormField_neu_morphism = BoxDecoration(
 BoxDecoration dark_textFormField_neu_morphism = BoxDecoration(
     borderRadius: BorderRadius.circular(10),
     color: Color.fromRGBO(30, 30, 30, 1.0),
-    boxShadow: [
+    boxShadow: const [
       BoxShadow(
         inset: true,
         blurRadius: 5,
@@ -93,7 +93,7 @@ BoxDecoration square_neu_Morphism = BoxDecoration(
     borderRadius: BorderRadius.circular(5),
     // theme == Brightness.light?light_Scaffold_color:dark_Scaffold_color
     color: Color.fromRGBO(240, 240, 240, 1),
-    boxShadow: [
+    boxShadow: const [
       BoxShadow(
         blurRadius: 2,
         offset: Offset(2, 2),
@@ -110,7 +110,7 @@ BoxDecoration square_dark_neu_Morphism = BoxDecoration(
     borderRadius: BorderRadius.circular(5),
     // theme == Brightness.light?light_Scaffold_color:dark_Scaffold_color
     color: Color.fromRGBO(25, 25, 25, 1.0),
-    boxShadow: [
+    boxShadow: const [
       BoxShadow(
         blurRadius: 5,
         offset: Offset(5, 7),
@@ -188,7 +188,7 @@ BoxDecoration selected_square_dark_neu_Morphism = BoxDecoration(
       color: const Color.fromRGBO(255, 83, 73, 1.0),
       width: 2,
     ),
-    boxShadow: [
+    boxShadow: const [
       BoxShadow(
         blurRadius: 5,
         offset: Offset(5, 7),
@@ -205,7 +205,7 @@ BoxDecoration selected_square_dark_neu_Morphism = BoxDecoration(
 BoxDecoration story_square_neu_Morphism = BoxDecoration(
     borderRadius: BorderRadius.circular(5),
     color: Color.fromRGBO(240, 240, 240, 1),
-    boxShadow: [
+    boxShadow: const [
       BoxShadow(
         blurRadius: 5,
         offset: Offset(2, 2),
@@ -221,7 +221,41 @@ BoxDecoration story_square_neu_Morphism = BoxDecoration(
 BoxDecoration story_square_dark_neu_Morphism = BoxDecoration(
     borderRadius: BorderRadius.circular(5),
     color: Color.fromRGBO(25, 25, 25, 1.0),
-    boxShadow: [
+    boxShadow: const [
+      BoxShadow(
+        blurRadius: 5,
+        offset: Offset(5, 7),
+        color: Color.fromRGBO(18, 18, 18, 1.0),
+      ),
+      BoxShadow(
+        blurRadius: 3,
+        offset: Offset(-3, -5),
+        color: Color.fromRGBO(33, 33, 33, 1.0),
+      ),
+    ]);
+
+
+
+BoxDecoration indicator_neu_Morphism = BoxDecoration(
+    borderRadius: BorderRadius.circular(5),
+    color: Color.fromRGBO(235, 235, 235, 1),
+    boxShadow: const [
+      BoxShadow(
+        blurRadius: 3,
+        offset: Offset(3, 3),
+        color: Color.fromRGBO(164, 162, 162, 1.0),
+      ),
+      BoxShadow(
+        blurRadius: 3,
+        offset: Offset(-3, -3),
+        color: Color.fromRGBO(255, 255, 255, 1.0),
+      ),
+    ]);
+
+BoxDecoration indicator_dark_neu_Morphism = BoxDecoration(
+    borderRadius: BorderRadius.circular(5),
+    color: Color.fromRGBO(25, 25, 25, 1.0),
+    boxShadow: const [
       BoxShadow(
         blurRadius: 5,
         offset: Offset(5, 7),

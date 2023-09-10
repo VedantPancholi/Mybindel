@@ -1,12 +1,12 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:mybindel_test/providers/selectTheme.dart';
-import 'package:mybindel_test/screens/Home/Friends/AlphabeticScrollView.dart';
+import 'package:mybindel_test/screens/Home/Post_Enhances/Friends/AlphabeticScrollView.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../../palette/palette.dart';
-import '../../../providers/selectFriends.dart';
+import '../../../../palette/palette.dart';
+import '../../../../providers/selectFriends.dart';
 
 class FriendScreenPage extends StatefulWidget {
   const FriendScreenPage({super.key});

@@ -1,26 +1,29 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:mybindel_test/Dummy_Data/dummy_member_of_your_pages_wordoffriends.dart';
 import 'package:mybindel_test/palette/palette.dart';
 import 'package:mybindel_test/providers/selectTheme.dart';
-import 'package:mybindel_test/screens/Home/Your_Pages/Member_Of_Your_Pages_WordOfFriends/Scroll_View_Member_Of_Your_Pages_WordOfFriend.dart';
+import 'package:mybindel_test/screens/Home/Post_Enhances/Friends/AlphabeticScrollView.dart';
+import 'package:mybindel_test/screens/Home/Post_Enhances/Location/LocationScrollView.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
-class Member_Of_Your_Pages_WordOfFriends extends StatefulWidget {
-  const Member_Of_Your_Pages_WordOfFriends({super.key});
+import '../../../../Dummy_Data/dummy_location.dart';
+
+class AddLocationPage extends StatefulWidget {
+  const AddLocationPage({super.key});
 
   @override
-  State<Member_Of_Your_Pages_WordOfFriends> createState() => _Member_Of_Your_Pages_WordOfFriendsState();
+  State<AddLocationPage> createState() => _AddLocationPageState();
 }
 
-class _Member_Of_Your_Pages_WordOfFriendsState extends State<Member_Of_Your_Pages_WordOfFriends> {
+class _AddLocationPageState extends State<AddLocationPage> {
   @override
   Widget build(BuildContext context) {
-        final provider = Provider.of<Themeprovider>(context);
+    // final locationsprovider = Provider.of<LocationsProvider>(context);
+    final provider = Provider.of<Themeprovider>(context);
     final size = MediaQuery.of(context).size;
     return ChangeNotifierProvider(
-      create: (context) => Member_Of_Your_Pages_WordOfFriendsProvider(),
+      create: (context) => LocationsProvider(),
       child: Scaffold(
           resizeToAvoidBottomInset: false,
           // backgroundColor: provider.currentTheme ? light_Scaffold_color : dark_Scaffold_color,
@@ -102,7 +105,7 @@ class _Member_Of_Your_Pages_WordOfFriendsState extends State<Member_Of_Your_Page
                   // controller: _find,
                   decoration: InputDecoration(
                       border: InputBorder.none,
-                      hintText: "Search In Pages",
+                      hintText: "Search In Locations",
                       hintStyle: TextStyle(
                         fontSize: 15,
                         color: provider.currentTheme ? dim_black : dim_white,
@@ -114,56 +117,54 @@ class _Member_Of_Your_Pages_WordOfFriendsState extends State<Member_Of_Your_Page
                 ),
               ),
 
-              Consumer(
-            builder: (context, Member_Of_Your_Pages_WordOfFriendsProvider member_Of_Your_Pages_WordOfFriendsProvider, child) {
-              return Visibility(
-                visible: member_Of_Your_Pages_WordOfFriendsProvider.getItem.length > 0 ? true:false,
-                child: Container(
-                  height: (15).h,
-                  width: (100).w,
-                  child: ListView.builder(
-                    // reverse: true,
-                      scrollDirection: Axis.horizontal,
-                      itemCount: member_Of_Your_Pages_WordOfFriendsProvider.getItem.length,
-                      itemBuilder: (context, index) {
-                        return Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                              margin: EdgeInsets.all((2).w),
-                              height: (8).h,
-                              width: (20).w,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(7),
-                                image: DecorationImage(
-                                    fit: BoxFit.cover,
-                                    image: AssetImage(
-                                      member_Of_Your_Pages_WordOfFriendsProvider.getItem[index].picture,
-                                    )),
-                              ),
-                              child: Center(
-                                child: IconButton(
-                                  onPressed: () {
-                                    member_Of_Your_Pages_WordOfFriendsProvider.removeItem(index);
-                                    print("removed");
-                                  },
-                                  icon: Icon(
-                                    Icons.cancel_outlined,
-                                    color: dim_white ,
-                                    size: 35,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Text( member_Of_Your_Pages_WordOfFriendsProvider.getItem[index].name)
-                          ],
-                        );
-                      }),
-                ),
-              );
-            },
-          ),
-
+              // Consumer(
+              //   builder: (context, LocationsProvider LocationProvider, child) {
+              //     return Visibility(
+              //       visible: LocationProvider.getItem.length > 0 ? true:false,
+              //       child: Container(
+              //         height: (15).h,
+              //         width: (100).w,
+              //         child: ListView.builder(
+              //             scrollDirection: Axis.horizontal,
+              //             itemCount: LocationProvider.getItem.length,
+              //             itemBuilder: (context, index) {
+              //               return Column(
+              //                 mainAxisAlignment: MainAxisAlignment.center,
+              //                 children: [
+              //                   Container(
+              //                     margin: EdgeInsets.all((2).w),
+              //                     height: (8).h,
+              //                     width: (20).w,
+              //                     decoration: BoxDecoration(
+              //                       borderRadius: BorderRadius.circular(7),
+              //                       image: DecorationImage(
+              //                           fit: BoxFit.cover,
+              //                           image: AssetImage(
+              //                             LocationProvider.getItem[index].picture,
+              //                           )),
+              //                     ),
+              //                     child: Center(
+              //                       child: IconButton(
+              //                         onPressed: () {
+              //                           LocationProvider.removeItem(index);
+              //                           print("removed");
+              //                         },
+              //                         icon: Icon(
+              //                           Icons.cancel_outlined,
+              //                           color: dim_white ,
+              //                           size: 35,
+              //                         ),
+              //                       ),
+              //                     ),
+              //                   ),
+              //                   Text( LocationProvider.getItem[index].name)
+              //                 ],
+              //               );
+              //             }),
+              //       ),
+              //     );
+              //   },
+              // ),
               Container(
                 padding: EdgeInsets.symmetric(
                     horizontal: size.width * 0.047,
@@ -171,14 +172,14 @@ class _Member_Of_Your_Pages_WordOfFriendsState extends State<Member_Of_Your_Page
                 color: provider.currentTheme
                     ? light_Scaffold_color
                     : dark_Scaffold_color,
-                height: size.height * 0.060,
+                height: size.height * 0.050,
                 width: size.width,
                 // color: Colors.amber,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     AutoSizeText(
-                      "Your Pages",
+                      "Locations",
                       style: TextStyle(
                           color: provider.currentTheme ? dim_black : dim_white,
                           fontFamily: 'Avant',
@@ -191,7 +192,7 @@ class _Member_Of_Your_Pages_WordOfFriendsState extends State<Member_Of_Your_Page
                         Navigator.pop(context);
                       },
                       child: Container(
-                        margin: EdgeInsets.only(right: 2.w),
+                        margin: EdgeInsets.only(right: 3.w),
                         padding: EdgeInsets.symmetric(
                             horizontal: 4.w, vertical: (0.5).h),
                         decoration: provider.currentTheme
@@ -208,21 +209,9 @@ class _Member_Of_Your_Pages_WordOfFriendsState extends State<Member_Of_Your_Page
               ),
               Expanded(
                 child: Consumer(builder:
-                    (context, Member_Of_Your_Pages_WordOfFriendsProvider member_Of_Your_Pages_WordOfFriendsProvider, child) {
-                  return Member_Of_Your_Pages_WordOfFriend_Scoll_View(
-                   items: const [
-                'Aiden', 'Alice', 'Alex', 'Amelia', 'Andrew', 'Anna',
-                'Benjamin', 'Brooke', 'Brandon', 'Bella', 'Caleb', 'Chloe', 'Christopher', 'Charlotte','Daniel', 'David', 'Diana', 'Dylan', 'Emily', 'Ethan', 'Elizabeth', 'Ella',
-                'Finn', 'Fiona', 'Faith', 'Gabriel', 'Grace', 'Gavin', 'Hannah', 'Henry', 'Haley',
-                'Isaac', 'Isabella', 'Ivy', 'Ian', 'Jackson', 'Julia', 'Jacob', 'James',
-                'Kevin', 'Kayla', 'Kyle', 'Katherine', 'Liam', 'Lily', 'Lucas', 'Leah',
-                'Mason', 'Mia', 'Michael', 'Madison', 'Noah', 'Natalie', 'Nathan', 'Olivia',
-                'Owen', 'Sophia', 'Samuel', 'Samantha', 'Thomas', 'Taylor', 'Tyler',
-                'Victoria', 'Violet', 'Vincent', 'Valerie', 'William', 'Willow', 'Wyatt',
-                'Xavier', 'Ximena', 'Xander',
-                'Yasmine', 'Yvonne', 'Yara',
-                'Zachary', 'Zoe', 'Zane', 'Zara'
-              ],
+                    (context, LocationsProvider locationsProvider, child) {
+                  return LocationScrollView(
+                    items: locationsProvider.getItem,
                     // onClickedIem : (item){},
                   );
                 }),
