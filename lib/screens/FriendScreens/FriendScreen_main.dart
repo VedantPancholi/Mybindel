@@ -100,7 +100,7 @@ class _FriendScreenMainState extends State<FriendScreenMain>
                 width: 25.w,
                 // color: Colors.amber,
                 child: AutoSizeText(
-                  "Add Music",
+                  "Friends",
                   style: TextStyle(
                       color: provider.currentTheme ? dim_black : dim_white,
                       fontFamily: 'Avant',

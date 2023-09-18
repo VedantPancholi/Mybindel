@@ -113,7 +113,7 @@ class FriendTabBar extends StatelessWidget {
             motion: DrawerMotion(), children: [
             SlidableAction(
               onPressed: (val2) {},
-              icon: Icons.person_2,
+              icon: Icons.person_off,
               backgroundColor: const Color.fromARGB(255, 253, 59, 0),
             ),
           ]),
@@ -224,10 +224,10 @@ class FriendTabBar extends StatelessWidget {
                               : music_listTile_dark_neu_Morphism,
                           child: Center(
                             child: SvgPicture.asset(
-                              'asset/share_icons/Everyone.svg',
-                              width: (4.40).w,
-                              height: (2.30).h,
-                              color: orange_color,
+                              'asset/icons/Messages.svg',
+                              // width: (4.40).w,
+                              // height: (2.30).h,
+                              // color: orange_color,
                             ),
                           ),
                         ),
@@ -245,10 +245,7 @@ class FriendTabBar extends StatelessWidget {
                               : music_listTile_dark_neu_Morphism,
                           child: Center(
                             child: SvgPicture.asset(
-                              'asset/share_icons/Everyone.svg',
-                              width: (4.40).w,
-                              height: (2.30).h,
-                              color: orange_color,
+                              'asset/icons/Calls.svg',
                             ),
                           ),
                         ),
@@ -266,10 +263,10 @@ class FriendTabBar extends StatelessWidget {
                               : music_listTile_dark_neu_Morphism,
                           child: Center(
                             child: SvgPicture.asset(
-                              'asset/share_icons/Everyone.svg',
-                              width: (4.40).w,
-                              height: (2.30).h,
-                              color: orange_color,
+                              'asset/friend_nonFriend_screen_icon/more.svg',
+                              // width: (4.40).w,
+                              // height: (2.30).h,
+                              // color: orange_color,
                             ),
                           ),
                         ),

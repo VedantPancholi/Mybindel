@@ -1,8 +1,10 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart' hide BoxDecoration, BoxShadow;
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 import 'package:mybindel_test/screens/pricingPlans.dart';
 import 'package:mybindel_test/screens/second_create_userPage.dart';
 import 'package:mybindel_test/screens/welcomePage.dart';
@@ -32,9 +34,14 @@ class _CreateUserState extends State<CreateUser> {
   TextEditingController _pass = TextEditingController();
   TextEditingController _confirmPass = TextEditingController();
   TextEditingController _multipleLine = TextEditingController();
+  TextEditingController _verify = TextEditingController();
+  TextEditingController _date = TextEditingController();
 
   final Uri _url = Uri.parse('https://www.google.com/');
+  // bool isPressed1 = false;
   bool isPressed1 = false;
+  bool isPressed2 = false;
+  bool isPressed3 = false;
 
   @override
   Widget build(BuildContext context) {
@@ -322,119 +329,88 @@ class _CreateUserState extends State<CreateUser> {
                           ),
                         ),
                       ),
-                      // //dropdown search
-                      // Container(
-                      //   padding: EdgeInsets.symmetric(
-                      //       horizontal: size.width * 0.020),
-                      //   decoration: provider.currentTheme
-                      //       ? textFormField_neu_morphism
-                      //       : dark_textFormField_neu_morphism,
-                      //   child: DropdownSearch<String>(
-                      //     popupProps: PopupProps.menu(
-                      //       showSearchBox: true,
-                      //       showSelectedItems: true,
-                      //       disabledItemFn: (String s) => s.startsWith('I'),
-                      //     ),
-                      //     items: [
-                      //       "Purpose 1",
-                      //       "Purpose 2",
-                      //       "Purpose 3",
-                      //       "Purpose 4"
-                      //     ],
-                      //     dropdownDecoratorProps: DropDownDecoratorProps(
-                      //       dropdownSearchDecoration: InputDecoration(
-                      //         border: InputBorder.none,
-                      //         // labelText: "Purpose",
-                      //         hintText: "Purpose",
-                      //       ),
-                      //     ),
-                      //     onChanged: print,
-                      //     // selectedItem: "Brazil",
-                      //   ),
-                      // ),
+                      
                       SizedBox(
                         height: size.height * 0.010,
                       ),
-                      // Row(
-                      //   children: [
-                      //     Container(
-                      //       width: size.width * 0.095,
-                      //       height: size.height * 0.040,
-                      //       decoration: provider.currentTheme
-                      //           ? textFormField_neu_morphism
-                      //           : dark_textFormField_neu_morphism,
-                      //       child: IconButton(
-                      //         color: provider.currentTheme
-                      //             ? light_Scaffold_color
-                      //             : dark_Scaffold_color,
-                      //         onPressed: () {
-                      //           setState(() {
-                      //             isPressed1 = true;
-                      //           });
-                      //         },
-                      //         icon: Icon(
-                      //           Icons.check,
-                      //           color: isPressed1 == true
-                      //               ? orange_color
-                      //               : dim_white,
-                      //         ),
-                      //       ),
-                      //     ),
-                      //     SizedBox(
-                      //       width: size.width * 0.030,
-                      //     ),
-                      //     RichText(
-                      //       textAlign: TextAlign.center,
-                      //         text: TextSpan(children: [
-                      //       TextSpan(
-                      //         text: "I agreed to the ",
-                      //         style: TextStyle(
-                      //           fontSize: 15.0,
-                      //             color: provider.currentTheme
-                      //                 ? dim_black
-                      //                 : dim_white),
-                      //       ),
-                      //       TextSpan(
-                      //         text: "Terms and Conditions",
-                      //         style: TextStyle(
-                      //             fontSize: 15.0,
-                      //             color: orange_color),
-                      //         recognizer: TapGestureRecognizer()
-                      //           ..onTap = () {
-                      //             launchUrl(_url);
-                      //           },
-                      //       )
-                      //     ]))
-                      //   ],
-                      // ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ),
-          Container(
-              height: size.height * 0.12,
-              // color: Colors.blue,//margin: EdgeInsets.fromLTRB(0,0,0,size.height*0.050),
-              child: Center(
-                child: fieldbutton(
-                    title: "Next",
-                    padding: EdgeInsets.symmetric(
-                        vertical: size.height * 0.010,
-                        horizontal: size.width * 0.010),
-                    height: size.height * 0.075,
-                    width: size.width * 0.82,
-                    onpressed: () {
-                      setState(() {
-                        isPressed1 = false;
-                      });
-                      Navigator.pushReplacement(
-                          context, custompageroute(child: SecondCreateUserPage(_email.text)));
-                      // print(_emailcontroller.text);
-                    }),
-              )),
+                      Row(
+                        children: [
+                          Container(
+                            width: size.width * 0.095,
+                            height: size.height * 0.040,
+                            decoration: provider.currentTheme
+                                ? textFormField_neu_morphism
+                                : dark_textFormField_neu_morphism,
+                            child: IconButton(
+                              color: provider.currentTheme
+                                  ? light_Scaffold_color
+                                  : dark_Scaffold_color,
+                              onPressed: () {
+                                setState(() {
+                                  isPressed1 = true;
+                                });
+                              },
+                              icon: Icon(
+                                Icons.check,
+                                color: isPressed1 == true
+                                    ? orange_color
+                                    : dim_white,
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: size.width * 0.030,
+                          ),
+                          RichText(
+                            textAlign: TextAlign.center,
+                              text: TextSpan(children: [
+                            TextSpan(
+                              text: "I agreed to the ",
+                              style: TextStyle(
+                                fontSize: 15.0,
+                                  color: provider.currentTheme
+                                      ? dim_black
+                                      : dim_white),
+                            ),
+                            TextSpan(
+                              text: "Terms and Conditions",
+                              style: TextStyle(
+                                  fontSize: 15.0,
+                                  color: orange_color),
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () {
+                                  launchUrl(_url);
+                                },
+                            )
+                          ]))
+                        ],
+                      ),
+                    
+            Container(
+                height: size.height * 0.12,
+                // color: Colors.blue,//margin: EdgeInsets.fromLTRB(0,0,0,size.height*0.050),
+                child: Center(
+                  child: fieldbutton(
+                      title: "Next",
+                      padding: EdgeInsets.symmetric(
+                          vertical: size.height * 0.010,
+                          horizontal: size.width * 0.010),
+                      height: size.height * 0.075,
+                      width: size.width * 0.82,
+                      onpressed: () {
+                        setState(() {
+                          isPressed1 = false;
+                        });
+                        Navigator.pushReplacement(
+                            context, custompageroute(child: SecondCreateUserPage(_email.text)));
+                        // print(_emailcontroller.text);
+                      }),
+                )),
+
+                  
         ],
       ),
+                ))))])
     );
   }
 }

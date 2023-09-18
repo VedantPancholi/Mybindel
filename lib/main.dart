@@ -66,7 +66,10 @@ class _MyAppState extends State<MyApp> {
       theme: MyThemes.lightTheme,
       darkTheme: MyThemes.darkTheme,
       //home: splash(),
-      home: ChangeNotifierProvider(
+      home: 
+      // CreateUser(),
+      
+      ChangeNotifierProvider(
           create: (_) => Navigationprovider(), child: BasePage()),
     );
   }

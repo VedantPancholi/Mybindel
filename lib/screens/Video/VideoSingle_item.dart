@@ -6,8 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_blurhash/flutter_blurhash.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:intl/intl.dart';
-import 'package:mybindel_test/Dummy_Data/dummy_feed.dart';
+import 'package:mybindel_test/Dummy_Data/Dummy_feed.dart';
 import 'package:mybindel_test/models/Comment.dart';
 import 'package:mybindel_test/widgets/CommnetChild_widget.dart';
 import 'package:provider/provider.dart';
@@ -47,7 +46,7 @@ class _VideoSingle_itemState extends State<VideoSingle_item> {
 
   @override
   void initState() {
-    object = getobj();
+    object = getpostobj();
     commentController = TextEditingController();
     _controller = VideoPlayerController.networkUrl(Uri.parse(
         'https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4'));

@@ -267,3 +267,38 @@ BoxDecoration indicator_dark_neu_Morphism = BoxDecoration(
         color: Color.fromRGBO(33, 33, 33, 1.0),
       ),
     ]);
+
+
+BoxDecoration nonFriend_square_neu_Morphism = BoxDecoration(
+    borderRadius: BorderRadius.circular(7),
+    // theme == Brightness.light?light_Scaffold_color:dark_Scaffold_color
+    color: Color.fromRGBO(240, 240, 240, 1),
+    boxShadow: const [
+      BoxShadow(
+        blurRadius: 2,
+        offset: Offset(-1, 2),
+        color: Color(0xFFB8B6B6),
+      ),
+      // BoxShadow(
+      //   blurRadius: 5,
+      //   offset: Offset(-5, -7),
+      //   color: Color.fromRGBO(255, 255, 255, 1.0),
+      // ),
+    ]);
+
+BoxDecoration nonFriend_square_dark_neu_Morphism = BoxDecoration(
+    borderRadius: BorderRadius.circular(7),
+    // theme == Brightness.light?light_Scaffold_color:dark_Scaffold_color
+    color: Color.fromRGBO(25, 25, 25, 1.0),
+    boxShadow: const [
+      BoxShadow(
+        blurRadius: 5,
+        offset: Offset(-1, 7),
+        color: Color.fromRGBO(18, 18, 18, 1.0),
+      ),
+      // BoxShadow(
+      //   blurRadius: 3,
+      //   offset: Offset(-3, -5),
+      //   color: Color.fromRGBO(33, 33, 33, 1.0),
+      // ),
+    ]);

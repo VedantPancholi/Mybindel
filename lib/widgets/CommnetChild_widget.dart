@@ -1,12 +1,13 @@
 import 'dart:ffi';
 
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:comment_box/comment/comment.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:provider/provider.dart';
 import 'package:readmore/readmore.dart';
 import 'package:sizer/sizer.dart';
-import '../Dummy_Data/dummy_feed.dart';
+import '../Dummy_Data/Dummy_feed.dart';
 import '../models/Comment.dart';
 import '../palette/palette.dart';
 import '../providers/selectCommentType.dart';
@@ -27,20 +28,22 @@ class _commentChildState extends State<commentChild> {
   bool reactionsVisibility = false;
   bool repliesVisible = false;
 
+
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<Themeprovider>(context);
+    final size = MediaQuery.of(context).size;
     final commenttypeprovider = Provider.of<Commenttypeprovider>(context);
 
     return ListView.builder(
         itemCount: widget.data.length,
-        itemBuilder: (ctx, commentIndex) {
+        itemBuilder: (ctx, commentIndex) {// widget.data[commentIndex].picture
           return widget.data.length > 0 ?
           Container(
             margin:
-                EdgeInsets.symmetric(vertical: (0.40).h, horizontal: (2.0).w),
+            EdgeInsets.symmetric(vertical: (0.40).h, horizontal: (2.0).w),
             padding:
-                EdgeInsets.symmetric(vertical: (1.00).h, horizontal: (1.50).w),
+            EdgeInsets.symmetric(vertical: (1.00).h, horizontal: (1.50).w),
             // color: Colors.green,
             child: SingleChildScrollView(
               child: Column(
@@ -90,16 +93,16 @@ class _commentChildState extends State<commentChild> {
                                             : dim_white),
                                   )),
                               Container(
-                                  // height: (2.0).h,
-                                  // width: (50.0).w,
+                                // height: (2.0).h,
+                                // width: (50.0).w,
                                   padding:
-                                      EdgeInsets.symmetric(horizontal: 3.w, vertical: 0.5.h),
+                                  EdgeInsets.symmetric(horizontal: 3.w, vertical: 0.5.h),
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.only(
                                         topRight: Radius.circular(10),
                                         bottomRight: Radius.circular(10)),
                                     color:
-                                        Colors.grey.shade400.withOpacity(0.6),
+                                    Colors.grey.shade400.withOpacity(0.6),
                                   ),
                                   child: ReadMoreText(
                                     widget.data[commentIndex].text,
@@ -113,21 +116,19 @@ class _commentChildState extends State<commentChild> {
                                     lessStyle: TextStyle(
                                         color: Colors.deepOrange, fontSize: 12),
                                     style: TextStyle(
-                                        fontSize: 18,
-                                        letterSpacing: 1.5,
-                                        color: provider.currentTheme
-                                            ? dim_black
-                                            : dim_white,),
+                                      fontSize: 18,
+                                      letterSpacing: 1.5,
+                                      color: provider.currentTheme
+                                          ? dim_black
+                                          : dim_white,),
                                   )),
                               Row(
                                 children: [
                                   //reply
                                   InkWell(
                                       onTap: () {
-                                        commenttypeprovider.setPushIndex =
-                                            commentIndex;
-                                        commenttypeprovider.changecommentType =
-                                            true;
+                                        commenttypeprovider.setPushIndex = commentIndex;
+                                        commenttypeprovider.changecommentType = true;
                                         FocusScope.of(context)
                                             .requestFocus(widget.inputnode);
                                       },
@@ -189,7 +190,7 @@ class _commentChildState extends State<commentChild> {
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    CrossAxisAlignment.start,
                                     // crossAxisAlignment: isReply ? CrossAxisAlignment.end : CrossAxisAlignment.start,
                                     children: [
                                       Container(
@@ -209,18 +210,18 @@ class _commentChildState extends State<commentChild> {
                                                     : dim_white),
                                           )),
                                       Container(
-                                          // height: (2.0).h,
+                                        // height: (2.0).h,
                                           width: (50.0).w,
                                           // color: Colors.amber,
                                           padding:
-                                      EdgeInsets.symmetric(horizontal: 2.w, vertical: 0.5.h),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.only(
-                                        topRight: Radius.circular(10),
-                                        bottomRight: Radius.circular(10)),
-                                    color:
-                                        Colors.grey.shade400.withOpacity(0.6),
-                                  ),
+                                          EdgeInsets.symmetric(horizontal: 2.w, vertical: 0.5.h),
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.only(
+                                                topRight: Radius.circular(10),
+                                                bottomRight: Radius.circular(10)),
+                                            color:
+                                            Colors.grey.shade400.withOpacity(0.6),
+                                          ),
                                           child: ReadMoreText(
                                             widget.data[commentIndex]
                                                 .replies[replyIndex].text,
@@ -253,8 +254,8 @@ class _commentChildState extends State<commentChild> {
                                   )),
                             ],
                           )
-                        : null;
-                        
+                              : null;
+
                         },
                       ),
                     ),
@@ -276,69 +277,16 @@ class _commentChildState extends State<commentChild> {
               ),
             ),
           )
-          : Center(child: Text("No comments"),);
+              : Center(child: Text("No comments"),);
         });
-    //   Card(
-    //     margin: EdgeInsets.only(
-    //         top: (1).h, bottom: (1).h, left: (2.00).w, right: (2.00).w),
-    //     color: provider.currentTheme
-    //         ? Colors.grey.shade100
-    //         : Colors.grey.shade800,
-    //     elevation: 5.0,
-    //     child: Column(children: [
-    //       Padding(
-    //         padding: const EdgeInsets.fromLTRB(12.0, 8.0, 2.0, 0.0),
-    //         child: ListTile(
-    //           leading: GestureDetector(
-    //             onTap: () async {
-    //               print("Comment Clicked ${index}");
-    //             },
-    //             child: Container(
-    //               height: 50.0,
-    //               width: 50.0,
-    //               decoration: const BoxDecoration(
-    //                   color: Colors.blue,
-    //                   borderRadius: BorderRadius.all(Radius.circular(50))),
-    //               child: CircleAvatar(
-    //                   radius: 50,
-    //                   backgroundImage: CommentBox.commentImageParser(
-    //                       imageURLorPath: widget.data[index].picture)),
-    //             ),
-    //           ),
-    //           title: Text(
-    //             widget.data[index].name,
-    //             style: TextStyle(fontWeight: FontWeight.bold),
-    //           ),
-    //           subtitle: Text(widget.data[index].text),
-    //           trailing: InkWell(
-    //             onTap: () {
-    //               FocusScope.of(context).requestFocus(widget.inputnode);
-    //             },
-    //             child: Text("Reply"),
-    //           ),
-    //           // trailing:
-    //           // Text(data[index].datetime, style: TextStyle(fontSize: 10)),
-    //         ),
-    //       ),
-    //       Container(
-    //         //color: Colors.amber,
-    //           width: (100).w,
-    //           height: (5.00).h,
-    //           // decoration: BoxDecoration(
-    //           //   borderRadius: BorderRadius.only(bottomLeft: Radius.circular(10),bottomRight: Radius.circular(10))
-    //           // ),
-    //           child: reactionButton(widget.reelIndex , index )
-    //       ),
-    //     ]),
-    //   );
-    // });
   }
 }
 
 class reactionButton extends StatefulWidget {
   int postIndex;
   int commentIndex;
-  reactionButton(this.postIndex, this.commentIndex);
+  int? replyIndex;
+  reactionButton(this.postIndex, this.commentIndex, [this.replyIndex]);
 
   @override
   State<reactionButton> createState() => _reactionButtonState();
@@ -346,7 +294,6 @@ class reactionButton extends StatefulWidget {
 
 class _reactionButtonState extends State<reactionButton> {
   bool _reactionView = false;
-
   List<ReactionElement> elements = [
     ReactionElement(
         Reaction.like,
@@ -381,7 +328,7 @@ class _reactionButtonState extends State<reactionButton> {
           weight: 10,
         )),
   ];
-  final object = getobj();
+  final postobject = getpostobj();
   getReactionIcon(Reaction r) {
     switch (r) {
       case Reaction.like:
@@ -422,8 +369,7 @@ class _reactionButtonState extends State<reactionButton> {
 
   @override
   Widget build(BuildContext context) {
-    Reaction reaction =
-        object.getReaction(widget.postIndex, widget.commentIndex);
+    Reaction reaction = postobject.getReaction(widget.postIndex, widget.commentIndex , widget.replyIndex);
     // print(reaction);
     return GestureDetector(
       onHorizontalDragUpdate: (details) {
@@ -457,12 +403,15 @@ class _reactionButtonState extends State<reactionButton> {
               } else {
                 if (reaction == Reaction.none) {
                   reaction = Reaction.like;
-                  object.changeReaction(
-                      Reaction.like, widget.postIndex, widget.commentIndex);
-                } else {
+
+                  postobject.changeReaction(
+                        Reaction.like, widget.postIndex, widget.commentIndex, widget.replyIndex);
+                }
+                else
+                {
                   reaction = Reaction.none;
-                  object.changeReaction(
-                      Reaction.none, widget.postIndex, widget.commentIndex);
+                  postobject.changeReaction(
+                      Reaction.none, widget.postIndex, widget.commentIndex,widget.replyIndex);
                 }
               }
               setState(() {});
@@ -487,9 +436,8 @@ class _reactionButtonState extends State<reactionButton> {
               maintainSize: true,
               maintainState: true,
               child: Container(
-                
-                margin: EdgeInsets.only(bottom: (0.2).h, top: (0.8).h),
-                height: 35,
+                margin: EdgeInsets.only(bottom: (1).w, top: (0.8).w),
+                height: 45,
                 width: 150,
                 decoration: BoxDecoration(
                     color: Colors.grey.shade200,
@@ -506,8 +454,8 @@ class _reactionButtonState extends State<reactionButton> {
                         icon: elements[index].icon,
                         onPressed: () {
                           reaction = elements[index].reaction;
-                          object.changeReaction(elements[index].reaction,
-                              widget.postIndex, widget.commentIndex);
+                          postobject.changeReaction(elements[index].reaction,
+                              widget.postIndex, widget.commentIndex ,widget.replyIndex);
                           _reactionView = false;
                           setState(() {});
                         },

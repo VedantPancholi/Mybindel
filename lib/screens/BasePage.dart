@@ -4,6 +4,7 @@ import 'package:badges/badges.dart' as badges;
 import 'package:mybindel_test/pagerouter/customPageRouter.dart';
 import 'package:mybindel_test/screens/FriendScreens/FriendScreen_main.dart';
 import 'package:mybindel_test/screens/Home/HomePage.dart';
+import 'package:mybindel_test/screens/NonFriendScreens/NonFriendScreen_main.dart';
 import 'package:provider/provider.dart';
 import '../../palette/palette.dart';
 import '../providers/bottomNavigationProvider.dart';
@@ -121,7 +122,7 @@ class _BasePageState extends State<BasePage> {
                 child: PageView(
                   physics: NeverScrollableScrollPhysics(),
                   controller: _pageController,
-                  children: [HomePage(), VideoScreenPage(), FriendScreenMain()],
+                  children: [HomePage(), VideoScreenPage(), FriendScreenMain() , NonFriendScreen_main(),],
                   onPageChanged: (index) {
                     //print("page: ${index}");
                   },

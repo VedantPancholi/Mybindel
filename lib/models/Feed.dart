@@ -1,6 +1,6 @@
 import 'package:mybindel_test/models/Comment.dart';
 
-class Reel {
+class Post {
   String picture;
   String name;
   String occupation;
@@ -12,7 +12,7 @@ class Reel {
   String views;
   List<Singelcomment> comments;
 
-  Reel(
+  Post(
       {
         required this.picture,
         required this.name,

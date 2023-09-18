@@ -1,22 +1,17 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:html';
-
 import 'package:mybindel_test/models/User.dart';
 
-enum MediaType {image, video}
+enum MediaType { image, video }
 
 class Story {
   String url;
   MediaType mediaType;
-  User user;
-  Location? location;
   bool isliked;
 
-  Story({
-    required this.url,
-    required this.mediaType,
-    required this.user,
-    this.location,
-    this.isliked = false
-  });
+  Story({required this.url, required this.mediaType, this.isliked = false});
+}
+
+class singleUserStory {
+  User user;
+  List<Story> stories;
+  singleUserStory({required this.user, required this.stories});
 }

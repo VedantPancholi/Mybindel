@@ -1,18 +1,16 @@
-import 'package:flutter/material.dart';
-import 'package:mybindel_test/models/feed.dart';
+import 'package:mybindel_test/models/Feed.dart';
 import '../models/Comment.dart';
-import '../models/Location.dart';
 
 class Feeds {
-  List<Reel> feeds = [
-    Reel(
+  List<Post> feeds = [
+    Post(
         picture: 'asset/images/user_logo.png',
         name: 'John David',
         occupation: 'ARTIST',
         image: 'asset/images/user_post.png',
         caption: 'Created with love, crafted with intelligence.',
         likesCount: '1k',
-        commentsCount: '47',
+        commentsCount: '0',
         sharesCount: 12,
         views: '1500 ',
         comments: [
@@ -73,7 +71,7 @@ class Feeds {
               reaction: Reaction.none,
               replies: []),
         ]),
-    Reel(
+    Post(
         picture: 'asset/images/user_logo.png',
         name: 'Franklin S.',
         occupation: 'Doctor',
@@ -117,22 +115,37 @@ class Feeds {
 
   int i = 0;
 
-  List<Reel> get getfeeds {
+  List<Post> get getfeeds {
     return feeds;
   }
 
-  void changeReaction(reaction, reelIndex, commentIndex) {
-    feeds[reelIndex].comments[commentIndex].reaction = reaction;
-    print(feeds[reelIndex].comments[commentIndex].reaction);
+  void changeReaction(reaction, reelIndex, commentIndex, replyIndex) {
+    if (replyIndex != null) {
+      feeds[reelIndex].comments[commentIndex].replies[replyIndex].reaction =
+          reaction;
+      print(
+          "oll  ${feeds[reelIndex].comments[commentIndex].replies[replyIndex].reaction}");
+    } else {
+      feeds[reelIndex].comments[commentIndex].reaction = reaction;
+      print(feeds[reelIndex].comments[commentIndex].reaction);
+    }
   }
 
-  Reaction getReaction(reelIndex, commentIndex) {
+  Reaction getReaction(reelIndex, commentIndex, replyIndex) {
     //print(  feeds[reelIndex].comments[commentIndex].reaction);
-    return feeds[reelIndex].comments[commentIndex].reaction;
+    if (replyIndex != null) {
+      return feeds[reelIndex]
+          .comments[commentIndex]
+          .replies[replyIndex]
+          .reaction;
+    } else {
+      return feeds[reelIndex].comments[commentIndex].reaction;
+    }
   }
 }
 
-Feeds obj = Feeds();
-Feeds getobj() {
-  return obj;
+Feeds postobj = Feeds();
+Feeds getpostobj() {
+  return 
+  postobj;
 }
