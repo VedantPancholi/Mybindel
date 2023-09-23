@@ -218,370 +218,374 @@ class _NonFriendPostState extends State<NonFriendPost> {
                       width: (76.00).w,
                       margin: EdgeInsets.symmetric(horizontal: (1.00).w),
                       decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
                         image: DecorationImage(
                             image: AssetImage(
                               "asset/images/user_post.png",
                             ),
                             fit: BoxFit.cover),
                       ),
-                      child: BackdropFilter(
-                        filter: ImageFilter.blur(sigmaX: 20.0, sigmaY: 20.0),
-                        child: Stack(
-                          children: [
-                            // const BlurHash(
-                            //     hash: "LXE]Hd|I\$f]C=dxISkr;67KRNsAV"),
-                            Container(
-                              height: (30.00).h,
-                              width: (70.00).w,
-                              margin:
-                                  EdgeInsets.symmetric(horizontal: (1.00).w),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10)),
-                              child: SingleChildScrollView(
-                                physics: BouncingScrollPhysics(),
-                                scrollDirection: Axis.vertical,
-                                child: Column(children: [
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsets.all((1.50).h),
-                                        child: const AutoSizeText(
-                                          "Share",
-                                          softWrap: true,
-                                          style: TextStyle(
-                                              fontSize: 17,
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.bold),
+                      child: ClipRRect(
+                        child: BackdropFilter(
+                          blendMode: BlendMode.srcOver,
+                          filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                          child: Stack(
+                            children: [
+                              // const BlurHash(
+                              //     hash: "LXE]Hd|I\$f]C=dxISkr;67KRNsAV"),
+                              Container(
+                                height: (30.00).h,
+                                width: (70.00).w,
+                                margin:
+                                    EdgeInsets.symmetric(horizontal: (1.00).w),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10)),
+                                child: SingleChildScrollView(
+                                  physics: BouncingScrollPhysics(),
+                                  scrollDirection: Axis.vertical,
+                                  child: Column(children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Padding(
+                                          padding: EdgeInsets.all((1.50).h),
+                                          child: const AutoSizeText(
+                                            "Share",
+                                            softWrap: true,
+                                            style: TextStyle(
+                                                fontSize: 17,
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold),
+                                          ),
                                         ),
+                                      ],
+                                    ),
+                          
+                                    // 1st Row
+                                    SizedBox(
+                                      height: (0.50).h,
+                                    ),
+                          
+                                    Padding(
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: (3).w),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
+                                            children: [
+                                              Container(
+                                                width: (14.00).w,
+                                                height: (6.60).h,
+                                                decoration: BoxDecoration(
+                                                    color: Colors.white
+                                                        .withOpacity(0.2),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            6)),
+                                                child: Center(
+                                                  child: SvgPicture.asset(
+                                                    'asset/share_icons/Everyone.svg',
+                                                    width: (6.40).w,
+                                                    height: (3.30).h,
+                                                  ),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: (0.25).h,
+                                              ),
+                                              const AutoSizeText(
+                                                "Everyone",
+                                                softWrap: true,
+                                                wrapWords: true,
+                                                style: TextStyle(
+                                                  fontSize: 12,
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
+                                            children: [
+                                              Container(
+                                                width: (14.00).w,
+                                                height: (6.60).h,
+                                                decoration: BoxDecoration(
+                                                    color: Colors.white
+                                                        .withOpacity(0.2),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            6)),
+                                                child: Center(
+                                                  child: SvgPicture.asset(
+                                                    'asset/share_icons/only_with.svg',
+                                                    width: (6.40).w,
+                                                    height: (3.40).h,
+                                                  ),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: (0.25).h,
+                                              ),
+                                              const AutoSizeText(
+                                                "Only With",
+                                                softWrap: true,
+                                                wrapWords: true,
+                                                style: TextStyle(
+                                                  fontSize: 12,
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
+                                            children: [
+                                              Container(
+                                                width: (14.00).w,
+                                                height: (6.60).h,
+                                                decoration: BoxDecoration(
+                                                    color: Colors.white
+                                                        .withOpacity(0.2),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            6)),
+                                                child: Center(
+                                                  child: SvgPicture.asset(
+                                                    "asset/share_icons/hide.svg",
+                                                    width: (6.40).w,
+                                                    height: (3.30).h,
+                                                  ),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: (0.25).h,
+                                              ),
+                                              const AutoSizeText(
+                                                "Hide From",
+                                                softWrap: true,
+                                                wrapWords: true,
+                                                style: TextStyle(
+                                                  fontSize: 12,
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
                                       ),
-                                    ],
-                                  ),
-                      
-                                  // 1st Row
-                                  SizedBox(
-                                    height: (0.50).h,
-                                  ),
-                      
-                                  Padding(
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: (3).w),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                          children: [
-                                            Container(
-                                              width: (14.00).w,
-                                              height: (6.60).h,
-                                              decoration: BoxDecoration(
-                                                  color: Colors.white
-                                                      .withOpacity(0.2),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          6)),
-                                              child: Center(
-                                                child: SvgPicture.asset(
-                                                  'asset/share_icons/Everyone.svg',
-                                                  width: (6.40).w,
-                                                  height: (3.30).h,
-                                                ),
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              height: (0.25).h,
-                                            ),
-                                            const AutoSizeText(
-                                              "Everyone",
-                                              softWrap: true,
-                                              wrapWords: true,
-                                              style: TextStyle(
-                                                fontSize: 12,
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                          children: [
-                                            Container(
-                                              width: (14.00).w,
-                                              height: (6.60).h,
-                                              decoration: BoxDecoration(
-                                                  color: Colors.white
-                                                      .withOpacity(0.2),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          6)),
-                                              child: Center(
-                                                child: SvgPicture.asset(
-                                                  'asset/share_icons/only_with.svg',
-                                                  width: (6.40).w,
-                                                  height: (3.40).h,
-                                                ),
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              height: (0.25).h,
-                                            ),
-                                            const AutoSizeText(
-                                              "Only With",
-                                              softWrap: true,
-                                              wrapWords: true,
-                                              style: TextStyle(
-                                                fontSize: 12,
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                          children: [
-                                            Container(
-                                              width: (14.00).w,
-                                              height: (6.60).h,
-                                              decoration: BoxDecoration(
-                                                  color: Colors.white
-                                                      .withOpacity(0.2),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          6)),
-                                              child: Center(
-                                                child: SvgPicture.asset(
-                                                  "asset/share_icons/hide.svg",
-                                                  width: (6.40).w,
-                                                  height: (3.30).h,
-                                                ),
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              height: (0.25).h,
-                                            ),
-                                            const AutoSizeText(
-                                              "Hide From",
-                                              softWrap: true,
-                                              wrapWords: true,
-                                              style: TextStyle(
-                                                fontSize: 12,
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
                                     ),
-                                  ),
-                      
-                                  SizedBox(
-                                    height: (1.00).h,
-                                  ),
-                                  // 2nd Row
-                                  Padding(
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: (3).w),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                          children: [
-                                            Container(
-                                              width: (14.00).w,
-                                              height: (6.60).h,
-                                              decoration: BoxDecoration(
-                                                  color: Colors.white
-                                                      .withOpacity(0.2),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          6)),
-                                              child: Center(
-                                                child: SvgPicture.asset(
-                                                  "asset/share_icons/private.svg",
-                                                  width: (6.40).w,
-                                                  height: (3.30).h,
-                                                ),
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              height: (0.25).h,
-                                            ),
-                                            const AutoSizeText(
-                                              "Private",
-                                              softWrap: true,
-                                              wrapWords: true,
-                                              style: TextStyle(
-                                                fontSize: 12,
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                          children: [
-                                            Container(
-                                              width: (14.00).w,
-                                              height: (6.60).h,
-                                              decoration: BoxDecoration(
-                                                  color: Colors.white
-                                                      .withOpacity(0.2),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          6)),
-                                              child: Center(
-                                                child: SvgPicture.asset(
-                                                  "asset/share_icons/Inbox.svg",
-                                                  width: (6.40).w,
-                                                  height: (3.30).h,
-                                                ),
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              height: (0.25).h,
-                                            ),
-                                            const AutoSizeText(
-                                              "Inbox",
-                                              softWrap: true,
-                                              wrapWords: true,
-                                              style: TextStyle(
-                                                fontSize: 12,
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                          children: [
-                                            Container(
-                                              width: (14.00).w,
-                                              height: (6.60).h,
-                                              decoration: BoxDecoration(
-                                                  color: Colors.white
-                                                      .withOpacity(0.2),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          6)),
-                                              child: Center(
-                                                child: SvgPicture.asset(
-                                                  "asset/share_icons/copy_link.svg",
-                                                  width: (6.40).w,
-                                                  height: (3.30).h,
-                                                ),
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              height: (0.25).h,
-                                            ),
-                                            const AutoSizeText(
-                                              "Copy With",
-                                              softWrap: true,
-                                              wrapWords: true,
-                                              style: TextStyle(
-                                                fontSize: 12,
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
+                          
+                                    SizedBox(
+                                      height: (1.00).h,
                                     ),
-                                  ),
-                      
-                                  SizedBox(
-                                    height: (1.00).h,
-                                  ),
-                                  // 3rd Row
-                                  Padding(
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: (3).w),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                          children: [
-                                            Container(
-                                              width: (14.00).w,
-                                              height: (6.60).h,
-                                              decoration: BoxDecoration(
-                                                  color: Colors.white
-                                                      .withOpacity(0.2),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          6)),
-                                              child: Center(
-                                                child: SvgPicture.asset(
-                                                  "asset/share_icons/outside.svg",
-                                                  width: (6.40).w,
-                                                  height: (3.0).h,
+                                    // 2nd Row
+                                    Padding(
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: (3).w),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
+                                            children: [
+                                              Container(
+                                                width: (14.00).w,
+                                                height: (6.60).h,
+                                                decoration: BoxDecoration(
+                                                    color: Colors.white
+                                                        .withOpacity(0.2),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            6)),
+                                                child: Center(
+                                                  child: SvgPicture.asset(
+                                                    "asset/share_icons/private.svg",
+                                                    width: (6.40).w,
+                                                    height: (3.30).h,
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                            SizedBox(
-                                              height: (0.25).h,
-                                            ),
-                                            const AutoSizeText(
-                                              "Outside",
-                                              softWrap: true,
-                                              wrapWords: true,
-                                              style: TextStyle(
-                                                fontSize: 12,
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.bold,
+                                              SizedBox(
+                                                height: (0.25).h,
                                               ),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
+                                              const AutoSizeText(
+                                                "Private",
+                                                softWrap: true,
+                                                wrapWords: true,
+                                                style: TextStyle(
+                                                  fontSize: 12,
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
+                                            children: [
+                                              Container(
+                                                width: (14.00).w,
+                                                height: (6.60).h,
+                                                decoration: BoxDecoration(
+                                                    color: Colors.white
+                                                        .withOpacity(0.2),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            6)),
+                                                child: Center(
+                                                  child: SvgPicture.asset(
+                                                    "asset/share_icons/Inbox.svg",
+                                                    width: (6.40).w,
+                                                    height: (3.30).h,
+                                                  ),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: (0.25).h,
+                                              ),
+                                              const AutoSizeText(
+                                                "Inbox",
+                                                softWrap: true,
+                                                wrapWords: true,
+                                                style: TextStyle(
+                                                  fontSize: 12,
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
+                                            children: [
+                                              Container(
+                                                width: (14.00).w,
+                                                height: (6.60).h,
+                                                decoration: BoxDecoration(
+                                                    color: Colors.white
+                                                        .withOpacity(0.2),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            6)),
+                                                child: Center(
+                                                  child: SvgPicture.asset(
+                                                    "asset/share_icons/copy_link.svg",
+                                                    width: (6.40).w,
+                                                    height: (3.30).h,
+                                                  ),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: (0.25).h,
+                                              ),
+                                              const AutoSizeText(
+                                                "Copy With",
+                                                softWrap: true,
+                                                wrapWords: true,
+                                                style: TextStyle(
+                                                  fontSize: 12,
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                ]),
-                              ),
-                            )
-                          ],
+                          
+                                    SizedBox(
+                                      height: (1.00).h,
+                                    ),
+                                    // 3rd Row
+                                    Padding(
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: (3).w),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
+                                            children: [
+                                              Container(
+                                                width: (14.00).w,
+                                                height: (6.60).h,
+                                                decoration: BoxDecoration(
+                                                    color: Colors.white
+                                                        .withOpacity(0.2),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            6)),
+                                                child: Center(
+                                                  child: SvgPicture.asset(
+                                                    "asset/share_icons/outside.svg",
+                                                    width: (6.40).w,
+                                                    height: (3.0).h,
+                                                  ),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: (0.25).h,
+                                              ),
+                                              const AutoSizeText(
+                                                "Outside",
+                                                softWrap: true,
+                                                wrapWords: true,
+                                                style: TextStyle(
+                                                  fontSize: 12,
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ]),
+                                ),
+                              )
+                            ],
+                          ),
                         ),
                       ),
                     ),

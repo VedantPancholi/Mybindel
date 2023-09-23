@@ -266,9 +266,9 @@ Widget popUpMenuNonFriend(provider) {
         ? light_Scaffold_color
         : dark_Scaffold_color, //Color.fromRGBO(204, 204, 204, 0.4),
     padding: const EdgeInsets.all(0),
-    constraints: BoxConstraints.expand(width: (44.1).w, height: (20.00).h),
+    constraints: BoxConstraints.expand(width: (44.2).w, height: (18.00).h),
     position: PopupMenuPosition.over,
-    offset: const Offset(-50, 0),
+    offset: const Offset(-10, 30),
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(5),
     ),
@@ -290,7 +290,7 @@ Widget popUpMenuNonFriend(provider) {
                 width: (7.0).w,
                 padding: EdgeInsets.all((0.8).w),
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey.shade600),
+                  border: Border.all(color: Colors.grey.shade600.withOpacity(0.5)),
                     color: provider.currentTheme
                         ? light_Scaffold_color
                         : dark_Scaffold_color,
@@ -299,14 +299,14 @@ Widget popUpMenuNonFriend(provider) {
               ),  
               Expanded(
                 child: Container(
-                  margin: EdgeInsets.symmetric(horizontal: (3.2).w),
+                  margin: EdgeInsets.symmetric(horizontal: (2.2).w),
                   alignment: Alignment.centerLeft,
                   // color: Colors.yellow,
                   child: Text(
                     'Cancel Request',
                     style: TextStyle(
-                        fontSize: 13,
-                        fontWeight: FontWeight.w500,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w600,
                         letterSpacing: 1),
                   ),
                 ),
@@ -326,7 +326,7 @@ Widget popUpMenuNonFriend(provider) {
                 width: (7.0).w,
                 padding: EdgeInsets.all((0.8).w),
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey.shade600),
+                  border: Border.all(color: Colors.grey.shade600.withOpacity(0.5)),
                     color: provider.currentTheme
                         ? light_Scaffold_color
                         : dark_Scaffold_color,
@@ -335,14 +335,14 @@ Widget popUpMenuNonFriend(provider) {
               ),
               Expanded(
                 child: Container(
-                  margin: EdgeInsets.symmetric(horizontal: (3.2).w),
+                  margin: EdgeInsets.symmetric(horizontal: (2.2).w),
                   alignment: Alignment.centerLeft,
                   // color: Colors.yellow,
                   child: Text(
                     'Block Person',
                     style: TextStyle(
-                        fontSize: 13,
-                        fontWeight: FontWeight.w500,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w600,
                         letterSpacing: 1),
                   ),
                 ),
@@ -362,12 +362,12 @@ Widget popUpMenuNonFriend(provider) {
                 width: (7.0).w,
                 padding: EdgeInsets.all((0.8).w),
                 decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey.shade600),
+                  border: Border.all(color: Colors.grey.shade600.withOpacity(0.5)),
                     color: provider.currentTheme
                         ? light_Scaffold_color
                         : dark_Scaffold_color,
                     borderRadius: BorderRadius.circular(5)),
-                child: SvgPicture.asset("asset/friend_nonFriend_screen_icon/Report.svg")
+                child: SvgPicture.asset("asset/friend_nonFriend_screen_icon/Report.svg",color: Colors.black,)
               ),
               Expanded(
                 child: Container(
@@ -377,8 +377,8 @@ Widget popUpMenuNonFriend(provider) {
                   child: Text(
                     'Report',
                     style: TextStyle(
-                        fontSize: 13,
-                        fontWeight: FontWeight.w500,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w600,
                         letterSpacing: 1,
                         ),
                   ),
