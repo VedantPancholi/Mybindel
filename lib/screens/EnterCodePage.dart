@@ -109,7 +109,7 @@ class _enterCodeState extends State<enterCode> {
                           //  textAlign: TextAlign.justify,
 
                           style: TextStyle(
-                              // fontFamily: 'Avant',
+                            // fontFamily: 'Avant',
                               fontSize: 14,
                               letterSpacing: 1,
                               color:  provider.currentTheme ? const Color.fromRGBO(91, 91, 91, 1) : Colors.grey.shade100,

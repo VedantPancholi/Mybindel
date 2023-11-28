@@ -120,7 +120,7 @@ class _DonationPageState extends State<DonationPage> {
                               : light_Scaffold_color,
                         ),
                       ),
-                        TextSpan(
+                      TextSpan(
                         text: "awaiting your ",
                         style: TextStyle(
                           fontSize: 18,
@@ -129,7 +129,7 @@ class _DonationPageState extends State<DonationPage> {
                               : light_Scaffold_color,
                         ),),
                       TextSpan(
-                        text: "help!",
+                          text: "help!",
                           style: TextStyle(fontSize: 18, color: orange_color)),
                     ],
                   ),
@@ -138,59 +138,59 @@ class _DonationPageState extends State<DonationPage> {
             ),
           ),
 
-         Row(
-           mainAxisAlignment: MainAxisAlignment.center,
-           children: [
-           Container(
-             // color: Colors.amber,
-             height: size.height * 0.055,
-             width: size.width * 0.302,
-             decoration:  provider.currentTheme?textFormField_neu_morphism:dark_textFormField_neu_morphism,
-             child: TextFormField(
-               keyboardType: TextInputType.numberWithOptions(decimal: true),
-               decoration: InputDecoration(
-                 contentPadding: EdgeInsets.symmetric(vertical: 18.0, horizontal: 18.0),
-                 border: InputBorder.none,
-                 hintText: "Min. 10\$",
-                 hintStyle: TextStyle(
-                     fontSize: 14,
-                     // fontFamily: 'Avant',
-                     // color: Color.fromRGBO(94, 94, 94, 1),
-                     letterSpacing: 1,
-                     fontWeight: FontWeight.w400),
-               ),
-               onChanged: (val){
-                 print(val);
-               },
-             )
-           ),
-           SizedBox(width: size.width*0.040,),
-           Container(
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                // color: Colors.amber,
+                  height: size.height * 0.055,
+                  width: size.width * 0.302,
+                  decoration:  provider.currentTheme?textFormField_neu_morphism:dark_textFormField_neu_morphism,
+                  child: TextFormField(
+                    keyboardType: TextInputType.numberWithOptions(decimal: true),
+                    decoration: InputDecoration(
+                      contentPadding: EdgeInsets.symmetric(vertical: 18.0, horizontal: 18.0),
+                      border: InputBorder.none,
+                      hintText: "Min. 10\$",
+                      hintStyle: TextStyle(
+                          fontSize: 14,
+                          // fontFamily: 'Avant',
+                          // color: Color.fromRGBO(94, 94, 94, 1),
+                          letterSpacing: 1,
+                          fontWeight: FontWeight.w400),
+                    ),
+                    onChanged: (val){
+                      print(val);
+                    },
+                  )
+              ),
+              SizedBox(width: size.width*0.040,),
+              Container(
 
-             // color: Colors.green,
-             height: size.height * 0.055,
-             width: size.width * 0.502,
-             decoration:  provider.currentTheme?neu_Morphism : dark_neu_Morphism,
-             child: InkWell(
-               onTap: (){
-                 //payment gateway
-                 print("Donate Now");
-               },
-               child: Center(
-                   child: Text(
-                     "Donate Now!",
-                     style: TextStyle(
-                         color: orange_color,
-                         fontSize: 16,
-                         // fontFamily: 'Avant',
-                         fontWeight: FontWeight.w600,
-                         letterSpacing: 1,
-                         height: 0.7),
-                   )),
-             ),
-           ),
-           ],
-         ),
+                // color: Colors.green,
+                height: size.height * 0.055,
+                width: size.width * 0.502,
+                decoration:  provider.currentTheme?neu_Morphism : dark_neu_Morphism,
+                child: InkWell(
+                  onTap: (){
+                    //payment gateway
+                    print("Donate Now");
+                  },
+                  child: Center(
+                      child: Text(
+                        "Donate Now!",
+                        style: TextStyle(
+                            color: orange_color,
+                            fontSize: 16,
+                            // fontFamily: 'Avant',
+                            fontWeight: FontWeight.w600,
+                            letterSpacing: 1,
+                            height: 0.7),
+                      )),
+                ),
+              ),
+            ],
+          ),
           Container(
             margin: EdgeInsets.symmetric(vertical: size.height*0.030),
             // color: Colors.green,
@@ -206,14 +206,14 @@ class _DonationPageState extends State<DonationPage> {
                   child: Text(
                     "Maybe Later...",
                     style: TextStyle(
-                        color:  provider.currentTheme
-                            ? dim_black
-                            : dim_white,
-                        fontSize: 18,
-                        // fontFamily: 'Avant',
-                        fontWeight: FontWeight.w600,
-                        letterSpacing: 1,
-                        height: 0.7,
+                      color:  provider.currentTheme
+                          ? dim_black
+                          : dim_white,
+                      fontSize: 18,
+                      // fontFamily: 'Avant',
+                      fontWeight: FontWeight.w600,
+                      letterSpacing: 1,
+                      height: 0.7,
                     ),
                   )),
             ),

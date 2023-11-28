@@ -2,124 +2,76 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:mybindel_test/pagerouter/customPageRouter.dart';
 import 'package:mybindel_test/palette/palette.dart';
 import 'package:mybindel_test/providers/selectTheme.dart';
+import 'package:mybindel_test/screens/Friends/FriendsScreen_main.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
-class FriendTabBar extends StatelessWidget {
-  List<String> friendsList = [
-    'Aiden',
-    'Alice',
-    'Alex',
-    'Amelia',
-    'Andrew',
-    'Anna',
-    'Benjamin',
-    'Brooke',
-    'Brandon',
-    'Bella',
-    'Caleb',
-    'Chloe',
-    'Christopher',
-    'Charlotte',
-    'Daniel',
-    'David',
-    'Diana',
-    'Dylan',
-    'Emily',
-    'Ethan',
-    'Elizabeth',
-    'Ella',
-    'Finn',
-    'Fiona',
-    'Faith',
-    'Gabriel',
-    'Grace',
-    'Gavin',
-    'Hannah',
-    'Henry',
-    'Haley',
-    'Isaac',
-    'Isabella',
-    'Ivy',
-    'Ian',
-    'Jackson',
-    'Julia',
-    'Jacob',
-    'James',
-    'Kevin',
-    'Kayla',
-    'Kyle',
-    'Katherine',
-    'Liam',
-    'Lily',
-    'Lucas',
-    'Leah',
-    'Mason',
-    'Mia',
-    'Michael',
-    'Madison',
-    'Noah',
-    'Natalie',
-    'Nathan',
-    'Olivia',
-    'Owen',
-    'Sophia',
-    'Samuel',
-    'Samantha',
-    'Thomas',
-    'Taylor',
-    'Tyler',
-    'Victoria',
-    'Violet',
-    'Vincent',
-    'Valerie',
-    'William',
-    'Willow',
-    'Wyatt',
-    'Xavier',
-    'Ximena',
-    'Xander',
-    'Yasmine',
-    'Yvonne',
-    'Yara',
-    'Zachary',
-    'Zoe',
-    'Zane',
-    'Zara'
-  ];
+import '../../Dummy_Data/Dummy_friends.dart';
+import '../../models/Friend.dart';
+import '../NonFriendScreens/NonFriendScreen_main.dart';
 
+class FriendTabBar extends StatefulWidget {
   FriendTabBar({super.key});
+
+  @override
+  State<FriendTabBar> createState() => _FriendTabBarState();
+}
+
+class _FriendTabBarState extends State<FriendTabBar> {
+  late final friendObject;
+
+  @override
+  void initState() {
+    friendObject = getfriendobj();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<Themeprovider>(context);
-    return ListView.builder(
-      physics: BouncingScrollPhysics(),
-      itemBuilder: (context, index) {
+    final friends = friendObject.getfriends;
+
+    return friends.length > 0
+        ? ListView.builder(
+      physics: const BouncingScrollPhysics(),
+      itemCount: friends.length,
+      itemBuilder: (context, friendIndex) {
         return Slidable(
           startActionPane: ActionPane(
-            extentRatio: 0.2,
-            motion: StretchMotion(), children: [
-            SlidableAction(
-              onPressed: (val) {},
-              backgroundColor: const Color.fromARGB(255, 253, 59, 0),
-              icon: Icons.block_rounded,
-            )
-          ]),
+              extentRatio: 0.2,
+              motion: const StretchMotion(),
+              children: [
+                SlidableAction(
+                  onPressed: (val) {
+                    friendObject.addtoBlockList(friendIndex, false);
+                    setState(() {});
+                  },
+                  backgroundColor: const Color.fromARGB(255, 253, 59, 0),
+                  icon: Icons.block_rounded,
+                )
+              ]),
           endActionPane: ActionPane(
-            extentRatio: 0.2,
-            motion: DrawerMotion(), children: [
-            SlidableAction(
-              onPressed: (val2) {},
-              icon: Icons.person_off,
-              backgroundColor: const Color.fromARGB(255, 253, 59, 0),
-            ),
-          ]),
+              extentRatio: 0.2,
+              motion: const DrawerMotion(),
+              children: [
+                SlidableAction(
+                  onPressed: (val2) {
+                    friendObject.addtoMuteList(friendIndex);
+                    setState(() {});
+                  },
+                  icon: Icons.notifications_off_outlined,
+                  backgroundColor: const Color.fromARGB(255, 253, 59, 0),
+                ),
+              ]),
           child: InkWell(
             onTap: () {
-              print(index);
+              Navigator.push(
+                  context,
+                  custompageroute(
+                      child: NonFriendScreen_main(profileId: friends[friendIndex].id)));
             },
             child: Container(
               height: (8).h,
@@ -146,7 +98,7 @@ class FriendTabBar extends StatelessWidget {
                             ClipRRect(
                               borderRadius: BorderRadius.circular(5),
                               child: Image.asset(
-                                "asset/music_icons/music_bg.png",
+                                friends[friendIndex].picture,
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -173,7 +125,7 @@ class FriendTabBar extends StatelessWidget {
                             text: TextSpan(
                               children: [
                                 TextSpan(
-                                  text: friendsList.elementAt(index),
+                                  text: friends[friendIndex].name,
                                   style: TextStyle(
                                       fontSize: 20,
                                       letterSpacing: 1.2,
@@ -197,7 +149,7 @@ class FriendTabBar extends StatelessWidget {
                             ),
                           ),
                           AutoSizeText(
-                            "Artist".toUpperCase(),
+                            friends[friendIndex].occupation.toUpperCase(),
                             style: TextStyle(
                                 color: orange_color,
                                 fontWeight: FontWeight.w500,
@@ -224,10 +176,10 @@ class FriendTabBar extends StatelessWidget {
                               : music_listTile_dark_neu_Morphism,
                           child: Center(
                             child: SvgPicture.asset(
-                              'asset/icons/Messages.svg',
-                              // width: (4.40).w,
-                              // height: (2.30).h,
-                              // color: orange_color,
+                              'asset/share_icons/Everyone.svg',
+                              width: (4.40).w,
+                              height: (2.30).h,
+                              color: orange_color,
                             ),
                           ),
                         ),
@@ -245,23 +197,24 @@ class FriendTabBar extends StatelessWidget {
                               : music_listTile_dark_neu_Morphism,
                           child: Center(
                             child: SvgPicture.asset(
-                              'asset/icons/Calls.svg',
+                              'asset/share_icons/Everyone.svg',
+                              width: (4.40).w,
+                              height: (2.30).h,
+                              color: orange_color,
                             ),
                           ),
                         ),
                       ),
-                      InkWell(
-                        onTap: () {
-                          print("3rd icon");
-                        },
-                        child:Container(
-                                    height: (3.2).h,
-                                    width: (6.5).w,
-                                    margin: EdgeInsets.only(right: 2.w),
-                                    decoration: provider.currentTheme
-                              ? music_listTile_neu_Morphism
-                              : music_listTile_dark_neu_Morphism,
-                                    child: popUpMenuFriend(provider)),
+                      Container(
+                        width: (7.00).w,
+                        height: (3.60).h,
+                        margin: EdgeInsets.only(right: 2.w),
+                        decoration: provider.currentTheme
+                            ? music_listTile_neu_Morphism
+                            : music_listTile_dark_neu_Morphism,
+                        child: Center(
+                          child: popUpMenuFriend(provider, friendIndex),
+                        ),
                       ),
                     ],
                   )
@@ -271,12 +224,14 @@ class FriendTabBar extends StatelessWidget {
           ),
         );
       },
+    )
+        : Center(
+      child: Text('No Friends'),
     );
   }
 }
 
-
-Widget popUpMenuFriend(provider) {
+Widget popUpMenuFriend(provider , friendIndex) {
   return PopupMenuButton(
     onOpened: () {},
     onCanceled: () {},
@@ -304,16 +259,16 @@ Widget popUpMenuFriend(provider) {
           child: Row(
             children: [
               Container(
-                height: (3).h,
-                width: (7.0).w,
-                padding: EdgeInsets.all((0.8).w),
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey.shade600.withOpacity(0.5)),
-                    color: provider.currentTheme
-                        ? light_Scaffold_color
-                        : dark_Scaffold_color,
-                    borderRadius: BorderRadius.circular(5)),
-                child: SvgPicture.asset("asset/friend_nonFriend_screen_icon/View Profile.svg")
+                  height: (3).h,
+                  width: (7.0).w,
+                  padding: EdgeInsets.all((0.8).w),
+                  decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey.shade600.withOpacity(0.5)),
+                      color: provider.currentTheme
+                          ? light_Scaffold_color
+                          : dark_Scaffold_color,
+                      borderRadius: BorderRadius.circular(5)),
+                  child: SvgPicture.asset("asset/friend_nonFriend_screen_icon/View Profile.svg")
               ),
               Expanded(
                 child: Container(
@@ -333,7 +288,6 @@ Widget popUpMenuFriend(provider) {
           ),
         ),
       ),
-
       PopupMenuItem(
         child: Container(
           height: (4.55).h,
@@ -341,16 +295,16 @@ Widget popUpMenuFriend(provider) {
           child: Row(
             children: [
               Container(
-                height: (3).h,
-                width: (7.0).w,
-                padding: EdgeInsets.all((0.8).w),
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey.shade600.withOpacity(0.5)),
-                    color: provider.currentTheme
-                        ? light_Scaffold_color
-                        : dark_Scaffold_color,
-                    borderRadius: BorderRadius.circular(5)),
-                child: SvgPicture.asset("asset/friend_nonFriend_screen_icon/Message.svg")
+                  height: (3).h,
+                  width: (7.0).w,
+                  padding: EdgeInsets.all((0.8).w),
+                  decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey.shade600.withOpacity(0.5)),
+                      color: provider.currentTheme
+                          ? light_Scaffold_color
+                          : dark_Scaffold_color,
+                      borderRadius: BorderRadius.circular(5)),
+                  child: SvgPicture.asset("asset/friend_nonFriend_screen_icon/Message.svg")
               ),
               Expanded(
                 child: Container(
@@ -370,7 +324,6 @@ Widget popUpMenuFriend(provider) {
           ),
         ),
       ),
-      
       PopupMenuItem(
         child: Container(
           height: (4.55).h,
@@ -378,23 +331,23 @@ Widget popUpMenuFriend(provider) {
           child: Row(
             children: [
               Container(
-                height: (3).h,
-                width: (7.0).w,
-                padding: EdgeInsets.all((0.8).w),
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey.shade600.withOpacity(0.5)),
-                    color: provider.currentTheme
-                        ? light_Scaffold_color
-                        : dark_Scaffold_color,
-                    borderRadius: BorderRadius.circular(5)),
-                child: SvgPicture.asset("asset/icons/Calls.svg")
+                  height: (3).h,
+                  width: (7.0).w,
+                  padding: EdgeInsets.all((0.8).w),
+                  decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey.shade600.withOpacity(0.5)),
+                      color: provider.currentTheme
+                          ? light_Scaffold_color
+                          : dark_Scaffold_color,
+                      borderRadius: BorderRadius.circular(5)),
+                  child: SvgPicture.asset("asset/friend_nonFriend_screen_icon/Calls.svg")
               ),
               Expanded(
                 child: Container(
                   margin: EdgeInsets.symmetric(horizontal: (2.2).w),
                   alignment: Alignment.centerLeft,
                   // color: Colors.yellow,
-                  child: Text(
+                  child: const Text(
                     'Call',
                     style: TextStyle(
                         fontSize: 12,
@@ -407,7 +360,6 @@ Widget popUpMenuFriend(provider) {
           ),
         ),
       ),
-      
       PopupMenuItem(
         child: Container(
           height: (4.55).h,
@@ -415,23 +367,23 @@ Widget popUpMenuFriend(provider) {
           child: Row(
             children: [
               Container(
-                height: (3).h,
-                width: (7.0).w,
-                padding: EdgeInsets.all((0.8).w),
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey.shade600.withOpacity(0.5)),
-                    color: provider.currentTheme
-                        ? light_Scaffold_color
-                        : dark_Scaffold_color,
-                    borderRadius: BorderRadius.circular(5)),
-                child: SvgPicture.asset("asset/friend_nonFriend_screen_icon/Mute.svg")
+                  height: (3).h,
+                  width: (7.0).w,
+                  padding: EdgeInsets.all((0.8).w),
+                  decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey.shade600.withOpacity(0.5)),
+                      color: provider.currentTheme
+                          ? light_Scaffold_color
+                          : dark_Scaffold_color,
+                      borderRadius: BorderRadius.circular(5)),
+                  child: SvgPicture.asset("asset/friend_nonFriend_screen_icon/Mute.svg")
               ),
               Expanded(
                 child: Container(
                   margin: EdgeInsets.symmetric(horizontal: (2.2).w),
                   alignment: Alignment.centerLeft,
                   // color: Colors.yellow,
-                  child: Text(
+                  child: const Text(
                     'Mute',
                     style: TextStyle(
                         fontSize: 12,
@@ -444,7 +396,6 @@ Widget popUpMenuFriend(provider) {
           ),
         ),
       ),
-
       PopupMenuItem(
         child: Container(
           height: (4.55).h,
@@ -452,16 +403,16 @@ Widget popUpMenuFriend(provider) {
           child: Row(
             children: [
               Container(
-                height: (3).h,
-                width: (7.0).w,
-                padding: EdgeInsets.all((0.8).w),
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey.shade600.withOpacity(0.5)),
-                    color: provider.currentTheme
-                        ? light_Scaffold_color
-                        : dark_Scaffold_color,
-                    borderRadius: BorderRadius.circular(5)),
-                child: SvgPicture.asset("asset/friend_nonFriend_screen_icon/Unfriend.svg")
+                  height: (3).h,
+                  width: (7.0).w,
+                  padding: EdgeInsets.all((0.8).w),
+                  decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey.shade600.withOpacity(0.5)),
+                      color: provider.currentTheme
+                          ? light_Scaffold_color
+                          : dark_Scaffold_color,
+                      borderRadius: BorderRadius.circular(5)),
+                  child: SvgPicture.asset("asset/friend_nonFriend_screen_icon/Unfriend.svg")
               ),
               Expanded(
                 child: Container(
@@ -481,7 +432,6 @@ Widget popUpMenuFriend(provider) {
           ),
         ),
       ),
-
       PopupMenuItem(
         child: Container(
           height: (4.55).h,
@@ -489,16 +439,16 @@ Widget popUpMenuFriend(provider) {
           child: Row(
             children: [
               Container(
-                height: (3).h,
-                width: (7.0).w,
-                padding: EdgeInsets.all((0.8).w),
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey.shade600.withOpacity(0.5)),
-                    color: provider.currentTheme
-                        ? light_Scaffold_color
-                        : dark_Scaffold_color,
-                    borderRadius: BorderRadius.circular(5)),
-                child: SvgPicture.asset("asset/friend_nonFriend_screen_icon/Block Person.svg")
+                  height: (3).h,
+                  width: (7.0).w,
+                  padding: EdgeInsets.all((0.8).w),
+                  decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey.shade600.withOpacity(0.5)),
+                      color: provider.currentTheme
+                          ? light_Scaffold_color
+                          : dark_Scaffold_color,
+                      borderRadius: BorderRadius.circular(5)),
+                  child: SvgPicture.asset("asset/friend_nonFriend_screen_icon/Block Person.svg")
               ),
               Expanded(
                 child: Container(
@@ -525,16 +475,16 @@ Widget popUpMenuFriend(provider) {
           child: Row(
             children: [
               Container(
-                height: (3).h,
-                width: (7.0).w,
-                padding: EdgeInsets.all((0.8).w),
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey.shade600.withOpacity(0.5)),
-                    color: provider.currentTheme
-                        ? light_Scaffold_color
-                        : dark_Scaffold_color,
-                    borderRadius: BorderRadius.circular(5)),
-                child: SvgPicture.asset("asset/friend_nonFriend_screen_icon/Block Person.svg")
+                  height: (3).h,
+                  width: (7.0).w,
+                  padding: EdgeInsets.all((0.8).w),
+                  decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey.shade600.withOpacity(0.5)),
+                      color: provider.currentTheme
+                          ? light_Scaffold_color
+                          : dark_Scaffold_color,
+                      borderRadius: BorderRadius.circular(5)),
+                  child: SvgPicture.asset("asset/friend_nonFriend_screen_icon/Block Person.svg")
               ),
               Expanded(
                 child: Container(
@@ -561,29 +511,29 @@ Widget popUpMenuFriend(provider) {
           child: Row(
             children: [
               Container(
-                height: (3).h,
-                width: (7.0).w,
-                padding: EdgeInsets.all((0.8).w),
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey.shade600.withOpacity(0.5)),
-                    color: provider.currentTheme
-                        ? light_Scaffold_color
-                        : dark_Scaffold_color,
-                    borderRadius: BorderRadius.circular(5)),
-                child: SvgPicture.asset("asset/friend_nonFriend_screen_icon/Report.svg",color: Colors.black,)
+                  height: (3).h,
+                  width: (7.0).w,
+                  padding: EdgeInsets.all((0.8).w),
+                  decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey.shade600.withOpacity(0.5)),
+                      color: provider.currentTheme
+                          ? light_Scaffold_color
+                          : dark_Scaffold_color,
+                      borderRadius: BorderRadius.circular(5)),
+                  child: SvgPicture.asset("asset/friend_nonFriend_screen_icon/Report.svg",color: Colors.black,)
               ),
               Expanded(
                 child: Container(
                   margin: EdgeInsets.symmetric(horizontal: (3.2).w),
                   alignment: Alignment.centerLeft,
                   // color: Colors.yellow,
-                  child: Text(
+                  child: const Text(
                     'Report',
                     style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w600,
-                        letterSpacing: 1,
-                        ),
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                      letterSpacing: 1,
+                    ),
                   ),
                 ),
               )

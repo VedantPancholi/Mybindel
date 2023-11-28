@@ -17,8 +17,8 @@ import '../widgets/fieldbutton_widget.dart';
 
 class SecondCreateUserPage extends StatefulWidget {
 
-String sendToEmail;
-SecondCreateUserPage(this.sendToEmail);
+  String sendToEmail;
+  SecondCreateUserPage(this.sendToEmail);
 
   @override
   State<SecondCreateUserPage> createState() => _SecondCreateUserPageState();
@@ -35,14 +35,18 @@ class _SecondCreateUserPageState extends State<SecondCreateUserPage> {
   bool isPressed3 = false;
   @override
   Widget build(BuildContext context) {
+
+    print('create second page called ');
+
+
     final provider = Provider.of<Themeprovider>(context);
     final size = MediaQuery.of(context).size;
     final theme =
         SchedulerBinding.instance.platformDispatcher.platformBrightness;
     return Scaffold(
-    resizeToAvoidBottomInset: false,
-    backgroundColor:
-    provider.currentTheme ? light_Scaffold_color : dark_Scaffold_color,
+      resizeToAvoidBottomInset: false,
+      backgroundColor:
+      provider.currentTheme ? light_Scaffold_color : dark_Scaffold_color,
       body: Form(
         key: _formKey,
         child: SingleChildScrollView(
@@ -73,9 +77,9 @@ class _SecondCreateUserPageState extends State<SecondCreateUserPage> {
                     child: Text(
                       "Mybindle",
                       style: TextStyle(
-                          fontWeight: FontWeight.w700,
-                          fontSize: 22,
-                          letterSpacing: 1.5,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 22,
+                        letterSpacing: 1.5,
                       ),
                     ),
                   ),
@@ -84,113 +88,112 @@ class _SecondCreateUserPageState extends State<SecondCreateUserPage> {
               Container(
                 padding: EdgeInsets.symmetric(horizontal: size.width * 0.087),
                 color: provider.currentTheme
-                ? light_Scaffold_color
-                : dark_Scaffold_color,
+                    ? light_Scaffold_color
+                    : dark_Scaffold_color,
                 height: size.height * 0.20,
                 width: size.width,
                 child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                InkWell(
-                  onTap: (){
-                    Navigator.pushAndRemoveUntil(context, custompageroute(child: CreateUser()), (route) => false);
-                  },
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Container(
-                        width: size.width*0.060,
-                        height: size.height*0.030,
-                          decoration : provider.currentTheme
-                              ? const BoxDecoration(
-                              // theme == Brightness.light?light_Scaffold_color:dark_Scaffold_color
-                              color: Color.fromRGBO(240, 240, 240, 1),
-                              boxShadow: [
-                                BoxShadow(
-                                  blurRadius: 2,
-                                  offset: Offset(1, 1),
-                                  color: Color.fromRGBO(174, 172, 172, 1.0),
-                                ),
-                                BoxShadow(
-                                  blurRadius: 3,
-                                  offset: Offset(-3, -4),
-                                  color: Color.fromRGBO(255, 255, 255, 1.0),
-                                ),
-                              ])
-                              : const BoxDecoration(
-                              // theme == Brightness.light?light_Scaffold_color:dark_Scaffold_color
-                              color: Color.fromRGBO(25, 25, 25, 1.0),
-                              boxShadow: [
-                                BoxShadow(
-                                  blurRadius: 5,
-                                  offset: Offset(5, 5),
-                                  color: Color.fromRGBO(18, 18, 18, 1.0),
-                                ),
-                                BoxShadow(
-                                  blurRadius: 3,
-                                  offset: Offset(-3, -5),
-                                  color: Color.fromRGBO(33, 33, 33, 1.0),
-                                ),
-                              ]),
-                          child: Center(child: Icon(Icons.arrow_back_ios_rounded,color: orange_color,size: 17,))),
-                      SizedBox(width: size.width*0.020,),
-                       Text(
-                        "Create New",
-                        style: TextStyle(
-                          color: provider.currentTheme ? dim_black : dim_white,
-                            fontFamily: 'Avant',
-                            fontSize: 21,
-                            letterSpacing: 1,
-                            fontWeight: FontWeight.w700),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(height: size.height * 0.020),
-                Container(
-                  decoration:  provider.currentTheme?textFormField_neu_morphism:dark_textFormField_neu_morphism,
-                  child: TextFormField(
-                      inputFormatters:  [FilteringTextInputFormatter.digitsOnly],
-                      maxLength: 6,
-                      controller: _verify,
-                      decoration: const InputDecoration(
-                        contentPadding: EdgeInsets.symmetric(vertical: 18.0, horizontal: 15.0),
-                        border: InputBorder.none,
-                        hintText: "Enter your verification code",
-                        hintStyle: TextStyle(
-                            fontSize: 14,
-                            // fontFamily: 'Avant',
-                            // color: Color.fromRGBO(94, 94, 94, 1),
-                            letterSpacing: 1,
-                            fontWeight: FontWeight.w500),
-                      ),
-                      // keyboardType: TextInputType.number,
-                      textInputAction: TextInputAction.next,
-                      keyboardType: TextInputType.number,
-                      autovalidateMode: AutovalidateMode.onUserInteraction,
-                      onChanged: null,
-                  ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Container(
-                      width: size.width*0.60,
-                      child: AutoSizeText(
-                        
-                        "The code was sent to ${widget.sendToEmail}",
-                        softWrap: true,
-                        wrapWords: true,
-                        style: TextStyle(color: provider.currentTheme ? dim_black : dim_white),
+                    InkWell(
+                      onTap: (){
+                        Navigator.pushAndRemoveUntil(context, custompageroute(child: CreateUser()), (route) => false);
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Container(
+                              width: size.width*0.060,
+                              height: size.height*0.030,
+                              decoration : provider.currentTheme
+                                  ? const BoxDecoration(
+                                // theme == Brightness.light?light_Scaffold_color:dark_Scaffold_color
+                                  color: Color.fromRGBO(240, 240, 240, 1),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      blurRadius: 2,
+                                      offset: Offset(1, 1),
+                                      color: Color.fromRGBO(174, 172, 172, 1.0),
+                                    ),
+                                    BoxShadow(
+                                      blurRadius: 3,
+                                      offset: Offset(-3, -4),
+                                      color: Color.fromRGBO(255, 255, 255, 1.0),
+                                    ),
+                                  ])
+                                  : const BoxDecoration(
+                                // theme == Brightness.light?light_Scaffold_color:dark_Scaffold_color
+                                  color: Color.fromRGBO(25, 25, 25, 1.0),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      blurRadius: 5,
+                                      offset: Offset(5, 5),
+                                      color: Color.fromRGBO(18, 18, 18, 1.0),
+                                    ),
+                                    BoxShadow(
+                                      blurRadius: 3,
+                                      offset: Offset(-3, -5),
+                                      color: Color.fromRGBO(33, 33, 33, 1.0),
+                                    ),
+                                  ]),
+                              child: Center(child: Icon(Icons.arrow_back_ios_rounded,color: orange_color,size: 17,))),
+                          SizedBox(width: size.width*0.020,),
+                          const Text(
+                            "Create New",
+                            style: TextStyle(
+                                fontFamily: 'Avant',
+                                fontSize: 21,
+                                letterSpacing: 1,
+                                fontWeight: FontWeight.w700),
+                          ),
+                        ],
                       ),
                     ),
-                    TextButton(onPressed: (){}, child: Text("Resend",style: TextStyle(color: orange_color),))
+                    SizedBox(height: size.height * 0.020),
+                    Container(
+                      decoration:  provider.currentTheme?textFormField_neu_morphism:dark_textFormField_neu_morphism,
+                      child: TextFormField(
+                        inputFormatters:  [FilteringTextInputFormatter.digitsOnly],
+                        maxLength: 6,
+                        controller: _verify,
+                        decoration: const InputDecoration(
+                          contentPadding: EdgeInsets.symmetric(vertical: 18.0, horizontal: 15.0),
+                          border: InputBorder.none,
+                          hintText: "Enter your verification code",
+                          hintStyle: TextStyle(
+                              fontSize: 14,
+                              // fontFamily: 'Avant',
+                              // color: Color.fromRGBO(94, 94, 94, 1),
+                              letterSpacing: 1,
+                              fontWeight: FontWeight.w500),
+                        ),
+                        // keyboardType: TextInputType.number,
+                        textInputAction: TextInputAction.next,
+                        keyboardType: TextInputType.number,
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                        onChanged: null,
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          width: size.width*0.60,
+                          child: AutoSizeText(
+
+                            "The code was sent to ${widget.sendToEmail}",
+                            softWrap: true,
+                            wrapWords: true,
+                            style: TextStyle(color: provider.currentTheme ? dim_black : dim_white),
+                          ),
+                        ),
+                        TextButton(onPressed: (){}, child: Text("Resend",style: TextStyle(color: orange_color),))
+                      ],
+                    ),
+                    // SizedBox(height: size.height * 0.020),
+
                   ],
                 ),
-                // SizedBox(height: size.height * 0.020),
-
-                ],
-              ),
               ),
               Container(
                 width: size.width,
@@ -408,12 +411,12 @@ class _SecondCreateUserPageState extends State<SecondCreateUserPage> {
                       keyboardType: TextInputType.datetime,
 
                       decoration: InputDecoration(
-                        border: InputBorder.none,
-                        suffixIcon: Icon(
-                          Icons.arrow_drop_down,
-                          size: 25,
-                        ),
-                       hintText: "Date of Birth"
+                          border: InputBorder.none,
+                          suffixIcon: Icon(
+                            Icons.arrow_drop_down,
+                            size: 25,
+                          ),
+                          hintText: "Date of Birth"
                       ),
                       onTap: () async {
                         DateTime? pickeddate = await showDatePicker(
@@ -423,27 +426,27 @@ class _SecondCreateUserPageState extends State<SecondCreateUserPage> {
                           lastDate: DateTime(2030),
                           builder: (BuildContext context, Widget? child){
                             return Theme(
-                                data: provider.currentTheme
-                               ? ThemeData.light().copyWith(
-                              colorScheme: ColorScheme.light(
-                                primary: orange_color,
-                                onPrimary: Colors.white,
-                                surface:orange_color,
-                                onSurface: Colors.black,
+                              data: provider.currentTheme
+                                  ? ThemeData.light().copyWith(
+                                colorScheme: ColorScheme.light(
+                                  primary: orange_color,
+                                  onPrimary: Colors.white,
+                                  surface:orange_color,
+                                  onSurface: Colors.black,
+                                ),
+                                dialogBackgroundColor:Colors.white,
+                              )
+                                  : ThemeData.dark().copyWith(
+                                colorScheme: ColorScheme.dark(
+                                  primary: orange_color,
+                                  onPrimary: Colors.black,
+                                  surface:orange_color,
+                                  onSurface: Colors.white,
+                                ),
+                                dialogBackgroundColor:Colors.black,
                               ),
-                              dialogBackgroundColor:Colors.white,
-                            )
-                              : ThemeData.dark().copyWith(
-                            colorScheme: ColorScheme.dark(
-                            primary: orange_color,
-                            onPrimary: Colors.black,
-                            surface:orange_color,
-                            onSurface: Colors.white,
-                            ),
-                            dialogBackgroundColor:Colors.black,
-                            ),
 
-                                child: child!,
+                              child: child!,
                             );
                           },
                         );
@@ -707,8 +710,8 @@ class _SecondCreateUserPageState extends State<SecondCreateUserPage> {
                           TextSpan(
                             text: "Terms and Conditions",
                             style: TextStyle(
-                                fontSize: 13.0,
-                                color: orange_color,
+                              fontSize: 13.0,
+                              color: orange_color,
                             ),
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {

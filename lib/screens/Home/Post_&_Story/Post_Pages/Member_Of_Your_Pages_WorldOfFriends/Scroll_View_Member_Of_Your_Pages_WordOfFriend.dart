@@ -1,17 +1,20 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:azlistview/azlistview.dart';
 import 'package:flutter/material.dart';
 import 'package:mybindel_test/models/Friend.dart';
 import 'package:mybindel_test/providers/Member_Of_Your_Pages_WorldOfFriendsProvider.dart';
 import 'package:provider/provider.dart';
+import 'package:sizer/sizer.dart';
 import 'package:mybindel_test/palette/palette.dart';
 import 'package:mybindel_test/providers/selectTheme.dart';
-import 'package:sizer/sizer.dart';
 
 class Member_Of_Your_Pages_WorldOfFriendList extends ISuspensionBean{
+  final int id;
   final String title;
   final String tag;
   Member_Of_Your_Pages_WorldOfFriendList({
+    required this.id,
     required this.title,
     required this.tag,
   });
@@ -41,9 +44,9 @@ class _Member_Of_Your_Pages_WorldOfFriend_Scoll_ViewState extends State<Member_O
 //  late final list;
   @override
   void initState() {
-
+    int i = 0;
     // final list = Member_Of_Your_Pages_WordOfFriendsProvider.getItem;
-    this.items_list = widget.items.map((item) => Member_Of_Your_Pages_WorldOfFriendList(title: item, tag: item[0].toUpperCase())).toList();
+    this.items_list = widget.items.map((item) => Member_Of_Your_Pages_WorldOfFriendList(id: i++, title: item, tag: item[0].toUpperCase())).toList();
     super.initState();
   }
   int currentIndex = 0;
@@ -109,7 +112,7 @@ class _Member_Of_Your_Pages_WorldOfFriend_Scoll_ViewState extends State<Member_O
               onTap: (){
                 if(!member_Of_Your_Pages_WordOfFriendsProvider.getItem.any((element) => element.name == items_list[index].title))
                 {
-                  var value = Friend(name: items_list[index].title, picture: 'asset/music_icons/music_bg.png', occupation: '');
+                  var value = Friend(name: items_list[index].title, picture: 'asset/music_icons/music_bg.png', occupation: '', id: 100);
                   member_Of_Your_Pages_WordOfFriendsProvider.addItem(value);
                 }
                 // print("onTap");
@@ -196,7 +199,7 @@ class _Member_Of_Your_Pages_WorldOfFriend_Scoll_ViewState extends State<Member_O
               ),
             ),
           ]
-     ),
-);
-}
+      ),
+    );
+  }
 }

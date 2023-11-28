@@ -7,8 +7,8 @@ class FriendRequest {
 
   FriendRequest(
       {required this.name,
-      required this.occupation,
-      required this.picture,
-      required this.mutualfriends,
-      required this.duration});
+        required this.occupation,
+        required this.picture,
+        required this.mutualfriends,
+        required this.duration});
 }

@@ -86,14 +86,18 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - asset/images/
-    - asset/icons/
-    - asset/icons2/
+    - asset/BottomNavigation_icons/
+    - asset/BottomNavigation_icons2/
+    - asset/payment_icons/
+    - asset/Friends_icons/
     - asset/share_icons/
-    - asset/post_icons/
+    - asset/story_icons/
     - asset/effect_icon/
     - asset/music_icons/
-    - asset/Videos/
+    - asset/post_icons/
+    - asset/test2.mp4
     - asset/friend_nonFriend_screen_icon/
+    - asset/homescreen_icons/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

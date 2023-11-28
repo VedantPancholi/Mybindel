@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:mybindel_test/screens/loginPage.dart';
-import 'package:mybindel_test/screens/pricingPlans.dart';
-import 'package:mybindel_test/screens/welcomePage.dart';
+
 import 'package:mybindel_test/widgets/payment_option_widget.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../pagerouter/customPageRouter.dart';
 import '../palette/palette.dart';
@@ -37,13 +35,13 @@ class _PaymentMethodsState extends State<PaymentMethods> {
     final provider = Provider.of<Themeprovider>(context);
     final size = MediaQuery.of(context).size;
     final List<Map<String ,dynamic>> item = [
-      {'image': 'asset/images/PayPal.png','title':'PayPal',},
-      {'image': 'asset/images/bankTransfer.png','title':'Bank Transfer'},
-      {'image': 'asset/images/masterCard.png','title':'Mastercard',},
-      {'image': 'asset/images/americanExpress.png','title':'American Express',},
-       provider.currentTheme?{'image': 'asset/images/applePay.png','title':'Apple Pay',}:{'image': 'asset/images/dark_applepay_theme.png','title':'Apple Pay',},
-      {'image': 'asset/images/googlepay.png','title':'Google Pay',},
-       provider.currentTheme?{'image': 'asset/images/amazonpay.png','title':'Amazon Pay',}:{'image': 'asset/images/dark_amazonpay_theme_according.png','title':'Amazon Pay',},
+      {'image': 'asset/payment_icons/PayPal.png','title':'PayPal',},
+      {'image': 'asset/payment_icons/bankTransfer.png','title':'Bank Transfer'},
+      {'image': 'asset/payment_icons/masterCard.png','title':'Mastercard',},
+      {'image': 'asset/payment_icons/americanExpress.png','title':'American Express',},
+      provider.currentTheme?{'image': 'asset/payment_icons/applePay.png','title':'Apple Pay',}:{'image': 'asset/payment_icons/dark_applepay_theme.png','title':'Apple Pay',},
+      {'image': 'asset/payment_icons/googlepay.png','title':'Google Pay',},
+      provider.currentTheme?{'image': 'asset/payment_icons/amazonpay.png','title':'Amazon Pay',}:{'image': 'asset/payment_icons/dark_amazonpay_theme_according.png','title':'Amazon Pay',},
     ];
 
     return Scaffold(
@@ -88,10 +86,10 @@ class _PaymentMethodsState extends State<PaymentMethods> {
               children: [
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: size.width * 0.087,),
-                    margin: EdgeInsets.symmetric(vertical: size.height * 0.010,),
-                    height: size.height * 0.030,
-                    width: size.width,
-                 // color: Colors.green,
+                  margin: EdgeInsets.symmetric(vertical: size.height * 0.010,),
+                  height: size.height * 0.030,
+                  width: size.width,
+                  // color: Colors.green,
                   child: const Text(
                     "Payment Methods",
                     style: TextStyle(
@@ -106,10 +104,10 @@ class _PaymentMethodsState extends State<PaymentMethods> {
                   width: size.width,
                   child: ListView.builder(
 
-                  //  physics: NeverScrollableScrollPhysics(),
-                   shrinkWrap: true,
+                    //  physics: NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
                     itemCount: item.length,
-                      itemBuilder: (ctx , index){
+                    itemBuilder: (ctx , index){
                       return  paymentoption(
                         title: item[index]['title'],
                         image: item[index]['image'],
@@ -119,7 +117,7 @@ class _PaymentMethodsState extends State<PaymentMethods> {
                             selectedindex = index ;
                           });
 
-                            print(index);
+                          print(index);
                         },
                         margin: EdgeInsets.symmetric(
                             vertical: size.height * 0.010, horizontal: size.width * 0.087),
@@ -127,14 +125,14 @@ class _PaymentMethodsState extends State<PaymentMethods> {
                         iconWidth: size.width * 0.14,
                         width: size.width * 0.60,
                       );
-                      } ,
+                    } ,
 
                   ),
                 ),
 
                 Container(
-                  height: size.height*0.15,
-                   // color: Colors.blue,//margin: EdgeInsets.fromLTRB(0,0,0,size.height*0.050),
+                    height: size.height*0.15,
+                    // color: Colors.blue,//margin: EdgeInsets.fromLTRB(0,0,0,size.height*0.050),
                     child: Center(
                       child: fieldbutton(
                           title: "Continue",

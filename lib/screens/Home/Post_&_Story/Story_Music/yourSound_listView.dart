@@ -6,6 +6,7 @@ import 'package:sizer/sizer.dart';
 import 'package:mybindel_test/palette/palette.dart';
 
 import '../../../../providers/selectTheme.dart';
+
 class YourSoundListView extends StatefulWidget {
 
   String img_url;

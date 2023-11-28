@@ -5,6 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:mybindel_test/palette/palette.dart';
 import 'package:mybindel_test/providers/selectTheme.dart';
 import 'package:provider/provider.dart';
+import 'package:sizer/sizer.dart';
 
 class postOptions extends StatelessWidget {
   final size;
@@ -15,11 +16,11 @@ class postOptions extends StatelessWidget {
 
   postOptions(
       {super.key,
-      required this.size,
-      required this.notification_number,
-      required this.showNotification,
-      required this.text,
-      required this.svg});
+        required this.size,
+        required this.notification_number,
+        required this.showNotification,
+        required this.text,
+        required this.svg});
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +35,10 @@ class postOptions extends StatelessWidget {
       //  color: Colors.amber,
       child: badges.Badge(
         badgeAnimation: badges.BadgeAnimation.slide(),
-        badgeContent: AutoSizeText(notification_number.toString()),
+        badgeContent: AutoSizeText(
+          notification_number.toString(),
+          style: TextStyle(color: Color.fromRGBO(242,242,242,1.0),fontSize: 10,fontWeight: FontWeight.bold),
+        ),
         badgeStyle: badges.BadgeStyle(
           badgeColor: orange_color,
           padding: EdgeInsets.all(5),
@@ -55,8 +59,11 @@ class postOptions extends StatelessWidget {
                 ? square_neu_Morphism
                 : square_dark_neu_Morphism,
             child: Row(children: [
-              SvgPicture.asset(svg),
-              SizedBox(width: size.width*0.020),
+              Container(
+                  height: (3).h, width: (5).w,
+                  child: SvgPicture.asset(svg)
+              ),
+              SizedBox(width: size.width * 0.030),
               AutoSizeText(
                 text,
                 style: TextStyle(

@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:azlistview/azlistview.dart';
 import 'package:flutter/material.dart';
@@ -37,31 +36,31 @@ class Group_of_friends_Scroll_View extends StatefulWidget {
 
 class _Group_of_friends_Scroll_ViewState extends State<Group_of_friends_Scroll_View> {
 
-List<Group_of_friendsList> items_list = [];
-bool isSelect = false;
+  List<Group_of_friendsList> items_list = [];
+  bool isSelect = false;
 
-//  late final list; 
+//  late final list;
   @override
   void initState() {
-    
-    
+
+
     // final list = Group_of_friendsProvider.getItem;
     this.items_list = widget.items.map((item) => Group_of_friendsList(title: item.name, tag: item.name[0].toUpperCase())).toList();
     super.initState();
   }
- int currentIndex = 0;
+  int currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<Themeprovider>(context);
-        final group_of_friendsProvider = Provider.of<Group_of_friendsProvider>(context);
+    final group_of_friendsProvider = Provider.of<Group_of_friendsProvider>(context);
     // final tag = item.getSuspensionTag();
     // final title = item.title;
-print(currentIndex);
+    print(currentIndex);
 
     return AzListView(
       // susItemHeight: 30,
-      data: items_list, 
+      data: items_list,
       indexBarHeight: 100.h,
       // indexBarItemHeight: 2.h,
       physics: const BouncingScrollPhysics(),
@@ -92,91 +91,91 @@ print(currentIndex);
         ),
         selectItemDecoration: provider.currentTheme ? square_neu_Morphism : square_dark_neu_Morphism,
 
-        decoration: provider.currentTheme 
-        ? BoxDecoration(
-          border: Border(right: BorderSide(color: Colors.black))
-        ) 
-        : BoxDecoration(
-          border: Border(right: BorderSide(color: Colors.white))
+        decoration: provider.currentTheme
+            ? BoxDecoration(
+            border: Border(right: BorderSide(color: Colors.black))
+        )
+            : BoxDecoration(
+            border: Border(right: BorderSide(color: Colors.white))
         ) ,
       ),
       itemCount: items_list.length,
       itemBuilder: (BuildContext context, int index) {
         // return _buildListItem(items_list[index], index, currentIndex);
         return Container(
-      height: (8).h,
-      width: (80).w,
-      margin: EdgeInsets.only(right: 12.w, bottom: 1.2.h, top: 0.5.h, left: 1.4.w),
-      alignment: Alignment.centerLeft,
-      decoration: provider.currentTheme ? currentIndex == index ? selected_square_neu_Morphism : square_neu_Morphism : square_dark_neu_Morphism,
-      child: InkWell(
-        onTap: (){
-          print("onTap");
-          currentIndex = index;
-          setState(() {
-            
-          });
-        },
-        child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      children: [
-                        Container(
-                          padding: EdgeInsets.symmetric(
-                              vertical: (0.8).h, horizontal: (2.2).w),
-                          child: _buildHeader(items_list[index].getSuspensionTag()),
+            height: (8).h,
+            width: (80).w,
+            margin: EdgeInsets.only(right: 12.w, bottom: 1.2.h, top: 0.5.h, left: 1.4.w),
+            alignment: Alignment.centerLeft,
+            decoration: provider.currentTheme ? currentIndex == index ? selected_square_neu_Morphism : square_neu_Morphism : square_dark_neu_Morphism,
+            child: InkWell(
+              onTap: (){
+                print("onTap");
+                currentIndex = index;
+                setState(() {
+
+                });
+              },
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      Container(
+                        padding: EdgeInsets.symmetric(
+                            vertical: (0.8).h, horizontal: (2.2).w),
+                        child: _buildHeader(items_list[index].getSuspensionTag()),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(left: (1.2).w),
+                        child: AutoSizeText(
+                          items_list[index].title,
+                          style: TextStyle(
+                              fontSize: 19,
+                              letterSpacing: 1,
+                              fontWeight: FontWeight.w400,
+                              color: provider.currentTheme
+                                  ? dim_black
+                                  : dim_white),
                         ),
-                        Container(
-                          margin: EdgeInsets.only(left: (1.2).w),
-                          child: AutoSizeText(
-                             items_list[index].title,
-                             style: TextStyle(
-                                 fontSize: 19,
-                                 letterSpacing: 1,
-                                 fontWeight: FontWeight.w400,
-                                 color: provider.currentTheme
-                                     ? dim_black
-                                     : dim_white),
-                           ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-      )
-    );
-       },
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            )
+        );
+      },
     );
   }
-      _buildHeader(tag) {
-        return Container(
-          width: (12.0).w,
-          height: (6.0).h,
-          // decoration: square_neu_Morphism,
-          child: Stack(
-            children: [
-              ClipRRect(
-                      borderRadius: BorderRadius.circular(5),
-                      child: Image.asset(
-                        "asset/music_icons/music_bg.png",
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                Positioned(
-                    bottom: 0,
-                    right: 0,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(40),
-                      child: Container(
-                        color: Colors.red,
-                        width: (2.500).w,
-                        height: (1.200).h,
-                      ),
-                    ),
-                  ),
-                ]
-          ),
-        );
-      }
+  _buildHeader(tag) {
+    return Container(
+      width: (12.0).w,
+      height: (6.0).h,
+      // decoration: square_neu_Morphism,
+      child: Stack(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(5),
+              child: Image.asset(
+                "asset/music_icons/music_bg.png",
+                fit: BoxFit.cover,
+              ),
+            ),
+            Positioned(
+              bottom: 0,
+              right: 0,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(40),
+                child: Container(
+                  color: Colors.red,
+                  width: (2.500).w,
+                  height: (1.200).h,
+                ),
+              ),
+            ),
+          ]
+      ),
+    );
+  }
 }

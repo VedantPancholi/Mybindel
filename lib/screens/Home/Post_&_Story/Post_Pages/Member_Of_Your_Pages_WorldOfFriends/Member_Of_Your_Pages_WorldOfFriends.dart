@@ -230,6 +230,6 @@ class _Member_Of_Your_Pages_WorldOfFriendsState extends State<Member_Of_Your_Pag
               )
             ],
           )),
-);
-}
+    );
+  }
 }

@@ -42,7 +42,7 @@ class _TrendingListViewState extends State<TrendingListView> {
                   ? music_listTile_neu_Morphism
                   : music_listTile_dark_neu_Morphism,
               margin:
-                  EdgeInsets.symmetric(vertical: (0.8).h, horizontal: (2.2).w),
+              EdgeInsets.symmetric(vertical: (0.8).h, horizontal: (2.2).w),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

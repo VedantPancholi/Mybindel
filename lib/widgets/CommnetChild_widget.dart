@@ -1,9 +1,11 @@
+
 import 'dart:ffi';
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:comment_box/comment/comment.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
+import 'package:mybindel_test/Dummy_Data/Dummy_profile.dart';
 import 'package:provider/provider.dart';
 import 'package:readmore/readmore.dart';
 import 'package:sizer/sizer.dart';
@@ -18,7 +20,9 @@ class commentChild extends StatefulWidget {
   final dynamic context;
   final FocusNode inputnode;
   final int postIndex;
-  commentChild(this.data, this.context, this.inputnode, this.postIndex);
+  final int? profileId;
+
+  commentChild(this.data, this.context, this.inputnode, this.postIndex ,[this.profileId]);
 
   @override
   State<commentChild> createState() => _commentChildState();
@@ -40,10 +44,8 @@ class _commentChildState extends State<commentChild> {
         itemBuilder: (ctx, commentIndex) {// widget.data[commentIndex].picture
           return widget.data.length > 0 ?
           Container(
-            margin:
-            EdgeInsets.symmetric(vertical: (0.40).h, horizontal: (2.0).w),
-            padding:
-            EdgeInsets.symmetric(vertical: (1.00).h, horizontal: (1.50).w),
+            margin: EdgeInsets.symmetric(vertical: (0.40).h, horizontal: (2.0).w),
+            padding: EdgeInsets.symmetric(vertical: (1.00).h, horizontal: (1.50).w),
             // color: Colors.green,
             child: SingleChildScrollView(
               child: Column(
@@ -98,7 +100,7 @@ class _commentChildState extends State<commentChild> {
                                   padding:
                                   EdgeInsets.symmetric(horizontal: 3.w, vertical: 0.5.h),
                                   decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.only(
+                                    borderRadius: const BorderRadius.only(
                                         topRight: Radius.circular(10),
                                         bottomRight: Radius.circular(10)),
                                     color:
@@ -111,10 +113,8 @@ class _commentChildState extends State<commentChild> {
                                     trimMode: TrimMode.Line,
                                     trimCollapsedText: ' View ',
                                     trimExpandedText: ' Show Less ',
-                                    moreStyle: TextStyle(
-                                        color: Colors.deepOrange, fontSize: 12),
-                                    lessStyle: TextStyle(
-                                        color: Colors.deepOrange, fontSize: 12),
+                                    moreStyle: const TextStyle(color: Colors.deepOrange, fontSize: 12),
+                                    lessStyle: const TextStyle(color: Colors.deepOrange, fontSize: 12),
                                     style: TextStyle(
                                       fontSize: 18,
                                       letterSpacing: 1.5,
@@ -129,8 +129,7 @@ class _commentChildState extends State<commentChild> {
                                       onTap: () {
                                         commenttypeprovider.setPushIndex = commentIndex;
                                         commenttypeprovider.changecommentType = true;
-                                        FocusScope.of(context)
-                                            .requestFocus(widget.inputnode);
+                                        FocusScope.of(context).requestFocus(widget.inputnode);
                                       },
                                       child: Text(
                                         "Reply",
@@ -140,7 +139,7 @@ class _commentChildState extends State<commentChild> {
                                             fontWeight: FontWeight.w400),
                                       )),
                                   //like reaction
-                                  reactionButton(widget.postIndex, commentIndex)
+                                  reactionButton(widget.postIndex, commentIndex ,replyIndex: null, profileId: widget.profileId,)
                                 ],
                               )
                             ],
@@ -148,20 +147,18 @@ class _commentChildState extends State<commentChild> {
                     ],
                   ),
                   Visibility(
-                    visible: widget.data[commentIndex].replies.length > 0
-                        ? true
-                        : false,
+                    visible: widget.data[commentIndex].replies.length > 0 ? true : false,
                     maintainAnimation: true,
                     maintainState: true,
                     child: SizedBox(
                       width: (100).w,
                       height: repliesVisible ? null : (13.5).h,
                       child: ListView.builder(
-                        physics: NeverScrollableScrollPhysics(),
+                        physics: const NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
                         itemCount: widget.data[commentIndex].replies.length,
                         itemBuilder: (context, replyIndex) {
-                          return widget.data[commentIndex].replies.length >0 ?
+                          return widget.data[commentIndex].replies.length > 0 ?
                           Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -174,8 +171,7 @@ class _commentChildState extends State<commentChild> {
                                 width: (10.0).w,
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(10),
-                                  child: Image.asset(
-                                      widget.data[commentIndex].picture),
+                                  child: Image.asset(widget.data[commentIndex].picture),
                                   // radius: 10,
                                   // backgroundImage: CommentBox.commentImageParser(
                                   //     imageURLorPath: widget.data[commentIndex].picture),
@@ -198,8 +194,7 @@ class _commentChildState extends State<commentChild> {
                                           width: (50.0).w,
                                           // color: Colors.blue,
                                           child: AutoSizeText(
-                                            widget.data[commentIndex]
-                                                .replies[replyIndex].name,
+                                            widget.data[commentIndex].replies[replyIndex].name,
                                             softWrap: true,
                                             style: TextStyle(
                                                 fontSize: 14,
@@ -216,24 +211,23 @@ class _commentChildState extends State<commentChild> {
                                           padding:
                                           EdgeInsets.symmetric(horizontal: 2.w, vertical: 0.5.h),
                                           decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.only(
+                                            borderRadius: const BorderRadius.only(
                                                 topRight: Radius.circular(10),
                                                 bottomRight: Radius.circular(10)),
                                             color:
                                             Colors.grey.shade400.withOpacity(0.6),
                                           ),
                                           child: ReadMoreText(
-                                            widget.data[commentIndex]
-                                                .replies[replyIndex].text,
+                                            widget.data[commentIndex].replies[replyIndex].text,
                                             trimLines: 2,
                                             // textAlign: TextAlign.justify,
                                             trimMode: TrimMode.Line,
                                             trimCollapsedText: ' View ',
                                             trimExpandedText: ' Show Less ',
-                                            moreStyle: TextStyle(
+                                            moreStyle: const TextStyle(
                                                 color: Colors.deepOrange,
                                                 fontSize: 12),
-                                            lessStyle: TextStyle(
+                                            lessStyle: const TextStyle(
                                                 color: Colors.deepOrange,
                                                 fontSize: 12),
                                             style: TextStyle(
@@ -246,24 +240,20 @@ class _commentChildState extends State<commentChild> {
                                       Row(
                                         children: [
                                           //like reaction
-                                          reactionButton(
-                                              widget.postIndex, commentIndex)
+                                          reactionButton(widget.postIndex, commentIndex , replyIndex: replyIndex, profileId: widget.profileId,)
                                         ],
                                       )
                                     ],
                                   )),
                             ],
-                          )
-                              : null;
+                          ) : null;
 
                         },
                       ),
                     ),
                   ),
                   Visibility(
-                    visible: widget.data[commentIndex].replies.length > 1
-                        ? true
-                        : false,
+                    visible: widget.data[commentIndex].replies.length > 1 ? true : false,
                     maintainState: true,
                     maintainAnimation: true,
                     child: InkWell(
@@ -271,13 +261,13 @@ class _commentChildState extends State<commentChild> {
                           repliesVisible = !repliesVisible;
                           setState(() {});
                         },
-                        child: repliesVisible == true ? Text("Show less replies") : Text("Show more replies")),
+                        child: repliesVisible == true ? const Text("Show less replies") : const Text("Show more replies")),
                   )
                 ],
               ),
             ),
           )
-              : Center(child: Text("No comments"),);
+              : const Center(child: Text("No comments"),);
         });
   }
 }
@@ -285,14 +275,16 @@ class _commentChildState extends State<commentChild> {
 class reactionButton extends StatefulWidget {
   int postIndex;
   int commentIndex;
+  int? profileId;
   int? replyIndex;
-  reactionButton(this.postIndex, this.commentIndex, [this.replyIndex]);
+  reactionButton(this.postIndex, this.commentIndex, {this.replyIndex, this.profileId});
 
   @override
   State<reactionButton> createState() => _reactionButtonState();
 }
 
 class _reactionButtonState extends State<reactionButton> {
+  late final postobject;
   bool _reactionView = false;
   List<ReactionElement> elements = [
     ReactionElement(
@@ -305,7 +297,7 @@ class _reactionButtonState extends State<reactionButton> {
         )),
     ReactionElement(
         Reaction.love,
-        Icon(
+        const Icon(
           Icons.favorite,
           color: Colors.red,
           size: 20,
@@ -313,7 +305,7 @@ class _reactionButtonState extends State<reactionButton> {
         )),
     ReactionElement(
         Reaction.laugh,
-        Icon(
+        const Icon(
           Icons.emoji_emotions_outlined,
           color: Colors.amber,
           size: 20,
@@ -328,7 +320,6 @@ class _reactionButtonState extends State<reactionButton> {
           weight: 10,
         )),
   ];
-  final postobject = getpostobj();
   getReactionIcon(Reaction r) {
     switch (r) {
       case Reaction.like:
@@ -339,27 +330,27 @@ class _reactionButtonState extends State<reactionButton> {
           weight: 10,
         );
       case Reaction.love:
-        return Icon(
+        return const Icon(
           Icons.favorite,
           color: Colors.red,
           size: 20,
           weight: 10,
         );
       case Reaction.laugh:
-        return Icon(
+        return const Icon(
           Icons.emoji_emotions_outlined,
           color: Colors.amber,
           size: 20,
           weight: 10,
         );
       case Reaction.none:
-        return Icon(
+        return const Icon(
           Icons.thumb_up_alt_outlined,
           size: 20,
           weight: 10,
         );
       default:
-        return Icon(
+        return const Icon(
           Icons.thumb_up_alt_outlined,
           size: 25,
           weight: 10,
@@ -368,8 +359,14 @@ class _reactionButtonState extends State<reactionButton> {
   }
 
   @override
+  void initState() {
+    postobject = widget.profileId == null ? getpostobj():getprofileobj();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    Reaction reaction = postobject.getReaction(widget.postIndex, widget.commentIndex , widget.replyIndex);
+    Reaction reaction = postobject.getReaction(widget.profileId , widget.postIndex, widget.commentIndex , widget.replyIndex);
     // print(reaction);
     return GestureDetector(
       onHorizontalDragUpdate: (details) {
@@ -404,14 +401,12 @@ class _reactionButtonState extends State<reactionButton> {
                 if (reaction == Reaction.none) {
                   reaction = Reaction.like;
 
-                  postobject.changeReaction(
-                        Reaction.like, widget.postIndex, widget.commentIndex, widget.replyIndex);
+                  postobject.changeReaction(Reaction.like, widget.profileId ,widget.postIndex, widget.commentIndex, widget.replyIndex);
                 }
                 else
                 {
                   reaction = Reaction.none;
-                  postobject.changeReaction(
-                      Reaction.none, widget.postIndex, widget.commentIndex,widget.replyIndex);
+                  postobject.changeReaction(Reaction.none, widget.profileId ,widget.postIndex, widget.commentIndex,widget.replyIndex);
                 }
               }
               setState(() {});
@@ -443,7 +438,7 @@ class _reactionButtonState extends State<reactionButton> {
                     color: Colors.grey.shade200,
                     borderRadius: BorderRadius.circular(30)),
                 child: ListView.builder(
-                  physics: BouncingScrollPhysics(),
+                  physics: const BouncingScrollPhysics(),
                   scrollDirection: Axis.horizontal,
                   itemCount: elements.length,
                   itemBuilder: (BuildContext context, int index) {
@@ -454,8 +449,7 @@ class _reactionButtonState extends State<reactionButton> {
                         icon: elements[index].icon,
                         onPressed: () {
                           reaction = elements[index].reaction;
-                          postobject.changeReaction(elements[index].reaction,
-                              widget.postIndex, widget.commentIndex ,widget.replyIndex);
+                          postobject.changeReaction(elements[index].reaction, widget.profileId , widget.postIndex, widget.commentIndex ,widget.replyIndex);
                           _reactionView = false;
                           setState(() {});
                         },

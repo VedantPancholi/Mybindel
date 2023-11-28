@@ -2,14 +2,18 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:mybindel_test/Dummy_Data/Dummy_profile.dart';
 import 'package:mybindel_test/palette/palette.dart';
 import 'package:mybindel_test/providers/selectTheme.dart';
-import 'package:mybindel_test/screens/NonFriendScreens/NonFriendPost.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../models/Profile.dart';
+import 'NonFriend_Post.dart';
+
 class NonFriendScreen_main extends StatefulWidget {
-  const NonFriendScreen_main({super.key});
+  int profileId;
+  NonFriendScreen_main({required this.profileId,super.key});
 
   @override
   State<NonFriendScreen_main> createState() => _NonFriendScreen_mainState();
@@ -17,24 +21,33 @@ class NonFriendScreen_main extends StatefulWidget {
 
 class _NonFriendScreen_mainState extends State<NonFriendScreen_main>
     with TickerProviderStateMixin {
-  late TabController nonFriendtabController =
-      nonFriendtabController = TabController(length: 4, vsync: this);
+  late TabController nonFriendtabController = nonFriendtabController = TabController(length: 4, vsync: this);
   bool tapAddFriend = false;
   Color unselectedLabelColor_custom = Colors.grey.shade600;
+  late final profileobj;
+  late Profile profile;
+
+  @override
+  void initState() {
+    profileobj = getprofileobj();
+    profile = profileobj.getprofile(widget.profileId);
+    super.initState();
+  }
+
 
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<Themeprovider>(context);
     return Scaffold(
       body: ListView(
-        physics: BouncingScrollPhysics(),
+        physics: const NeverScrollableScrollPhysics(),
         // crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
             margin: EdgeInsets.symmetric(horizontal: (1.2).w),
             width: 100.w,
-            height: 40.h,
-            // color: Colors.black,
+            //height: 40.h,
+            //color: Colors.black,
             child: Stack(
               children: [
                 Column(
@@ -43,7 +56,7 @@ class _NonFriendScreen_mainState extends State<NonFriendScreen_main>
                       child: ClipRRect(
                           borderRadius: BorderRadius.circular(7),
                           child: Image.asset(
-                            "asset/images/user_post.png",
+                            profile.coverpicture,
                             width: 100.w,
                             height: 18.h,
                             fit: BoxFit.cover,
@@ -63,8 +76,8 @@ class _NonFriendScreen_mainState extends State<NonFriendScreen_main>
                                   padding: EdgeInsets.symmetric(
                                       vertical: (0.3).h, horizontal: (0.5).w),
                                   child: AutoSizeText(
-                                    "John David",
-                                    style: TextStyle(fontSize: 20),
+                                    profile.name,
+                                    style: const TextStyle(fontSize: 20),
                                   ),
                                 ),
                                 Icon(
@@ -74,8 +87,8 @@ class _NonFriendScreen_mainState extends State<NonFriendScreen_main>
                                 ),
                                 Container(
                                   child: AutoSizeText(
-                                    "Johnny",
-                                    style: TextStyle(
+                                    profile.nickname,
+                                    style: const TextStyle(
                                       fontSize: 12,
                                       fontWeight: FontWeight.w400,
                                     ),
@@ -87,7 +100,7 @@ class _NonFriendScreen_mainState extends State<NonFriendScreen_main>
                               padding: EdgeInsets.symmetric(
                                   vertical: (0.3).h, horizontal: (0.5).w),
                               child: AutoSizeText(
-                                "Artist".toUpperCase(),
+                                profile.occupation.toUpperCase(),
                                 style: TextStyle(
                                     fontSize: 12,
                                     color: Colors.deepOrange.shade700,
@@ -123,8 +136,8 @@ class _NonFriendScreen_mainState extends State<NonFriendScreen_main>
                                               color: tapAddFriend == true
                                                   ? Colors.deepOrange.shade600
                                                   : provider.currentTheme
-                                                      ? dim_black
-                                                      : dim_white,
+                                                  ? dim_black
+                                                  : dim_white,
                                               fontWeight: FontWeight.w500)),
                                     ),
                                   ),
@@ -145,10 +158,11 @@ class _NonFriendScreen_mainState extends State<NonFriendScreen_main>
                     Container(
                       margin: EdgeInsets.only(top: (0.5).h),
                       padding: EdgeInsets.symmetric(
-                          vertical: 0.5.h, horizontal: 1.5.w),
+                          vertical: 1.5.h, horizontal: 1.5.w),
                       width: 100.w,
                       child: AutoSizeText(
-                        "In the World of Friends, the possibilities are boundless. Connect with old pals and make new ones from all corners of the globe. Share your thoughts, photos, and experiences with ease, and let your creativity soar through engaging posts and captivating stories.",
+                        profile.discription,
+                        textAlign: TextAlign.left,
                         softWrap: true,
                         wrapWords: true,
                         style: TextStyle(
@@ -170,7 +184,7 @@ class _NonFriendScreen_mainState extends State<NonFriendScreen_main>
                     child: ClipRRect(
                         borderRadius: BorderRadius.circular(5),
                         child: Image.asset(
-                          "asset/images/user_post.png",
+                          profile.picture,
                           width: 25.w,
                           height: 12.h,
                           fit: BoxFit.cover,
@@ -188,11 +202,11 @@ class _NonFriendScreen_mainState extends State<NonFriendScreen_main>
             child: Container(
               decoration: provider.currentTheme
                   ? BoxDecoration(
-                      color: Colors.grey.shade200,
-                    )
+                color: Colors.grey.shade200,
+              )
                   : BoxDecoration(
-                      color: Colors.grey.shade800,
-                    ),
+                color: Colors.grey.shade800,
+              ),
               // decoration: provider.currentTheme
               //     ? textFormField_neu_morphism
               //     : dark_textFormField_neu_morphism,
@@ -202,7 +216,7 @@ class _NonFriendScreen_mainState extends State<NonFriendScreen_main>
                       ? indicator_neu_Morphism
                       : indicator_dark_neu_Morphism,
                   labelColor: Colors.deepOrange.shade600,
-                  labelStyle: TextStyle(
+                  labelStyle: const TextStyle(
                     fontWeight: FontWeight.w800,
                     letterSpacing: 0.4,
                   ),
@@ -240,17 +254,17 @@ class _NonFriendScreen_mainState extends State<NonFriendScreen_main>
             ),
           ),
           SizedBox(
-            height: 100.h,
+              height: 100.h,
               child: TabBarView(
-                physics: BouncingScrollPhysics(),
-            controller: nonFriendtabController,
-            children: [
-              NonFriendPost(),
-              NonFriendPost(),
-              NonFriendPost(),
-              NonFriendPost(),
-            ],
-          ))
+                physics: const BouncingScrollPhysics(),
+                controller: nonFriendtabController,
+                children: [
+                  NonFriendPost(profileId: profile.id,posts: profile.posts),
+                  NonFriendPost(profileId: profile.id,posts: profile.posts),
+                  NonFriendPost(profileId: profile.id,posts: profile.posts),
+                  NonFriendPost(profileId: profile.id,posts: profile.posts),
+                ],
+              ))
         ],
       ),
 
@@ -286,23 +300,23 @@ Widget popUpMenuNonFriend(provider) {
           child: Row(
             children: [
               Container(
-                height: (3).h,
-                width: (7.0).w,
-                padding: EdgeInsets.all((0.8).w),
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey.shade600.withOpacity(0.5)),
-                    color: provider.currentTheme
-                        ? light_Scaffold_color
-                        : dark_Scaffold_color,
-                    borderRadius: BorderRadius.circular(5)),
-                child: SvgPicture.asset("asset/friend_nonFriend_screen_icon/Cancel Request.svg")
-              ),  
+                  height: (3).h,
+                  width: (7.0).w,
+                  padding: EdgeInsets.all((0.8).w),
+                  decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey.shade600.withOpacity(0.5)),
+                      color: provider.currentTheme
+                          ? light_Scaffold_color
+                          : dark_Scaffold_color,
+                      borderRadius: BorderRadius.circular(5)),
+                  child: SvgPicture.asset("asset/friend_nonFriend_screen_icon/Cancel Request.svg")
+              ),
               Expanded(
                 child: Container(
                   margin: EdgeInsets.symmetric(horizontal: (2.2).w),
                   alignment: Alignment.centerLeft,
                   // color: Colors.yellow,
-                  child: Text(
+                  child: const Text(
                     'Cancel Request',
                     style: TextStyle(
                         fontSize: 12,
@@ -322,23 +336,23 @@ Widget popUpMenuNonFriend(provider) {
           child: Row(
             children: [
               Container(
-                height: (3).h,
-                width: (7.0).w,
-                padding: EdgeInsets.all((0.8).w),
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey.shade600.withOpacity(0.5)),
-                    color: provider.currentTheme
-                        ? light_Scaffold_color
-                        : dark_Scaffold_color,
-                    borderRadius: BorderRadius.circular(5)),
-                child: SvgPicture.asset("asset/friend_nonFriend_screen_icon/Block Person.svg")
+                  height: (3).h,
+                  width: (7.0).w,
+                  padding: EdgeInsets.all((0.8).w),
+                  decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey.shade600.withOpacity(0.5)),
+                      color: provider.currentTheme
+                          ? light_Scaffold_color
+                          : dark_Scaffold_color,
+                      borderRadius: BorderRadius.circular(5)),
+                  child: SvgPicture.asset("asset/friend_nonFriend_screen_icon/Block Person.svg")
               ),
               Expanded(
                 child: Container(
                   margin: EdgeInsets.symmetric(horizontal: (2.2).w),
                   alignment: Alignment.centerLeft,
                   // color: Colors.yellow,
-                  child: Text(
+                  child: const Text(
                     'Block Person',
                     style: TextStyle(
                         fontSize: 12,
@@ -358,29 +372,29 @@ Widget popUpMenuNonFriend(provider) {
           child: Row(
             children: [
               Container(
-                height: (3).h,
-                width: (7.0).w,
-                padding: EdgeInsets.all((0.8).w),
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.grey.shade600.withOpacity(0.5)),
-                    color: provider.currentTheme
-                        ? light_Scaffold_color
-                        : dark_Scaffold_color,
-                    borderRadius: BorderRadius.circular(5)),
-                child: SvgPicture.asset("asset/friend_nonFriend_screen_icon/Report.svg",color: Colors.black,)
+                  height: (3).h,
+                  width: (7.0).w,
+                  padding: EdgeInsets.all((0.8).w),
+                  decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey.shade600.withOpacity(0.5)),
+                      color: provider.currentTheme
+                          ? light_Scaffold_color
+                          : dark_Scaffold_color,
+                      borderRadius: BorderRadius.circular(5)),
+                  child: SvgPicture.asset("asset/friend_nonFriend_screen_icon/Report.svg",color: Colors.black,)
               ),
               Expanded(
                 child: Container(
                   margin: EdgeInsets.symmetric(horizontal: (3.2).w),
                   alignment: Alignment.centerLeft,
                   // color: Colors.yellow,
-                  child: Text(
+                  child: const Text(
                     'Report',
                     style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w600,
-                        letterSpacing: 1,
-                        ),
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                      letterSpacing: 1,
+                    ),
                   ),
                 ),
               )

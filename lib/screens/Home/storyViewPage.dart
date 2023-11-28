@@ -1,12 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:mybindel_test/Dummy_Data/Dummy_story.dart';
 import 'package:provider/provider.dart';
 import 'package:readmore/readmore.dart';
 import 'package:video_player/video_player.dart';
 import 'package:sizer/sizer.dart';
+import '../../Dummy_Data/Dummy_story.dart';
 import '../../models/Story.dart';
-import '../../palette/palette.dart';
 import '../../providers/selectTheme.dart';
 
 class StoryViewPage extends StatefulWidget {
@@ -755,8 +754,7 @@ class Animatedbar extends StatelessWidget {
                       animation: animationController,
                       builder: (context, index) {
                         return _buildContainer(
-                            width: Constraints.maxWidth *
-                                animationController.value,
+                            width: Constraints.maxWidth * animationController.value,
                             color: Colors.white);
                       })
                       : SizedBox.shrink()

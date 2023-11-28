@@ -1,14 +1,17 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:mybindel_test/palette/palette.dart';
 import 'package:mybindel_test/providers/selectEnhancement.dart';
 import 'package:mybindel_test/providers/selectTheme.dart';
-import 'package:mybindel_test/screens/Home/POST_&_STORY/Story_Enhancement/adjust_effect.dart.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
+
+import 'Adjust_effect.dart.dart';
 import 'border_effect.dart';
 import 'filter_effect.dart';
+
 
 class AddEffectPage extends StatefulWidget {
   const AddEffectPage({Key? key}) : super(key: key);
@@ -100,8 +103,7 @@ class _AddEffectPageState extends State<AddEffectPage> {
             // color: Colors.red,
             child: InkWell(
               onTap: () {
-                Navigator.pop(context);
-                // Navigator.pushAndRemoveUntil(context, custompageroute(child: CreateUser()), (route) => false);
+                Navigator.of(context).pop();
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -186,13 +188,13 @@ class _AddEffectPageState extends State<AddEffectPage> {
             height: (36.72).h,
             width: (92.82).w,
             decoration: BoxDecoration(
-                color: Colors.amber, borderRadius: BorderRadius.circular(10)),
-                child: ClipRRect(
+                borderRadius: BorderRadius.circular(10)),
+            child: ClipRRect(
                 borderRadius: BorderRadius.circular(10),
                 child: Image.asset(
                   "asset/images/user_post.png",
                   fit: BoxFit.cover,
-                  )),
+                )),
           ),
           SizedBox(
             height: (1.0).h,
@@ -250,10 +252,10 @@ class _showOptionsState extends State<showOptions> {
 
   @override
   Widget build(BuildContext context) {
-    final enhancementprovider = Provider.of<Enhancementprovider>(context);
+    final effectswiper = Provider.of<Enhancementprovider>(context);
 
     ontapped(index) {
-      enhancementprovider.setIndex = index;
+      effectswiper.setIndex = index;
       _pageController.jumpToPage(index);
     }
 
@@ -275,13 +277,13 @@ class _showOptionsState extends State<showOptions> {
                       ontapped(0);
                     },
                     child: Consumer<Enhancementprovider>(
-                      builder: (context, Enhancementprovider enhancementprovider, child) {
+                      builder: (context, Enhancementprovider effectswiper, child) {
                         return Text(
-                          'Effects',
+                          'Borders',
                           style: TextStyle(
                               fontSize: 17,
                               fontWeight: FontWeight.bold,
-                              color: enhancementprovider.getIndex == 0
+                              color: effectswiper.getIndex == 0
                                   ? const Color.fromRGBO(255, 83, 73, 1.0)
                                   : const Color.fromRGBO(93, 93, 93, 1.0)),
                         );
@@ -293,13 +295,13 @@ class _showOptionsState extends State<showOptions> {
                       ontapped(1);
                     },
                     child: Consumer<Enhancementprovider>(
-                      builder: (context, Enhancementprovider enhancementprovider, child) {
+                      builder: (context, Enhancementprovider effectswiper, child) {
                         return Text(
                           'Filters',
                           style: TextStyle(
                               fontSize: 17,
                               fontWeight: FontWeight.bold,
-                              color: enhancementprovider.getIndex == 1
+                              color: effectswiper.getIndex == 1
                                   ? const Color.fromRGBO(255, 83, 73, 1.0)
                                   : const Color.fromRGBO(93, 93, 93, 1.0)),
                         );
@@ -311,13 +313,13 @@ class _showOptionsState extends State<showOptions> {
                       ontapped(2);
                     },
                     child: Consumer<Enhancementprovider>(
-                      builder: (context, Enhancementprovider enhancementprovider, child) {
+                      builder: (context, Enhancementprovider effectswiper, child) {
                         return Text(
                           'Adjust',
                           style: TextStyle(
                               fontSize: 17,
                               fontWeight: FontWeight.bold,
-                              color: enhancementprovider.getIndex == 2
+                              color: effectswiper.getIndex == 2
                                   ? const Color.fromRGBO(255, 83, 73, 1.0)
                                   : const Color.fromRGBO(93, 93, 93, 1.0)),
                         );
@@ -396,9 +398,9 @@ class _showOptionsState extends State<showOptions> {
             SizedBox(
                 width: (70).w,
                 child: Consumer(
-                  builder: (context, Enhancementprovider enhancementprovider, child) {
+                  builder: (context, Enhancementprovider effectswiper, child) {
                     return Text(
-                      description(enhancementprovider.getIndex),
+                      description(effectswiper.getIndex),
                       style: const TextStyle(
                           fontSize: 12,
                           color: Color.fromRGBO(173, 173, 173, 1.0),
@@ -419,7 +421,7 @@ class _showOptionsState extends State<showOptions> {
                 children: const [
                   BorderEffectContainer(),
                   FilterEffectContainer(),
-                  Adjust(),
+                  Adjust()
                 ],
                 onPageChanged: (index) {
                   //print("page: ${index}");
@@ -428,5 +430,35 @@ class _showOptionsState extends State<showOptions> {
         )
       ],
     );
+  }
+}
+
+
+
+class Borders extends StatefulWidget {
+  const Borders({super.key});
+
+  @override
+  State<Borders> createState() => _BordersState();
+}
+
+class _BordersState extends State<Borders> {
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
+  }
+}
+
+class Filters extends StatefulWidget {
+  const Filters({super.key});
+
+  @override
+  State<Filters> createState() => _FiltersState();
+}
+
+class _FiltersState extends State<Filters> {
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
   }
 }

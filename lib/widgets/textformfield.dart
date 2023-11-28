@@ -51,32 +51,32 @@ class _textfieldState extends State<textfields> {
       child: TextFormField(
           inputFormatters: widget.inputFormatters,
           maxLength: widget.maxlength,
-        controller: widget.textController,
-        decoration: InputDecoration(
-          contentPadding: EdgeInsets.symmetric(vertical: 18.0, horizontal: 15.0),
-          border: InputBorder.none,
-          prefixIcon: widget.icon != null
-              ? Icon(
-            widget.icon,
-            color: Colors.black,
-            size: 22,
-          )
-              : null,
-          hintText: widget.hintText,
+          controller: widget.textController,
+          decoration: InputDecoration(
+            contentPadding: EdgeInsets.symmetric(vertical: 18.0, horizontal: 15.0),
+            border: InputBorder.none,
+            prefixIcon: widget.icon != null
+                ? Icon(
+              widget.icon,
+              color: Colors.black,
+              size: 22,
+            )
+                : null,
+            hintText: widget.hintText,
 
 
-          hintStyle: TextStyle(
-              fontSize: 14,
-              // fontFamily: 'Avant',
-              // color: Color.fromRGBO(94, 94, 94, 1),
-              letterSpacing: 1,
-              fontWeight: FontWeight.w500),
-        ),
-        // keyboardType: TextInputType.number,
-        textInputAction: TextInputAction.next,
-        keyboardType: widget.keybordType,
+            hintStyle: TextStyle(
+                fontSize: 14,
+                // fontFamily: 'Avant',
+                // color: Color.fromRGBO(94, 94, 94, 1),
+                letterSpacing: 1,
+                fontWeight: FontWeight.w500),
+          ),
+          // keyboardType: TextInputType.number,
+          textInputAction: TextInputAction.next,
+          keyboardType: widget.keybordType,
 
-        autovalidateMode: AutovalidateMode.onUserInteraction,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
           onChanged: widget.onChanged,
           validator: widget.validator
       ),

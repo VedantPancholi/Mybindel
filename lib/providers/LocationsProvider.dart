@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:mybindel_test/models/Location.dart';
 
@@ -14,7 +13,7 @@ class LocationsProvider extends ChangeNotifier{
     Location(name: 'New York', picture: "asset/music_icons/music_bg.png"),
   ];
 
-    List<Location> get getItem => _locations;
+  List<Location> get getItem => _locations;
 
   addItem(value){
     _locations.add(value);

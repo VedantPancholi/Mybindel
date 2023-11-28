@@ -1,5 +1,12 @@
+/*
+Select theme and save it on shared preferences and provide its value to materialApp
+*/
+
+
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Themeprovider extends ChangeNotifier {
@@ -69,5 +76,5 @@ class ThemePreferences {
   Future<bool> getFinalPreference() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     return sharedPreferences.getBool('final_pref')??true;
-    }
+  }
 }

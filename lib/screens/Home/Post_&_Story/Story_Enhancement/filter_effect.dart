@@ -40,11 +40,11 @@ class _FilterEffectContainerState extends State<FilterEffectContainer> {
                     ontap: ontapped,
                     decoration: provider.currentTheme
                         ? (selectedFilter == 0
-                            ? selected_square_neu_Morphism
-                            : square_neu_Morphism)
+                        ? selected_square_neu_Morphism
+                        : square_neu_Morphism)
                         : (selectedFilter == 0
-                            ? selected_square_dark_neu_Morphism
-                            : square_dark_neu_Morphism),
+                        ? selected_square_dark_neu_Morphism
+                        : square_dark_neu_Morphism),
                     filter_name: "White",
                   ),
                   FliterEffectWidget(
@@ -52,11 +52,11 @@ class _FilterEffectContainerState extends State<FilterEffectContainer> {
                     ontap: ontapped,
                     decoration: provider.currentTheme
                         ? (selectedFilter == 1
-                            ? selected_square_neu_Morphism
-                            : square_neu_Morphism)
+                        ? selected_square_neu_Morphism
+                        : square_neu_Morphism)
                         : (selectedFilter == 1
-                            ? selected_square_dark_neu_Morphism
-                            : square_dark_neu_Morphism),
+                        ? selected_square_dark_neu_Morphism
+                        : square_dark_neu_Morphism),
                     filter_name: "Bueauty",
                   ),
                   FliterEffectWidget(
@@ -64,11 +64,11 @@ class _FilterEffectContainerState extends State<FilterEffectContainer> {
                     ontap: ontapped,
                     decoration: provider.currentTheme
                         ? (selectedFilter == 2
-                            ? selected_square_neu_Morphism
-                            : square_neu_Morphism)
+                        ? selected_square_neu_Morphism
+                        : square_neu_Morphism)
                         : (selectedFilter == 2
-                            ? selected_square_dark_neu_Morphism
-                            : square_dark_neu_Morphism),
+                        ? selected_square_dark_neu_Morphism
+                        : square_dark_neu_Morphism),
                     filter_name: "Brown Tint",
                   ),
                   FliterEffectWidget(
@@ -76,11 +76,11 @@ class _FilterEffectContainerState extends State<FilterEffectContainer> {
                     ontap: ontapped,
                     decoration: provider.currentTheme
                         ? (selectedFilter == 3
-                            ? selected_square_neu_Morphism
-                            : square_neu_Morphism)
+                        ? selected_square_neu_Morphism
+                        : square_neu_Morphism)
                         : (selectedFilter == 3
-                            ? selected_square_dark_neu_Morphism
-                            : square_dark_neu_Morphism),
+                        ? selected_square_dark_neu_Morphism
+                        : square_dark_neu_Morphism),
                     filter_name: "Sway",
                   ),
                 ],
@@ -95,11 +95,11 @@ class _FilterEffectContainerState extends State<FilterEffectContainer> {
                     ontap: ontapped,
                     decoration: provider.currentTheme
                         ? (selectedFilter == 4
-                            ? selected_square_neu_Morphism
-                            : square_neu_Morphism)
+                        ? selected_square_neu_Morphism
+                        : square_neu_Morphism)
                         : (selectedFilter == 4
-                            ? selected_square_dark_neu_Morphism
-                            : square_dark_neu_Morphism),
+                        ? selected_square_dark_neu_Morphism
+                        : square_dark_neu_Morphism),
                     filter_name: "White",
                   ),
                   FliterEffectWidget(
@@ -107,11 +107,11 @@ class _FilterEffectContainerState extends State<FilterEffectContainer> {
                     ontap: ontapped,
                     decoration: provider.currentTheme
                         ? (selectedFilter == 5
-                            ? selected_square_neu_Morphism
-                            : square_neu_Morphism)
+                        ? selected_square_neu_Morphism
+                        : square_neu_Morphism)
                         : (selectedFilter == 5
-                            ? selected_square_dark_neu_Morphism
-                            : square_dark_neu_Morphism),
+                        ? selected_square_dark_neu_Morphism
+                        : square_dark_neu_Morphism),
                     filter_name: "Bueauty",
                   ),
                   FliterEffectWidget(
@@ -119,11 +119,11 @@ class _FilterEffectContainerState extends State<FilterEffectContainer> {
                     ontap: ontapped,
                     decoration: provider.currentTheme
                         ? (selectedFilter == 6
-                            ? selected_square_neu_Morphism
-                            : square_neu_Morphism)
+                        ? selected_square_neu_Morphism
+                        : square_neu_Morphism)
                         : (selectedFilter == 6
-                            ? selected_square_dark_neu_Morphism
-                            : square_dark_neu_Morphism),
+                        ? selected_square_dark_neu_Morphism
+                        : square_dark_neu_Morphism),
                     filter_name: "Brown Tint",
                   ),
                   FliterEffectWidget(
@@ -131,11 +131,11 @@ class _FilterEffectContainerState extends State<FilterEffectContainer> {
                     ontap: ontapped,
                     decoration: provider.currentTheme
                         ? (selectedFilter == 7
-                            ? selected_square_neu_Morphism
-                            : square_neu_Morphism)
+                        ? selected_square_neu_Morphism
+                        : square_neu_Morphism)
                         : (selectedFilter == 7
-                            ? selected_square_dark_neu_Morphism
-                            : square_dark_neu_Morphism),
+                        ? selected_square_dark_neu_Morphism
+                        : square_dark_neu_Morphism),
                     filter_name: "Sway",
                   ),
                 ],
@@ -150,11 +150,11 @@ class _FilterEffectContainerState extends State<FilterEffectContainer> {
                     ontap: ontapped,
                     decoration: provider.currentTheme
                         ? (selectedFilter == 8
-                            ? selected_square_neu_Morphism
-                            : square_neu_Morphism)
+                        ? selected_square_neu_Morphism
+                        : square_neu_Morphism)
                         : (selectedFilter == 8
-                            ? selected_square_dark_neu_Morphism
-                            : square_dark_neu_Morphism),
+                        ? selected_square_dark_neu_Morphism
+                        : square_dark_neu_Morphism),
                     filter_name: "White",
                   ),
                   FliterEffectWidget(
@@ -162,11 +162,11 @@ class _FilterEffectContainerState extends State<FilterEffectContainer> {
                     ontap: ontapped,
                     decoration: provider.currentTheme
                         ? (selectedFilter == 9
-                            ? selected_square_neu_Morphism
-                            : square_neu_Morphism)
+                        ? selected_square_neu_Morphism
+                        : square_neu_Morphism)
                         : (selectedFilter == 9
-                            ? selected_square_dark_neu_Morphism
-                            : square_dark_neu_Morphism),
+                        ? selected_square_dark_neu_Morphism
+                        : square_dark_neu_Morphism),
                     filter_name: "Bueauty",
                   ),
                   FliterEffectWidget(
@@ -174,11 +174,11 @@ class _FilterEffectContainerState extends State<FilterEffectContainer> {
                     ontap: ontapped,
                     decoration: provider.currentTheme
                         ? (selectedFilter == 10
-                            ? selected_square_neu_Morphism
-                            : square_neu_Morphism)
+                        ? selected_square_neu_Morphism
+                        : square_neu_Morphism)
                         : (selectedFilter == 10
-                            ? selected_square_dark_neu_Morphism
-                            : square_dark_neu_Morphism),
+                        ? selected_square_dark_neu_Morphism
+                        : square_dark_neu_Morphism),
                     filter_name: "Brown Tint",
                   ),
                   FliterEffectWidget(
@@ -186,11 +186,11 @@ class _FilterEffectContainerState extends State<FilterEffectContainer> {
                     ontap: ontapped,
                     decoration: provider.currentTheme
                         ? (selectedFilter == 11
-                            ? selected_square_neu_Morphism
-                            : square_neu_Morphism)
+                        ? selected_square_neu_Morphism
+                        : square_neu_Morphism)
                         : (selectedFilter == 11
-                            ? selected_square_dark_neu_Morphism
-                            : square_dark_neu_Morphism),
+                        ? selected_square_dark_neu_Morphism
+                        : square_dark_neu_Morphism),
                     filter_name: "Sway",
                   ),
                 ],
@@ -235,7 +235,7 @@ class FliterEffectWidget extends StatelessWidget {
               height: (9.0).h,
               decoration: decoration,
               padding:
-                  EdgeInsets.symmetric(vertical: (0.8).h, horizontal: (1.5).w),
+              EdgeInsets.symmetric(vertical: (0.8).h, horizontal: (1.5).w),
               child: ClipRRect(
                   borderRadius: BorderRadius.circular(5),
                   child: Image.asset(

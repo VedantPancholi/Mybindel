@@ -3,128 +3,49 @@ import 'dart:ui';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:comment_box/comment/comment.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_blurhash/flutter_blurhash.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:intl/intl.dart';
-import 'package:mybindel_test/Dummy_Data/Dummy_feed.dart';
-import 'package:mybindel_test/models/Comment.dart';
-import 'package:mybindel_test/widgets/CommnetChild_widget.dart';
+import 'package:mybindel_test/palette/palette.dart';
+import 'package:mybindel_test/providers/selectTheme.dart';
 import 'package:provider/provider.dart';
-import '../../palette/palette.dart';
-import '../../providers/selectCommentType.dart';
-import '../../providers/selectTheme.dart';
 import 'package:sizer/sizer.dart';
 
-class single_item extends StatefulWidget {
-  int postIndex;
-  single_item(this.postIndex);
+import '../../models/Comment.dart';
+import '../../models/Feed.dart';
+import '../../providers/selectCommentType.dart';
+import '../../widgets/CommnetChild_widget.dart';
+
+class NonFriendPost extends StatefulWidget {
+  int profileId;
+  List<Post> posts;
+  NonFriendPost({required this.profileId, required this.posts,super.key});
+
   @override
-  State<single_item> createState() => _single_itemState();
+  State<NonFriendPost> createState() => _NonFriendPostState();
 }
 
-class _single_itemState extends State<single_item> {
+class _NonFriendPostState extends State<NonFriendPost> {
   final formKey = GlobalKey<FormState>();
   late final TextEditingController commentController;
-  late final postobject;
-  bool isFollow = false;
   FocusNode inputNode = FocusNode();
-  bool liked = false;
-  bool share_clicked = false;
 
-  // List filedata = [
-  //   {
-  //     'name': 'Chuks Okwuenu',
-  //     'pic': 'asset/images/emily.png',
-  //     'message': 'I love to code',
-  //     'date': '2021-01-01 11:00 AM'
-  //   },
-  //   {
-  //     'name': 'Biggi Man',
-  //     'pic': 'asset/images/franklin.png',
-  //     'message': 'Very cool',
-  //     'date': '2021-01-01 08:00 PM'
-  //   },
-  //   {
-  //     'name': 'Tunde Martins',
-  //     'pic': 'asset/images/marshall.png',
-  //     'message': 'Very cool',
-  //     'date': '2021-01-01 01:00 AM'
-  //   },
-  //   {
-  //     'name': 'Biggi Man',
-  //     'pic': 'asset/images/user_post.png',
-  //     'message': 'Very cool',
-  //     'date': '2021-01-01 10:00 PM'
-  //   },
-  // ];
+  bool isFollow = false;
+  bool share_clicked = false;
+  bool isLiked = false;
 
   @override
   void initState() {
-    postobject = getpostobj();
     commentController = TextEditingController();
     super.initState();
   }
 
   @override
-  void dispose() {
-    commentController.dispose();
-    super.dispose();
-  }
-
-  // Widget commentChild(data) {
-  //   return Expanded(
-  //     child: ListView(
-  //       shrinkWrap: true,
-  //       children: [
-  //         for (var i = 0; i < data.length; i++)
-  //           Padding(
-  //             padding: const EdgeInsets.fromLTRB(12.0, 8.0, 2.0, 0.0),
-  //             child: ListTile(
-  //               leading: GestureDetector(
-  //                 onTap: () async {
-  //                   // Display the image in large form.
-  //                   print("Comment Clicked ${i}");
-  //                 },
-  //                 child: Container(
-  //                   height: 50.0,
-  //                   width: 50.0,
-  //                   decoration: const BoxDecoration(
-  //                       color: Colors.blue,
-  //                       borderRadius: BorderRadius.all(Radius.circular(50))),
-  //                   child: CircleAvatar(
-  //                       radius: 50,
-  //                       backgroundImage: CommentBox.commentImageParser(
-  //                           imageURLorPath: data[i]['pic'])),
-  //                 ),
-  //               ),
-  //               title: Text(
-  //                 data[i]['name'],
-  //                 style: TextStyle(fontWeight: FontWeight.bold),
-  //               ),
-  //               subtitle: Text(data[i]['message']),
-  //               trailing: Text(data[i]['date'], style: TextStyle(fontSize: 10)),
-  //             ),
-  //           )
-  //       ],
-  //     ),
-  //   );
-  // }
-
-  @override
   Widget build(BuildContext context) {
-    List feeds = postobject.getfeeds;
     final provider = Provider.of<Themeprovider>(context);
-
-    return Container(
-      margin: EdgeInsets.all((1.00).w),
-      // color: Colors.green,
-      color: provider.currentTheme ? light_Scaffold_color : dark_Scaffold_color,
-      height: (49.00).h,
-      width: (98.00).w,
-      child: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: Column(
+    return ListView.builder(
+      primary: true,
+      itemCount: widget.posts.length,
+      itemBuilder:(context, postIndex) {
+        return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
@@ -150,7 +71,7 @@ class _single_itemState extends State<single_item> {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(5),
                       child: Image.asset(
-                        feeds[widget.postIndex].picture,
+                        widget.posts[postIndex].picture,
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -199,7 +120,7 @@ class _single_itemState extends State<single_item> {
                                       text: TextSpan(
                                         children: [
                                           TextSpan(
-                                            text: feeds[widget.postIndex].name,
+                                            text: widget.posts[postIndex].name,
                                             style: TextStyle(
                                                 fontSize: 18,
                                                 color: provider.currentTheme
@@ -218,8 +139,7 @@ class _single_itemState extends State<single_item> {
                                       ),
                                     ),
                                     AutoSizeText(
-                                      feeds[widget.postIndex]
-                                          .occupation
+                                      widget.posts[postIndex].occupation
                                           .toUpperCase(),
                                       style: TextStyle(
                                           fontSize: 15, color: orange_color),
@@ -238,19 +158,15 @@ class _single_itemState extends State<single_item> {
                                 MainAxisAlignment.spaceAround,
                                 children: [
                                   SizedBox(
-                                      width: (10.00).w,
-                                      height: (1.800).h,
-                                      // decoration: provider.currentTheme ? square_neu_Morphism : square_dark_neu_Morphism,
-                                      // ignore: prefer_const_constructors
-                                      child: popupbutton(provider)),
-                                  // IconButton(onPressed: (){}, icon: Icon(Icons.more_horiz_outlined)),
+                                    width: (10.00).w,
+                                    height: (1.800).h,
+                                    child: popUpMenuNonFriendPostIndividual((provider)),),
                                   Container(
                                     width: (19.00).w,
                                     height: (3.00).h,
                                     decoration: provider.currentTheme
                                         ? square_neu_Morphism
                                         : square_dark_neu_Morphism,
-                                    // ignore: prefer_const_constructors
                                     child: InkWell(
                                       onTap: () {
                                         setState(() {
@@ -285,7 +201,7 @@ class _single_itemState extends State<single_item> {
             Container(
               margin: EdgeInsets.symmetric(
                   horizontal: (3.500).w, vertical: (0.5).h),
-              child: AutoSizeText(feeds[widget.postIndex].caption),
+              child: AutoSizeText(widget.posts[postIndex].caption),
             ),
             Container(
               // color: Colors.amber,
@@ -307,27 +223,29 @@ class _single_itemState extends State<single_item> {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(10),
                         child: Image.asset(
-                          feeds[widget.postIndex].image,
+                          widget.posts[postIndex].picture,
                           fit: BoxFit.cover,
                         ),
-                      ))
+                      )
+                  )
                       : Container(
                     height: (33.00).h,
                     width: (76.00).w,
                     margin: EdgeInsets.symmetric(horizontal: (1.00).w),
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                          image: AssetImage(
-                            "asset/images/user_post.png",
-                          ),
+                          image: AssetImage(widget.posts[postIndex].picture),
                           fit: BoxFit.cover),
                     ),
                     child: ClipRRect(
+                      clipBehavior:  Clip.antiAlias,
                       child: BackdropFilter(
                         blendMode: BlendMode.srcOver,
                         filter: ImageFilter.blur(sigmaX: 20.0, sigmaY: 20.0),
                         child: Stack(
                           children: [
+                            // const BlurHash(
+                            //     hash: "LXE]Hd|I\$f]C=dxISkr;67KRNsAV"),
                             Container(
                               height: (30.00).h,
                               width: (70.00).w,
@@ -336,6 +254,7 @@ class _single_itemState extends State<single_item> {
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10)),
                               child: SingleChildScrollView(
+                                physics: BouncingScrollPhysics(),
                                 scrollDirection: Axis.vertical,
                                 child: Column(children: [
                                   Row(
@@ -701,18 +620,18 @@ class _single_itemState extends State<single_item> {
                           // color: Colors.deepOrange,
                           child: GestureDetector(
                             onTap: () {
-                              liked = !liked;
+                              isLiked = !isLiked;
                               setState(() {});
                               print("Star clicked");
                             },
                             child: Column(children: [
                               Image.asset(
-                                liked
+                                isLiked
                                     ? "asset/images/highlighted_star_in_post.png"
                                     : "asset/images/un_highlighted_star_in_post.png",
                                 width: (6.00).w,
                               ),
-                              AutoSizeText(feeds[widget.postIndex].likesCount),
+                              AutoSizeText(widget.posts[postIndex].likesCount),
                             ]),
                           ),
                         ),
@@ -738,8 +657,7 @@ class _single_itemState extends State<single_item> {
                                   // backgroundColor: Colors.transparent,
                                   builder: (BuildContext context) {
                                     return ChangeNotifierProvider(
-                                      create: (context) =>
-                                          Commenttypeprovider(),
+                                      create: (context) => Commenttypeprovider(),
                                       builder: (context, child) {
                                         return GestureDetector(
                                           onTap: () {
@@ -753,10 +671,7 @@ class _single_itemState extends State<single_item> {
                                             ),
                                             height: (70.00).h,
                                             child: Consumer(
-                                              builder: (context,
-                                                  Commenttypeprovider
-                                                  commenttypeprovider,
-                                                  child) {
+                                              builder: (context, Commenttypeprovider commenttypeprovider, child) {
                                                 return CommentBox(
                                                   focusNode: inputNode,
                                                   userImage: CommentBox
@@ -769,57 +684,31 @@ class _single_itemState extends State<single_item> {
                                                   'Comment cannot be blank',
                                                   withBorder: false,
                                                   sendButtonMethod: () {
-                                                    if (formKey.currentState!
-                                                        .validate()) {
-                                                      print(commentController
-                                                          .text);
+                                                    if (formKey.currentState!.validate()) {
+                                                      print(commentController.text);
                                                       setState(() {
                                                         var value = Singelcomment(
-                                                            picture:
-                                                            'asset/images/user_logo.png',
+                                                            picture: 'asset/images/user_logo.png',
                                                             name: 'maharshi',
-                                                            text:
-                                                            commentController
-                                                                .text,
-                                                            datetime:
-                                                            DateTime.now()
-                                                                .toString(),
-                                                            reaction:
-                                                            Reaction.none,
-                                                            replies: []);
+                                                            text: commentController.text,
+                                                            datetime: DateTime.now().toString(),
+                                                            reaction: Reaction.none,
+                                                            replies: []
+                                                        );
 
-                                                        if (commenttypeprovider
-                                                            .isreply) {
-                                                          String name = "@" +
-                                                              feeds[widget
-                                                                  .postIndex]
-                                                                  .comments[
-                                                              commenttypeprovider
-                                                                  .pushIndex]
-                                                                  .name;
-                                                          value.text =
-                                                          "$name ${value.text}";
-                                                          feeds[widget
-                                                              .postIndex]
-                                                              .comments[
-                                                          commenttypeprovider
-                                                              .getPushIndex]
-                                                              .replies
-                                                              .add(value);
-                                                          commenttypeprovider
-                                                              .changecommentType =
-                                                          false;
-                                                        } else {
-                                                          feeds[widget
-                                                              .postIndex]
-                                                              .comments
-                                                              .add(value);
+                                                        if (commenttypeprovider.isreply) {
+                                                          String name = "@" + widget.posts[postIndex].comments[commenttypeprovider.pushIndex].name;
+                                                          value.text = "$name ${value.text}";
+                                                          widget.posts[postIndex].comments[commenttypeprovider.getPushIndex].replies.add(value);
+                                                          commenttypeprovider.changecommentType = false;
+                                                        }
+                                                        else {
+                                                          widget.posts[postIndex].comments.add(value);
                                                         }
                                                       });
 
                                                       commentController.clear();
-                                                      FocusScope.of(context)
-                                                          .unfocus();
+                                                      FocusScope.of(context).unfocus();
                                                     } else {
                                                       print("Not validated");
                                                     }
@@ -847,7 +736,7 @@ class _single_itemState extends State<single_item> {
                                                         padding:
                                                         const EdgeInsets
                                                             .only(top: 20),
-                                                        child: commentChild(feeds[widget.postIndex].comments, context, inputNode, widget.postIndex)),
+                                                        child: commentChild(widget.posts[postIndex].comments, context, inputNode, postIndex , widget.profileId)),
                                                   ),
                                                 );
                                               },
@@ -863,10 +752,7 @@ class _single_itemState extends State<single_item> {
                                 "asset/images/comment_in_post.png",
                                 width: (6.00).w,
                               ),
-                              AutoSizeText(feeds[widget.postIndex]
-                                  .comments
-                                  .length
-                                  .toString()),
+                              AutoSizeText(widget.posts[postIndex].comments.length.toString()),
                             ]),
                           ),
                         ),
@@ -887,9 +773,9 @@ class _single_itemState extends State<single_item> {
                                 "asset/images/share_in_post.png",
                                 width: (6.00).w,
                               ),
-                              AutoSizeText(feeds[widget.postIndex]
-                                  .sharesCount
-                                  .toString()),
+                              AutoSizeText(
+                                  widget.posts[postIndex].sharesCount.toString()
+                              ),
                             ]),
                           ),
                         ),
@@ -925,7 +811,7 @@ class _single_itemState extends State<single_item> {
                 text: TextSpan(
                   children: [
                     TextSpan(
-                      text: feeds[widget.postIndex].views,
+                      text: widget.posts[postIndex].views,
                       style: TextStyle(
                         fontSize: 10,
                         color: provider.currentTheme
@@ -945,15 +831,16 @@ class _single_itemState extends State<single_item> {
                   ],
                 ),
               ),
-            )
+            ),
+            postIndex == widget.posts.length - 1 ? SizedBox(height: 45.h,width: 19.w,): const Text("")
           ],
-        ),
-      ),
+        );
+      },
     );
   }
 }
 
-Widget popupbutton(provider) {
+Widget popUpMenuNonFriendPostIndividual(provider) {
   return PopupMenuButton(
     onOpened: () {},
     onCanceled: () {},
@@ -974,203 +861,6 @@ Widget popupbutton(provider) {
       size: 25,
     ),
     itemBuilder: (context) => [
-      PopupMenuItem(
-        child: Container(
-          height: (4.55).h,
-          // color: Colors.red,
-          child: Row(
-            children: [
-              Container(
-                  height: (3).h,
-                  width: (7.0).w,
-                  padding: EdgeInsets.all((0.8).w),
-                  decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey.shade600.withOpacity(0.5)),
-                      color: provider.currentTheme
-                          ? light_Scaffold_color
-                          : dark_Scaffold_color,
-                      borderRadius: BorderRadius.circular(5)),
-                  child: SvgPicture.asset("asset/homescreen_icons/hideIcon.svg")
-              ),
-              Expanded(
-                child: Container(
-                  margin: EdgeInsets.symmetric(horizontal: (2.2).w),
-                  alignment: Alignment.centerLeft,
-                  // color: Colors.yellow,
-                  child: const Center(
-                    child: Text(
-                      'Hide',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w600,
-                          letterSpacing: 1),
-                    ),
-                  ),
-                ),
-              )
-            ],
-          ),
-        ),
-      ),
-      PopupMenuItem(
-        child: Container(
-          height: (4.55).h,
-          // color: Colors.red,
-          child: Row(
-            children: [
-              Container(
-                  height: (3).h,
-                  width: (7.0).w,
-                  padding: EdgeInsets.all((0.8).w),
-                  decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey.shade600.withOpacity(0.5)),
-                      color: provider.currentTheme
-                          ? light_Scaffold_color
-                          : dark_Scaffold_color,
-                      borderRadius: BorderRadius.circular(5)),
-                  child: SvgPicture.asset("asset/homescreen_icons/personIcon.svg")
-              ),
-              Expanded(
-                child: Container(
-                  margin: EdgeInsets.symmetric(horizontal: (2.2).w),
-                  alignment: Alignment.centerLeft,
-                  // color: Colors.yellow,
-                  child: const Center(
-                    child: Text(
-                      'View Profile',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w600,
-                          letterSpacing: 1),
-                    ),
-                  ),
-                ),
-              )
-            ],
-          ),
-        ),
-      ),
-      PopupMenuItem(
-        child: Container(
-          height: (4.55).h,
-          // color: Colors.red,
-          child: Row(
-            children: [
-              Container(
-                  height: (3).h,
-                  width: (7.0).w,
-                  padding: EdgeInsets.all((0.8).w),
-                  decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey.shade600.withOpacity(0.5)),
-                      color: provider.currentTheme
-                          ? light_Scaffold_color
-                          : dark_Scaffold_color,
-                      borderRadius: BorderRadius.circular(5)),
-                  child: SvgPicture.asset("asset/homescreen_icons/muteIcon.svg")
-              ),
-              Expanded(
-                child: Container(
-                  margin: EdgeInsets.symmetric(horizontal: (2.2).w),
-                  alignment: Alignment.centerLeft,
-                  // color: Colors.yellow,
-                  child: const Center(
-                    child: Text(
-                      'Mute',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w600,
-                          letterSpacing: 1),
-                    ),
-                  ),
-                ),
-              )
-            ],
-          ),
-        ),
-      ),
-      PopupMenuItem(
-        child: Container(
-          height: (4.55).h,
-          // color: Colors.red,
-          child: Row(
-            children: [
-              Container(
-                  height: (3).h,
-                  width: (7.0).w,
-                  padding: EdgeInsets.all((0.8).w),
-                  decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey.shade600.withOpacity(0.5)),
-                      color: provider.currentTheme
-                          ? light_Scaffold_color
-                          : dark_Scaffold_color,
-                      borderRadius: BorderRadius.circular(5)),
-                  child: SvgPicture.asset("asset/homescreen_icons/messageIcon.svg")
-              ),
-              Expanded(
-                child: Container(
-                  margin: EdgeInsets.symmetric(horizontal: (2.2).w),
-                  alignment: Alignment.centerLeft,
-                  // color: Colors.yellow,
-                  child: const Center(
-                    child: Text(
-                      'Messages',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w600,
-                          letterSpacing: 1),
-                    ),
-                  ),
-                ),
-              )
-            ],
-          ),
-        ),
-      ),
-      PopupMenuItem(
-        child: Container(
-          height: (4.55).h,
-          // color: Colors.red,
-          child: Row(
-            children: [
-              Container(
-                  height: (3).h,
-                  width: (7.0).w,
-                  padding: EdgeInsets.all((0.8).w),
-                  decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey.shade600.withOpacity(0.5)),
-                      color: provider.currentTheme
-                          ? light_Scaffold_color
-                          : dark_Scaffold_color,
-                      borderRadius: BorderRadius.circular(5)),
-                  child: SvgPicture.asset("asset/homescreen_icons/reportIcon.svg")
-              ),
-              Expanded(
-                child: Container(
-                  margin: EdgeInsets.symmetric(horizontal: (2.2).w),
-                  alignment: Alignment.centerLeft,
-                  // color: Colors.yellow,
-                  child: const Center(
-                    child: Text(
-                      'Report',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w600,
-                          letterSpacing: 1),
-                    ),
-                  ),
-                ),
-              )
-            ],
-          ),
-        ),
-      ),
-
-
       PopupMenuItem(
         child: Container(
           height: (4.55).h,

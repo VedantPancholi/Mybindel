@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:azlistview/azlistview.dart';
 import 'package:flutter/material.dart';
@@ -36,30 +35,30 @@ class Member_of_Groups_ScrollView extends StatefulWidget {
 
 class _Member_of_Groups_ScrollViewState extends State<Member_of_Groups_ScrollView> {
 
-List<Member_of_GroupsList> items_list = [];
-bool isSelect = false;
+  List<Member_of_GroupsList> items_list = [];
+  bool isSelect = false;
 
-//  late final list; 
+//  late final list;
   @override
   void initState() {
-    
+
     // final list = Member_of_GroupsProvider.getItem;
     this.items_list = widget.items.map((item) => Member_of_GroupsList(title: item, tag: item[0].toUpperCase())).toList();
     super.initState();
   }
- int currentIndex = 0;
+  int currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<Themeprovider>(context);
-        final member_of_GroupsProvider = Provider.of<Member_of_GroupsProvider>(context);
+    final member_of_GroupsProvider = Provider.of<Member_of_GroupsProvider>(context);
     // final tag = item.getSuspensionTag();
     // final title = item.title;
-print(currentIndex);
+    print(currentIndex);
 
     return AzListView(
       // susItemHeight: 20,
-      data: items_list, 
+      data: items_list,
       indexBarItemHeight: 2.h,
       physics: const BouncingScrollPhysics(),
       indexBarMargin: EdgeInsets.symmetric(horizontal: 2.w,vertical: 0),
@@ -89,115 +88,115 @@ print(currentIndex);
         ),
         selectItemDecoration: provider.currentTheme ? square_neu_Morphism : square_dark_neu_Morphism,
 
-        decoration: provider.currentTheme 
-        ? BoxDecoration(
-          border: Border(right: BorderSide(color: Colors.black))
-        ) 
-        : BoxDecoration(
-          border: Border(right: BorderSide(color: Colors.white))
+        decoration: provider.currentTheme
+            ? BoxDecoration(
+            border: Border(right: BorderSide(color: Colors.black))
+        )
+            : BoxDecoration(
+            border: Border(right: BorderSide(color: Colors.white))
         ) ,
       ),
       itemCount: items_list.length,
       itemBuilder: (BuildContext context, int index) {
         // return _buildListItem(items_list[index], index, currentIndex);
         return Container(
-      height: (8).h,
-      width: (80).w,
-      margin: EdgeInsets.only(right: 12.w, bottom: 1.2.h, top: 0.5.h, left: 1.4.w),
-      alignment: Alignment.centerLeft,
-      decoration: provider.currentTheme ? square_neu_Morphism : square_dark_neu_Morphism,
-      child: InkWell(
-        onTap: (){
-           if(!member_of_GroupsProvider.getItem.any((element) => element.name == items_list[index].title))
-            {
-              var value = Friend(name: items_list[index].title, picture: 'asset/music_icons/music_bg.png', occupation: '');
-              member_of_GroupsProvider.addItem(value);
-            }
-          // print("onTap");
-          // currentIndex = index;
-          // setState(() {
-            
-          // });
-        },
-        child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      children: [
-                        Container(
-                          padding: EdgeInsets.symmetric(
-                              vertical: (0.8).h, horizontal: (2.2).w),
-                          child: _buildHeader(items_list[index].getSuspensionTag()),
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children:  [
-                              RichText(
-                              text: TextSpan(
-                                children: [
-                                  TextSpan(
-                                    text: items_list[index].title,
-                                    style: TextStyle(
-                                        fontSize: 20,
-                                        letterSpacing: 1.2,
-                                        fontWeight: FontWeight.w500,
-                                        color: provider.currentTheme
-                                            ? dim_black
-                                            : dim_white),
-                                  ),
-                                  WidgetSpan(
-                                    alignment: PlaceholderAlignment.top,
-                                    child: Container(
+            height: (8).h,
+            width: (80).w,
+            margin: EdgeInsets.only(right: 12.w, bottom: 1.2.h, top: 0.5.h, left: 1.4.w),
+            alignment: Alignment.centerLeft,
+            decoration: provider.currentTheme ? square_neu_Morphism : square_dark_neu_Morphism,
+            child: InkWell(
+              onTap: (){
+                if(!member_of_GroupsProvider.getItem.any((element) => element.name == items_list[index].title))
+                {
+                  var value = Friend(name: items_list[index].title, picture: 'asset/music_icons/music_bg.png', occupation: '', id: 100);
+                  member_of_GroupsProvider.addItem(value);
+                }
+                // print("onTap");
+                // currentIndex = index;
+                // setState(() {
+
+                // });
+              },
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      Container(
+                        padding: EdgeInsets.symmetric(
+                            vertical: (0.8).h, horizontal: (2.2).w),
+                        child: _buildHeader(items_list[index].getSuspensionTag()),
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children:  [
+                          RichText(
+                            text: TextSpan(
+                              children: [
+                                TextSpan(
+                                  text: items_list[index].title,
+                                  style: TextStyle(
+                                      fontSize: 20,
+                                      letterSpacing: 1.2,
+                                      fontWeight: FontWeight.w500,
+                                      color: provider.currentTheme
+                                          ? dim_black
+                                          : dim_white),
+                                ),
+                                WidgetSpan(
+                                  alignment: PlaceholderAlignment.top,
+                                  child: Container(
                                       width: 4.2.w,
                                       height: 2.0.h,
                                       alignment: Alignment.topCenter,
                                       margin: EdgeInsets.only(bottom: 0.5.h, left: 1.2.w),
                                       child: Image.asset("asset/images/check.png")),
-                                  ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
-                            AutoSizeText("Artist".toUpperCase(), style: TextStyle(color: orange_color, fontWeight: FontWeight.w500, fontSize: 13),),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-      )
-    );
-       },
+                          ),
+                          AutoSizeText("Artist".toUpperCase(), style: TextStyle(color: orange_color, fontWeight: FontWeight.w500, fontSize: 13),),
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            )
+        );
+      },
     );
   }
-      _buildHeader(tag) {
-        return Container(
-          width: (12.0).w,
-          height: (6.0).h,
-          // decoration: square_neu_Morphism,
-          child: Stack(
-            children: [
-              ClipRRect(
-                      borderRadius: BorderRadius.circular(5),
-                      child: Image.asset(
-                        "asset/music_icons/music_bg.png",
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                Positioned(
-                    bottom: 0,
-                    right: 0,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(40),
-                      child: Container(
-                        color: Colors.red,
-                        width: (2.500).w,
-                        height: (1.200).h,
-                      ),
-                    ),
-                  ),
-                ]
-          ),
-        );
-      }
+  _buildHeader(tag) {
+    return Container(
+      width: (12.0).w,
+      height: (6.0).h,
+      // decoration: square_neu_Morphism,
+      child: Stack(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(5),
+              child: Image.asset(
+                "asset/music_icons/music_bg.png",
+                fit: BoxFit.cover,
+              ),
+            ),
+            Positioned(
+              bottom: 0,
+              right: 0,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(40),
+                child: Container(
+                  color: Colors.red,
+                  width: (2.500).w,
+                  height: (1.200).h,
+                ),
+              ),
+            ),
+          ]
+      ),
+    );
+  }
 }

@@ -1,4 +1,7 @@
 
+/* show which slidebar is selected in adjust of post-enhancement screen. */
+
+
 import 'package:flutter/material.dart';
 
 class Slidebarprovider with ChangeNotifier{
@@ -10,4 +13,6 @@ class Slidebarprovider with ChangeNotifier{
     selectedSlidebar = index;
     notifyListeners();
   }
+
+
 }

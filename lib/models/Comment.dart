@@ -11,11 +11,11 @@ class Singelcomment {
 
   Singelcomment(
       {required this.picture,
-      required this.name,
-      required this.text,
-      required this.datetime,
-      required this.reaction,
-      required this.replies
+        required this.name,
+        required this.text,
+        required this.datetime,
+        required this.reaction,
+        required this.replies
       });
 }
 

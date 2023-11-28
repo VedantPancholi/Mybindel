@@ -1,4 +1,8 @@
 
+/* for selecting that is it comment or reply of comment */
+
+
+
 import 'package:flutter/foundation.dart';
 
 class Commenttypeprovider with ChangeNotifier {
@@ -11,8 +15,8 @@ class Commenttypeprovider with ChangeNotifier {
   }
 
   set changecommentType(bool flag){
-     reply = flag;
-     notifyListeners();
+    reply = flag;
+    notifyListeners();
   }
 
   int get getPushIndex{

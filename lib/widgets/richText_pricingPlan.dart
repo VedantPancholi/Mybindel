@@ -7,12 +7,12 @@ import '../palette/palette.dart';
 import '../providers/selectTheme.dart';
 
 class RichTextPricingPlan extends StatefulWidget {
-   String text;
+  String text;
 
 
-   RichTextPricingPlan(
-       this.text,
-       );
+  RichTextPricingPlan(
+      this.text,
+      );
 
   @override
   State<RichTextPricingPlan> createState() => _RichTextPricingPlanState();
@@ -38,8 +38,8 @@ class _RichTextPricingPlanState extends State<RichTextPricingPlan> {
           TextSpan(
             text: widget.text,
             style: TextStyle(fontSize: 18,color:  provider.currentTheme
-              ? dark_Scaffold_color
-              : light_Scaffold_color,),
+                ? dark_Scaffold_color
+                : light_Scaffold_color,),
           ),
         ],
       ),

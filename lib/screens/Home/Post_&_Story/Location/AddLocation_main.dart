@@ -95,7 +95,7 @@ class _AddLocationPageState extends State<AddLocationPage> {
               Container(
                 width: (95.0).w,
                 margin: EdgeInsets.symmetric(
-                    // vertical: ().h * 0.010,
+                  // vertical: ().h * 0.010,
                     horizontal: (3.00).w),
                 decoration: provider.currentTheme
                     ? textFormField_neu_morphism
@@ -110,7 +110,7 @@ class _AddLocationPageState extends State<AddLocationPage> {
                         color: provider.currentTheme ? dim_black : dim_white,
                       ),
                       contentPadding:
-                          EdgeInsets.symmetric(horizontal: (4.00).w)),
+                      EdgeInsets.symmetric(horizontal: (4.00).w)),
                   keyboardType: TextInputType.text,
                   textInputAction: TextInputAction.done,
                 ),

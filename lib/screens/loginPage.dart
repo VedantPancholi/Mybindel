@@ -69,13 +69,13 @@ class _login_pageState extends State<login_page> {
               height: size.height * 0.04,
               width: size.width * 0.27,
               alignment: Alignment.center,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 // image: DecorationImage(
                 //   image: AssetImage('asset/images/mainTitle.png'
                 //       ''),
                 // ),
               ),
-              child: Text("Mybindle",style: TextStyle(fontWeight: FontWeight.w700,fontSize: 22,letterSpacing: 1.5),),
+              child: const Text("Mybindle",style: TextStyle(fontWeight: FontWeight.w700,fontSize: 22,letterSpacing: 1.5),),
             ),
           ]),
         ),
@@ -136,8 +136,8 @@ class _login_pageState extends State<login_page> {
                 SizedBox(width: size.width * 0.010),
                 Padding(
                   padding: EdgeInsets.symmetric(
-                      vertical: size.height * 0.010,
-                      horizontal: size.width * 0.010,
+                    vertical: size.height * 0.010,
+                    horizontal: size.width * 0.010,
                   ),
                   child: textfields(
                     hintText: '  Password',
@@ -176,7 +176,7 @@ class _login_pageState extends State<login_page> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    Text(
+                    const Text(
                       'Forgotten?',
                       style: TextStyle(
                           fontFamily: "Avant",
@@ -188,21 +188,18 @@ class _login_pageState extends State<login_page> {
                       width: size.width * 0.01,
                     ),
                     GestureDetector(
-                      child: Text(
-                        'Reset here!',
-                        style: TextStyle(
-                            fontFamily: 'Avant',
-                            fontSize: 16,
-                            color: orange_color,
-                            fontWeight: FontWeight.w500),
-                      ),
-                      onTap: () {
-                        if (_formKey.currentState!.validate()) {
-                          _formKey.currentState!.save();
+                        child: Text(
+                          'Reset here!',
+                          style: TextStyle(
+                              fontFamily: 'Avant',
+                              fontSize: 16,
+                              color: orange_color,
+                              fontWeight: FontWeight.w500),
+                        ),
+                        onTap: () {
                           Navigator.push(
-                              context, custompageroute(child: sendCode()),);
+                            context, custompageroute(child: sendCode()),);
                         }
-                      },
                     )
                   ],
                 )

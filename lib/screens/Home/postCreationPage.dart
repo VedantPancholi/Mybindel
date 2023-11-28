@@ -4,18 +4,18 @@ import 'package:flutter/material.dart';
 import 'package:mybindel_test/pagerouter/customPageRouter.dart';
 import 'package:mybindel_test/palette/palette.dart';
 import 'package:mybindel_test/providers/selectTheme.dart';
-import 'package:mybindel_test/screens/Home/POST_&_STORY/Post_Pages/Member_Of_Your_Pages_WorldOfFriends/Member_Of_Your_Pages_WorldOfFriends.dart';
-import 'package:mybindel_test/screens/Home/POST_&_STORY/Story_Enhancement/AddEffectPage_main.dart';
-import 'package:mybindel_test/screens/Home/Post_&_Story/Post_Groups/Group_of_Friends_main.dart';
-import 'package:mybindel_test/screens/Home/Post_&_Story/Post_Pages/Word_Of_Friends/World_Of_FriendsPage.dart';
-import 'package:mybindel_test/screens/Home/Post_&_Story/TagFriends/FriendScreenPage.dart';
-import 'package:mybindel_test/screens/Home/Post_&_Story/Location/AddLocation_main.dart';
-import 'package:mybindel_test/screens/Home/Post_&_Story/Post_Groups/Member_of_group/Member_Of_GroupPage.dart';
+import 'package:mybindel_test/screens/Home/Post_&_Story/Post_Groups/Group_Of_Friends_main.dart';
+import 'package:mybindel_test/screens/Home/Post_&_Story/Post_Pages/Member_Of_Your_Pages_WorldOfFriends/Member_Of_Your_Pages_WorldOfFriends.dart';
 import 'package:mybindel_test/widgets/fieldbutton_widget.dart';
 import 'package:mybindel_test/widgets/postOptions/withoutBadge_postOptions_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 import '../../widgets/postOptions/postOptions_widget.dart';
+import 'Post_&_Story/Location/AddLocation_main.dart';
+import 'Post_&_Story/Post_Groups/Member_of_group/Member_Of_GroupPage.dart';
+import 'Post_&_Story/Post_Pages/Word_Of_Friends/World_Of_FriendsPage.dart';
+import 'Post_&_Story/TagFriends/FriendScreenPage.dart';
+
 class PostCreationPage extends StatefulWidget {
   const PostCreationPage({Key? key}) : super(key: key);
 
@@ -114,8 +114,7 @@ class _postCreationPageState extends State<PostCreationPage> {
             // color: Colors.red,
             child: InkWell(
               onTap: () {
-                Navigator.pop(context);
-                // Navigator.pushAndRemoveUntil(context, custompageroute(child: CreateUser()), (route) => false);
+                Navigator.of(context).pop();
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -295,16 +294,14 @@ class _postCreationPageState extends State<PostCreationPage> {
                   ),
                   InkWell(
                     onTap: (){
-                      Navigator.push(context, custompageroute(child: World_Of_friendsPage()));
+                      Navigator.push(context, custompageroute(child: Member_Of_Your_Pages_WorldOfFriends()));
                     },
-                    child: postOptions(size: size,showNotification: true,notification_number: 3,text: "Share in Pages",svg: "asset/post_icons/share_page.svg",),
+                    child: postOptions(size: size,showNotification: true,notification_number: 3,text: "Share in  Pages",svg: "asset/post_icons/share_page.svg",),
                   ),
                   InkWell(
                     onTap: (){},
                     child: InkWell(
-                      onTap: (){
-                        Navigator.push(context, custompageroute(child: Member_Of_GroupPage()));
-                      },
+                      onTap: (){},
                       child: postOptions(size: size,showNotification: true,notification_number: 3,text: "Direct message",svg: "asset/post_icons/direct_message.svg",),
                     ),
                   ),
@@ -359,18 +356,22 @@ class _postCreationPageState extends State<PostCreationPage> {
                   ),
                   InkWell(
                     onTap: (){
-                      Navigator.push(context, custompageroute(child: const Group_Of_FriendsPage()));
+                      Navigator.push(context, custompageroute(child:  Group_Of_FriendsPage()));
+
                     },
                     child: postOptionsWithoutBadge(size: size,text: "Share in Groups", svg: 'asset/post_icons/share_groups.svg',),
                   ),
                   InkWell(
                     onTap: (){
-                      Navigator.push(context, custompageroute(child: Member_Of_Your_Pages_WorldOfFriends()));
+                      Navigator.push(context, custompageroute(child:  World_Of_friendsPage()));
                     },
                     child: postOptionsWithoutBadge(size: size,text: "Add in queue", svg: 'asset/post_icons/add_queue.svg',),
                   ),
                   InkWell(
-                    onTap: (){},
+                    onTap: (){
+                      Navigator.push(context, custompageroute(child:  Member_Of_GroupPage()));
+
+                    },
                     child: postOptionsWithoutBadge(size: size,text: "Save in drive", svg: 'asset/post_icons/save_drive.svg',),
                   ),
 
@@ -392,7 +393,7 @@ class _postCreationPageState extends State<PostCreationPage> {
                     height: size.height * 0.065,
                     width: size.width * 0.90,
                     onpressed: () {
-                      Navigator.push(context, custompageroute(child: const AddEffectPage()));
+
                     }),
               )),
         ]),

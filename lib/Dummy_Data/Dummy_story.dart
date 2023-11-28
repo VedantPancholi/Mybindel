@@ -4,7 +4,7 @@ import '../models/User.dart';
 class Stories {
   List<singleUserStory> stories = [
     singleUserStory(
-        user: User(name: 'Maharshi', picture: 'asset/images/user_logo.png'),
+        user: User(name: 'Maharshi', picture: 'asset/images/user_logo.png' , occupation: 'Artist'),
         stories: [
           Story(
             url:
@@ -13,7 +13,7 @@ class Stories {
           ),
           Story(
             url:
-                'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4',
+            'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4',
             mediaType: MediaType.video,
           ),
 
@@ -28,16 +28,16 @@ class Stories {
           ),
         ]),
     singleUserStory(
-        user: User(name: 'vedant', picture: 'asset/images/user_logo.png'),
+        user: User(name: 'vedant', picture: 'asset/images/user_logo.png', occupation: 'writer'),
         stories: [
           Story(
             url:
-                'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4',
+            'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4',
             mediaType: MediaType.video,
           ),
           Story(
             url:
-                'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4',
+            'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4',
             mediaType: MediaType.video,
           ),
         ])

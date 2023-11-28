@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:mybindel_test/palette/palette.dart';
 import 'package:mybindel_test/providers/Group_of_friendsProvider.dart';
 import 'package:mybindel_test/providers/selectTheme.dart';
-import 'package:mybindel_test/screens/Home/Post_&_Story/Post_Groups/ScrollView_Group_of_friends.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
+
+import 'ScrollView_Group_of_friends.dart';
 
 class Group_Of_FriendsPage extends StatefulWidget {
   const Group_Of_FriendsPage({super.key});
@@ -22,7 +23,7 @@ class _Group_Of_FriendsPageState extends State<Group_Of_FriendsPage> {
     return ChangeNotifierProvider(
       create: (context) => Group_of_friendsProvider(),
       child: Scaffold(
-          // backgroundColor: provider.currentTheme ? light_Scaffold_color : dark_Scaffold_color,
+        // backgroundColor: provider.currentTheme ? light_Scaffold_color : dark_Scaffold_color,
           body: Column(
             children: [
               Container(
@@ -92,7 +93,7 @@ class _Group_Of_FriendsPageState extends State<Group_Of_FriendsPage> {
               Container(
                 width: (95.0).w,
                 margin: EdgeInsets.symmetric(
-                    // vertical: ().h * 0.010,
+                  // vertical: ().h * 0.010,
                     horizontal: (3.00).w),
                 decoration: provider.currentTheme
                     ? textFormField_neu_morphism
@@ -107,7 +108,7 @@ class _Group_Of_FriendsPageState extends State<Group_Of_FriendsPage> {
                         color: provider.currentTheme ? dim_black : dim_white,
                       ),
                       contentPadding:
-                          EdgeInsets.symmetric(horizontal: (4.00).w)),
+                      EdgeInsets.symmetric(horizontal: (4.00).w)),
                   keyboardType: TextInputType.text,
                   textInputAction: TextInputAction.done,
                 ),
@@ -138,26 +139,26 @@ class _Group_Of_FriendsPageState extends State<Group_Of_FriendsPage> {
                               fontWeight: FontWeight.w700),
                         ),
                         InkWell(
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                      child: Container(
-                        margin: EdgeInsets.only(right: 2.w),
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 4.w, vertical: (0.5).h),
-                        decoration: provider.currentTheme
-                            ? square_neu_Morphism
-                            : square_dark_neu_Morphism,
-                        child: Text(
-                          "Done",
-                          style: TextStyle(color: orange_color),
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          child: Container(
+                            margin: EdgeInsets.only(right: 2.w),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 4.w, vertical: (0.5).h),
+                            decoration: provider.currentTheme
+                                ? square_neu_Morphism
+                                : square_dark_neu_Morphism,
+                            child: Text(
+                              "Done",
+                              style: TextStyle(color: orange_color),
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
                       ],
                     ),
                   ),
-                  
+
                 ],
               ),
               Expanded(

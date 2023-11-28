@@ -20,6 +20,7 @@ class World_Of_FriendsList extends ISuspensionBean{
   @override
   String getSuspensionTag() => tag;
 }
+
 class World_Of_Friends_ScrollView extends StatefulWidget {
 
   final List<Friend> items;
@@ -30,10 +31,10 @@ class World_Of_Friends_ScrollView extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<World_Of_Friends_ScrollView> createState() => _World_Of_Friends_ScrollViewState();
+  State<World_Of_Friends_ScrollView> createState() => _Word_Of_Friends_ScrollViewState();
 }
 
-class _World_Of_Friends_ScrollViewState extends State<World_Of_Friends_ScrollView> {
+class _Word_Of_Friends_ScrollViewState extends State<World_Of_Friends_ScrollView> {
 
   List<World_Of_FriendsList> items_list = [];
   bool isSelect = false;
@@ -51,7 +52,7 @@ class _World_Of_Friends_ScrollViewState extends State<World_Of_Friends_ScrollVie
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<Themeprovider>(context);
-    final world_Of_FriendsProvider = Provider.of<World_Of_FriendsProvider>(context);
+    final word_Of_FriendsProvider = Provider.of<World_Of_FriendsProvider>(context);
     // final tag = item.getSuspensionTag();
     // final title = item.title;
     print(currentIndex);
@@ -168,27 +169,7 @@ class _World_Of_Friends_ScrollViewState extends State<World_Of_Friends_ScrollVie
               ),
             ),
           ]
-     ),
-);
+      ),
+    );
+  }
 }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -1,18 +1,21 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
-import 'package:mybindel_test/pagerouter/customPageRouter.dart';
 import 'package:mybindel_test/palette/palette.dart';
+import 'package:mybindel_test/providers/selectFriends.dart';
 import 'package:mybindel_test/providers/selectTheme.dart';
-import 'package:mybindel_test/screens/Home/POST_&_STORY/Story_Enhancement/AddEffectPage_main.dart';
-import 'package:mybindel_test/screens/Home/Post_&_Story/TagFriends/FriendScreenPage.dart';
 import 'package:mybindel_test/screens/Home/Post_&_Story/Location/AddLocation_main.dart';
-import 'package:mybindel_test/screens/Home/Post_&_Story/Story_Music/AddMusicPage_main.dart';
 import 'package:mybindel_test/widgets/fieldbutton_widget.dart';
 import 'package:mybindel_test/widgets/postOptions/withoutBadge_postOptions_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
+import '../../pagerouter/customPageRouter.dart';
 import '../../widgets/postOptions/postOptions_widget.dart';
+import 'POST_&_STORY/Story_Enhancement/AddEffectPage_main.dart';
+import 'Post_&_Story/Story_Music/AddMusicPage_main.dart';
+import 'Post_&_Story/TagFriends/FriendScreenPage.dart';
+
+
 class StoryCreationPage extends StatefulWidget {
   const StoryCreationPage({Key? key}) : super(key: key);
 
@@ -111,8 +114,7 @@ class _StoryCreationPageState extends State<StoryCreationPage> {
             // color: Colors.red,
             child: InkWell(
               onTap: () {
-                Navigator.pop(context);
-                // Navigator.pushAndRemoveUntil(context, custompageroute(child: CreateUser()), (route) => false);
+                Navigator.of(context).pop();
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -286,21 +288,21 @@ class _StoryCreationPageState extends State<StoryCreationPage> {
                 children: [
                   InkWell(
                     onTap: (){
-                      Navigator.push(context, custompageroute(child:  FriendScreenPage()));
+                      Navigator.push(context, custompageroute(child: FriendScreenPage()));
                     },
-                    child: postOptions(size: size,showNotification: true,notification_number: 3,text: "Tag friends",svg: "asset/post_icons/tag.svg",),
+                    child: postOptions(size: size,showNotification: true,notification_number: 3,text: "Tag friends",svg: "asset/story_icons/tag.svg",),
                   ),
                   InkWell(
                     onTap: (){
                       Navigator.push(context, custompageroute(child: AddMusicPage()));
                     },
-                    child: postOptions(size: size,showNotification: true,notification_number: 3,text: "Add music",svg: "asset/post_icons/add_music.svg",),
+                    child: postOptions(size: size,showNotification: true,notification_number: 3,text: "Add music",svg: "asset/story_icons/add_music.svg",),
                   ),
                   InkWell(
                     onTap: (){},
                     child: InkWell(
                       onTap: (){},
-                      child: postOptions(size: size,showNotification: true,notification_number: 3,text: "Direct message",svg: "asset/post_icons/direct_message.svg",),
+                      child: postOptions(size: size,showNotification: true,notification_number: 3,text: "Direct message",svg: "asset/story_icons/direct_message.svg",),
                     ),
                   ),
                   //Drop down for friends to friends
@@ -348,23 +350,23 @@ class _StoryCreationPageState extends State<StoryCreationPage> {
                 children: [
                   InkWell(
                     onTap: (){
-                      Navigator.push(context, custompageroute(child:  AddLocationPage()));
+                      Navigator.push(context, custompageroute(child: AddLocationPage()));
                     },
-                    child: postOptionsWithoutBadge(size: size,text: "Add Location", svg: 'asset/post_icons/add_location.svg',),
+                    child: postOptionsWithoutBadge(size: size,text: "Add Location", svg: 'asset/story_icons/add_location.svg',),
                   ),
                   InkWell(
                     onTap: (){
                       Navigator.push(context, custompageroute(child: AddEffectPage()));
                     },
-                    child: postOptionsWithoutBadge(size: size,text: "Enhancements", svg: 'asset/post_icons/share_groups.svg',),
+                    child: postOptionsWithoutBadge(size: size,text: "Enhancement", svg: 'asset/story_icons/share_groups.svg',),
                   ),
                   InkWell(
                     onTap: (){},
-                    child: postOptionsWithoutBadge(size: size,text: "Add in queue", svg: 'asset/post_icons/add_queue.svg',),
+                    child: postOptionsWithoutBadge(size: size,text: "Add in queue", svg: 'asset/story_icons/add_queue.svg',),
                   ),
                   InkWell(
                     onTap: (){},
-                    child: postOptionsWithoutBadge(size: size,text: "Save in drive", svg: 'asset/post_icons/save_drive.svg',),
+                    child: postOptionsWithoutBadge(size: size,text: "Save in drive", svg: 'asset/story_icons/save_drive.svg',),
                   ),
 
                 ],
@@ -385,6 +387,7 @@ class _StoryCreationPageState extends State<StoryCreationPage> {
                     height: size.height * 0.065,
                     width: size.width * 0.90,
                     onpressed: () {
+
                     }),
               )),
         ]),

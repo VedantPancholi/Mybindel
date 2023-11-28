@@ -33,7 +33,7 @@ class MutedFriendsState extends State<MutedFriends> {
     final friends = friendObject.getmutedfriends;
 
     return friends.length > 0 ?
-      ListView.builder(
+    ListView.builder(
       physics: const BouncingScrollPhysics(),
       itemCount: friends.length,
       itemBuilder: (context, mutedfriendIndex) {

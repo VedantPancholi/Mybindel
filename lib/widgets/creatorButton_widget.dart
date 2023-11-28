@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:mybindel_test/screens/create_userPage.dart';
 import 'package:provider/provider.dart';
+import '../pagerouter/customPageRouter.dart';
 import '../palette/palette.dart';
 import '../providers/selectTheme.dart';
+import '../screens/sendCodePage.dart';
 import 'rowbutton_widget.dart';
 
 class creatorButton extends StatelessWidget {
@@ -46,7 +49,8 @@ class creatorButton extends StatelessWidget {
               title: 'Create using E-mail',
               icon: Icons.email_outlined,
               onpressed: () {
-                print("Email pressed");
+                Navigator.push(
+                  context, custompageroute(child: CreateUser()),);
               },
               margin: EdgeInsets.symmetric(
                   vertical: size.height * 0.005, horizontal: size.width * 0.087),
@@ -58,7 +62,8 @@ class creatorButton extends StatelessWidget {
               title: 'Create using Phone',
               icon: Icons.phone,
               onpressed: () {
-                print("Phone pressed");
+                Navigator.push(
+                  context, custompageroute(child: CreateUser()),);
               },
               margin: EdgeInsets.symmetric(
                   vertical: size.height * 0.005, horizontal: size.width * 0.087),

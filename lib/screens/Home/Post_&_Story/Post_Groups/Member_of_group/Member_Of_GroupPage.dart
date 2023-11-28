@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:mybindel_test/palette/palette.dart';
 import 'package:mybindel_test/providers/Member_of_GroupsProvider.dart';
 import 'package:mybindel_test/providers/selectTheme.dart';
-import 'package:mybindel_test/screens/Home/Post_&_Story/Post_Groups/Member_of_group/Scroll_View_Member_of_Group.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
+
+import 'Scroll_View_Member_of_Group.dart';
 
 class Member_Of_GroupPage extends StatefulWidget {
   const Member_Of_GroupPage({super.key});
@@ -23,6 +24,7 @@ class _Member_Of_GroupPageState extends State<Member_Of_GroupPage> {
       create: (context) => Member_of_GroupsProvider(),
       child: Scaffold(
           resizeToAvoidBottomInset: false,
+          // backgroundColor: provider.currentTheme ? light_Scaffold_color : dark_Scaffold_color,
           body: Column(
             children: [
               Container(
@@ -92,7 +94,7 @@ class _Member_Of_GroupPageState extends State<Member_Of_GroupPage> {
               Container(
                 width: (95.0).w,
                 margin: EdgeInsets.symmetric(
-                    // vertical: ().h * 0.010,
+                  // vertical: ().h * 0.010,
                     horizontal: (3.00).w),
                 decoration: provider.currentTheme
                     ? textFormField_neu_morphism
@@ -107,61 +109,61 @@ class _Member_Of_GroupPageState extends State<Member_Of_GroupPage> {
                         color: provider.currentTheme ? dim_black : dim_white,
                       ),
                       contentPadding:
-                          EdgeInsets.symmetric(horizontal: (4.00).w)),
+                      EdgeInsets.symmetric(horizontal: (4.00).w)),
                   keyboardType: TextInputType.text,
                   textInputAction: TextInputAction.done,
                 ),
               ),
 
               Consumer(
-            builder: (context, Member_of_GroupsProvider member_of_GroupsProvider, child) {
-              return Visibility(
-                visible: member_of_GroupsProvider.getItem.length > 0 ? true:false,
-                child: Container(
-                  height: (15).h,
-                  width: (100).w,
-                  child: ListView.builder(
-                    // reverse: true,
-                      scrollDirection: Axis.horizontal,
-                      itemCount: member_of_GroupsProvider.getItem.length,
-                      itemBuilder: (context, index) {
-                        return Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                              margin: EdgeInsets.all((2).w),
-                              height: (8).h,
-                              width: (20).w,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(7),
-                                image: DecorationImage(
-                                    fit: BoxFit.cover,
-                                    image: AssetImage(
-                                      member_of_GroupsProvider.getItem[index].picture,
-                                    )),
-                              ),
-                              child: Center(
-                                child: IconButton(
-                                  onPressed: () {
-                                    member_of_GroupsProvider.removeItem(index);
-                                    print("removed");
-                                  },
-                                  icon: Icon(
-                                    Icons.cancel_outlined,
-                                    color: dim_white ,
-                                    size: 35,
+                builder: (context, Member_of_GroupsProvider member_of_GroupsProvider, child) {
+                  return Visibility(
+                    visible: member_of_GroupsProvider.getItem.length > 0 ? true:false,
+                    child: Container(
+                      height: (15).h,
+                      width: (100).w,
+                      child: ListView.builder(
+                        // reverse: true,
+                          scrollDirection: Axis.horizontal,
+                          itemCount: member_of_GroupsProvider.getItem.length,
+                          itemBuilder: (context, index) {
+                            return Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  margin: EdgeInsets.all((2).w),
+                                  height: (8).h,
+                                  width: (20).w,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(7),
+                                    image: DecorationImage(
+                                        fit: BoxFit.cover,
+                                        image: AssetImage(
+                                          member_of_GroupsProvider.getItem[index].picture,
+                                        )),
+                                  ),
+                                  child: Center(
+                                    child: IconButton(
+                                      onPressed: () {
+                                        member_of_GroupsProvider.removeItem(index);
+                                        print("removed");
+                                      },
+                                      icon: Icon(
+                                        Icons.cancel_outlined,
+                                        color: dim_white ,
+                                        size: 35,
+                                      ),
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ),
-                            Text( member_of_GroupsProvider.getItem[index].name)
-                          ],
-                        );
-                      }),
-                ),
-              );
-            },
-          ),
+                                Text( member_of_GroupsProvider.getItem[index].name)
+                              ],
+                            );
+                          }),
+                    ),
+                  );
+                },
+              ),
 
               Container(
                 padding: EdgeInsets.symmetric(
@@ -209,19 +211,19 @@ class _Member_Of_GroupPageState extends State<Member_Of_GroupPage> {
                 child: Consumer(builder:
                     (context, Member_of_GroupsProvider member_of_GroupsProvider, child) {
                   return Member_of_Groups_ScrollView(
-                   items: const [
-                'Aiden', 'Alice', 'Alex', 'Amelia', 'Andrew', 'Anna',
-                'Benjamin', 'Brooke', 'Brandon', 'Bella', 'Caleb', 'Chloe', 'Christopher', 'Charlotte','Daniel', 'David', 'Diana', 'Dylan', 'Emily', 'Ethan', 'Elizabeth', 'Ella',
-                'Finn', 'Fiona', 'Faith', 'Gabriel', 'Grace', 'Gavin', 'Hannah', 'Henry', 'Haley',
-                'Isaac', 'Isabella', 'Ivy', 'Ian', 'Jackson', 'Julia', 'Jacob', 'James',
-                'Kevin', 'Kayla', 'Kyle', 'Katherine', 'Liam', 'Lily', 'Lucas', 'Leah',
-                'Mason', 'Mia', 'Michael', 'Madison', 'Noah', 'Natalie', 'Nathan', 'Olivia',
-                'Owen', 'Sophia', 'Samuel', 'Samantha', 'Thomas', 'Taylor', 'Tyler',
-                'Victoria', 'Violet', 'Vincent', 'Valerie', 'William', 'Willow', 'Wyatt',
-                'Xavier', 'Ximena', 'Xander',
-                'Yasmine', 'Yvonne', 'Yara',
-                'Zachary', 'Zoe', 'Zane', 'Zara'
-              ],
+                    items: const [
+                      'Aiden', 'Alice', 'Alex', 'Amelia', 'Andrew', 'Anna',
+                      'Benjamin', 'Brooke', 'Brandon', 'Bella', 'Caleb', 'Chloe', 'Christopher', 'Charlotte','Daniel', 'David', 'Diana', 'Dylan', 'Emily', 'Ethan', 'Elizabeth', 'Ella',
+                      'Finn', 'Fiona', 'Faith', 'Gabriel', 'Grace', 'Gavin', 'Hannah', 'Henry', 'Haley',
+                      'Isaac', 'Isabella', 'Ivy', 'Ian', 'Jackson', 'Julia', 'Jacob', 'James',
+                      'Kevin', 'Kayla', 'Kyle', 'Katherine', 'Liam', 'Lily', 'Lucas', 'Leah',
+                      'Mason', 'Mia', 'Michael', 'Madison', 'Noah', 'Natalie', 'Nathan', 'Olivia',
+                      'Owen', 'Sophia', 'Samuel', 'Samantha', 'Thomas', 'Taylor', 'Tyler',
+                      'Victoria', 'Violet', 'Vincent', 'Valerie', 'William', 'Willow', 'Wyatt',
+                      'Xavier', 'Ximena', 'Xander',
+                      'Yasmine', 'Yvonne', 'Yara',
+                      'Zachary', 'Zoe', 'Zane', 'Zara'
+                    ],
                     // onClickedIem : (item){},
                   );
                 }),

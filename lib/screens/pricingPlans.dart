@@ -419,23 +419,23 @@ class _PricingPlansState extends State<PricingPlans> {
             ),
           ),
           Container(
-                    margin: EdgeInsets.symmetric(vertical: 5.0, horizontal: 15),
-                    child: Padding(
-                        padding: EdgeInsets.symmetric(
-                            vertical: size.height * 0.010,
-                            horizontal: size.width * 0.010),
-                        child: fieldbutton(
-                            title: "Continue",  
-                            height: size.height * 0.075,
-                            width: size.width * 0.82,
-                            onpressed: () {
-                              Navigator.push(context, custompageroute(child: PaymentMethods()));
-                              print("Continue tapped");
-                              print(isPressed1);
-                              print(isPressed2);
-                              print(isPressed3);
-                            })),
-                  )
+            margin: EdgeInsets.symmetric(vertical: 5.0, horizontal: 15),
+            child: Padding(
+                padding: EdgeInsets.symmetric(
+                    vertical: size.height * 0.010,
+                    horizontal: size.width * 0.010),
+                child: fieldbutton(
+                    title: "Continue",
+                    height: size.height * 0.075,
+                    width: size.width * 0.82,
+                    onpressed: () {
+                      Navigator.push(context, custompageroute(child: PaymentMethods()));
+                      print("Continue tapped");
+                      print(isPressed1);
+                      print(isPressed2);
+                      print(isPressed3);
+                    })),
+          )
         ],
       ),
     );

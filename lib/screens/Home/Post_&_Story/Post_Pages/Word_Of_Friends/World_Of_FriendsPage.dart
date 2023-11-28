@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:mybindel_test/palette/palette.dart';
 import 'package:mybindel_test/providers/World_Of_FriendsProvider.dart';
 import 'package:mybindel_test/providers/selectTheme.dart';
-import 'package:mybindel_test/screens/Home/Post_&_Story/Post_Pages/Word_Of_Friends/Scroll_View_Word_Of_Friends.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
+import 'Scroll_View_Word_Of_Friends.dart';
 
 class World_Of_friendsPage extends StatefulWidget {
   const World_Of_friendsPage({super.key});
@@ -167,6 +167,6 @@ class _World_Of_friendsPageState extends State<World_Of_friendsPage> {
               )
             ],
           )),
-);
-}
+    );
+  }
 }

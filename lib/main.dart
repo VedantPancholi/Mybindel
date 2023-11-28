@@ -5,23 +5,14 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:mybindel_test/pagerouter/customPageRouter.dart';
 import 'package:mybindel_test/palette/palette.dart';
-import 'package:mybindel_test/providers/bottomNavigationProvider.dart';
 import 'package:mybindel_test/screens/BasePage.dart';
 
-import 'package:mybindel_test/screens/Home/HomePage.dart';
 import 'package:mybindel_test/screens/create_userPage.dart';
-import 'package:mybindel_test/screens/loginPage.dart';
-// import 'package:mybindel_test/screens/loginPage.dart';
-import 'package:mybindel_test/screens/payement_methodsPage.dart';
-import 'package:mybindel_test/screens/second_create_userPage.dart';
-import 'package:mybindel_test/screens/welcomePage.dart';
 import 'package:mybindel_test/providers/selectTheme.dart';
-// import 'package:mybindel_test/screens/welcomePage.dart';
+import 'package:mybindel_test/screens/loginPage.dart';
 import 'package:mybindel_test/theme/theme.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
-
-// import 'package:test_mybindel/pageroute/customPageRouter.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -65,17 +56,12 @@ class _MyAppState extends State<MyApp> {
           : ThemeMode.dark, //ThemeMode.system, //
       theme: MyThemes.lightTheme,
       darkTheme: MyThemes.darkTheme,
-      //home: splash(),
-      home: 
-      CreateUser(),
-      
-      // ChangeNotifierProvider(
-      //     create: (_) => Navigationprovider(), child: BasePage()),
+      home: splash(),
+      //home: BasePage(),
+      //home: CreateUser(),
     );
   }
 }
-
-
 
 
 
@@ -95,7 +81,7 @@ class _splashState extends State<splash> {
 
   openscreen() {
     Navigator.pushReplacement(
-        this.context, custompageroute(child: CreateUser()));
+        this.context, custompageroute(child: login_page()));
   }
 
   // @override
@@ -144,8 +130,9 @@ class _splashState extends State<splash> {
                 //  color: Colors.amber,
                 child: Text("Mybindle",
                     style: provider.currentTheme
-                        ? TextStyle(
-                      // fontFamily: 'Avant',
+                        ? const TextStyle(
+                        color: Color.fromRGBO(242,242,242,1) ,
+                        // fontFamily: 'Avant',
                         fontWeight: FontWeight.w700,
                         letterSpacing: 1.2,
                         fontSize: 21)

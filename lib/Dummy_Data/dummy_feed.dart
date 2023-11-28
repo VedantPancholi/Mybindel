@@ -119,7 +119,7 @@ class Feeds {
     return feeds;
   }
 
-  void changeReaction(reaction, reelIndex, commentIndex, replyIndex) {
+  void changeReaction(reaction, profileId ,reelIndex, commentIndex, replyIndex) {
     if (replyIndex != null) {
       feeds[reelIndex].comments[commentIndex].replies[replyIndex].reaction =
           reaction;
@@ -131,13 +131,10 @@ class Feeds {
     }
   }
 
-  Reaction getReaction(reelIndex, commentIndex, replyIndex) {
+  Reaction getReaction(profileId ,reelIndex, commentIndex, replyIndex) {
     //print(  feeds[reelIndex].comments[commentIndex].reaction);
     if (replyIndex != null) {
-      return feeds[reelIndex]
-          .comments[commentIndex]
-          .replies[replyIndex]
-          .reaction;
+      return feeds[reelIndex].comments[commentIndex].replies[replyIndex].reaction;
     } else {
       return feeds[reelIndex].comments[commentIndex].reaction;
     }
@@ -146,6 +143,5 @@ class Feeds {
 
 Feeds postobj = Feeds();
 Feeds getpostobj() {
-  return 
-  postobj;
+  return postobj;
 }

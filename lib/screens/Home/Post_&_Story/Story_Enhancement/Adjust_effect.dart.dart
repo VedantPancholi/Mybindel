@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:mybindel_test/providers/selectSlideBar.dart';
-import 'package:mybindel_test/providers/selectTheme.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
+import '../../../../providers/selectSlideBar.dart';
+import '../../../../providers/selectTheme.dart';
 
 class Adjust extends StatefulWidget {
   const Adjust({super.key});
@@ -33,7 +33,7 @@ class _AdjustState extends State<Adjust> {
           itemCount: slideBarProperty.length,
           itemBuilder: (context, index) {
             return Consumer(
-              builder: (context, Slidebarprovider slidebarprovider, child) {
+              builder: (context, Slidebarprovider adujustSelector, child) {
                 return Container(
                   margin: EdgeInsets.only(bottom: (0.5).h),
                   height: (8.8).h,
@@ -53,7 +53,7 @@ class _AdjustState extends State<Adjust> {
                               height: (5.31).h,
                               width: (11.84).w,
                               decoration: provider.currentTheme
-                                  ? slidebarprovider.getsliderbarIndex == index
+                                  ? adujustSelector.getsliderbarIndex == index
                                   ? BoxDecoration(
                                   color: const Color.fromRGBO(
                                       255, 221, 219, 0.8),
@@ -125,7 +125,7 @@ class _AdjustState extends State<Adjust> {
                             ),
                             Text(slideBarProperty[index]['title'],
                                 style: TextStyle(
-                                    color: slidebarprovider.getsliderbarIndex ==
+                                    color: adujustSelector.getsliderbarIndex ==
                                         index
                                         ? const Color.fromRGBO(253, 83, 73, 1.0)
                                         : const Color.fromRGBO(93, 93, 93, 1.0),
@@ -168,7 +168,7 @@ class _SlidebarState extends State<Slidebar> {
   double sliderValue = 0;
   @override
   Widget build(BuildContext context) {
-    final slidebarprovider = Provider.of<Slidebarprovider>(context);
+    final adujustSelector = Provider.of<Slidebarprovider>(context);
 
     return SliderTheme(
       data: SliderTheme.of(context).copyWith(
@@ -180,7 +180,7 @@ class _SlidebarState extends State<Slidebar> {
         thumbShape:
         const RoundSliderThumbShape(elevation: 1, pressedElevation: 5),
         valueIndicatorShape: const DropSliderValueIndicatorShape(),
-        valueIndicatorColor: Colors.grey.shade300,
+        valueIndicatorColor: Colors.grey.shade400,
         overlayColor: const Color.fromRGBO(255, 83, 73, 0.2),
       ),
       child: Slider(
@@ -192,7 +192,7 @@ class _SlidebarState extends State<Slidebar> {
           onChanged: (index) {
             setState(() {
               sliderValue = index;
-              slidebarprovider.changeslidebarIndex = widget.barnumber;
+              adujustSelector.changeslidebarIndex = widget.barnumber;
               print(sliderValue);
             });
           }),

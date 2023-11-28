@@ -52,16 +52,16 @@ class _sendCodeState extends State<sendCode> {
                     DecorationImage(image: AssetImage('asset/images/logo.png')))),
             SizedBox(width: size.width * 0.010),
             Container(
-                height: size.height * 0.04,
-                width: size.width * 0.27,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  // image: DecorationImage(
-                  //   image: AssetImage('asset/images/mainTitle.png'
-                  //       ''),
-                  // ),
-                ),
-                child: Text("Mybindle",style: TextStyle(fontWeight: FontWeight.w700,fontSize: 22,letterSpacing: 1.5),),
+              height: size.height * 0.04,
+              width: size.width * 0.27,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                // image: DecorationImage(
+                //   image: AssetImage('asset/images/mainTitle.png'
+                //       ''),
+                // ),
+              ),
+              child: Text("Mybindle",style: TextStyle(fontWeight: FontWeight.w700,fontSize: 22,letterSpacing: 1.5),),
             ),
           ]),
         ),
@@ -180,7 +180,7 @@ class _sendCodeState extends State<sendCode> {
                     Text(
                       'Remembered?',
                       style: TextStyle(
-                          // fontFamily: 'Avant',
+                        // fontFamily: 'Avant',
                           fontSize: 16,
                           color:  provider.currentTheme ?  Color.fromRGBO(91, 91, 91, 1) : Colors.grey.shade100,
                           fontWeight: FontWeight.w500),
@@ -192,12 +192,14 @@ class _sendCodeState extends State<sendCode> {
                       child: Text(
                         'Login here!',
                         style: TextStyle(
-                            // fontFamily: 'Avant',
+                          // fontFamily: 'Avant',
                             fontSize: 16,
                             color: orange_color,
                             fontWeight: FontWeight.w500),
                       ),
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.of(context).pop();
+                      },
                     )
                   ],
                 )
